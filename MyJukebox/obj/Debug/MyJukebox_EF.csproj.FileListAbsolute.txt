@@ -1,0 +1,43 @@
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.csprojAssemblyReference.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\Interop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\AxInterop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.ResolveComReference.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.AboutBox.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.EditRecord.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.Filescanner.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.MyJukebox.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.Properties.Resources.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.GenerateResource.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.CoreCompileInputs.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\MyJukebox_EF.exe.config
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\MyJukebox_EF.exe
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\MyJukebox_EF.pdb
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFramework.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFramework.SqlServer.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFrameworkMyJukebox.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\FunctionPool.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\Newtonsoft.Json.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\System.Data.SQLite.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\FunctionPool.pdb
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFrameworkMyJukebox.pdb
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFrameworkMyJukebox.dll.config
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFramework.xml
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\EntityFramework.SqlServer.xml
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\Newtonsoft.Json.xml
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\Interop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\bin\Debug\AxInterop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.CopyComplete
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.exe
+A:\Source\Repos\01_Audio\MyJukebox_EF\MyJukebox_EF\obj\Debug\MyJukebox_EF.pdb
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.csprojAssemblyReference.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\Interop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\AxInterop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.ResolveComReference.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.AboutBox.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.EditRecord.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.Filescanner.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.MyJukebox.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.Properties.Resources.resources
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.csproj.GenerateResource.cache
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.exe
+A:\Source\Repos\01_Audio\MyJukebox_EF - 20190920\MyJukebox_EF\obj\Debug\MyJukebox_EF.pdb
