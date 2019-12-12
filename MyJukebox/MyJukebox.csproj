@@ -286,6 +286,7 @@
       <LastGenOutput>MyJukeboxModel.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\Delete.ico" />
+    <Content Include="Resources\QuerySave.ico" />
     <Content Include="Resources\save32.ico" />
     <None Include="app.config" />
     <None Include="Resources\MyBitmap.gif" />

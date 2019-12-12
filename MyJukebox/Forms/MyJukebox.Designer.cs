@@ -140,11 +140,12 @@ namespace MyJukebox_EF
             this.setLinkToToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.moveEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSearch = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.buttonSearchSave = new System.Windows.Forms.Button();
+            this.buttonQueryhSave = new System.Windows.Forms.Button();
             this.comboBoxQueries = new System.Windows.Forms.ComboBox();
-            this.buttonSearchClear = new System.Windows.Forms.Button();
-            this.buttonSearchExecute = new System.Windows.Forms.Button();
+            this.buttonQueryClear = new System.Windows.Forms.Button();
+            this.buttonQueryExecute = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStripFile = new System.Windows.Forms.ToolStrip();
             this.toolStripFileButtonOpen = new System.Windows.Forms.ToolStripButton();
@@ -156,7 +157,6 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -194,7 +194,7 @@ namespace MyJukebox_EF
             this.menuMainAbout});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(1006, 24);
+            this.menuMain.Size = new System.Drawing.Size(884, 24);
             this.menuMain.TabIndex = 0;
             this.menuMain.Text = "menuMain";
             // 
@@ -351,10 +351,10 @@ namespace MyJukebox_EF
             this.statusStripDuration,
             this.statusStripVersion,
             this.statusStripCopyright});
-            this.statusStrip.Location = new System.Drawing.Point(0, 513);
+            this.statusStrip.Location = new System.Drawing.Point(0, 533);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 14, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1006, 28);
+            this.statusStrip.Size = new System.Drawing.Size(884, 28);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -429,7 +429,7 @@ namespace MyJukebox_EF
             // 
             this.statusStripTitel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripTitel.Name = "statusStripTitel";
-            this.statusStripTitel.Size = new System.Drawing.Size(283, 23);
+            this.statusStripTitel.Size = new System.Drawing.Size(161, 23);
             this.statusStripTitel.Spring = true;
             this.statusStripTitel.Text = "Titel";
             this.statusStripTitel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -529,8 +529,8 @@ namespace MyJukebox_EF
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView);
             this.splitContainer1.Panel2.Controls.Add(this.panelSearch);
             this.splitContainer1.Panel2.Controls.Add(this.toolStripFile);
-            this.splitContainer1.Size = new System.Drawing.Size(1006, 489);
-            this.splitContainer1.SplitterDistance = 269;
+            this.splitContainer1.Size = new System.Drawing.Size(884, 509);
+            this.splitContainer1.SplitterDistance = 223;
             this.splitContainer1.SplitterIncrement = 6;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 2;
@@ -540,9 +540,9 @@ namespace MyJukebox_EF
             this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(25)))), ((int)(((byte)(52)))));
-            this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 360);
+            this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 380);
             this.pictureBoxFoto.Name = "pictureBoxFoto";
-            this.pictureBoxFoto.Size = new System.Drawing.Size(274, 125);
+            this.pictureBoxFoto.Size = new System.Drawing.Size(228, 125);
             this.pictureBoxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxFoto.TabIndex = 1;
             this.pictureBoxFoto.TabStop = false;
@@ -552,10 +552,10 @@ namespace MyJukebox_EF
             this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 236);
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 256);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(267, 169);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(221, 169);
             this.axWindowsMediaPlayer1.TabIndex = 3;
             this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.axWindowsMediaPlayer1_PlayStateChange);
@@ -576,7 +576,7 @@ namespace MyJukebox_EF
             this.tabControl.Location = new System.Drawing.Point(3, 6);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(268, 224);
+            this.tabControl.Size = new System.Drawing.Size(222, 244);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
@@ -590,7 +590,7 @@ namespace MyJukebox_EF
             this.tabLogical.Location = new System.Drawing.Point(4, 24);
             this.tabLogical.Name = "tabLogical";
             this.tabLogical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogical.Size = new System.Drawing.Size(260, 196);
+            this.tabLogical.Size = new System.Drawing.Size(214, 216);
             this.tabLogical.TabIndex = 0;
             this.tabLogical.Text = "Logical";
             this.tabLogical.UseVisualStyleBackColor = true;
@@ -615,7 +615,7 @@ namespace MyJukebox_EF
             this.tvlogic.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2});
             this.tvlogic.ShowNodeToolTips = true;
-            this.tvlogic.Size = new System.Drawing.Size(254, 190);
+            this.tvlogic.Size = new System.Drawing.Size(208, 210);
             this.tvlogic.TabIndex = 0;
             this.tvlogic.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.tvlogic_AfterExpand);
             this.tvlogic.Click += new System.EventHandler(this.tvlogic_Click);
@@ -698,7 +698,7 @@ namespace MyJukebox_EF
             this.tabPlayLists.Location = new System.Drawing.Point(4, 24);
             this.tabPlayLists.Name = "tabPlayLists";
             this.tabPlayLists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlayLists.Size = new System.Drawing.Size(211, 196);
+            this.tabPlayLists.Size = new System.Drawing.Size(232, 216);
             this.tabPlayLists.TabIndex = 1;
             this.tabPlayLists.Text = "Playlists";
             // 
@@ -720,7 +720,7 @@ namespace MyJukebox_EF
             treeNode4.Text = "Node0";
             this.tvplaylist.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.tvplaylist.Size = new System.Drawing.Size(208, 195);
+            this.tvplaylist.Size = new System.Drawing.Size(229, 215);
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
             this.tvplaylist.DoubleClick += new System.EventHandler(this.tvplaylist_DoubleClick);
@@ -733,7 +733,7 @@ namespace MyJukebox_EF
             this.tabPhysical.Location = new System.Drawing.Point(4, 24);
             this.tabPhysical.Name = "tabPhysical";
             this.tabPhysical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhysical.Size = new System.Drawing.Size(211, 196);
+            this.tabPhysical.Size = new System.Drawing.Size(232, 216);
             this.tabPhysical.TabIndex = 2;
             this.tabPhysical.Text = "Physical";
             this.tabPhysical.UseVisualStyleBackColor = true;
@@ -744,7 +744,7 @@ namespace MyJukebox_EF
             this.tvphysical.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvphysical.Location = new System.Drawing.Point(3, 3);
             this.tvphysical.Name = "tvphysical";
-            this.tvphysical.Size = new System.Drawing.Size(205, 190);
+            this.tvphysical.Size = new System.Drawing.Size(226, 210);
             this.tvphysical.TabIndex = 0;
             // 
             // toolStripPlaybackTrackBarPosition
@@ -928,7 +928,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(703, 428);
+            this.dataGridView.Size = new System.Drawing.Size(644, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -1142,15 +1142,26 @@ namespace MyJukebox_EF
             this.panelSearch.BackColor = System.Drawing.Color.LightSlateGray;
             this.panelSearch.Controls.Add(this.label2);
             this.panelSearch.Controls.Add(this.textBoxSearch);
-            this.panelSearch.Controls.Add(this.buttonSearchSave);
+            this.panelSearch.Controls.Add(this.buttonQueryhSave);
             this.panelSearch.Controls.Add(this.comboBoxQueries);
-            this.panelSearch.Controls.Add(this.buttonSearchClear);
-            this.panelSearch.Controls.Add(this.buttonSearchExecute);
+            this.panelSearch.Controls.Add(this.buttonQueryClear);
+            this.panelSearch.Controls.Add(this.buttonQueryExecute);
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(700, 28);
+            this.panelSearch.Size = new System.Drawing.Size(644, 28);
             this.panelSearch.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Gold;
+            this.label2.Location = new System.Drawing.Point(378, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Queries:";
             // 
             // textBoxSearch
             // 
@@ -1163,53 +1174,51 @@ namespace MyJukebox_EF
             this.textBoxSearch.Enter += new System.EventHandler(this.textBoxSearch_Enter);
             this.textBoxSearch.Leave += new System.EventHandler(this.textBoxSearch_Leave);
             // 
-            // buttonSearchSave
+            // buttonQueryhSave
             // 
-            this.buttonSearchSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchSave.BackColor = System.Drawing.Color.LightGray;
-            this.buttonSearchSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearchSave.Image")));
-            this.buttonSearchSave.Location = new System.Drawing.Point(672, 5);
-            this.buttonSearchSave.Name = "buttonSearchSave";
-            this.buttonSearchSave.Size = new System.Drawing.Size(18, 20);
-            this.buttonSearchSave.TabIndex = 6;
-            this.buttonSearchSave.UseVisualStyleBackColor = false;
-            this.buttonSearchSave.Click += new System.EventHandler(this.buttonSaveQuery_Click);
+            this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
+            this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
+            this.buttonQueryhSave.Location = new System.Drawing.Point(616, 5);
+            this.buttonQueryhSave.Name = "buttonQueryhSave";
+            this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
+            this.buttonQueryhSave.TabIndex = 6;
+            this.buttonQueryhSave.UseVisualStyleBackColor = false;
+            this.buttonQueryhSave.Click += new System.EventHandler(this.buttonQueryhSave_Click);
             // 
             // comboBoxQueries
             // 
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(429, 6);
+            this.comboBoxQueries.Location = new System.Drawing.Point(429, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
             this.comboBoxQueries.TabIndex = 5;
             this.comboBoxQueries.SelectedIndexChanged += new System.EventHandler(this.comboBoxQueries_SelectedIndexChanged);
             // 
-            // buttonSearchClear
+            // buttonQueryClear
             // 
-            this.buttonSearchClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchClear.BackColor = System.Drawing.Color.LightGray;
-            this.buttonSearchClear.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearchClear.Image")));
-            this.buttonSearchClear.Location = new System.Drawing.Point(622, 5);
-            this.buttonSearchClear.Name = "buttonSearchClear";
-            this.buttonSearchClear.Size = new System.Drawing.Size(18, 20);
-            this.buttonSearchClear.TabIndex = 3;
-            this.buttonSearchClear.UseVisualStyleBackColor = false;
-            this.buttonSearchClear.Click += new System.EventHandler(this.buttonClear_Click);
+            this.buttonQueryClear.BackColor = System.Drawing.Color.LightGray;
+            this.buttonQueryClear.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryClear.Image")));
+            this.buttonQueryClear.Location = new System.Drawing.Point(282, 6);
+            this.buttonQueryClear.Name = "buttonQueryClear";
+            this.buttonQueryClear.Size = new System.Drawing.Size(18, 20);
+            this.buttonQueryClear.TabIndex = 3;
+            this.buttonQueryClear.UseVisualStyleBackColor = false;
+            this.buttonQueryClear.Click += new System.EventHandler(this.buttonQueryClear_Click);
             // 
-            // buttonSearchExecute
+            // buttonQueryExecute
             // 
-            this.buttonSearchExecute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSearchExecute.BackColor = System.Drawing.Color.LightGray;
-            this.buttonSearchExecute.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearchExecute.Image")));
-            this.buttonSearchExecute.Location = new System.Drawing.Point(648, 5);
-            this.buttonSearchExecute.Name = "buttonSearchExecute";
-            this.buttonSearchExecute.Size = new System.Drawing.Size(18, 20);
-            this.buttonSearchExecute.TabIndex = 2;
-            this.buttonSearchExecute.UseVisualStyleBackColor = false;
-            this.buttonSearchExecute.Click += new System.EventHandler(this.buttonSearch_Click);
+            this.buttonQueryExecute.BackColor = System.Drawing.Color.LightGray;
+            this.buttonQueryExecute.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryExecute.Image")));
+            this.buttonQueryExecute.Location = new System.Drawing.Point(306, 5);
+            this.buttonQueryExecute.Name = "buttonQueryExecute";
+            this.buttonQueryExecute.Size = new System.Drawing.Size(18, 20);
+            this.buttonQueryExecute.TabIndex = 2;
+            this.buttonQueryExecute.UseVisualStyleBackColor = false;
+            this.buttonQueryExecute.Click += new System.EventHandler(this.buttonQueryExecute_Click);
             // 
             // label1
             // 
@@ -1281,34 +1290,24 @@ namespace MyJukebox_EF
             // 
             this.timerShowMyBitmap.Interval = 10000;
             // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(377, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Queries:";
-            // 
             // MyJukebox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 541);
+            this.ClientSize = new System.Drawing.Size(884, 561);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuMain);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuMain;
-            this.MinimumSize = new System.Drawing.Size(836, 580);
+            this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "MyJukebox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyJukebox";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MyJukebox_FormClosing);
             this.Load += new System.EventHandler(this.MyJukebox_Load);
+            this.Shown += new System.EventHandler(this.MyJukebox_Shown);
             this.ResizeEnd += new System.EventHandler(this.MyJukebox_ResizeEnd);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
@@ -1444,11 +1443,11 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem setLinkToToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem moveEntryToolStripMenuItem;
-        private System.Windows.Forms.Button buttonSearchExecute;
+        private System.Windows.Forms.Button buttonQueryExecute;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonSearchClear;
+        private System.Windows.Forms.Button buttonQueryClear;
         private System.Windows.Forms.ComboBox comboBoxQueries;
-        private System.Windows.Forms.Button buttonSearchSave;
+        private System.Windows.Forms.Button buttonQueryhSave;
         //private System.Windows.Forms.PlaceholderTextBox placeholderTextBoxSearch;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.ImageList imageListTreeView;

@@ -1,6 +1,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace NRSoft.FunctionPool
 {
@@ -53,7 +54,7 @@ namespace NRSoft.FunctionPool
         #endregion
 
         #region Methods
-        public bool SaveSetting(string subkey, string keyname, string keyDefault)
+        public bool SaveSetting(string subkey, string keyname, string keyDefault = "")
         {
             RegistryKey keySet;
             RegistryKey rkCurrentUser = Registry.CurrentUser;
@@ -109,6 +110,25 @@ namespace NRSoft.FunctionPool
                 }
             }
             return al;
+        }
+
+        public List<string> GetAllSettings(string subkey, bool dummy)
+        {
+            RegistryKey keyGet;
+            RegistryKey rkCurrentUser = Registry.CurrentUser;
+            List<string> querys = new List<string>();
+
+            string sReg = String.Format(@"Software\{0}\{1}\{2}", CompanyName, ProductName, subkey);
+            keyGet = rkCurrentUser.CreateSubKey(sReg);
+            string[] allValueNames = keyGet.GetValueNames();
+
+            foreach (string strRegValueName in allValueNames)
+            {
+                querys.Add(strRegValueName);
+            }
+
+            querys.Sort();
+            return querys;
         }
 
         public string[,] GetAllSettings(string subkey)

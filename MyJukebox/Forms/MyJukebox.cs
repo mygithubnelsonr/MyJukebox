@@ -19,7 +19,7 @@ namespace MyJukebox_EF
         private bool _isloop = false;
         private bool _tvFilled = false;
         private bool _isSetting = false;
-        double _duration = 0;
+        private double _duration = 0;
         double _position = 0;
         bool _buttonStop = true;
         bool _isPlaying = false;
@@ -28,13 +28,10 @@ namespace MyJukebox_EF
         private TreeNode currentTreeNode;
         private TreeNode lastSelectedTreeNode;
 
+        string _placeHolder = $"<Input SQL like Album='V8-A-1'>";
+
         // FunctionPool functions
         RandomH random = new RandomH();
-        //GeneralH general = new GeneralH();
-        //RegistryH registry = new RegistryH(
-        //    Properties.Settings.Default.CompanyName,
-        //    Properties.Settings.Default.ProductName
-        //    );
 
         List<string> artistImageFiles;
 
@@ -64,11 +61,17 @@ namespace MyJukebox_EF
             WindowState = (Settings.FormState == "Normal") ? FormWindowState.Normal : FormWindowState.Maximized;
             #endregion
 
+            #region restore query
             TextBoxSearchClear();
             FillQueryCombo();
+            if (!string.IsNullOrEmpty(Settings.QueryLastQuery))
+            {
+                textBoxSearch.Text = Settings.QueryLastQuery;
+                textBoxSearch.ForeColor = Colors.Standard;
+            }
+            #endregion
 
             #region initialize TreeView
-            #region Treeview tvLogic
             tvlogic_Initialize();
 
             // fill treeview with last results
@@ -83,7 +86,6 @@ namespace MyJukebox_EF
 
             tvlogic_FillInterpret();
             //Refresh();
-            #endregion
 
             tvplaylist_Initialize();
             tvplaylist_Fill();
@@ -121,9 +123,8 @@ namespace MyJukebox_EF
 
             pictureBoxFoto.Image = Properties.Resources.MyBitmap;
 
-            //Show();
             splitContainer1.SplitterDistance = Settings.FormSplitterLeft;
-            Refresh();
+            //Refresh();
 
             // first fill
             FillDatagridView(Settings.QueryLastQuery);
@@ -136,8 +137,11 @@ namespace MyJukebox_EF
                 dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
                 statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
             }
+        }
 
-            Show();
+        private void MyJukebox_Shown(object sender, EventArgs e)
+        {
+
         }
 
         private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
@@ -155,6 +159,13 @@ namespace MyJukebox_EF
                 {
                     Settings.DatagridColums[column.Name] = column.Width;
                 }
+            }
+
+            Settings.QueryList.Clear();
+            foreach (var q in comboBoxQueries.Items)
+            {
+                if (q != "")
+                    Settings.QueryList.Add(q.ToString());
             }
 
             Settings.Save();
@@ -206,7 +217,16 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
         {
-            comboBoxQueries.Items.Clear();
+            TextBoxSearchClear();
+            FillQueryCombo();
+            if (!string.IsNullOrEmpty(Settings.QueryLastQuery))
+            {
+                textBoxSearch.Text = Settings.QueryLastQuery;
+                textBoxSearch.BackColor = Color.White;
+                textBoxSearch.ForeColor = Colors.Standard;
+                buttonQueryExecute.PerformClick();
+            }
+
         }
 
         private void menuMainToolsFileScanner_Click(object sender, EventArgs e)
@@ -1006,34 +1026,28 @@ namespace MyJukebox_EF
         #region DataGrid Methodes
         public void FillDatagridView()
         {
-            FillDatagridView(String.Empty);
+            FillDatagridView(string.Empty);
         }
 
         public void FillDatagridView(string filter)
         {
-            bool IsQuery = false;
-
-            if (filter == "" || filter == $"<Input SQL like 'Album' = 'V8-A-1'>")
-                IsQuery = false;
-            else
-                IsQuery = true;
-
-            if (IsQuery)
+            bool isQuery = IsQuery(filter);
+            if (isQuery)
             {
-                var context = new MyJukeboxEntities();
-                var result = context.vSongs
-                    .SqlQuery($"select * from vSongs where {textBoxSearch.Text}").ToList();
-
-                if (result != null)
+                try
                 {
-                    AddQueryToComboBox(textBoxSearch.Text);
-                }
+                    var context = new MyJukeboxEntities();
+                    var result = context.vSongs
+                        .SqlQuery($"select * from vSongs where {textBoxSearch.Text}").ToList();
 
-                dataGridView.DataSource = result;
+                    dataGridView.DataSource = result;
+                }
+                catch
+                { }
                 return;
             }
 
-            if (tabControl.SelectedTab == tabLogical && !IsQuery)
+            if (tabControl.SelectedTab == tabLogical && !isQuery)
             {
                 var genre = Settings.LastGenre == "Alle" ? "" : Settings.LastGenre;
                 var album = Settings.LastAlbum == "Alle" ? "" : Settings.LastAlbum;
@@ -1052,7 +1066,7 @@ namespace MyJukebox_EF
                 dataGridView.DataSource = result;
             }
 
-            if (tabControl.SelectedTab == tabPlayLists && !IsQuery)
+            if (tabControl.SelectedTab == tabPlayLists && !isQuery)
             {
                 var db = new MyJukeboxEntities();
                 var result = db.vPlaylistSongs
@@ -1070,7 +1084,7 @@ namespace MyJukebox_EF
 
                     statusStripRow.Text = Convert.ToString(dataGridView.CurrentRow.Index + 1);
                     statusStripRowcount.Text = this.dataGridView.RowCount.ToString();
-                    Settings.QueryLastQuery = textBoxSearch.Text;
+                    //Settings.QueryLastQuery = textBoxSearch.Text;
                 }
 
                 dataGridView.Columns["ID"].Visible = false;
@@ -1090,6 +1104,17 @@ namespace MyJukebox_EF
             //random.InitRandomNumbers(dataGridView.RowCount - 1, 0);
         }
 
+        private bool IsQuery(string filter)
+        {
+            bool IsQuery = false;
+
+            if (filter == "" || filter == $"<Input SQL like 'Album' = 'V8-A-1'>")
+                IsQuery = false;
+            else
+                IsQuery = true;
+            return IsQuery;
+        }
+
         private void AddQueryToComboBox(string query)
         {
             bool itemExist = false;
@@ -1100,7 +1125,10 @@ namespace MyJukebox_EF
                     itemExist = true;
             }
             if (itemExist == false)
+            {
                 comboBoxQueries.Items.Add(query);
+                Settings.QueryList.Add(query);
+            }
         }
 
         private void GridViewSetColumsWidth()
@@ -1446,10 +1474,8 @@ namespace MyJukebox_EF
             Settings.LastTab = currentTabIndex;
 
             Debug.Print("tabControl_Click");
-            FillDatagridView();
-
-
-            GridViewSetColumsWidth();
+            //FillDatagridView();
+            //GridViewSetColumsWidth();
 
         }
 
@@ -1461,9 +1487,15 @@ namespace MyJukebox_EF
         #endregion tabControl Events
 
         #region other controls
-        private void buttonSearch_Click(object sender, EventArgs e)
+        private void buttonQueryExecute_Click(object sender, EventArgs e)
         {
-            FillDatagridView(textBoxSearch.Text);
+            if (textBoxSearch.Text != $"<Input SQL like Album='V8-A-1'>")
+                FillDatagridView(textBoxSearch.Text);
+        }
+
+        private void buttonQueryhSave_Click(object sender, EventArgs e)
+        {
+            AddQueryToComboBox(textBoxSearch.Text);
         }
 
         private void tvlogicContextMenuStripAdd_Click(object sender, EventArgs e)
@@ -1503,7 +1535,7 @@ namespace MyJukebox_EF
             Clipboard.SetText(strCellInhalt);
         }
 
-        private void buttonClear_Click(object sender, EventArgs e)
+        private void buttonQueryClear_Click(object sender, EventArgs e)
         {
             TextBoxSearchClear();
         }
@@ -1541,18 +1573,13 @@ namespace MyJukebox_EF
         {
             comboBoxQueries.Items.Clear();
 
-            if (Settings.QueryCount > 0)
+            if (Settings.QueryList.Count > 0)
             {
-                string query = "";
-                comboBoxQueries.Items.Add(query);
-                for (int n = 1; n <= Settings.QueryCount; n++)
+                comboBoxQueries.Items.Add("");
+                foreach (var q in Settings.QueryList)
                 {
-                    query = Settings.QueryLastQuery;    // registry.GetSetting("Settings\\Queries\\" + n, "Query", "");
-                    comboBoxQueries.Items.Add(query);
-                    if (n == Settings.QueryLastSelected)
-                        Settings.QueryLastQuery = query;
+                    comboBoxQueries.Items.Add(q);
                 }
-                textBoxSearch.Text = Settings.QueryLastQuery;
             }
         }
 
@@ -1769,15 +1796,15 @@ namespace MyJukebox_EF
             toolStripPlaybackButtonStop.PerformClick();
 
             int item = comboBoxQueries.SelectedIndex;
+
             textBoxSearch.Text = comboBoxQueries.Text;
-            textBoxSearch.Tag = item;
+            //textBoxSearch.Tag = item;
+            textBoxSearch.ForeColor = Color.Black;
             textBoxSearch.Refresh();
 
-            Settings.QueryLastSelected = item;
-            // Convert.ToInt16(rh.GetSetting("Settings\\Queries\\" + item, "LastSelected", "0"));
-            Settings.QueryLastQuery = item.ToString();
-            // rh.SaveSetting("Settings\\Queries", "LastSelected", item.ToString());
-            buttonSearchExecute.PerformClick();
+            //Settings.QueryLastSelected = item;
+            Settings.QueryLastQuery = comboBoxQueries.Text;
+            buttonQueryExecute.PerformClick();
         }
 
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -1796,26 +1823,6 @@ namespace MyJukebox_EF
         private void dataGridView_Scroll(object sender, ScrollEventArgs e)
         {
             Debug.Print("");
-        }
-
-        private void buttonSaveQuery_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(textBoxSearch.Text))
-                return;
-
-            Settings.QueryLastQuery = textBoxSearch.Text;
-            Settings.QueryCount = Settings.QueryCount++;
-            //Settings.QueryLastSelected = _lastSelected;
-
-            {
-                //rh.SaveSetting("Settings\\Queries\\" + queryCount.ToString(), "LastSelected", _lastSelected.ToString());
-                //rh.SaveSetting("Settings\\Queries\\" + queryCount.ToString(), "Query", _lastQuery.ToString());
-
-                //rh.SaveSetting("Settings\\Queries", "Count", queryCount.ToString());
-                //rh.SaveSetting("Settings\\Queries", "LastQuery", queryCount.ToString());
-            }
-
-            FillQueryCombo();
         }
 
         #region WindowsMediaPlayer Events
@@ -2001,7 +2008,7 @@ namespace MyJukebox_EF
 
         private void textBoxSearch_Enter(object sender, EventArgs e)
         {
-            if (textBoxSearch.Text == $"<Input SQL like 'Album' = 'V8-A-1'>")
+            if (textBoxSearch.Text == _placeHolder)
             {
                 textBoxSearch.Text = "";
                 textBoxSearch.ForeColor = Color.Black;
@@ -2012,14 +2019,14 @@ namespace MyJukebox_EF
         {
             if (textBoxSearch.Text == "")
             {
-                textBoxSearch.Text = $"<Input SQL like 'Album' = 'V8-A-1'>";
+                textBoxSearch.Text = _placeHolder;
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
 
         private void TextBoxSearchClear()
         {
-            textBoxSearch.Text = $"<Input SQL like 'Album' = 'V8-A-1'>";
+            textBoxSearch.Text = _placeHolder;
             textBoxSearch.ForeColor = Color.Gray;
         }
 

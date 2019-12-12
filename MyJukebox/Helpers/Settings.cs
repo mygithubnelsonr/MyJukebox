@@ -1,11 +1,11 @@
 ﻿using NRSoft.FunctionPool;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MyJukebox_EF
 {
     [Serializable]
-
     public class Settings
     {
         static RegistryH rh;
@@ -36,6 +36,7 @@ namespace MyJukebox_EF
         public static int DatagridLastSelectedRow { get; set; }
         public static SortedList<string, int> DatagridColums = new SortedList<string, int>();
         // Query
+        public static List<string> QueryList = new List<string>();
         public static int QueryCount { get; set; }
         public static int QueryLastSelected { get; set; }
         public static string QueryLastQuery { get; set; }
@@ -124,8 +125,9 @@ namespace MyJukebox_EF
             #endregion
 
             #region Query Settings
-            QueryCount = Convert.ToInt16(rh.GetSetting("Settings\\Queries", "Count", "0"));
-            QueryLastQuery = rh.GetSetting("Settings\\Logical", "LastQuery", "");
+            //QueryCount = Convert.ToInt16(rh.GetSetting("Settings\\Queries", "Count", "0"));
+            QueryLastQuery = rh.GetSetting("Settings\\Queries", "LastQuery", "");
+            QueryList = rh.GetAllSettings("Settings\\Queries\\List", true);
             #endregion
 
             #region Other Settings
@@ -168,9 +170,11 @@ namespace MyJukebox_EF
             #endregion
 
             #region Query Settings
-            rh.SaveSetting("Settings\\Queries", "Count", QueryCount.ToString());
+            //rh.SaveSetting("Settings\\Queries", "Count", QueryCount.ToString());
             rh.SaveSetting("Settings\\Queries", "LastQuery", QueryLastQuery);
-            rh.SaveSetting(@"Settings\Queries", "LastSelected", QueryLastSelected.ToString());
+            //rh.SaveSetting(@"Settings\Queries", "LastSelected", QueryLastSelected.ToString());
+            foreach (var q in QueryList) rh.SaveSetting("Settings\\Queries\\List", q);
+
             #endregion
 
             #region Other Settings
