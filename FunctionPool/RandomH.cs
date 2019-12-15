@@ -10,6 +10,48 @@ namespace NRSoft.FunctionPool
         private int[] numberArray;
         private static int numberCounter;
 
+        public RandomH()
+        {
+            numberArray = null;
+        }
+
+        public void InitRandomNumbers(int max, int min = 0)
+        {
+            _nextNumber = 0;
+
+            numberCounter = 0;
+            int LowerBound = min;
+            int UpperBound = (max >= 1) ? max : 1;
+            bool firsttime = true;
+            int starti = 0;
+            numberArray = new int[UpperBound];
+            Random randomGenerator = new Random(DateTime.Now.Millisecond);
+            do
+            {
+                int nogenerated = randomGenerator.Next(LowerBound, UpperBound + 1);
+                // Note: randomGenerator.Next generates no. to UpperBound - 1 hence +1 
+                // .... i got stuck at this pt & had to use the debugger. 
+                if (firsttime) // if (firsttime == true) 
+                {
+                    numberArray[starti] = nogenerated; // we simply store the nogenerated in vararray 
+                    firsttime = false;
+                    starti++;
+                }
+                else // if (firsttime == false) 
+                {
+                    bool duplicate_flag = CheckDuplicate(nogenerated, starti, numberArray); // call to check in array 
+                    if (!duplicate_flag) // duplicate_flag == false 
+                    {
+                        numberArray[starti] = nogenerated;
+                        starti++;
+                    }
+                }
+            }
+            while (starti < UpperBound);
+
+            Debug.Print($"numberArrayCount={numberArray.Length}");
+        }
+
         public string GetNumbersAsString
         {
             get { return _numbersAsString; }
@@ -20,7 +62,7 @@ namespace NRSoft.FunctionPool
             get
             {
                 Debug.Print($"numberArray.Length={numberArray.Length}");
-                if(numberArray.Length == numberCounter)
+                if (numberArray.Length == numberCounter)
                     numberCounter = 0;
 
                 _nextNumber = numberArray[numberCounter];
@@ -44,49 +86,14 @@ namespace NRSoft.FunctionPool
             get { return numberArray; }
         }
 
-        public void InitRandomNumbers(int max, int min = 0)
-        {
-            _nextNumber = 0;
 
-            numberCounter = 0;
-            int LowerBound = min;
-            int UpperBound = (max >= 1) ? max : 1;
-            bool firsttime = true;
-            int starti = 0;
-            numberArray = new int[UpperBound];
-            Random randomGenerator = new Random(DateTime.Now.Millisecond);
-            do
-            {
-                int nogenerated = randomGenerator.Next(LowerBound, UpperBound + 1);
-                // Note: randomGenerator.Next generates no. to UpperBound - 1 hence +1 
-                // .... i got stuck at this pt & had to use the debugger. 
-                if(firsttime) // if (firsttime == true) 
-                {
-                    numberArray[starti] = nogenerated; // we simply store the nogenerated in vararray 
-                    firsttime = false;
-                    starti++;
-                }
-                else // if (firsttime == false) 
-                {
-                    bool duplicate_flag = CheckDuplicate(nogenerated, starti, numberArray); // call to check in array 
-                    if(!duplicate_flag) // duplicate_flag == false 
-                    {
-                        numberArray[starti] = nogenerated;
-                        starti++;
-                    }
-                }
-            }
-            while(starti < UpperBound);
-
-            Debug.Print($"numberArrayCount={numberArray.Length}");
-        }
 
         public bool CheckDuplicate(int newrandomNum, int loopcount, int[] function_array)
         {
             bool temp_duplicate = false;
-            for(int j = 0; j < loopcount; j++)
+            for (int j = 0; j < loopcount; j++)
             {
-                if(function_array[j] == newrandomNum)
+                if (function_array[j] == newrandomNum)
                 {
                     temp_duplicate = true;
                     break;
@@ -101,14 +108,14 @@ namespace NRSoft.FunctionPool
             Console.Write("{");
             int count = 0;
             int li = arr.Length;
-            foreach(object o in arr)
+            foreach (object o in arr)
             {
                 Console.Write("{0}", o);
                 _numbersAsString += o.ToString();
 
                 count++;
                 //Condition to check whether ',' should be added in printing arrray 
-                if(count < li)
+                if (count < li)
                 {
                     Console.Write(",");
                     _numbersAsString += ",";

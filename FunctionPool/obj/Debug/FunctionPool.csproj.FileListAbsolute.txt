@@ -47,3 +47,4 @@ A:\Source\Repos\90_Work\MyJukebox\FunctionPool\bin\Debug\System.Data.SQLite.dll
 A:\Source\Repos\90_Work\MyJukebox\FunctionPool\obj\Debug\FunctionPool.csproj.CopyComplete
 A:\Source\Repos\90_Work\MyJukebox\FunctionPool\obj\Debug\FunctionPool.dll
 A:\Source\Repos\90_Work\MyJukebox\FunctionPool\obj\Debug\FunctionPool.pdb
+A:\Source\Repos\90_Work\MyJukebox\FunctionPool\obj\Debug\FunctionPool.csprojAssemblyReference.cache

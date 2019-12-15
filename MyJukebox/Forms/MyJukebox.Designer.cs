@@ -157,6 +157,7 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorkerTreeviewsFirstLoad = new System.ComponentModel.BackgroundWorker();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -537,7 +538,7 @@ namespace MyJukebox_EF
             // 
             // pictureBoxFoto
             // 
-            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(25)))), ((int)(((byte)(52)))));
             this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 380);
@@ -549,7 +550,7 @@ namespace MyJukebox_EF
             // 
             // axWindowsMediaPlayer1
             // 
-            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 256);
@@ -566,8 +567,8 @@ namespace MyJukebox_EF
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabLogical);
             this.tabControl.Controls.Add(this.tabPlayLists);
@@ -698,14 +699,14 @@ namespace MyJukebox_EF
             this.tabPlayLists.Location = new System.Drawing.Point(4, 24);
             this.tabPlayLists.Name = "tabPlayLists";
             this.tabPlayLists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlayLists.Size = new System.Drawing.Size(232, 216);
+            this.tabPlayLists.Size = new System.Drawing.Size(214, 216);
             this.tabPlayLists.TabIndex = 1;
             this.tabPlayLists.Text = "Playlists";
             // 
             // tvplaylist
             // 
-            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvplaylist.BackColor = System.Drawing.Color.LightSlateGray;
             this.tvplaylist.ForeColor = System.Drawing.Color.Gold;
@@ -720,7 +721,7 @@ namespace MyJukebox_EF
             treeNode4.Text = "Node0";
             this.tvplaylist.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.tvplaylist.Size = new System.Drawing.Size(229, 215);
+            this.tvplaylist.Size = new System.Drawing.Size(211, 215);
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
             this.tvplaylist.DoubleClick += new System.EventHandler(this.tvplaylist_DoubleClick);
@@ -733,7 +734,7 @@ namespace MyJukebox_EF
             this.tabPhysical.Location = new System.Drawing.Point(4, 24);
             this.tabPhysical.Name = "tabPhysical";
             this.tabPhysical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhysical.Size = new System.Drawing.Size(232, 216);
+            this.tabPhysical.Size = new System.Drawing.Size(214, 216);
             this.tabPhysical.TabIndex = 2;
             this.tabPhysical.Text = "Physical";
             this.tabPhysical.UseVisualStyleBackColor = true;
@@ -744,7 +745,7 @@ namespace MyJukebox_EF
             this.tvphysical.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvphysical.Location = new System.Drawing.Point(3, 3);
             this.tvphysical.Name = "tvphysical";
-            this.tvphysical.Size = new System.Drawing.Size(226, 210);
+            this.tvphysical.Size = new System.Drawing.Size(208, 210);
             this.tvphysical.TabIndex = 0;
             // 
             // toolStripPlaybackTrackBarPosition
@@ -891,8 +892,8 @@ namespace MyJukebox_EF
             this.dataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
             this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -928,7 +929,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(644, 448);
+            this.dataGridView.Size = new System.Drawing.Size(640, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -1137,7 +1138,7 @@ namespace MyJukebox_EF
             // 
             // panelSearch
             // 
-            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.BackColor = System.Drawing.Color.LightSlateGray;
             this.panelSearch.Controls.Add(this.label2);
@@ -1149,7 +1150,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(644, 28);
+            this.panelSearch.Size = new System.Drawing.Size(640, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1157,7 +1158,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(378, 9);
+            this.label2.Location = new System.Drawing.Point(374, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1179,7 +1180,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(616, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(612, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1191,7 +1192,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(429, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(425, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1307,7 +1308,6 @@ namespace MyJukebox_EF
             this.Text = "MyJukebox";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MyJukebox_FormClosing);
             this.Load += new System.EventHandler(this.MyJukebox_Load);
-            this.Shown += new System.EventHandler(this.MyJukebox_Shown);
             this.ResizeEnd += new System.EventHandler(this.MyJukebox_ResizeEnd);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
@@ -1460,6 +1460,7 @@ namespace MyJukebox_EF
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Timer timerShowMyBitmap;
         private System.Windows.Forms.Label label2;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerTreeviewsFirstLoad;
     }
 }
 
