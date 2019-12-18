@@ -28,6 +28,7 @@ namespace MyJukebox_EF.DAL
         public Nullable<bool> Error { get; set; }
         public Nullable<bool> Sampler { get; set; }
         public string Comment { get; set; }
+        public Nullable<int> Media { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tSong> tSongs { get; set; }

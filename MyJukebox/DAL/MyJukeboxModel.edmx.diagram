@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="MyJukeboxContext.tPlaylist" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tPLentry" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tSong" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyJukeboxContext.View_tSons_New" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.vPlaylistSong" Width="1.5" PointX="2.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.vSong" Width="1.5" PointX="4.75" PointY="12.125" IsExpanded="true" />
         <AssociationConnector Association="MyJukeboxContext.FK_tSongs_tCatalog" ManuallyRouted="false" />
@@ -28,6 +27,8 @@
         <AssociationConnector Association="MyJukeboxContext.FK_tSongs_tMedia" ManuallyRouted="false" />
         <AssociationConnector Association="MyJukeboxContext.FK_tPLentries_tPlaylists" ManuallyRouted="false" />
         <AssociationConnector Association="MyJukeboxContext.FK_tPLentries_tSongs" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyJukeboxContext.vSongsNewLong" Width="2.125" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MyJukeboxContext.vSongsNewShort" Width="1.875" PointX="6.75" PointY="12.125" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -57,6 +57,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Jukebox.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
@@ -86,6 +89,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\vSongsNewLong.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\vSongsNewShort.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Helpers\ColorsUsed.cs" />
     <Compile Include="DAL\MyJukeboxModel.Context.cs">
@@ -137,9 +146,6 @@
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\tSong.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\View_tSons_New.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\vPlaylistSong.cs">
@@ -285,6 +291,7 @@
       <DependentUpon>MyJukeboxModel.edmx</DependentUpon>
       <LastGenOutput>MyJukeboxModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Jukebox.ico" />
     <Content Include="Resources\Delete.ico" />
     <Content Include="Resources\QuerySave.ico" />
     <Content Include="Resources\save32.ico" />

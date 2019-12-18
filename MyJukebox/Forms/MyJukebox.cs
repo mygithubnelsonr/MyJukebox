@@ -111,7 +111,7 @@ namespace MyJukebox_EF
             splitContainer1.SplitterDistance = Settings.FormSplitterLeft;
 
             // first fill
-            FillDatagridView(Settings.QueryLastQuery);
+            FillDatagridViewAsynk(Settings.QueryLastQuery);
 
             //if (dataGridView.RowCount > 0)
             //{
@@ -123,13 +123,13 @@ namespace MyJukebox_EF
 
         private void TreeviewsFirstFill()
         {   // fill treeview with last results
-            tvlogicFillGenre();
+            tvlogicFillGenreAsync();
 
-            tvlogicFillKatalog();
+            tvlogicFillKatalogAsync();
 
-            tvlogicFillAlbum();
+            tvlogicFillAlbumAsync();
 
-            tvlogicFillInterpret();
+            tvlogicFillInterpretAsync();
 
             tvplaylistFillPlaylist();
 
@@ -269,13 +269,13 @@ namespace MyJukebox_EF
             if (_tvFilled == false) return;
 
             if (e.Node.Name == "katalog")
-                this.tvlogicFillKatalog();
+                this.tvlogicFillKatalogAsync();
 
             if (e.Node.Name == "album")
-                tvlogicFillAlbum();
+                tvlogicFillAlbumAsync();
 
             if (e.Node.Name == "interpret")
-                this.tvlogicFillInterpret();
+                this.tvlogicFillInterpretAsync();
         }
 
         private void tvlogic_MouseDown(object sender, MouseEventArgs e)
@@ -333,15 +333,15 @@ namespace MyJukebox_EF
             if (mainNode == "katalog" || mainNode == "genre")
             {
                 Settings.LastKatalog = "Alle";
-                tvlogicFillAlbum();
-                tvlogicFillInterpret();
+                tvlogicFillAlbumAsync();
+                tvlogicFillInterpretAsync();
             }
 
             if (mainNode == "genre")
             {
                 Settings.LastGenre = statusStripGenre.Text = tn.Text;
                 TreeviewFindNodeByText(tn.Parent, Settings.LastGenre, true, true);
-                tvlogicFillKatalog();
+                tvlogicFillKatalogAsync();
             }
 
             if (mainNode == "katalog")
@@ -349,8 +349,8 @@ namespace MyJukebox_EF
                 Settings.LastKatalog = statusStripKatalog.Text = tn.Text;
                 TreeviewFindNodeByText(tn.Parent, Settings.LastKatalog, true, true);
 
-                tvlogicFillAlbum();
-                tvlogicFillInterpret();
+                tvlogicFillAlbumAsync();
+                tvlogicFillInterpretAsync();
             }
 
             if (mainNode == "album")
@@ -659,15 +659,12 @@ namespace MyJukebox_EF
             }
         }
 
-        private async void tvlogicFillGenre()
+        private async Task tvlogicFillGenreAsync()
         {
             string mainNode = "genre";
             List<string> genres = null;
 
-            await Task.Run(() =>
-            {
-                genres = GetGenres();
-            });
+            await Task.Run(() => genres = GetGenres());
 
             TreeNode tngenre = tvlogic.Nodes["root"].Nodes[mainNode];
 
@@ -687,7 +684,7 @@ namespace MyJukebox_EF
             tvlogic.EndUpdate();
         }
 
-        private async void tvlogicFillKatalog()
+        private async Task tvlogicFillKatalogAsync()
         {
             string mainNode = "katalog";
             List<string> catalogues = null;
@@ -721,7 +718,7 @@ namespace MyJukebox_EF
             tvlogic.EndUpdate();
         }
 
-        private async void tvlogicFillAlbum()
+        private async Task tvlogicFillAlbumAsync()
         {
             string mainNode = "album";
             List<string> albums = null;
@@ -768,7 +765,7 @@ namespace MyJukebox_EF
             tvlogic.EndUpdate();
         }
 
-        private async void tvlogicFillInterpret()
+        private async Task tvlogicFillInterpretAsync()
         {
             string mainNode = "interpret";
             List<string> interpreten = null;
@@ -957,17 +954,34 @@ namespace MyJukebox_EF
         #region DataGrid Methodes
         public void FillDatagridView()
         {
-            FillDatagridView(string.Empty);
+            FillDatagridViewAsynk(string.Empty);
         }
 
-        public void FillDatagridView(string filter)
+        public async Task FillDatagridViewAsynk(string filter)
         {
             bool isQuery = IsQuery(filter);
+            List<vSongsNewShort> songs = new List<vSongsNewShort>();
 
             if (isQuery)
             {
                 _gridFilled = false;
-                GetQueryResult();
+
+                var results = await GetQueryResultAsync();
+
+                int currentDatagrigRow = 0;
+
+                if (Settings.LastTab == (int)TabcontrolTab.Logical)
+                    currentDatagrigRow = Settings.DatagridLastSelectedRow;
+
+                dataGridView.DataSource = results;
+
+                if (dataGridView.RowCount > 0)
+                {
+                    GridViewSetColumsWidth();
+                    dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
+                    statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
+                }
+
                 return;
             }
 
@@ -976,10 +990,6 @@ namespace MyJukebox_EF
                 _gridFilled = false;
 
                 GetTablogicalResults();
-
-                //do {
-                //    Task.Delay(200);
-                //} while(_gridFilled == false);
 
                 //dataGridView.SuspendLayout();
                 //dataGridView.DataSource = songs;
@@ -1419,8 +1429,8 @@ namespace MyJukebox_EF
         #region other controls
         private void buttonQueryExecute_Click(object sender, EventArgs e)
         {
-            if (textBoxSearch.Text != $"<Input SQL like Album='V8-A-1'>")
-                FillDatagridView(textBoxSearch.Text);
+            if (textBoxSearch.Text != _placeHolder)
+                FillDatagridViewAsynk(textBoxSearch.Text);
         }
 
         private void buttonQueryhSave_Click(object sender, EventArgs e)
@@ -1468,6 +1478,28 @@ namespace MyJukebox_EF
         private void buttonQueryClear_Click(object sender, EventArgs e)
         {
             TextBoxSearchClear();
+            if (comboBoxQueries.Text != "")
+            {
+                comboBoxQueries.Text = "";
+
+
+            //    toolStripPlaybackButtonStop.PerformClick();
+            //    int item = comboBoxQueries.SelectedIndex;
+            //    textBoxSearch.Text = comboBoxQueries.Text;
+            //    textBoxSearch.ForeColor = Color.Black;
+            //    textBoxSearch.Refresh();
+            //    Settings.QueryLastQuery = comboBoxQueries.Text;
+            //    buttonQueryExecute.PerformClick();
+            //}
+            //else
+            //{
+            //    comboBoxQueries.Text = "";
+            }
+
+            //buttonQueryExecute.PerformClick();
+
+            FillDatagridView();
+
         }
 
         #endregion other controls
@@ -1657,21 +1689,28 @@ namespace MyJukebox_EF
 
         private void comboBoxQueries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TextBoxSearchClear();
             toolStripPlaybackButtonStop.PerformClick();
-            int item = comboBoxQueries.SelectedIndex;
-            textBoxSearch.Text = comboBoxQueries.Text;
-            textBoxSearch.ForeColor = Color.Black;
-            textBoxSearch.Refresh();
-            Settings.QueryLastQuery = comboBoxQueries.Text;
+
+            if (comboBoxQueries.Text != "")
+            {
+                int item = comboBoxQueries.SelectedIndex;
+                textBoxSearch.Text = comboBoxQueries.Text;
+                textBoxSearch.ForeColor = Color.Black;
+                textBoxSearch.Refresh();
+                Settings.QueryLastQuery = comboBoxQueries.Text;
+            }
+
             buttonQueryExecute.PerformClick();
         }
 
+        // ToDo: Make async
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
         {
             using (var db = new MyJukeboxEntities())
             {
-                var result = db.tSongs
-                            .Where(a => a.Genre == Settings.LastGenre && a.Katalog == Settings.LastKatalog)
+                var result = db.vSongsNewShort
+                            .Where(a => a.Genre == Settings.LastGenre && a.Catalog == Settings.LastKatalog)
                             .Select(a => a.Album)
                             .Distinct().OrderBy(a => a);
 
@@ -1885,11 +1924,10 @@ namespace MyJukebox_EF
             textBoxSearch.ForeColor = Color.Gray;
         }
 
-
         #region Data Getters
-        private async void GetQueryResult()
+        private async Task<List<vSongsNewShort>> GetQueryResultAsync()
         {
-            List<vSong> songs = null;
+            List<vSongsNewShort> songs = null;
 
             int currentDatagrigRow = 0;
 
@@ -1898,31 +1936,43 @@ namespace MyJukebox_EF
 
             try
             {
+                var arTokens = textBoxSearch.Text.Split('=');
+                var search = arTokens[0];
+                var argument = arTokens[1];
+
+                if (argument.Substring(0, 1) == "'")
+                    argument = argument.Substring(1);
+
+                if (argument.Substring(argument.Length -1, 1) == "'")
+                    argument = argument.Substring(0, argument.Length - 1);
+
                 var context = new MyJukeboxEntities();
                 await Task.Run(() =>
                 {
-                    songs = context.vSongs
-                        .SqlQuery($"select * from vSongs where {textBoxSearch.Text}").ToList();
-
-                    dataGridView.DataSource = songs;
-
-                    if (dataGridView.RowCount > 0)
+                    try
                     {
-                        GridViewSetColumsWidth();
-                        dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
-                        statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
+                        songs = context.vSongsNewShort
+                            .SqlQuery($"select * from vSongsNewShort where {search} like '%{argument}%'").ToList();
+                    }
+                    catch
+                    {
+
                     }
 
                 });
 
+                return songs;
             }
             catch
-            { }
+            {
+                return null;
+            }
         }
 
+        // ToDo: make this async
         private void GetTablogicalResults()
         {
-            List<tSong> songs = null;
+            List<vSongsNewShort> songs = null;
             int currentDatagrigRow = 0;
 
             if (Settings.LastTab == (int)TabcontrolTab.Logical)
@@ -1936,9 +1986,9 @@ namespace MyJukebox_EF
                 var artist = Settings.LastInterpret == "Alle" ? "" : Settings.LastInterpret;
 
                 var context = new MyJukeboxEntities();
-                songs = context.tSongs
+                songs = context.vSongsNewShort
                     .Where(s => (s.Genre.Contains(genre)) &&
-                        (s.Katalog.Contains(catalog)) &&
+                        (s.Catalog.Contains(catalog)) &&
                         (s.Album.Contains(album)) &&
                         (s.Interpret.Contains(artist))
                         ).ToList();
@@ -1999,9 +2049,9 @@ namespace MyJukebox_EF
 
         public List<string> GetGenres()
         {
-            using (var db = new MyJukeboxEntities())
+            using (var context = new MyJukeboxEntities())
             {
-                var result = (from o in db.tSongs
+                var result = (from o in context.tSongs
                               select o.Genre)
                                   .Distinct().OrderBy(o => o
                                   );

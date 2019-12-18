@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyJukeboxContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MyJukeboxContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tActionLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -70,6 +70,7 @@
           <Property Name="Error" Type="bit" />
           <Property Name="Sampler" Type="bit" />
           <Property Name="Comment" Type="nvarchar" MaxLength="20" />
+          <Property Name="Media" Type="int" />
         </EntityType>
         <EntityType Name="tMD5">
           <Key>
@@ -137,37 +138,6 @@
           <Property Name="ID_File" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'MyJukebox.dbo.View_tSons_New' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_tSons_New">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="ID_Song" />
-            <PropertyRef Name="ID_F" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Expr1" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="156" />
-          <Property Name="ID_File" Type="int" />
-          <Property Name="ID_Song" Type="int" Nullable="false" />
-          <Property Name="FileSize" Type="int" />
-          <Property Name="FileDate" Type="datetime" />
-          <Property Name="Duration" Type="time" Precision="7" />
-          <Property Name="ImportDate" Type="datetime" />
-          <Property Name="Link" Type="nvarchar" MaxLength="50" />
-          <Property Name="ID_F" Type="int" Nullable="false" />
-          <Property Name="ID_Media" Type="int" />
-          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Expr1" Type="int" Nullable="false" />
-          <Property Name="Played" Type="int" />
-          <Property Name="Rating" Type="int" />
-          <Property Name="Beat" Type="int" />
-          <Property Name="Error" Type="bit" />
-          <Property Name="Sampler" Type="bit" />
-          <Property Name="Comment" Type="nvarchar" MaxLength="20" />
-        </EntityType>
-        <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vPlaylistSongs">
           <Key>
@@ -192,6 +162,53 @@ warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a prim
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vSongs">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Titel" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+          <Property Name="Catalog" Type="nvarchar" MaxLength="12" />
+          <Property Name="Album" Type="nvarchar" MaxLength="50" />
+          <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="156" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MyJukebox.dbo.vSongsNewLong' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSongsNewLong">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Song" />
+            <PropertyRef Name="ID_F" />
+            <PropertyRef Name="Beat" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+          <Property Name="Catalog" Type="nvarchar" MaxLength="12" />
+          <Property Name="Album" Type="nvarchar" MaxLength="50" />
+          <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
+          <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="156" />
+          <Property Name="ID_Song" Type="int" Nullable="false" />
+          <Property Name="FileSize" Type="int" />
+          <Property Name="FileDate" Type="datetime" />
+          <Property Name="Duration" Type="time" Precision="7" />
+          <Property Name="ImportDate" Type="datetime" />
+          <Property Name="Link" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_F" Type="int" Nullable="false" />
+          <Property Name="Media" Type="nvarchar" MaxLength="12" />
+          <Property Name="Played" Type="int" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Beat" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Error" Type="bit" />
+          <Property Name="Sampler" Type="bit" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSongsNewShort">
           <Key>
             <PropertyRef Name="ID" />
             <PropertyRef Name="Titel" />
@@ -314,30 +331,6 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
           <EntitySet Name="tPlaylists" EntityType="Self.tPlaylists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPLentries" EntityType="Self.tPLentries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tSongs" EntityType="Self.tSongs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="View_tSons_New" EntityType="Self.View_tSons_New" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_tSons_New].[ID] AS [ID], 
-    [View_tSons_New].[Pfad] AS [Pfad], 
-    [View_tSons_New].[FileName] AS [FileName], 
-    [View_tSons_New].[ID_File] AS [ID_File], 
-    [View_tSons_New].[ID_Song] AS [ID_Song], 
-    [View_tSons_New].[FileSize] AS [FileSize], 
-    [View_tSons_New].[FileDate] AS [FileDate], 
-    [View_tSons_New].[Duration] AS [Duration], 
-    [View_tSons_New].[ImportDate] AS [ImportDate], 
-    [View_tSons_New].[Link] AS [Link], 
-    [View_tSons_New].[ID_F] AS [ID_F], 
-    [View_tSons_New].[ID_Media] AS [ID_Media], 
-    [View_tSons_New].[Name] AS [Name], 
-    [View_tSons_New].[Expr1] AS [Expr1], 
-    [View_tSons_New].[Played] AS [Played], 
-    [View_tSons_New].[Rating] AS [Rating], 
-    [View_tSons_New].[Beat] AS [Beat], 
-    [View_tSons_New].[Error] AS [Error], 
-    [View_tSons_New].[Sampler] AS [Sampler], 
-    [View_tSons_New].[Comment] AS [Comment]
-    FROM [dbo].[View_tSons_New] AS [View_tSons_New]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 
@@ -365,6 +358,43 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
     [vSongs].[Pfad] AS [Pfad], 
     [vSongs].[FileName] AS [FileName]
     FROM [dbo].[vSongs] AS [vSongs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSongsNewLong" EntityType="Self.vSongsNewLong" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vSongsNewLong].[ID] AS [ID], 
+    [vSongsNewLong].[Genre] AS [Genre], 
+    [vSongsNewLong].[Catalog] AS [Catalog], 
+    [vSongsNewLong].[Album] AS [Album], 
+    [vSongsNewLong].[Interpret] AS [Interpret], 
+    [vSongsNewLong].[Pfad] AS [Pfad], 
+    [vSongsNewLong].[FileName] AS [FileName], 
+    [vSongsNewLong].[ID_Song] AS [ID_Song], 
+    [vSongsNewLong].[FileSize] AS [FileSize], 
+    [vSongsNewLong].[FileDate] AS [FileDate], 
+    [vSongsNewLong].[Duration] AS [Duration], 
+    [vSongsNewLong].[ImportDate] AS [ImportDate], 
+    [vSongsNewLong].[Link] AS [Link], 
+    [vSongsNewLong].[ID_F] AS [ID_F], 
+    [vSongsNewLong].[Media] AS [Media], 
+    [vSongsNewLong].[Played] AS [Played], 
+    [vSongsNewLong].[Rating] AS [Rating], 
+    [vSongsNewLong].[Beat] AS [Beat], 
+    [vSongsNewLong].[Error] AS [Error], 
+    [vSongsNewLong].[Sampler] AS [Sampler], 
+    [vSongsNewLong].[Comment] AS [Comment]
+    FROM [dbo].[vSongsNewLong] AS [vSongsNewLong]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSongsNewShort" EntityType="Self.vSongsNewShort" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vSongsNewShort].[ID] AS [ID], 
+    [vSongsNewShort].[Genre] AS [Genre], 
+    [vSongsNewShort].[Catalog] AS [Catalog], 
+    [vSongsNewShort].[Album] AS [Album], 
+    [vSongsNewShort].[Interpret] AS [Interpret], 
+    [vSongsNewShort].[Titel] AS [Titel], 
+    [vSongsNewShort].[Pfad] AS [Pfad], 
+    [vSongsNewShort].[FileName] AS [FileName]
+    FROM [dbo].[vSongsNewShort] AS [vSongsNewShort]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_tFileInfo_tSongs" Association="Self.FK_tFileInfo_tSongs">
             <End Role="tSongs" EntitySet="tSongs" />
@@ -399,8 +429,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
             <End Role="tSongs" EntitySet="tSongs" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyJukeboxContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -473,6 +502,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
           <Property Name="Sampler" Type="Boolean" />
           <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tInfos" FromRole="tInfos" ToRole="tSongs" />
+          <Property Name="Media" Type="Int32" />
         </EntityType>
         <EntityType Name="tMD5">
           <Key>
@@ -550,35 +580,6 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
           <NavigationProperty Name="tMD5" Relationship="Self.FK_tMD5n_tSongs" FromRole="tSongs" ToRole="tMD5" />
           <NavigationProperty Name="tMedia" Relationship="Self.FK_tSongs_tMedia" FromRole="tSongs" ToRole="tMedia" />
           <NavigationProperty Name="tPLentries" Relationship="Self.FK_tPLentries_tSongs" FromRole="tSongs" ToRole="tPLentries" />
-        </EntityType>
-        <EntityType Name="View_tSons_New">
-          <Key>
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="ID_Song" />
-            <PropertyRef Name="ID_F" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Expr1" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-          <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-          <Property Name="ID_File" Type="Int32" />
-          <Property Name="ID_Song" Type="Int32" Nullable="false" />
-          <Property Name="FileSize" Type="Int32" />
-          <Property Name="FileDate" Type="DateTime" Precision="3" />
-          <Property Name="Duration" Type="Time" Precision="7" />
-          <Property Name="ImportDate" Type="DateTime" Precision="3" />
-          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ID_F" Type="Int32" Nullable="false" />
-          <Property Name="ID_Media" Type="Int32" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Expr1" Type="Int32" Nullable="false" />
-          <Property Name="Played" Type="Int32" />
-          <Property Name="Rating" Type="Int32" />
-          <Property Name="Beat" Type="Int32" />
-          <Property Name="Error" Type="Boolean" />
-          <Property Name="Sampler" Type="Boolean" />
-          <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="vPlaylistSong">
           <Key>
@@ -723,7 +724,6 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
           <EntitySet Name="tPlaylists" EntityType="Self.tPlaylist" />
           <EntitySet Name="tPLentries" EntityType="Self.tPLentry" />
           <EntitySet Name="tSongs" EntityType="Self.tSong" />
-          <EntitySet Name="View_tSons_New" EntityType="Self.View_tSons_New" />
           <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSong" />
           <EntitySet Name="vSongs" EntityType="Self.vSong" />
           <AssociationSet Name="FK_tSongs_tCatalog" Association="Self.FK_tSongs_tCatalog">
@@ -758,7 +758,52 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
             <End Role="tSongs" EntitySet="tSongs" />
             <End Role="tPLentries" EntitySet="tPLentries" />
           </AssociationSet>
+          <EntitySet Name="vSongsNewLongs" EntityType="MyJukeboxContext.vSongsNewLong" />
+          <EntitySet Name="vSongsNewShorts" EntityType="MyJukeboxContext.vSongsNewShort" />
         </EntityContainer>
+        <EntityType Name="vSongsNewLong">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="ID_Song" />
+            <PropertyRef Name="ID_F" />
+            <PropertyRef Name="Beat" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+          <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+          <Property Name="ID_Song" Type="Int32" Nullable="false" />
+          <Property Name="FileSize" Type="Int32" />
+          <Property Name="FileDate" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="Time" Precision="7" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_F" Type="Int32" Nullable="false" />
+          <Property Name="Media" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Played" Type="Int32" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Beat" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Error" Type="Boolean" />
+          <Property Name="Sampler" Type="Boolean" />
+          <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vSongsNewShort">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Titel" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -827,6 +872,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
           <EntitySetMapping Name="tInfos">
             <EntityTypeMapping TypeName="MyJukeboxContext.tInfo">
               <MappingFragment StoreEntitySet="tInfos">
+                <ScalarProperty Name="Media" ColumnName="Media" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
                 <ScalarProperty Name="Played" ColumnName="Played" />
@@ -908,32 +954,6 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="View_tSons_New">
-            <EntityTypeMapping TypeName="MyJukeboxContext.View_tSons_New">
-              <MappingFragment StoreEntitySet="View_tSons_New">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="ID_File" ColumnName="ID_File" />
-                <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
-                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
-                <ScalarProperty Name="Duration" ColumnName="Duration" />
-                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="ID_F" ColumnName="ID_F" />
-                <ScalarProperty Name="ID_Media" ColumnName="ID_Media" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="Played" ColumnName="Played" />
-                <ScalarProperty Name="Rating" ColumnName="Rating" />
-                <ScalarProperty Name="Beat" ColumnName="Beat" />
-                <ScalarProperty Name="Error" ColumnName="Error" />
-                <ScalarProperty Name="Sampler" ColumnName="Sampler" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vPlaylistSongs">
             <EntityTypeMapping TypeName="MyJukeboxContext.vPlaylistSong">
               <MappingFragment StoreEntitySet="vPlaylistSongs">
@@ -963,6 +983,47 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
                 <ScalarProperty Name="Titel" ColumnName="Titel" />
                 <ScalarProperty Name="Pfad" ColumnName="Pfad" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSongsNewLongs">
+            <EntityTypeMapping TypeName="MyJukeboxContext.vSongsNewLong">
+              <MappingFragment StoreEntitySet="vSongsNewLong">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Sampler" ColumnName="Sampler" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="Beat" ColumnName="Beat" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Played" ColumnName="Played" />
+                <ScalarProperty Name="Media" ColumnName="Media" />
+                <ScalarProperty Name="ID_F" ColumnName="ID_F" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+                <ScalarProperty Name="Interpret" ColumnName="Interpret" />
+                <ScalarProperty Name="Album" ColumnName="Album" />
+                <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSongsNewShorts">
+            <EntityTypeMapping TypeName="MyJukeboxContext.vSongsNewShort">
+              <MappingFragment StoreEntitySet="vSongsNewShort">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Interpret" ColumnName="Interpret" />
+                <ScalarProperty Name="Album" ColumnName="Album" />
+                <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

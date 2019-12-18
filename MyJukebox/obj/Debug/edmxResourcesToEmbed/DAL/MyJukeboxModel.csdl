@@ -69,6 +69,7 @@
     <Property Name="Sampler" Type="Boolean" />
     <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tInfos" FromRole="tInfos" ToRole="tSongs" />
+    <Property Name="Media" Type="Int32" />
   </EntityType>
   <EntityType Name="tMD5">
     <Key>
@@ -146,35 +147,6 @@
     <NavigationProperty Name="tMD5" Relationship="Self.FK_tMD5n_tSongs" FromRole="tSongs" ToRole="tMD5" />
     <NavigationProperty Name="tMedia" Relationship="Self.FK_tSongs_tMedia" FromRole="tSongs" ToRole="tMedia" />
     <NavigationProperty Name="tPLentries" Relationship="Self.FK_tPLentries_tSongs" FromRole="tSongs" ToRole="tPLentries" />
-  </EntityType>
-  <EntityType Name="View_tSons_New">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="ID_Song" />
-      <PropertyRef Name="ID_F" />
-      <PropertyRef Name="Name" />
-      <PropertyRef Name="Expr1" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-    <Property Name="ID_File" Type="Int32" />
-    <Property Name="ID_Song" Type="Int32" Nullable="false" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="FileDate" Type="DateTime" Precision="3" />
-    <Property Name="Duration" Type="Time" Precision="7" />
-    <Property Name="ImportDate" Type="DateTime" Precision="3" />
-    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ID_F" Type="Int32" Nullable="false" />
-    <Property Name="ID_Media" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Expr1" Type="Int32" Nullable="false" />
-    <Property Name="Played" Type="Int32" />
-    <Property Name="Rating" Type="Int32" />
-    <Property Name="Beat" Type="Int32" />
-    <Property Name="Error" Type="Boolean" />
-    <Property Name="Sampler" Type="Boolean" />
-    <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="vPlaylistSong">
     <Key>
@@ -319,7 +291,6 @@
     <EntitySet Name="tPlaylists" EntityType="Self.tPlaylist" />
     <EntitySet Name="tPLentries" EntityType="Self.tPLentry" />
     <EntitySet Name="tSongs" EntityType="Self.tSong" />
-    <EntitySet Name="View_tSons_New" EntityType="Self.View_tSons_New" />
     <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSong" />
     <EntitySet Name="vSongs" EntityType="Self.vSong" />
     <AssociationSet Name="FK_tSongs_tCatalog" Association="Self.FK_tSongs_tCatalog">
@@ -354,5 +325,50 @@
       <End Role="tSongs" EntitySet="tSongs" />
       <End Role="tPLentries" EntitySet="tPLentries" />
     </AssociationSet>
+    <EntitySet Name="vSongsNewLongs" EntityType="MyJukeboxContext.vSongsNewLong" />
+    <EntitySet Name="vSongsNewShorts" EntityType="MyJukeboxContext.vSongsNewShort" />
   </EntityContainer>
+  <EntityType Name="vSongsNewLong">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="ID_Song" />
+      <PropertyRef Name="ID_F" />
+      <PropertyRef Name="Beat" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Song" Type="Int32" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileDate" Type="DateTime" Precision="3" />
+    <Property Name="Duration" Type="Time" Precision="7" />
+    <Property Name="ImportDate" Type="DateTime" Precision="3" />
+    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID_F" Type="Int32" Nullable="false" />
+    <Property Name="Media" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Played" Type="Int32" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="Beat" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Error" Type="Boolean" />
+    <Property Name="Sampler" Type="Boolean" />
+    <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vSongsNewShort">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Titel" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
