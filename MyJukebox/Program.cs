@@ -13,7 +13,8 @@ namespace MyJukebox_EF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MyJukebox());
+            //Application.Run(new MyJukebox());
+            Application.Run(new Filescanner());
         }
     }
 }

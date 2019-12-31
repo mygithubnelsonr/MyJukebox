@@ -89,12 +89,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\tTestImport.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\vSongsNewLong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\vSongsNewShort.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BLL\DataGetSet.cs" />
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Helpers\ColorsUsed.cs" />
     <Compile Include="DAL\MyJukeboxModel.Context.cs">
@@ -179,6 +183,7 @@
     <Compile Include="Forms\MyJukebox.Designer.cs">
       <DependentUpon>MyJukebox.cs</DependentUpon>
     </Compile>
+    <Compile Include="BLL\Methods.cs" />
     <Compile Include="Resources\GetFiles.cs" />
     <Compile Include="Helpers\LocalFunctions.cs" />
     <Compile Include="Helpers\ImageCollector.cs" />
@@ -343,7 +348,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FunctionPool\FunctionPool.csproj">
+    <ProjectReference Include="..\..\..\11_Public\FunctionPool\FunctionPool.csproj">
       <Project>{5e8d2814-7dda-47ad-9739-dc3192f4a5f6}</Project>
       <Name>FunctionPool</Name>
     </ProjectReference>

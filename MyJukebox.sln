@@ -4,7 +4,7 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyJukebox", "MyJukebox\MyJukebox.csproj", "{771D5D43-38BA-4C8E-9F74-38DD45D5E6D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionPool", "FunctionPool\FunctionPool.csproj", "{5E8D2814-7DDA-47AD-9739-DC3192F4A5F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionPool", "..\..\11_Public\FunctionPool\FunctionPool.csproj", "{5E8D2814-7DDA-47AD-9739-DC3192F4A5F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -29,26 +29,29 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelFolders2 = new System.Windows.Forms.Label();
-            this.labelFolders1 = new System.Windows.Forms.Label();
-            this.labelDateien1 = new System.Windows.Forms.Label();
-            this.labelDateien2 = new System.Windows.Forms.Label();
+            this.panelControls = new System.Windows.Forms.Panel();
+            this.buttonStartScann = new System.Windows.Forms.Button();
+            this.statusStripScann = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelFolders = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelFiles = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelTotalsize = new System.Windows.Forms.ToolStripStatusLabel();
             this.listViewFileList = new System.Windows.Forms.ListView();
-            this.columnHeaderFileName = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderSize = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderDate = new System.Windows.Forms.ColumnHeader();
-            this.columnHeaderPath = new System.Windows.Forms.ColumnHeader();
-            this.buttonCancelScann = new System.Windows.Forms.Button();
+            this.columnHeaderFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderPath = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxExtension = new System.Windows.Forms.TextBox();
             this.buttonOrdner = new System.Windows.Forms.Button();
-            this.buttonStartScann = new System.Windows.Forms.Button();
             this.cmb_StartOrdner = new System.Windows.Forms.ComboBox();
             this.panelDB = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBoxMedium = new System.Windows.Forms.ComboBox();
-            this.comboBoxQuelle = new System.Windows.Forms.ComboBox();
+            this.comboBoxAlbum = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxKatalog = new System.Windows.Forms.ComboBox();
@@ -59,9 +62,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.labelAllFileSize = new System.Windows.Forms.Label();
-            this.labelFolders = new System.Windows.Forms.Label();
-            this.labelDateien = new System.Windows.Forms.Label();
+            this.labelFilesizeTotal = new System.Windows.Forms.Label();
+            this.labelFailed = new System.Windows.Forms.Label();
+            this.labelSuccess = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonCancelImport = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
@@ -69,7 +72,7 @@
             this.checkBoxTest = new System.Windows.Forms.CheckBox();
             this.checkBoxSampler = new System.Windows.Forms.CheckBox();
             this.checkBoxLöschen = new System.Windows.Forms.CheckBox();
-            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusStripImport = new System.Windows.Forms.StatusStrip();
             this.statusStripLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelStart = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -78,73 +81,108 @@
             this.statusStripLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStripLabelSpecial = new System.Windows.Forms.ToolStripStatusLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.labelShowHideDbPanel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.panelControls.SuspendLayout();
+            this.statusStripScann.SuspendLayout();
             this.panelDB.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.statusStrip.SuspendLayout();
+            this.statusStripImport.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSlateGray;
-            this.panel1.Controls.Add(this.labelFolders2);
-            this.panel1.Controls.Add(this.labelFolders1);
-            this.panel1.Controls.Add(this.labelDateien1);
-            this.panel1.Controls.Add(this.labelDateien2);
+            this.panel1.Controls.Add(this.panelControls);
             this.panel1.Controls.Add(this.listViewFileList);
-            this.panel1.Controls.Add(this.buttonCancelScann);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textBoxExtension);
             this.panel1.Controls.Add(this.buttonOrdner);
-            this.panel1.Controls.Add(this.buttonStartScann);
             this.panel1.Controls.Add(this.cmb_StartOrdner);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(426, 219);
+            this.panel1.Size = new System.Drawing.Size(424, 219);
             this.panel1.TabIndex = 8;
             // 
-            // labelFolders2
+            // panelControls
             // 
-            this.labelFolders2.AutoSize = true;
-            this.labelFolders2.Location = new System.Drawing.Point(378, 191);
-            this.labelFolders2.Name = "labelFolders2";
-            this.labelFolders2.Size = new System.Drawing.Size(19, 13);
-            this.labelFolders2.TabIndex = 22;
-            this.labelFolders2.Text = "----";
+            this.panelControls.Controls.Add(this.buttonStartScann);
+            this.panelControls.Controls.Add(this.statusStripScann);
+            this.panelControls.Location = new System.Drawing.Point(12, 195);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Size = new System.Drawing.Size(412, 21);
+            this.panelControls.TabIndex = 24;
             // 
-            // labelFolders1
+            // buttonStartScann
             // 
-            this.labelFolders1.AutoSize = true;
-            this.labelFolders1.Location = new System.Drawing.Point(335, 191);
-            this.labelFolders1.Name = "labelFolders1";
-            this.labelFolders1.Size = new System.Drawing.Size(47, 13);
-            this.labelFolders1.TabIndex = 21;
-            this.labelFolders1.Text = "Folders: ";
+            this.buttonStartScann.Location = new System.Drawing.Point(313, -1);
+            this.buttonStartScann.Name = "buttonStartScann";
+            this.buttonStartScann.Size = new System.Drawing.Size(87, 20);
+            this.buttonStartScann.TabIndex = 9;
+            this.buttonStartScann.Text = "Start";
+            this.buttonStartScann.UseVisualStyleBackColor = true;
+            this.buttonStartScann.Click += new System.EventHandler(this.buttonStartScann_Click);
             // 
-            // labelDateien1
+            // statusStripScann
             // 
-            this.labelDateien1.AutoSize = true;
-            this.labelDateien1.Location = new System.Drawing.Point(239, 191);
-            this.labelDateien1.Name = "labelDateien1";
-            this.labelDateien1.Size = new System.Drawing.Size(50, 13);
-            this.labelDateien1.TabIndex = 18;
-            this.labelDateien1.Text = "Dateien: ";
+            this.statusStripScann.BackColor = System.Drawing.Color.LightSlateGray;
+            this.statusStripScann.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabelFolders,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelFiles,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabelTotalsize});
+            this.statusStripScann.Location = new System.Drawing.Point(0, -1);
+            this.statusStripScann.Name = "statusStripScann";
+            this.statusStripScann.Size = new System.Drawing.Size(412, 22);
+            this.statusStripScann.TabIndex = 23;
+            this.statusStripScann.Text = "statusStripScanner";
             // 
-            // labelDateien2
+            // toolStripStatusLabel2
             // 
-            this.labelDateien2.AutoSize = true;
-            this.labelDateien2.Location = new System.Drawing.Point(285, 191);
-            this.labelDateien2.Name = "labelDateien2";
-            this.labelDateien2.Size = new System.Drawing.Size(19, 13);
-            this.labelDateien2.TabIndex = 17;
-            this.labelDateien2.Text = "----";
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabel2.Text = "Folders:";
+            // 
+            // toolStripStatusLabelFolders
+            // 
+            this.toolStripStatusLabelFolders.Name = "toolStripStatusLabelFolders";
+            this.toolStripStatusLabelFolders.Size = new System.Drawing.Size(13, 17);
+            this.toolStripStatusLabelFolders.Text = "0";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(33, 17);
+            this.toolStripStatusLabel1.Text = "Files:";
+            // 
+            // toolStripStatusLabelFiles
+            // 
+            this.toolStripStatusLabelFiles.Name = "toolStripStatusLabelFiles";
+            this.toolStripStatusLabelFiles.Size = new System.Drawing.Size(13, 17);
+            this.toolStripStatusLabelFiles.Text = "0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(74, 17);
+            this.toolStripStatusLabel3.Text = "Filesize total:";
+            // 
+            // toolStripStatusLabelTotalsize
+            // 
+            this.toolStripStatusLabelTotalsize.Name = "toolStripStatusLabelTotalsize";
+            this.toolStripStatusLabelTotalsize.Size = new System.Drawing.Size(13, 17);
+            this.toolStripStatusLabelTotalsize.Text = "0";
             // 
             // listViewFileList
             // 
+            this.listViewFileList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewFileList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderFileName,
             this.columnHeaderSize,
@@ -152,9 +190,10 @@
             this.columnHeaderPath});
             this.listViewFileList.FullRowSelect = true;
             this.listViewFileList.GridLines = true;
+            this.listViewFileList.HideSelection = false;
             this.listViewFileList.Location = new System.Drawing.Point(12, 52);
             this.listViewFileList.Name = "listViewFileList";
-            this.listViewFileList.Size = new System.Drawing.Size(401, 111);
+            this.listViewFileList.Size = new System.Drawing.Size(401, 133);
             this.listViewFileList.TabIndex = 16;
             this.listViewFileList.UseCompatibleStateImageBehavior = false;
             this.listViewFileList.View = System.Windows.Forms.View.Details;
@@ -178,18 +217,6 @@
             this.columnHeaderPath.Text = "Path";
             this.columnHeaderPath.Width = 118;
             // 
-            // buttonCancelScann
-            // 
-            this.buttonCancelScann.Enabled = false;
-            this.buttonCancelScann.Location = new System.Drawing.Point(113, 181);
-            this.buttonCancelScann.Name = "buttonCancelScann";
-            this.buttonCancelScann.Size = new System.Drawing.Size(87, 23);
-            this.buttonCancelScann.TabIndex = 15;
-            this.buttonCancelScann.Tag = "false";
-            this.buttonCancelScann.Text = "Cancel";
-            this.buttonCancelScann.UseVisualStyleBackColor = true;
-            this.buttonCancelScann.Click += new System.EventHandler(this.buttonCancelScann_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -210,7 +237,8 @@
             // 
             // textBoxExtension
             // 
-            this.textBoxExtension.Location = new System.Drawing.Point(367, 25);
+            this.textBoxExtension.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxExtension.Location = new System.Drawing.Point(366, 25);
             this.textBoxExtension.Name = "textBoxExtension";
             this.textBoxExtension.Size = new System.Drawing.Size(47, 20);
             this.textBoxExtension.TabIndex = 12;
@@ -219,7 +247,8 @@
             // 
             // buttonOrdner
             // 
-            this.buttonOrdner.Location = new System.Drawing.Point(316, 26);
+            this.buttonOrdner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOrdner.Location = new System.Drawing.Point(303, 30);
             this.buttonOrdner.Name = "buttonOrdner";
             this.buttonOrdner.Size = new System.Drawing.Size(34, 16);
             this.buttonOrdner.TabIndex = 10;
@@ -228,45 +257,41 @@
             this.buttonOrdner.UseVisualStyleBackColor = true;
             this.buttonOrdner.Click += new System.EventHandler(this.buttonOrdner_Click);
             // 
-            // buttonStartScann
-            // 
-            this.buttonStartScann.Enabled = false;
-            this.buttonStartScann.Location = new System.Drawing.Point(12, 181);
-            this.buttonStartScann.Name = "buttonStartScann";
-            this.buttonStartScann.Size = new System.Drawing.Size(87, 23);
-            this.buttonStartScann.TabIndex = 9;
-            this.buttonStartScann.Text = "Start";
-            this.buttonStartScann.UseVisualStyleBackColor = true;
-            this.buttonStartScann.Click += new System.EventHandler(this.buttonStartScann_Click);
-            // 
             // cmb_StartOrdner
             // 
+            this.cmb_StartOrdner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmb_StartOrdner.BackColor = System.Drawing.Color.Salmon;
             this.cmb_StartOrdner.FormattingEnabled = true;
+            this.cmb_StartOrdner.Items.AddRange(new object[] {
+            "",
+            "\\\\win2k16dc01\\FS012\\Country\\Sonja\\CD\\Dan + Shay\\Dan + Shay"});
             this.cmb_StartOrdner.Location = new System.Drawing.Point(12, 25);
             this.cmb_StartOrdner.Name = "cmb_StartOrdner";
-            this.cmb_StartOrdner.Size = new System.Drawing.Size(287, 21);
+            this.cmb_StartOrdner.Size = new System.Drawing.Size(285, 21);
             this.cmb_StartOrdner.TabIndex = 8;
             this.cmb_StartOrdner.SelectedIndexChanged += new System.EventHandler(this.cmb_StartOrdner_SelectedIndexChanged);
-            this.cmb_StartOrdner.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb_StartOrdner_KeyUp);
             this.cmb_StartOrdner.TextChanged += new System.EventHandler(this.cmb_StartOrdner_TextChanged);
+            this.cmb_StartOrdner.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb_StartOrdner_KeyUp);
             // 
             // panelDB
             // 
-            this.panelDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panelDB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelDB.BackColor = System.Drawing.Color.LightSlateGray;
             this.panelDB.Controls.Add(this.groupBox3);
             this.panelDB.Controls.Add(this.groupBox2);
             this.panelDB.Controls.Add(this.groupBox1);
-            this.panelDB.Location = new System.Drawing.Point(0, 228);
+            this.panelDB.Location = new System.Drawing.Point(0, 233);
             this.panelDB.Name = "panelDB";
-            this.panelDB.Size = new System.Drawing.Size(430, 250);
+            this.panelDB.Size = new System.Drawing.Size(424, 246);
             this.panelDB.TabIndex = 9;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.comboBoxMedium);
-            this.groupBox3.Controls.Add(this.comboBoxQuelle);
+            this.groupBox3.Controls.Add(this.comboBoxAlbum);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.comboBoxKatalog);
@@ -289,14 +314,14 @@
             this.comboBoxMedium.TabIndex = 8;
             this.comboBoxMedium.Text = "Medium";
             // 
-            // comboBoxQuelle
+            // comboBoxAlbum
             // 
-            this.comboBoxQuelle.FormattingEnabled = true;
-            this.comboBoxQuelle.Location = new System.Drawing.Point(10, 86);
-            this.comboBoxQuelle.Name = "comboBoxQuelle";
-            this.comboBoxQuelle.Size = new System.Drawing.Size(166, 21);
-            this.comboBoxQuelle.TabIndex = 7;
-            this.comboBoxQuelle.Text = "Quelle";
+            this.comboBoxAlbum.FormattingEnabled = true;
+            this.comboBoxAlbum.Location = new System.Drawing.Point(10, 86);
+            this.comboBoxAlbum.Name = "comboBoxAlbum";
+            this.comboBoxAlbum.Size = new System.Drawing.Size(166, 21);
+            this.comboBoxAlbum.TabIndex = 7;
+            this.comboBoxAlbum.Text = "Album";
             // 
             // label9
             // 
@@ -312,9 +337,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(7, 70);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 13);
+            this.label8.Size = new System.Drawing.Size(36, 13);
             this.label8.TabIndex = 5;
-            this.label8.Text = "Quelle";
+            this.label8.Text = "Album";
             // 
             // comboBoxKatalog
             // 
@@ -357,72 +382,71 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.labelAllFileSize);
-            this.groupBox2.Controls.Add(this.labelFolders);
-            this.groupBox2.Controls.Add(this.labelDateien);
+            this.groupBox2.Controls.Add(this.labelFilesizeTotal);
+            this.groupBox2.Controls.Add(this.labelFailed);
+            this.groupBox2.Controls.Add(this.labelSuccess);
             this.groupBox2.Location = new System.Drawing.Point(220, 18);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(193, 96);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Dateien";
+            this.groupBox2.Text = "Record";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(16, 67);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 13);
+            this.label5.Size = new System.Drawing.Size(70, 13);
             this.label5.TabIndex = 21;
-            this.label5.Text = "Size: ";
+            this.label5.Text = "Filesize total: ";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(16, 42);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
+            this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 20;
-            this.label4.Text = "Folders: ";
+            this.label4.Text = "Import failed:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(16, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 19;
-            this.label3.Text = "Count: ";
+            this.label3.Text = "Import success: ";
             // 
-            // labelAllFileSize
+            // labelFilesizeTotal
             // 
-            this.labelAllFileSize.AutoSize = true;
-            this.labelAllFileSize.Location = new System.Drawing.Point(66, 67);
-            this.labelAllFileSize.Name = "labelAllFileSize";
-            this.labelAllFileSize.Size = new System.Drawing.Size(19, 13);
-            this.labelAllFileSize.TabIndex = 2;
-            this.labelAllFileSize.Text = "----";
-            this.labelAllFileSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFilesizeTotal.Location = new System.Drawing.Point(96, 67);
+            this.labelFilesizeTotal.Name = "labelFilesizeTotal";
+            this.labelFilesizeTotal.Size = new System.Drawing.Size(81, 13);
+            this.labelFilesizeTotal.TabIndex = 2;
+            this.labelFilesizeTotal.Text = "----";
+            this.labelFilesizeTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelFolders
+            // labelFailed
             // 
-            this.labelFolders.AutoSize = true;
-            this.labelFolders.Location = new System.Drawing.Point(66, 42);
-            this.labelFolders.Name = "labelFolders";
-            this.labelFolders.Size = new System.Drawing.Size(19, 13);
-            this.labelFolders.TabIndex = 1;
-            this.labelFolders.Text = "----";
-            this.labelFolders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFailed.AutoSize = true;
+            this.labelFailed.Location = new System.Drawing.Point(158, 43);
+            this.labelFailed.Name = "labelFailed";
+            this.labelFailed.Size = new System.Drawing.Size(19, 13);
+            this.labelFailed.TabIndex = 1;
+            this.labelFailed.Text = "----";
+            this.labelFailed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // labelDateien
+            // labelSuccess
             // 
-            this.labelDateien.AutoSize = true;
-            this.labelDateien.Location = new System.Drawing.Point(66, 21);
-            this.labelDateien.Name = "labelDateien";
-            this.labelDateien.Size = new System.Drawing.Size(19, 13);
-            this.labelDateien.TabIndex = 0;
-            this.labelDateien.Text = "----";
-            this.labelDateien.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSuccess.AutoSize = true;
+            this.labelSuccess.Location = new System.Drawing.Point(158, 18);
+            this.labelSuccess.Name = "labelSuccess";
+            this.labelSuccess.Size = new System.Drawing.Size(19, 13);
+            this.labelSuccess.TabIndex = 0;
+            this.labelSuccess.Text = "----";
+            this.labelSuccess.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBox1
             // 
@@ -453,7 +477,6 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Enabled = false;
             this.buttonImport.Location = new System.Drawing.Point(15, 71);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(69, 23);
@@ -505,9 +528,9 @@
             this.checkBoxLöschen.Text = "Löschen";
             this.checkBoxLöschen.UseVisualStyleBackColor = true;
             // 
-            // statusStrip
+            // statusStripImport
             // 
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusStripImport.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusStripLabel1,
             this.statusStripLabelStart,
             this.statusStripLabel2,
@@ -515,17 +538,17 @@
             this.toolStripProgressBar,
             this.statusStripLabel3,
             this.statusStripLabelSpecial});
-            this.statusStrip.Location = new System.Drawing.Point(0, 478);
-            this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(426, 22);
-            this.statusStrip.TabIndex = 16;
-            this.statusStrip.Text = "statusStrip1";
+            this.statusStripImport.Location = new System.Drawing.Point(0, 477);
+            this.statusStripImport.Name = "statusStripImport";
+            this.statusStripImport.Size = new System.Drawing.Size(424, 24);
+            this.statusStripImport.TabIndex = 16;
+            this.statusStripImport.Text = "statusStrip1";
             // 
             // statusStripLabel1
             // 
             this.statusStripLabel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabel1.Name = "statusStripLabel1";
-            this.statusStripLabel1.Size = new System.Drawing.Size(31, 17);
+            this.statusStripLabel1.Size = new System.Drawing.Size(31, 19);
             this.statusStripLabel1.Text = "Start";
             // 
             // statusStripLabelStart
@@ -534,7 +557,7 @@
             this.statusStripLabelStart.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabelStart.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabelStart.Name = "statusStripLabelStart";
-            this.statusStripLabelStart.Size = new System.Drawing.Size(50, 17);
+            this.statusStripLabelStart.Size = new System.Drawing.Size(50, 19);
             this.statusStripLabelStart.Text = " ";
             // 
             // statusStripLabel2
@@ -542,7 +565,7 @@
             this.statusStripLabel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabel2.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabel2.Name = "statusStripLabel2";
-            this.statusStripLabel2.Size = new System.Drawing.Size(40, 17);
+            this.statusStripLabel2.Size = new System.Drawing.Size(42, 19);
             this.statusStripLabel2.Text = "Dauer";
             // 
             // statusStripabelDauer
@@ -551,14 +574,14 @@
             this.statusStripabelDauer.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripabelDauer.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripabelDauer.Name = "statusStripabelDauer";
-            this.statusStripabelDauer.Size = new System.Drawing.Size(50, 17);
+            this.statusStripabelDauer.Size = new System.Drawing.Size(50, 19);
             this.statusStripabelDauer.Text = " ";
             // 
             // toolStripProgressBar
             // 
             this.toolStripProgressBar.Enabled = false;
             this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(160, 16);
+            this.toolStripProgressBar.Size = new System.Drawing.Size(160, 18);
             this.toolStripProgressBar.Step = 1;
             this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.toolStripProgressBar.Visible = false;
@@ -568,7 +591,7 @@
             this.statusStripLabel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabel3.Name = "statusStripLabel3";
-            this.statusStripLabel3.Size = new System.Drawing.Size(223, 17);
+            this.statusStripLabel3.Size = new System.Drawing.Size(219, 19);
             this.statusStripLabel3.Spring = true;
             // 
             // statusStripLabelSpecial
@@ -578,27 +601,45 @@
             this.statusStripLabelSpecial.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
             this.statusStripLabelSpecial.Enabled = false;
             this.statusStripLabelSpecial.Name = "statusStripLabelSpecial";
-            this.statusStripLabelSpecial.Size = new System.Drawing.Size(17, 17);
+            this.statusStripLabelSpecial.Size = new System.Drawing.Size(17, 19);
             this.statusStripLabelSpecial.Text = "S";
             this.statusStripLabelSpecial.Click += new System.EventHandler(this.statusStripLabelSpecial_Click);
+            // 
+            // labelShowHideDbPanel
+            // 
+            this.labelShowHideDbPanel.AutoSize = true;
+            this.labelShowHideDbPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelShowHideDbPanel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.labelShowHideDbPanel.Location = new System.Drawing.Point(193, 221);
+            this.labelShowHideDbPanel.Name = "labelShowHideDbPanel";
+            this.labelShowHideDbPanel.Size = new System.Drawing.Size(35, 9);
+            this.labelShowHideDbPanel.TabIndex = 17;
+            this.labelShowHideDbPanel.Text = "======";
+            this.labelShowHideDbPanel.Click += new System.EventHandler(this.labelShowHideDbPanel_Click);
             // 
             // Filescanner
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(426, 500);
-            this.Controls.Add(this.statusStrip);
+            this.ClientSize = new System.Drawing.Size(424, 501);
+            this.Controls.Add(this.labelShowHideDbPanel);
+            this.Controls.Add(this.statusStripImport);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelDB);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(434, 272);
+            this.MaximumSize = new System.Drawing.Size(1024, 640);
             this.Name = "Filescanner";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Filescanner";
-            this.Load += new System.EventHandler(this.Filescanner_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Filescanner_FormClosing);
+            this.Load += new System.EventHandler(this.Filescanner_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelControls.ResumeLayout(false);
+            this.panelControls.PerformLayout();
+            this.statusStripScann.ResumeLayout(false);
+            this.statusStripScann.PerformLayout();
             this.panelDB.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -606,8 +647,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
+            this.statusStripImport.ResumeLayout(false);
+            this.statusStripImport.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -623,7 +664,7 @@
         private System.Windows.Forms.ComboBox cmb_StartOrdner;
         private System.Windows.Forms.Panel panelDB;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.StatusStrip statusStripImport;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -632,18 +673,17 @@
         private System.Windows.Forms.CheckBox checkBoxSampler;
         private System.Windows.Forms.CheckBox checkBoxLöschen;
         private System.Windows.Forms.ComboBox comboBoxMedium;
-        private System.Windows.Forms.ComboBox comboBoxQuelle;
+        private System.Windows.Forms.ComboBox comboBoxAlbum;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBoxKatalog;
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelAllFileSize;
-        private System.Windows.Forms.Label labelFolders;
-        private System.Windows.Forms.Label labelDateien;
+        private System.Windows.Forms.Label labelFilesizeTotal;
+        private System.Windows.Forms.Label labelFailed;
+        private System.Windows.Forms.Label labelSuccess;
         private System.Windows.Forms.Button buttonImport;
-        private System.Windows.Forms.Button buttonCancelScann;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabel1;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelStart;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabel2;
@@ -657,13 +697,18 @@
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabel3;
         private System.Windows.Forms.Button buttonCancelImport;
         private System.Windows.Forms.ColumnHeader columnHeaderDate;
-        private System.Windows.Forms.Label labelDateien2;
-        private System.Windows.Forms.Label labelDateien1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Label labelFolders2;
-        private System.Windows.Forms.Label labelFolders1;
+        private System.Windows.Forms.StatusStrip statusStripScann;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFolders;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelFiles;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTotalsize;
+        private System.Windows.Forms.Panel panelControls;
+        private System.Windows.Forms.Label labelShowHideDbPanel;
     }
 }

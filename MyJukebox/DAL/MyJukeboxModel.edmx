@@ -137,6 +137,26 @@
           <Property Name="ID_Info" Type="int" />
           <Property Name="ID_File" Type="int" />
         </EntityType>
+        <EntityType Name="tTestImport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Katalog" Type="nvarchar" MaxLength="50" />
+          <Property Name="Medium" Type="nvarchar" MaxLength="2" />
+          <Property Name="Album" Type="nvarchar" MaxLength="50" />
+          <Property Name="Interpret" Type="nvarchar" MaxLength="65" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+          <Property Name="FileSize" Type="bigint" />
+          <Property Name="FileDate" Type="datetime2" Precision="0" />
+          <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsSampler" Type="bit" />
+          <Property Name="MD5" Type="nvarchar" MaxLength="32" />
+          <Property Name="ImportDate" Type="datetime2" Precision="0" />
+          <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vPlaylistSongs">
@@ -331,6 +351,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a prim
           <EntitySet Name="tPlaylists" EntityType="Self.tPlaylists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPLentries" EntityType="Self.tPLentries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tSongs" EntityType="Self.tSongs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tTestImport" EntityType="Self.tTestImport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 
@@ -760,6 +781,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a prim
           </AssociationSet>
           <EntitySet Name="vSongsNewLongs" EntityType="MyJukeboxContext.vSongsNewLong" />
           <EntitySet Name="vSongsNewShorts" EntityType="MyJukeboxContext.vSongsNewShort" />
+          <EntitySet Name="tTestImports" EntityType="MyJukeboxContext.tTestImport" />
         </EntityContainer>
         <EntityType Name="vSongsNewLong">
           <Key>
@@ -803,6 +825,25 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a prim
           <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tTestImport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Katalog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Medium" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Interpret" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" />
+          <Property Name="FileDate" Type="DateTime" Precision="0" />
+          <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MD5" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="ImportDate" Type="DateTime" Precision="0" />
+          <Property Name="IsSampler" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1023,6 +1064,26 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a prim
                 <ScalarProperty Name="Album" ColumnName="Album" />
                 <ScalarProperty Name="Catalog" ColumnName="Catalog" />
                 <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTestImports">
+            <EntityTypeMapping TypeName="MyJukeboxContext.tTestImport">
+              <MappingFragment StoreEntitySet="tTestImport">
+                <ScalarProperty Name="IsSampler" ColumnName="IsSampler" />
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="MD5" ColumnName="MD5" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Interpret" ColumnName="Interpret" />
+                <ScalarProperty Name="Album" ColumnName="Album" />
+                <ScalarProperty Name="Medium" ColumnName="Medium" />
+                <ScalarProperty Name="Katalog" ColumnName="Katalog" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

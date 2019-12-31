@@ -5,10 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5f831fd0a90e4554a8e86d74be47cdd4" Name="Diagram1">
-        <EntityTypeShape EntityType="MyJukeboxContext.tActionLog" Width="1.5" PointX="7.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyJukeboxContext.tActionLog" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tBeat" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tCatalog" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyJukeboxContext.tColumn" Width="1.5" PointX="9.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyJukeboxContext.tColumn" Width="1.5" PointX="7.125" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tFileInfo" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tGenre" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tInfo" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
@@ -27,8 +27,9 @@
         <AssociationConnector Association="MyJukeboxContext.FK_tSongs_tMedia" ManuallyRouted="false" />
         <AssociationConnector Association="MyJukeboxContext.FK_tPLentries_tPlaylists" ManuallyRouted="false" />
         <AssociationConnector Association="MyJukeboxContext.FK_tPLentries_tSongs" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MyJukeboxContext.vSongsNewLong" Width="2.125" PointX="12.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MyJukeboxContext.vSongsNewLong" Width="2.125" PointX="9" PointY="9.625" />
         <EntityTypeShape EntityType="MyJukeboxContext.vSongsNewShort" Width="1.875" PointX="6.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyJukeboxContext.tTestImport" Width="1.5" PointX="10.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

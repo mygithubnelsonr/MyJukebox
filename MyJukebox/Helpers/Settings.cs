@@ -1,7 +1,6 @@
 ﻿using NRSoft.FunctionPool;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace MyJukebox_EF
 {
@@ -10,6 +9,7 @@ namespace MyJukebox_EF
     {
         static RegistryH rh;
         static MyJukebox form = new MyJukebox();
+        public static string PlaceHolderText = $"< Input SQL like Album='V8-A-1'>";
 
         #region public properties
         public static string CompanyName { get; set; }
@@ -47,6 +47,11 @@ namespace MyJukebox_EF
         public static string ForbChars { get; set; }
         public static string ImagePath { get; set; }
         public static string RootImagePath { get; set; }
+        // Filescanner
+        public static int FilescannerTop { get; set; }
+        public static int FilescannerLeft { get; set; }
+        public static int FilescannerWidth { get; set; }
+        public static int FilescannerHeight { get; set; }
         #endregion
 
         public Settings()
@@ -187,5 +192,12 @@ namespace MyJukebox_EF
             #endregion
         }
 
+        public static void FilescannerLoad()
+        {
+            FilescannerTop = Convert.ToInt16(rh.GetSetting(@"Settings\Filescanner", "Top", "100"));
+            FilescannerLeft = Convert.ToInt16(rh.GetSetting(@"Settings\Filescanner", "Left", "100"));
+            FilescannerWidth = Convert.ToInt16(rh.GetSetting("Settings\\Filescanner", "Width", "440"));
+            FilescannerHeight = Convert.ToInt16(rh.GetSetting("Settings\\Filescanner", "Height", "540"));
+        }
     }
 }

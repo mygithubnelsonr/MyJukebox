@@ -9,21 +9,22 @@
 
 namespace MyJukebox_EF.DAL
 {
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class MyJukeboxEntities : DbContext
     {
         public MyJukeboxEntities()
             : base("name=MyJukeboxEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<tActionLog> tActionLogs { get; set; }
         public virtual DbSet<tBeat> tBeats { get; set; }
         public virtual DbSet<tCatalog> tCatalogs { get; set; }
@@ -38,7 +39,8 @@ namespace MyJukebox_EF.DAL
         public virtual DbSet<tSong> tSongs { get; set; }
         public virtual DbSet<vPlaylistSong> vPlaylistSongs { get; set; }
         public virtual DbSet<vSong> vSongs { get; set; }
-        public virtual DbSet<vSongsNewLong> vSongsNewLong { get; set; }
-        public virtual DbSet<vSongsNewShort> vSongsNewShort { get; set; }
+        public virtual DbSet<vSongsNewLong> vSongsNewLongs { get; set; }
+        public virtual DbSet<vSongsNewShort> vSongsNewShorts { get; set; }
+        public virtual DbSet<tTestImport> tTestImports { get; set; }
     }
 }

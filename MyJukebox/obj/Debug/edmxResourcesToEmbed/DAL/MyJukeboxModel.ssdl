@@ -132,6 +132,26 @@
     <Property Name="ID_Info" Type="int" />
     <Property Name="ID_File" Type="int" />
   </EntityType>
+  <EntityType Name="tTestImport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Katalog" Type="nvarchar" MaxLength="50" />
+    <Property Name="Medium" Type="nvarchar" MaxLength="2" />
+    <Property Name="Album" Type="nvarchar" MaxLength="50" />
+    <Property Name="Interpret" Type="nvarchar" MaxLength="65" />
+    <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+    <Property Name="FileSize" Type="bigint" />
+    <Property Name="FileDate" Type="datetime2" Precision="0" />
+    <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsSampler" Type="bit" />
+    <Property Name="MD5" Type="nvarchar" MaxLength="32" />
+    <Property Name="ImportDate" Type="datetime2" Precision="0" />
+    <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="vPlaylistSongs">
@@ -326,6 +346,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsNewShort' does not have a prim
     <EntitySet Name="tPlaylists" EntityType="Self.tPlaylists" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tPLentries" EntityType="Self.tPLentries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tSongs" EntityType="Self.tSongs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tTestImport" EntityType="Self.tTestImport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 

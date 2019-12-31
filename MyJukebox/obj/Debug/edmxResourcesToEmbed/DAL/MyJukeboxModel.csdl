@@ -327,6 +327,7 @@
     </AssociationSet>
     <EntitySet Name="vSongsNewLongs" EntityType="MyJukeboxContext.vSongsNewLong" />
     <EntitySet Name="vSongsNewShorts" EntityType="MyJukeboxContext.vSongsNewShort" />
+    <EntitySet Name="tTestImports" EntityType="MyJukeboxContext.tTestImport" />
   </EntityContainer>
   <EntityType Name="vSongsNewLong">
     <Key>
@@ -370,5 +371,24 @@
     <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
     <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tTestImport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Katalog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Medium" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="65" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileDate" Type="DateTime" Precision="0" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MD5" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ImportDate" Type="DateTime" Precision="0" />
+    <Property Name="IsSampler" Type="Boolean" />
   </EntityType>
 </Schema>

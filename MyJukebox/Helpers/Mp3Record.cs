@@ -1,23 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MyJukebox_EF
 {
-    public struct MP3Record
+    public class MP3Record
     {
-        public string Katalog;
-        public string Owner;
-        public string Media;
-        public string Album;
-        public string Interpret;
-        public string Titel;
-        public string Genre;
-        public string Path;
-        public string FileName;
-        public long FileSize;
-        public DateTime FileDate;
-        public string MD5;
+        public string Katalog { get; set; }
+        public string Owner { get; set; }
+        public string Media { get; set; }
+        public string Album { get; set; }
+        public string Interpret { get; set; }
+        public string Titel { get; set; }
+        public string Genre { get; set; }
+        public string Path { get; set; }
+        public string FileName { get; set; }
+        public int FileSize { get; set; }
+        public DateTime FileDate { get; set; }
+        public string MD5 { get; set; }
+        public bool IsSample { get; set; }
     }
 }

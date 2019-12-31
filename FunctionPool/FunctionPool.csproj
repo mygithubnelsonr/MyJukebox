@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDAID.cs" />
+    <Compile Include="CopyFault.cs" />
     <Compile Include="DatabaseH.cs" />
     <Compile Include="FileH.cs" />
     <Compile Include="FormsH.cs" />
