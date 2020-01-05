@@ -47,7 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxExtension = new System.Windows.Forms.TextBox();
             this.buttonOrdner = new System.Windows.Forms.Button();
-            this.cmb_StartOrdner = new System.Windows.Forms.ComboBox();
+            this.comboBoxStartOrdner = new System.Windows.Forms.ComboBox();
             this.panelDB = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBoxMedium = new System.Windows.Forms.ComboBox();
@@ -59,10 +59,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.labelFilesizeTotal = new System.Windows.Forms.Label();
             this.labelFailed = new System.Windows.Forms.Label();
             this.labelSuccess = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -101,7 +99,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textBoxExtension);
             this.panel1.Controls.Add(this.buttonOrdner);
-            this.panel1.Controls.Add(this.cmb_StartOrdner);
+            this.panel1.Controls.Add(this.comboBoxStartOrdner);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -243,7 +241,6 @@
             this.textBoxExtension.Size = new System.Drawing.Size(47, 20);
             this.textBoxExtension.TabIndex = 12;
             this.textBoxExtension.Text = ".mp3";
-            this.textBoxExtension.TextChanged += new System.EventHandler(this.textBoxExtension_TextChanged);
             // 
             // buttonOrdner
             // 
@@ -257,22 +254,23 @@
             this.buttonOrdner.UseVisualStyleBackColor = true;
             this.buttonOrdner.Click += new System.EventHandler(this.buttonOrdner_Click);
             // 
-            // cmb_StartOrdner
+            // comboBoxStartOrdner
             // 
-            this.cmb_StartOrdner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.comboBoxStartOrdner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmb_StartOrdner.BackColor = System.Drawing.Color.Salmon;
-            this.cmb_StartOrdner.FormattingEnabled = true;
-            this.cmb_StartOrdner.Items.AddRange(new object[] {
+            this.comboBoxStartOrdner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.comboBoxStartOrdner.FormattingEnabled = true;
+            this.comboBoxStartOrdner.Items.AddRange(new object[] {
             "",
+            "A:\\Temp",
             "\\\\win2k16dc01\\FS012\\Country\\Sonja\\CD\\Dan + Shay\\Dan + Shay"});
-            this.cmb_StartOrdner.Location = new System.Drawing.Point(12, 25);
-            this.cmb_StartOrdner.Name = "cmb_StartOrdner";
-            this.cmb_StartOrdner.Size = new System.Drawing.Size(285, 21);
-            this.cmb_StartOrdner.TabIndex = 8;
-            this.cmb_StartOrdner.SelectedIndexChanged += new System.EventHandler(this.cmb_StartOrdner_SelectedIndexChanged);
-            this.cmb_StartOrdner.TextChanged += new System.EventHandler(this.cmb_StartOrdner_TextChanged);
-            this.cmb_StartOrdner.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmb_StartOrdner_KeyUp);
+            this.comboBoxStartOrdner.Location = new System.Drawing.Point(12, 25);
+            this.comboBoxStartOrdner.Name = "comboBoxStartOrdner";
+            this.comboBoxStartOrdner.Size = new System.Drawing.Size(285, 21);
+            this.comboBoxStartOrdner.TabIndex = 8;
+            this.comboBoxStartOrdner.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartOrdner_SelectedIndexChanged);
+            this.comboBoxStartOrdner.TextChanged += new System.EventHandler(this.comboBoxStartOrdner_TextChanged);
+            this.comboBoxStartOrdner.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBoxStartOrdner_KeyUp);
             // 
             // panelDB
             // 
@@ -379,10 +377,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.labelFilesizeTotal);
             this.groupBox2.Controls.Add(this.labelFailed);
             this.groupBox2.Controls.Add(this.labelSuccess);
             this.groupBox2.Location = new System.Drawing.Point(220, 18);
@@ -391,15 +387,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Record";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 67);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 13);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Filesize total: ";
             // 
             // label4
             // 
@@ -418,15 +405,6 @@
             this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 19;
             this.label3.Text = "Import success: ";
-            // 
-            // labelFilesizeTotal
-            // 
-            this.labelFilesizeTotal.Location = new System.Drawing.Point(96, 67);
-            this.labelFilesizeTotal.Name = "labelFilesizeTotal";
-            this.labelFilesizeTotal.Size = new System.Drawing.Size(81, 13);
-            this.labelFilesizeTotal.TabIndex = 2;
-            this.labelFilesizeTotal.Text = "----";
-            this.labelFilesizeTotal.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelFailed
             // 
@@ -599,11 +577,9 @@
             this.statusStripLabelSpecial.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.statusStripLabelSpecial.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
             this.statusStripLabelSpecial.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
-            this.statusStripLabelSpecial.Enabled = false;
             this.statusStripLabelSpecial.Name = "statusStripLabelSpecial";
             this.statusStripLabelSpecial.Size = new System.Drawing.Size(17, 19);
             this.statusStripLabelSpecial.Text = "S";
-            this.statusStripLabelSpecial.Click += new System.EventHandler(this.statusStripLabelSpecial_Click);
             // 
             // labelShowHideDbPanel
             // 
@@ -661,7 +637,7 @@
         private System.Windows.Forms.TextBox textBoxExtension;
         private System.Windows.Forms.Button buttonOrdner;
         private System.Windows.Forms.Button buttonStartScann;
-        private System.Windows.Forms.ComboBox cmb_StartOrdner;
+        private System.Windows.Forms.ComboBox comboBoxStartOrdner;
         private System.Windows.Forms.Panel panelDB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.StatusStrip statusStripImport;
@@ -680,7 +656,6 @@
         private System.Windows.Forms.ComboBox comboBoxGenre;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelFilesizeTotal;
         private System.Windows.Forms.Label labelFailed;
         private System.Windows.Forms.Label labelSuccess;
         private System.Windows.Forms.Button buttonImport;
@@ -699,7 +674,6 @@
         private System.Windows.Forms.ColumnHeader columnHeaderDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.StatusStrip statusStripScann;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;

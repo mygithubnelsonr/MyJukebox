@@ -141,7 +141,8 @@ namespace MyJukebox_EF
             LastTab = Convert.ToInt16(rh.GetSetting(@"Settings", "LastTab", "0"));
             ForbChars = rh.GetSetting("Settings", "ForbChars", @"\\/:?");
             ImagePath = rh.GetSetting("Settings", "ImagePath", "_Images");
-            RootImagePath = rh.GetSetting("Settings", "RootImagePath", @"\\win2k16dc01\FS012");
+            //RootImagePath = rh.GetSetting("Settings", "RootImagePath", @"\\win2k16dc01\FS012");
+            RootImagePath = rh.GetSetting("Settings", "RootImagePath", @"A:\Temp");
             #endregion
 
         }

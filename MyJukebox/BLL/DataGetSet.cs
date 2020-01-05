@@ -170,18 +170,31 @@ namespace MyJukebox_EF.BLL
 
         }
 
-        public static bool SaveNewRecord(MP3Record record, bool testImport)
+        public static int SaveNewRecords(List<MP3Record> mP3Records, bool testImport)
         {
-            bool results = false;
+            int recordsImporteds = 0;
 
-            if (testImport == true)
-                results = SetNewTestRecord(record);
-            else
-                results = SetNewRecord(record);
-            return results;
+            foreach (MP3Record record in mP3Records)
+            {
+                recordsImporteds += SaveNewRecord(record, testImport);
+            }
+
+            return recordsImporteds;
         }
 
-        private static bool SetNewRecord(MP3Record record)
+        private static int SaveNewRecord(MP3Record record, bool testImport)
+        {
+            int recordsImported = 0;
+
+            if (testImport == true)
+                recordsImported += SetNewTestRecord(record);
+            else
+                recordsImported += SetNewRecord(record);
+
+            return recordsImported;
+        }
+
+        private static int SetNewRecord(MP3Record record)
         {
             try
             {
@@ -211,16 +224,16 @@ namespace MyJukebox_EF.BLL
                 //import.IsSampler = record.IsSample;
 
 
-                return true;
+                return 1;
             }
             catch (Exception ex)
             {
                 Debug.Print(ex.Message);
-                return false;
+                return 0;
             }
         }
 
-        private static bool SetNewTestRecord(MP3Record record)
+        private static int SetNewTestRecord(MP3Record record)
         {
             try
             {
@@ -244,31 +257,38 @@ namespace MyJukebox_EF.BLL
                 context.tTestImports.Add(import);
                 context.SaveChanges();
 
-                return true;
+                return 1;
             }
             catch (Exception ex)
             {
                 Debug.Print(ex.Message);
-                return false;
+                return 0;
             }
         }
-
         #endregion
 
-        // Generell
-        public static int GetLastSongID(string tableName)
+        #region Generell
+        public static int? GetLastSongID(string tableName)
         {
-            int lastId = -1;
+            int? lastId = -1;
+            int recCount = -1;
 
             var context = new MyJukeboxEntities();
 
-            if (tableName == "tTestImport")
+            recCount = context.tTestImports
+                .Select(i => i.ID).Count();
+
+            if (recCount != 0 && tableName == "tTestImport")
                 lastId = context.tTestImports.Max(x => x.ID);
 
-            if (tableName == "tSongs")
+            recCount = context.tSongs
+                .Select(i => i.ID).Count();
+
+            if (recCount != 0 && tableName == "tSongs")
                 lastId = context.tSongs.Max(x => x.ID);
 
             return lastId;
         }
+        #endregion
     }
 }
