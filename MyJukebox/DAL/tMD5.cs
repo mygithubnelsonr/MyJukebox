@@ -17,7 +17,5 @@ namespace MyJukebox_EF.DAL
         public int ID { get; set; }
         public int ID_Song { get; set; }
         public string MD5 { get; set; }
-    
-        public virtual tSong tSong { get; set; }
     }
 }

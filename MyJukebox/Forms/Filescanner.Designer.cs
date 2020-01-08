@@ -77,9 +77,9 @@
             this.statusStripabelDauer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.statusStripLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.statusStripLabelSpecial = new System.Windows.Forms.ToolStripStatusLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.labelShowHideDbPanel = new System.Windows.Forms.Label();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panelControls.SuspendLayout();
             this.statusStripScann.SuspendLayout();
@@ -108,6 +108,7 @@
             // 
             // panelControls
             // 
+            this.panelControls.Controls.Add(this.buttonTest);
             this.panelControls.Controls.Add(this.buttonStartScann);
             this.panelControls.Controls.Add(this.statusStripScann);
             this.panelControls.Location = new System.Drawing.Point(12, 195);
@@ -270,7 +271,6 @@
             this.comboBoxStartOrdner.TabIndex = 8;
             this.comboBoxStartOrdner.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartOrdner_SelectedIndexChanged);
             this.comboBoxStartOrdner.TextChanged += new System.EventHandler(this.comboBoxStartOrdner_TextChanged);
-            this.comboBoxStartOrdner.KeyUp += new System.Windows.Forms.KeyEventHandler(this.comboBoxStartOrdner_KeyUp);
             // 
             // panelDB
             // 
@@ -514,8 +514,7 @@
             this.statusStripLabel2,
             this.statusStripabelDauer,
             this.toolStripProgressBar,
-            this.statusStripLabel3,
-            this.statusStripLabelSpecial});
+            this.statusStripLabel3});
             this.statusStripImport.Location = new System.Drawing.Point(0, 477);
             this.statusStripImport.Name = "statusStripImport";
             this.statusStripImport.Size = new System.Drawing.Size(424, 24);
@@ -569,17 +568,8 @@
             this.statusStripLabel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabel3.Name = "statusStripLabel3";
-            this.statusStripLabel3.Size = new System.Drawing.Size(219, 19);
+            this.statusStripLabel3.Size = new System.Drawing.Size(236, 19);
             this.statusStripLabel3.Spring = true;
-            // 
-            // statusStripLabelSpecial
-            // 
-            this.statusStripLabelSpecial.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.statusStripLabelSpecial.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)));
-            this.statusStripLabelSpecial.BorderStyle = System.Windows.Forms.Border3DStyle.Raised;
-            this.statusStripLabelSpecial.Name = "statusStripLabelSpecial";
-            this.statusStripLabelSpecial.Size = new System.Drawing.Size(17, 19);
-            this.statusStripLabelSpecial.Text = "S";
             // 
             // labelShowHideDbPanel
             // 
@@ -592,6 +582,16 @@
             this.labelShowHideDbPanel.TabIndex = 17;
             this.labelShowHideDbPanel.Text = "======";
             this.labelShowHideDbPanel.Click += new System.EventHandler(this.labelShowHideDbPanel_Click);
+            // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(269, -1);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(38, 20);
+            this.buttonTest.TabIndex = 24;
+            this.buttonTest.Text = "Test";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // Filescanner
             // 
@@ -663,7 +663,6 @@
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabelStart;
         private System.Windows.Forms.ToolStripStatusLabel statusStripLabel2;
         private System.Windows.Forms.ToolStripStatusLabel statusStripabelDauer;
-        private System.Windows.Forms.ToolStripStatusLabel statusStripLabelSpecial;
         private System.Windows.Forms.ListView listViewFileList;
         private System.Windows.Forms.ColumnHeader columnHeaderFileName;
         private System.Windows.Forms.ColumnHeader columnHeaderPath;
@@ -684,5 +683,6 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTotalsize;
         private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Label labelShowHideDbPanel;
+        private System.Windows.Forms.Button buttonTest;
     }
 }

@@ -6,7 +6,7 @@ namespace MyJukebox_EF
     {
         public string Katalog { get; set; }
         public string Owner { get; set; }
-        public string Media { get; set; }
+        public int Media { get; set; }
         public string Album { get; set; }
         public string Interpret { get; set; }
         public string Titel { get; set; }

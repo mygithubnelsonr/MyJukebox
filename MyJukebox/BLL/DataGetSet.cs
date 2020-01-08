@@ -16,7 +16,7 @@ namespace MyJukebox_EF.BLL
             var context = new MyJukeboxEntities();
             await Task.Run(() =>
             {
-                genres = context.vSongsNewShorts
+                genres = context.vSongs
                     .Select(g => g.Genre).Distinct().OrderBy(g => g).ToList();
             });
             return genres;
@@ -30,7 +30,7 @@ namespace MyJukebox_EF.BLL
             {
                 await Task.Run(() =>
                 {
-                    catalogues = context.vSongsNewShorts
+                    catalogues = context.vSongs
                                         .Where(c => c.Genre == Settings.LastGenre)
                                         .Select(c => c.Catalog)
                                         .Distinct().OrderBy(c => c).ToList();
@@ -48,7 +48,7 @@ namespace MyJukebox_EF.BLL
             {
                 await Task.Run(() =>
                 {
-                    albums = context.vSongsNewShorts
+                    albums = context.vSongs
                                     .Where(a => a.Genre == Settings.LastGenre && a.Catalog == Settings.LastKatalog)
                                     .Select(a => a.Album)
                                     .Distinct().OrderBy(a => a).ToList();
@@ -66,7 +66,7 @@ namespace MyJukebox_EF.BLL
             {
                 await Task.Run(() =>
                 {
-                    interprer = context.vSongsNewShorts
+                    interprer = context.vSongs
                                     .Where(i => i.Genre == Settings.LastGenre && i.Catalog == Settings.LastKatalog)
                                     .Select(i => i.Interpret)
                                     .Distinct().OrderBy(i => i).ToList();
@@ -99,9 +99,9 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static async Task<List<vSongsNewShort>> GetTablogicalResultsAsync()
+        public static async Task<List<vSong>> GetTablogicalResultsAsync()
         {
-            List<vSongsNewShort> songs = null;
+            List<vSong> songs = null;
 
             try
             {
@@ -113,7 +113,7 @@ namespace MyJukebox_EF.BLL
                 var context = new MyJukeboxEntities();
                 await Task.Run(() =>
                 {
-                    songs = context.vSongsNewShorts
+                    songs = context.vSongs
                         .Where(s => (s.Genre.Contains(genre)) &&
                             (s.Catalog.Contains(catalog)) &&
                             (s.Album.Contains(album)) &&
@@ -174,6 +174,12 @@ namespace MyJukebox_EF.BLL
         {
             int recordsImporteds = 0;
 
+            if (testImport == true)
+            {
+                var result = DataGetSet.TruncateTableImportTest();
+                Debug.Print($"TruncateTableImportTest result = {result}");
+            }
+
             foreach (MP3Record record in mP3Records)
             {
                 recordsImporteds += SaveNewRecord(record, testImport);
@@ -189,40 +195,104 @@ namespace MyJukebox_EF.BLL
             if (testImport == true)
                 recordsImported += SetNewTestRecord(record);
             else
-                recordsImported += SetNewRecord(record);
-
+            {
+                if (MD5Exist(record.MD5) == false)
+                {
+                    recordsImported += SetNewRecord(record);
+                }
+            }
             return recordsImported;
         }
 
-        private static int SetNewRecord(MP3Record record)
+        private static bool MD5Exist(string MD5)
         {
+            var context = new MyJukeboxEntities();
+            var result = context.tMd5
+                            .Where(m => m.MD5 == MD5)
+                            .Select(m => m.MD5).ToList();
+
+            if (result.Count > 0)
+            {
+                Debug.Print("title allready exist!");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static void SaveRecordTest(int songID, string md)
+        {
+            var context = new MyJukeboxEntities();
+            // tFileInfo
+            var file = new tFileInfo();
+            file.ID_Song = songID;
+            file.FileDate = DateTime.Now;
+            file.FileSize = 12345;
+            file.ImportDate = DateTime.Now;
+            context.tFileInfoes.Add(file);
+            context.SaveChanges();
+        }
+
+        private static int SetNewRecord(MP3Record record)   // productiv
+        {
+            int idSong = -1;
+            int idCatalog = -1;
+            int idGenre = -1;
+            int idInfo = -1;
+            int idFile = -1;
+
             try
             {
                 var context = new MyJukeboxEntities();
-                var import = new tSong();
 
-                import.Album = record.Album;
-                import.FileDate = record.FileDate;
-                import.FileName = record.FileName;
-                import.FileSize = record.FileSize;
-                import.Genre = record.Genre;
-                import.Interpret = record.Interpret;
-                import.Katalog = record.Katalog;
+                var song = new tSong();
+                song.Album = record.Album;
+                song.Interpret = record.Interpret;
+                song.Titel = record.Titel;
+                song.Pfad = record.Path;
+                song.FileName = record.FileName;
 
-                import.Medium = record.Media;
-                import.Pfad = record.Path;
-                import.Titel = record.Titel;
-                import.ImportDate = DateTime.Now;
+                context.tSongs.Add(song);
+                context.SaveChanges();
 
-                context.tSongs.Add(import);
+                idSong = (int)GetLastSongID("tSongs");
+
+                // tMd5
+                var md5 = new tMD5();
+                md5.ID_Song = idSong;
+                md5.MD5 = record.MD5;
+
+                context.tMd5.Add(md5);
+                context.SaveChanges();
+
+                // tInfo
+                var info = new tInfo();
+                info.ID_Song = idSong;
+                info.Media = record.Media;
+                info.Sampler = record.IsSample;
+                context.tInfos.Add(info);
+                context.SaveChanges();
+
+                // tFileInfo
+                var file = new tFileInfo();
+                file.ID_Song = idSong;
+                file.FileDate = record.FileDate;
+                file.FileSize = record.FileSize;
+                file.ImportDate = DateTime.Now;
+                context.tFileInfoes.Add(file);
                 context.SaveChanges();
 
 
-                // get last tSong ID needed for tMd5 and tInfos
 
-                //import.MD5 = record.MD5;
-                //import.IsSampler = record.IsSample;
-
+                // tSong
+                song.ID_Catalog = idCatalog;
+                song.ID_Genre = idGenre;
+                song.ID_Info = idInfo;
+                song.ID_File = idFile;
+                //song.ID_MD5 = idMd5;
+                context.SaveChanges();
 
                 return 1;
             }
@@ -238,8 +308,13 @@ namespace MyJukebox_EF.BLL
             try
             {
                 var context = new MyJukeboxEntities();
-                var import = new tTestImport();
 
+                var media = new tMedia();
+                var medium = context.tMedias
+                    .Where(m => m.ID == record.Media)
+                    .Select(m => m.Type).FirstOrDefault();
+
+                var import = new tTestImport();
                 import.Album = record.Album;
                 import.FileDate = record.FileDate;
                 import.FileName = record.FileName;
@@ -248,7 +323,7 @@ namespace MyJukebox_EF.BLL
                 import.Interpret = record.Interpret;
                 import.Katalog = record.Katalog;
                 import.MD5 = record.MD5;
-                import.Medium = record.Media;
+                import.Medium = medium;
                 import.Pfad = record.Path;
                 import.IsSampler = record.IsSample;
                 import.Titel = record.Titel;

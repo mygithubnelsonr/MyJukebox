@@ -1,6 +1,10 @@
-﻿using System.Drawing;
+﻿using MyJukebox_EF.DAL;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
 
 namespace MyJukebox_EF.BLL
 {
@@ -34,10 +38,17 @@ namespace MyJukebox_EF.BLL
             if (arTmp.Length < 5)
                 return record;
 
+            List<int> media;
+            string type = arTmp[arTmp.Length - 3];
+            var context = new MyJukeboxEntities();
+            media = context.tMedias
+                        .Where(m => m.Type == type)
+                        .Select(m => m.ID).ToList();
+
             record = new MP3Record();
             record.Album = arTmp[arTmp.Length - 1];
             record.Interpret = arTmp[arTmp.Length - 2];
-            record.Media = arTmp[arTmp.Length - 3];
+            record.Media = media[0];
             record.Owner = arTmp[arTmp.Length - 4];
             record.Genre = arTmp[arTmp.Length - 5];
             record.Katalog = arTmp[arTmp.Length - 4];

@@ -20,6 +20,5 @@ namespace MyJukebox_EF.DAL
         public int Pos { get; set; }
     
         public virtual tPlaylist tPlaylist { get; set; }
-        public virtual tSong tSong { get; set; }
     }
 }

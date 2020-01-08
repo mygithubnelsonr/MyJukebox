@@ -12,15 +12,9 @@ namespace MyJukebox_EF.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class vSongsNewShort
+    public partial class tAlbum
     {
         public int ID { get; set; }
-        public string Genre { get; set; }
-        public string Catalog { get; set; }
-        public string Album { get; set; }
-        public string Interpret { get; set; }
-        public string Titel { get; set; }
-        public string Pfad { get; set; }
-        public string FileName { get; set; }
+        public string Name { get; set; }
     }
 }

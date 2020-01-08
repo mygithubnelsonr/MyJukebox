@@ -17,14 +17,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="tCatalog">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tCatalog" FromRole="tCatalog" ToRole="tSongs" />
-  </EntityType>
   <EntityType Name="tColumn">
     <Key>
       <PropertyRef Name="ID" />
@@ -35,26 +27,13 @@
     <Property Name="Active" Type="Boolean" />
     <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
-  <EntityType Name="tFileInfo">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ID_Song" Type="Int32" Nullable="false" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="FileDate" Type="DateTime" Precision="3" />
-    <Property Name="Duration" Type="Time" Precision="7" />
-    <Property Name="ImportDate" Type="DateTime" Precision="3" />
-    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tSong" Relationship="Self.FK_tFileInfo_tSongs" FromRole="tFileInfo" ToRole="tSongs" />
-  </EntityType>
   <EntityType Name="tGenre">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tGenres" FromRole="tGenres" ToRole="tSongs" />
+    <NavigationProperty Name="tSongs" Relationship="MyJukeboxContext.FK_tSongsNew_tGenres" FromRole="tGenres" ToRole="tSong" />
   </EntityType>
   <EntityType Name="tInfo">
     <Key>
@@ -68,8 +47,8 @@
     <Property Name="Error" Type="Boolean" />
     <Property Name="Sampler" Type="Boolean" />
     <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tInfos" FromRole="tInfos" ToRole="tSongs" />
     <Property Name="Media" Type="Int32" />
+    <NavigationProperty Name="tSongs" Relationship="MyJukeboxContext.FK_tSongsNew_tInfos" FromRole="tInfo" ToRole="tSong" />
   </EntityType>
   <EntityType Name="tMD5">
     <Key>
@@ -78,7 +57,6 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ID_Song" Type="Int32" Nullable="false" />
     <Property Name="MD5" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="tSong" Relationship="Self.FK_tMD5n_tSongs" FromRole="tMD5" ToRole="tSongs" />
   </EntityType>
   <EntityType Name="tMedia">
     <Key>
@@ -87,7 +65,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Type" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
     <Property Name="Comment" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="tSongs" Relationship="Self.FK_tSongs_tMedia" FromRole="tMedia" ToRole="tSongs" />
+    <NavigationProperty Name="tSongs" Relationship="MyJukeboxContext.FK_tSongsNew_tMedia" FromRole="tMedia" ToRole="tSong" />
   </EntityType>
   <EntityType Name="tPlaylist">
     <Key>
@@ -107,46 +85,6 @@
     <Property Name="SongID" Type="Int32" Nullable="false" />
     <Property Name="Pos" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tPlaylist" Relationship="Self.FK_tPLentries_tPlaylists" FromRole="tPLentries" ToRole="tPlaylists" />
-    <NavigationProperty Name="tSong" Relationship="Self.FK_tPLentries_tSongs" FromRole="tPLentries" ToRole="tSongs" />
-  </EntityType>
-  <EntityType Name="tSong">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Katalog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Medium" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
-    <Property Name="Titel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="K1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="K2" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-    <Property Name="Gespielt" Type="Int32" />
-    <Property Name="Voting" Type="Int32" />
-    <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="FileDate" Type="DateTime" Precision="0" />
-    <Property Name="Beat" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-    <Property Name="Link" Type="Boolean" />
-    <Property Name="Error" Type="Boolean" />
-    <Property Name="Hide" Type="Boolean" />
-    <Property Name="Sampler" Type="Boolean" />
-    <Property Name="ImportDate" Type="DateTime" Precision="0" />
-    <Property Name="ID_Catalog" Type="Int32" />
-    <Property Name="ID_Genre" Type="Int32" />
-    <Property Name="ID_Media" Type="Int32" />
-    <Property Name="ID_Info" Type="Int32" />
-    <Property Name="ID_File" Type="Int32" />
-    <NavigationProperty Name="tCatalog" Relationship="Self.FK_tSongs_tCatalog" FromRole="tSongs" ToRole="tCatalog" />
-    <NavigationProperty Name="tFileInfoes" Relationship="Self.FK_tFileInfo_tSongs" FromRole="tSongs" ToRole="tFileInfo" />
-    <NavigationProperty Name="tGenre" Relationship="Self.FK_tSongs_tGenres" FromRole="tSongs" ToRole="tGenres" />
-    <NavigationProperty Name="tInfo" Relationship="Self.FK_tSongs_tInfos" FromRole="tSongs" ToRole="tInfos" />
-    <NavigationProperty Name="tMD5" Relationship="Self.FK_tMD5n_tSongs" FromRole="tSongs" ToRole="tMD5" />
-    <NavigationProperty Name="tMedia" Relationship="Self.FK_tSongs_tMedia" FromRole="tSongs" ToRole="tMedia" />
-    <NavigationProperty Name="tPLentries" Relationship="Self.FK_tPLentries_tSongs" FromRole="tSongs" ToRole="tPLentries" />
   </EntityType>
   <EntityType Name="vPlaylistSong">
     <Key>
@@ -168,92 +106,6 @@
     <Property Name="PLID" Type="Int32" Nullable="false" />
     <Property Name="Pos" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="vSong">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="Titel" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
-    <Property Name="Titel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK_tSongs_tCatalog">
-    <End Role="tCatalog" Type="Self.tCatalog" Multiplicity="0..1" />
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tCatalog">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tSongs">
-        <PropertyRef Name="ID_Catalog" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tFileInfo_tSongs">
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="1" />
-    <End Role="tFileInfo" Type="Self.tFileInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tSongs">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tFileInfo">
-        <PropertyRef Name="ID_Song" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tSongs_tGenres">
-    <End Role="tGenres" Type="Self.tGenre" Multiplicity="0..1" />
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tGenres">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tSongs">
-        <PropertyRef Name="ID_Genre" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tSongs_tInfos">
-    <End Role="tInfos" Type="Self.tInfo" Multiplicity="0..1" />
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tInfos">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tSongs">
-        <PropertyRef Name="ID_Info" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tMD5n_tSongs">
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="1" />
-    <End Role="tMD5" Type="Self.tMD5" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tSongs">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tMD5">
-        <PropertyRef Name="ID_Song" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_tSongs_tMedia">
-    <End Role="tMedia" Type="Self.tMedia" Multiplicity="0..1" />
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tMedia">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tSongs">
-        <PropertyRef Name="ID_Media" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_tPLentries_tPlaylists">
     <End Role="tPlaylists" Type="Self.tPlaylist" Multiplicity="1" />
     <End Role="tPLentries" Type="Self.tPLentry" Multiplicity="*" />
@@ -266,112 +118,48 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tPLentries_tSongs">
-    <End Role="tSongs" Type="Self.tSong" Multiplicity="1" />
-    <End Role="tPLentries" Type="Self.tPLentry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tSongs">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tPLentries">
-        <PropertyRef Name="PLID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="MyJukeboxEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tActionLogs" EntityType="Self.tActionLog" />
     <EntitySet Name="tBeats" EntityType="Self.tBeat" />
-    <EntitySet Name="tCatalogs" EntityType="Self.tCatalog" />
     <EntitySet Name="tColumns" EntityType="Self.tColumn" />
-    <EntitySet Name="tFileInfoes" EntityType="Self.tFileInfo" />
-    <EntitySet Name="tGenres" EntityType="Self.tGenre" />
+    <EntitySet Name="tGenres" EntityType="MyJukeboxContext.tGenre" />
     <EntitySet Name="tInfos" EntityType="Self.tInfo" />
     <EntitySet Name="tMD5" EntityType="Self.tMD5" />
     <EntitySet Name="tMedias" EntityType="Self.tMedia" />
     <EntitySet Name="tPlaylists" EntityType="Self.tPlaylist" />
     <EntitySet Name="tPLentries" EntityType="Self.tPLentry" />
-    <EntitySet Name="tSongs" EntityType="Self.tSong" />
     <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSong" />
-    <EntitySet Name="vSongs" EntityType="Self.vSong" />
-    <AssociationSet Name="FK_tSongs_tCatalog" Association="Self.FK_tSongs_tCatalog">
-      <End Role="tCatalog" EntitySet="tCatalogs" />
-      <End Role="tSongs" EntitySet="tSongs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tFileInfo_tSongs" Association="Self.FK_tFileInfo_tSongs">
-      <End Role="tSongs" EntitySet="tSongs" />
-      <End Role="tFileInfo" EntitySet="tFileInfoes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tSongs_tGenres" Association="Self.FK_tSongs_tGenres">
-      <End Role="tGenres" EntitySet="tGenres" />
-      <End Role="tSongs" EntitySet="tSongs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tSongs_tInfos" Association="Self.FK_tSongs_tInfos">
-      <End Role="tInfos" EntitySet="tInfos" />
-      <End Role="tSongs" EntitySet="tSongs" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tMD5n_tSongs" Association="Self.FK_tMD5n_tSongs">
-      <End Role="tSongs" EntitySet="tSongs" />
-      <End Role="tMD5" EntitySet="tMD5" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tSongs_tMedia" Association="Self.FK_tSongs_tMedia">
-      <End Role="tMedia" EntitySet="tMedias" />
-      <End Role="tSongs" EntitySet="tSongs" />
-    </AssociationSet>
     <AssociationSet Name="FK_tPLentries_tPlaylists" Association="Self.FK_tPLentries_tPlaylists">
       <End Role="tPlaylists" EntitySet="tPlaylists" />
       <End Role="tPLentries" EntitySet="tPLentries" />
     </AssociationSet>
-    <AssociationSet Name="FK_tPLentries_tSongs" Association="Self.FK_tPLentries_tSongs">
-      <End Role="tSongs" EntitySet="tSongs" />
-      <End Role="tPLentries" EntitySet="tPLentries" />
-    </AssociationSet>
-    <EntitySet Name="vSongsNewLongs" EntityType="MyJukeboxContext.vSongsNewLong" />
-    <EntitySet Name="vSongsNewShorts" EntityType="MyJukeboxContext.vSongsNewShort" />
     <EntitySet Name="tTestImports" EntityType="MyJukeboxContext.tTestImport" />
+    <EntitySet Name="tAlbums" EntityType="MyJukeboxContext.tAlbum" />
+    <EntitySet Name="tCatalogs1" EntityType="MyJukeboxContext.tCatalog" />
+    <EntitySet Name="tFileInfoes" EntityType="MyJukeboxContext.tFileInfo" />
+    <EntitySet Name="tSongs" EntityType="MyJukeboxContext.tSong" />
+    <AssociationSet Name="FK_tSongsNew_tCatalogs" Association="MyJukeboxContext.FK_tSongsNew_tCatalogs">
+      <End Role="tCatalogs" EntitySet="tCatalogs1" />
+      <End Role="tSong" EntitySet="tSongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tSongsNew_tFileInfos" Association="MyJukeboxContext.FK_tSongsNew_tFileInfos">
+      <End Role="tFileInfo1" EntitySet="tFileInfoes" />
+      <End Role="tSong" EntitySet="tSongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tSongsNew_tGenres" Association="MyJukeboxContext.FK_tSongsNew_tGenres">
+      <End Role="tGenres" EntitySet="tGenres" />
+      <End Role="tSong" EntitySet="tSongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tSongsNew_tInfos" Association="MyJukeboxContext.FK_tSongsNew_tInfos">
+      <End Role="tInfo" EntitySet="tInfos" />
+      <End Role="tSong" EntitySet="tSongs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tSongsNew_tMedia" Association="MyJukeboxContext.FK_tSongsNew_tMedia">
+      <End Role="tMedia" EntitySet="tMedias" />
+      <End Role="tSong" EntitySet="tSongs" />
+    </AssociationSet>
+    <EntitySet Name="vSongs" EntityType="MyJukeboxContext.vSong" />
   </EntityContainer>
-  <EntityType Name="vSongsNewLong">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="ID_Song" />
-      <PropertyRef Name="ID_F" />
-      <PropertyRef Name="Beat" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-    <Property Name="ID_Song" Type="Int32" Nullable="false" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="FileDate" Type="DateTime" Precision="3" />
-    <Property Name="Duration" Type="Time" Precision="7" />
-    <Property Name="ImportDate" Type="DateTime" Precision="3" />
-    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="ID_F" Type="Int32" Nullable="false" />
-    <Property Name="Media" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Played" Type="Int32" />
-    <Property Name="Rating" Type="Int32" />
-    <Property Name="Beat" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="Error" Type="Boolean" />
-    <Property Name="Sampler" Type="Boolean" />
-    <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="vSongsNewShort">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="Titel" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
-    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="tTestImport">
     <Key>
       <PropertyRef Name="ID" />
@@ -390,5 +178,129 @@
     <Property Name="MD5" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="ImportDate" Type="DateTime" Precision="0" />
     <Property Name="IsSampler" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tAlbum">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tCatalog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Song" Type="Int32" />
+    <NavigationProperty Name="tSongs" Relationship="MyJukeboxContext.FK_tSongsNew_tCatalogs" FromRole="tCatalogs" ToRole="tSong" />
+  </EntityType>
+  <EntityType Name="tFileInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Song" Type="Int32" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileDate" Type="DateTime" Precision="3" />
+    <Property Name="Duration" Type="Time" Precision="7" />
+    <Property Name="ImportDate" Type="DateTime" Precision="3" />
+    <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tSongs" Relationship="MyJukeboxContext.FK_tSongsNew_tFileInfos" FromRole="tFileInfo1" ToRole="tSong" />
+  </EntityType>
+  <EntityType Name="tSong">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+    <Property Name="ID_Genre" Type="Int32" />
+    <Property Name="ID_Catalog" Type="Int32" />
+    <Property Name="ID_Media" Type="Int32" />
+    <Property Name="ID_Info" Type="Int32" />
+    <Property Name="ID_File" Type="Int32" />
+    <NavigationProperty Name="tCatalog" Relationship="MyJukeboxContext.FK_tSongsNew_tCatalogs" FromRole="tSong" ToRole="tCatalogs" />
+    <NavigationProperty Name="tFileInfo" Relationship="MyJukeboxContext.FK_tSongsNew_tFileInfos" FromRole="tSong" ToRole="tFileInfo1" />
+    <NavigationProperty Name="tGenre" Relationship="MyJukeboxContext.FK_tSongsNew_tGenres" FromRole="tSong" ToRole="tGenres" />
+    <NavigationProperty Name="tInfo" Relationship="MyJukeboxContext.FK_tSongsNew_tInfos" FromRole="tSong" ToRole="tInfo" />
+    <NavigationProperty Name="tMedia" Relationship="MyJukeboxContext.FK_tSongsNew_tMedia" FromRole="tSong" ToRole="tMedia" />
+  </EntityType>
+  <Association Name="FK_tSongsNew_tCatalogs">
+    <End Type="MyJukeboxContext.tCatalog" Role="tCatalogs" Multiplicity="0..1" />
+    <End Type="MyJukeboxContext.tSong" Role="tSong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tCatalogs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tSong">
+        <PropertyRef Name="ID_Catalog" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tSongsNew_tFileInfos">
+    <End Type="MyJukeboxContext.tFileInfo" Role="tFileInfo1" Multiplicity="0..1" />
+    <End Type="MyJukeboxContext.tSong" Role="tSong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tFileInfo1">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tSong">
+        <PropertyRef Name="ID_File" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tSongsNew_tGenres">
+    <End Type="MyJukeboxContext.tGenre" Role="tGenres" Multiplicity="0..1" />
+    <End Type="MyJukeboxContext.tSong" Role="tSong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tGenres">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tSong">
+        <PropertyRef Name="ID_Genre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tSongsNew_tInfos">
+    <End Type="MyJukeboxContext.tInfo" Role="tInfo" Multiplicity="0..1" />
+    <End Type="MyJukeboxContext.tSong" Role="tSong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tInfo">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tSong">
+        <PropertyRef Name="ID_Info" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tSongsNew_tMedia">
+    <End Type="MyJukeboxContext.tMedia" Role="tMedia" Multiplicity="0..1" />
+    <End Type="MyJukeboxContext.tSong" Role="tSong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tMedia">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tSong">
+        <PropertyRef Name="ID_Media" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="vSong">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Titel" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

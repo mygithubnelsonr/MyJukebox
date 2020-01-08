@@ -20,14 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tCatalogs">
-      <EntityTypeMapping TypeName="MyJukeboxContext.tCatalog">
-        <MappingFragment StoreEntitySet="tCatalog">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tColumns">
       <EntityTypeMapping TypeName="MyJukeboxContext.tColumn">
         <MappingFragment StoreEntitySet="tColumns">
@@ -36,19 +28,6 @@
           <ScalarProperty Name="DefaultWidth" ColumnName="DefaultWidth" />
           <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="SSMA_TimeStamp" ColumnName="SSMA_TimeStamp" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tFileInfoes">
-      <EntityTypeMapping TypeName="MyJukeboxContext.tFileInfo">
-        <MappingFragment StoreEntitySet="tFileInfo">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="FileDate" ColumnName="FileDate" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -112,39 +91,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tSongs">
-      <EntityTypeMapping TypeName="MyJukeboxContext.tSong">
-        <MappingFragment StoreEntitySet="tSongs">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Katalog" ColumnName="Katalog" />
-          <ScalarProperty Name="Medium" ColumnName="Medium" />
-          <ScalarProperty Name="Album" ColumnName="Album" />
-          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
-          <ScalarProperty Name="Titel" ColumnName="Titel" />
-          <ScalarProperty Name="Genre" ColumnName="Genre" />
-          <ScalarProperty Name="K1" ColumnName="K1" />
-          <ScalarProperty Name="K2" ColumnName="K2" />
-          <ScalarProperty Name="Gespielt" ColumnName="Gespielt" />
-          <ScalarProperty Name="Voting" ColumnName="Voting" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="FileDate" ColumnName="FileDate" />
-          <ScalarProperty Name="Beat" ColumnName="Beat" />
-          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="Error" ColumnName="Error" />
-          <ScalarProperty Name="Hide" ColumnName="Hide" />
-          <ScalarProperty Name="Sampler" ColumnName="Sampler" />
-          <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
-          <ScalarProperty Name="ID_Catalog" ColumnName="ID_Catalog" />
-          <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
-          <ScalarProperty Name="ID_Media" ColumnName="ID_Media" />
-          <ScalarProperty Name="ID_Info" ColumnName="ID_Info" />
-          <ScalarProperty Name="ID_File" ColumnName="ID_File" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vPlaylistSongs">
       <EntityTypeMapping TypeName="MyJukeboxContext.vPlaylistSong">
         <MappingFragment StoreEntitySet="vPlaylistSongs">
@@ -160,61 +106,6 @@
           <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="PLID" ColumnName="PLID" />
           <ScalarProperty Name="Pos" ColumnName="Pos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vSongs">
-      <EntityTypeMapping TypeName="MyJukeboxContext.vSong">
-        <MappingFragment StoreEntitySet="vSongs">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Genre" ColumnName="Genre" />
-          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
-          <ScalarProperty Name="Album" ColumnName="Album" />
-          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
-          <ScalarProperty Name="Titel" ColumnName="Titel" />
-          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vSongsNewLongs">
-      <EntityTypeMapping TypeName="MyJukeboxContext.vSongsNewLong">
-        <MappingFragment StoreEntitySet="vSongsNewLong">
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Sampler" ColumnName="Sampler" />
-          <ScalarProperty Name="Error" ColumnName="Error" />
-          <ScalarProperty Name="Beat" ColumnName="Beat" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="Played" ColumnName="Played" />
-          <ScalarProperty Name="Media" ColumnName="Media" />
-          <ScalarProperty Name="ID_F" ColumnName="ID_F" />
-          <ScalarProperty Name="Link" ColumnName="Link" />
-          <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
-          <ScalarProperty Name="Duration" ColumnName="Duration" />
-          <ScalarProperty Name="FileDate" ColumnName="FileDate" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
-          <ScalarProperty Name="Album" ColumnName="Album" />
-          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
-          <ScalarProperty Name="Genre" ColumnName="Genre" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="vSongsNewShorts">
-      <EntityTypeMapping TypeName="MyJukeboxContext.vSongsNewShort">
-        <MappingFragment StoreEntitySet="vSongsNewShort">
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-          <ScalarProperty Name="Titel" ColumnName="Titel" />
-          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
-          <ScalarProperty Name="Album" ColumnName="Album" />
-          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
-          <ScalarProperty Name="Genre" ColumnName="Genre" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -234,6 +125,67 @@
           <ScalarProperty Name="Album" ColumnName="Album" />
           <ScalarProperty Name="Medium" ColumnName="Medium" />
           <ScalarProperty Name="Katalog" ColumnName="Katalog" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tAlbums">
+      <EntityTypeMapping TypeName="MyJukeboxContext.tAlbum">
+        <MappingFragment StoreEntitySet="tAlbums">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tCatalogs1">
+      <EntityTypeMapping TypeName="MyJukeboxContext.tCatalog">
+        <MappingFragment StoreEntitySet="tCatalogs">
+          <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tFileInfoes">
+      <EntityTypeMapping TypeName="MyJukeboxContext.tFileInfo">
+        <MappingFragment StoreEntitySet="tFileInfos">
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tSongs">
+      <EntityTypeMapping TypeName="MyJukeboxContext.tSong">
+        <MappingFragment StoreEntitySet="tSongs">
+          <ScalarProperty Name="ID_File" ColumnName="ID_File" />
+          <ScalarProperty Name="ID_Info" ColumnName="ID_Info" />
+          <ScalarProperty Name="ID_Media" ColumnName="ID_Media" />
+          <ScalarProperty Name="ID_Catalog" ColumnName="ID_Catalog" />
+          <ScalarProperty Name="ID_Genre" ColumnName="ID_Genre" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+          <ScalarProperty Name="Titel" ColumnName="Titel" />
+          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vSongs">
+      <EntityTypeMapping TypeName="MyJukeboxContext.vSong">
+        <MappingFragment StoreEntitySet="vSongs">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+          <ScalarProperty Name="Titel" ColumnName="Titel" />
+          <ScalarProperty Name="Interpret" ColumnName="Interpret" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

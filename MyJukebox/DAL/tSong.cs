@@ -14,51 +14,22 @@ namespace MyJukebox_EF.DAL
     
     public partial class tSong
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tSong()
-        {
-            this.tFileInfoes = new HashSet<tFileInfo>();
-            this.tMD5 = new HashSet<tMD5>();
-            this.tPLentries = new HashSet<tPLentry>();
-        }
-    
         public int ID { get; set; }
-        public string Katalog { get; set; }
-        public string Medium { get; set; }
         public string Album { get; set; }
         public string Interpret { get; set; }
         public string Titel { get; set; }
-        public string Genre { get; set; }
-        public string K1 { get; set; }
-        public string K2 { get; set; }
-        public Nullable<int> Gespielt { get; set; }
-        public Nullable<int> Voting { get; set; }
-        public string Duration { get; set; }
-        public Nullable<int> FileSize { get; set; }
-        public Nullable<System.DateTime> FileDate { get; set; }
-        public string Beat { get; set; }
         public string Pfad { get; set; }
         public string FileName { get; set; }
-        public Nullable<bool> Link { get; set; }
-        public Nullable<bool> Error { get; set; }
-        public Nullable<bool> Hide { get; set; }
-        public Nullable<bool> Sampler { get; set; }
-        public Nullable<System.DateTime> ImportDate { get; set; }
-        public Nullable<int> ID_Catalog { get; set; }
         public Nullable<int> ID_Genre { get; set; }
+        public Nullable<int> ID_Catalog { get; set; }
         public Nullable<int> ID_Media { get; set; }
         public Nullable<int> ID_Info { get; set; }
         public Nullable<int> ID_File { get; set; }
     
         public virtual tCatalog tCatalog { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tFileInfo> tFileInfoes { get; set; }
+        public virtual tFileInfo tFileInfo { get; set; }
         public virtual tGenre tGenre { get; set; }
         public virtual tInfo tInfo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tMD5> tMD5 { get; set; }
         public virtual tMedia tMedia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tPLentry> tPLentries { get; set; }
     }
 }

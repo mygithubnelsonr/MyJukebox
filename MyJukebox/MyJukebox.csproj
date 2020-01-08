@@ -89,34 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\tTestImport.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\vSongsNewLong.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\vSongsNewShort.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="BLL\DataGetSet.cs" />
-    <Compile Include="Helpers\Colors.cs" />
-    <Compile Include="Helpers\ColorsUsed.cs" />
-    <Compile Include="DAL\MyJukeboxModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyJukeboxModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\MyJukeboxModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
+    <Compile Include="DAL\tActionLog.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\MyJukeboxModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyJukeboxModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\tActionLog.cs">
+    <Compile Include="DAL\tAlbum.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\tBeat.cs">
@@ -152,11 +129,31 @@
     <Compile Include="DAL\tSong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\tTestImport.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\vPlaylistSong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\vSong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Colors.cs" />
+    <Compile Include="Helpers\ColorsUsed.cs" />
+    <Compile Include="DAL\MyJukeboxModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyJukeboxModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MyJukeboxModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\MyJukeboxModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyJukeboxModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Helpers\FileSystemUtils.FindFiles.cs" />
     <Compile Include="Forms\AboutBox.cs">

@@ -1,5 +1,5 @@
-﻿using MyJukebox_EF.DAL;
-using MyJukebox_EF.BLL;
+﻿using MyJukebox_EF.BLL;
+using MyJukebox_EF.DAL;
 using NRSoft.FunctionPool;
 using System;
 using System.Collections;
@@ -972,7 +972,7 @@ namespace MyJukebox_EF
         public async Task FillDatagridViewAsynk(string filter)
         {
             bool isQuery = Methods.IsQuery(filter);
-            List<vSongsNewShort> songs = new List<vSongsNewShort>();
+            List<vSong> songs = new List<vSong>();
 
             if (isQuery)
             {
@@ -1555,62 +1555,62 @@ namespace MyJukebox_EF
             }
         }
 
-        public bool ImportData(MP3Record mp3Data, bool Test)
-        {
-            //const string scQuelle = "ImportData";
-            //var dh = factory.GetDatabaseH(Factory.dbType.mssql);
-            string _testTable = "tTestImport";
-            string _mainTable = "vSongsNewShort";
-            string Katalog, Owner, Media, Album, Interpret, Titel, Genre, Path, FileName, SQL, TableName, MD5;
-            long FileSize;
-            DateTime FileDate;
+        //public bool ImportData(MP3Record mp3Data, bool Test)
+        //{
+        //    //const string scQuelle = "ImportData";
+        //    //var dh = factory.GetDatabaseH(Factory.dbType.mssql);
+        //    string _testTable = "tTestImport";
+        //    string _mainTable = "vSongsNewShort";
+        //    string Katalog, Owner, Media, Album, Interpret, Titel, Genre, Path, FileName, SQL, TableName, MD5;
+        //    long FileSize;
+        //    DateTime FileDate;
 
-            TableName = (Test) ? _testTable : _mainTable;
+        //    TableName = (Test) ? _testTable : _mainTable;
 
-            Katalog = mp3Data.Katalog;
-            Owner = mp3Data.Owner;
-            Media = mp3Data.Media;
-            Album = mp3Data.Album;
-            Interpret = mp3Data.Interpret;
-            Titel = mp3Data.Titel;
-            Genre = mp3Data.Genre;
-            Path = mp3Data.Path;
-            FileName = mp3Data.FileName;
-            FileSize = mp3Data.FileSize;
-            FileDate = mp3Data.FileDate;
-            MD5 = mp3Data.MD5;
+        //    Katalog = mp3Data.Katalog;
+        //    Owner = mp3Data.Owner;
+        //    Media = mp3Data.Media;
+        //    Album = mp3Data.Album;
+        //    Interpret = mp3Data.Interpret;
+        //    Titel = mp3Data.Titel;
+        //    Genre = mp3Data.Genre;
+        //    Path = mp3Data.Path;
+        //    FileName = mp3Data.FileName;
+        //    FileSize = mp3Data.FileSize;
+        //    FileDate = mp3Data.FileDate;
+        //    MD5 = mp3Data.MD5;
 
-            SQL = "insert into " + TableName + " (katalog, quelle, medium, interpret, album, titel, genre, pfad, filename, filesize, filedate, md5) " +
-                "values (" + "\"" +
-                Katalog + "\",\"" +
-                Owner + "\",\"" +
-                Media + "\",\"" +
-                Interpret + "\",\"" +
-                Album + "\",\"" +
-                Titel + "\",\"" +
-                Genre + "\",\"" +
-                Path + "\",\"" +
-                FileName + "\",'" +
-                FileSize + "','" +
-                FileDate + "','" +
-                MD5 + "')";
-            Console.WriteLine(SQL);
-            try
-            {
-                //dh.ExecuteNonQuery(SQL);
-                return true;
-            }
-            catch
-            {
-                //    al.FaultType = alError
-                //    al.FaultSource = scQuelle
-                //    al.FaultMsg = Err.Description
-                //    al.AddEntry
+        //    SQL = "insert into " + TableName + " (katalog, quelle, medium, interpret, album, titel, genre, pfad, filename, filesize, filedate, md5) " +
+        //        "values (" + "\"" +
+        //        Katalog + "\",\"" +
+        //        Owner + "\",\"" +
+        //        Media + "\",\"" +
+        //        Interpret + "\",\"" +
+        //        Album + "\",\"" +
+        //        Titel + "\",\"" +
+        //        Genre + "\",\"" +
+        //        Path + "\",\"" +
+        //        FileName + "\",'" +
+        //        FileSize + "','" +
+        //        FileDate + "','" +
+        //        MD5 + "')";
+        //    Console.WriteLine(SQL);
+        //    try
+        //    {
+        //        //dh.ExecuteNonQuery(SQL);
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        //    al.FaultType = alError
+        //        //    al.FaultSource = scQuelle
+        //        //    al.FaultMsg = Err.Description
+        //        //    al.AddEntry
 
-                return false;
-            }
-            finally { };
-        }
+        //        return false;
+        //    }
+        //    finally { };
+        //}
 
         public string QueryBuilder()
         {
@@ -1714,7 +1714,7 @@ namespace MyJukebox_EF
         {
             using (var context = new MyJukeboxEntities())
             {
-                var result = context.vSongsNewShorts
+                var result = context.vSongs
                             .Where(a => a.Genre == Settings.LastGenre && a.Catalog == Settings.LastKatalog)
                             .Select(a => a.Album)
                             .Distinct().OrderBy(a => a);
@@ -1914,9 +1914,9 @@ namespace MyJukebox_EF
         }
 
         #region Data Getters
-        private async Task<List<vSongsNewShort>> GetQueryResultAsync()
+        private async Task<List<vSong>> GetQueryResultAsync()
         {
-            List<vSongsNewShort> songs = null;
+            List<vSong> songs = null;
             string sql = "";
             string[] arTokens;
             bool findExplizit = false;
@@ -1952,7 +1952,7 @@ namespace MyJukebox_EF
                 {
                     try
                     {
-                        songs = context.vSongsNewShorts
+                        songs = context.vSongs
                             .SqlQuery(sql).ToList();
                     }
                     catch

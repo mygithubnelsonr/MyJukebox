@@ -17,6 +17,7 @@ namespace MyJukebox_EF
 {
     public partial class Filescanner : Form
     {
+
         #region private Fields
         //private bool _dbPanelVisible;
         #endregion
@@ -66,7 +67,7 @@ namespace MyJukebox_EF
         #endregion
 
         #region ComboBox_Events
-        internal void comboBoxStartOrdner_KeyUp(object sender, KeyEventArgs e)
+        private void ActionStartfolder()
         {
             try
             {
@@ -76,28 +77,27 @@ namespace MyJukebox_EF
                 {
                     comboBoxStartOrdner.BackColor = Color.LightGreen;
                     //rh.SaveSetting("Settings\\Filescanner", "LastScanPfad", di.FullName);
-                    this.buttonStartScann.Enabled = true;
+                    buttonStartScann.Enabled = true;
                 }
                 else
                 {
                     comboBoxStartOrdner.BackColor = Color.Salmon;
-                    this.buttonStartScann.Enabled = false;
+                    buttonStartScann.Enabled = false;
                 }
             }
             catch { }
-            finally { }
         }
 
         private void comboBoxStartOrdner_SelectedIndexChanged(object sender, EventArgs e)
         {
-            KeyEventArgs k = new KeyEventArgs(Keys.KeyCode);
-            comboBoxStartOrdner_KeyUp(sender, k);
+            listViewFileList.Items.Clear();
+            ActionStartfolder();
         }
 
         private void comboBoxStartOrdner_TextChanged(object sender, EventArgs e)
         {
-            KeyEventArgs k = new KeyEventArgs(Keys.KeyCode);
-            comboBoxStartOrdner_KeyUp(sender, k);
+            listViewFileList.Items.Clear();
+            ActionStartfolder();
         }
         #endregion ComboBox_Events
 
@@ -224,7 +224,6 @@ namespace MyJukebox_EF
 
             if (allFileSize > 0)
             {
-                this.statusStripLabelSpecial.Enabled = true;
                 this.buttonImport.Enabled = true;
             }
 
@@ -236,7 +235,7 @@ namespace MyJukebox_EF
                 comboBoxGenre.Text = record.Genre;
                 comboBoxKatalog.Text = record.Katalog;
                 comboBoxAlbum.Text = record.Album;
-                comboBoxMedium.Text = record.Media;
+                comboBoxMedium.SelectedIndex = record.Media;
             }
         }
 
@@ -262,9 +261,6 @@ namespace MyJukebox_EF
                     return;
                 }
             }
-
-            //record = new MP3Record();
-
 
             DateTime t1 = DateTime.Now;
             statusStripLabelStart.Text = t1.Hour.ToString() + ":" + t1.Minute.ToString() + ":" + t1.Second.ToString();
@@ -295,8 +291,6 @@ namespace MyJukebox_EF
                 arPath = filePfad.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
                 FileInfo fi = new FileInfo(fileName);
                 fileExtension = fi.Extension.ToLower();
-                //if (fileExtension == ".mp3")
-                //{
                 if (checkBoxSpecialImport.Checked)
                 {
                     MP3Record record = Methods.GetRecordInfo(filePfad);
@@ -315,8 +309,7 @@ namespace MyJukebox_EF
 
                     mp3.Genre = comboBoxGenre.Text;
                     mp3.Album = comboBoxAlbum.Text;  //arPath[arPath.Length - 1];
-                    mp3.Media = comboBoxMedium.Text;
-                    //mp3.Owner = comboBoxAlbum.Text;
+                    mp3.Media = comboBoxMedium.SelectedIndex;
                     mp3.Katalog = comboBoxKatalog.Text;
                     catalogue = comboBoxKatalog.Text;
                 }
@@ -348,27 +341,27 @@ namespace MyJukebox_EF
                         mp3.Titel = strTitel.Replace(fileExtension, "");
                     }
 
+                    List<int> media;
+                    string type = arPath[arPath.Length - 3];
+                    var context = new MyJukeboxEntities();
+                    media = context.tMedias
+                                .Where(m => m.Type == type)
+                                .Select(m => m.ID).ToList();
+
+                    mp3.Media = media[0];
                     mp3.Album = arPath[arPath.Length - 1];
                     mp3.Interpret = arPath[arPath.Length - 2];
-                    mp3.Media = arPath[arPath.Length - 3];
-                    mp3.Owner = arPath[arPath.Length - 4];
-                    mp3.Genre = arPath[arPath.Length - 5];
                     mp3.Katalog = arPath[arPath.Length - 4];
+                    mp3.Genre = arPath[arPath.Length - 5];
                 }
 
                 mp3.MD5 = MD5(mp3.Album + mp3.Path + mp3.FileName);
                 mp3List.Add(mp3);
 
-
-                //}
-
                 //StopImport:
                 //    gbBuisy = False
             }
 
-            DateTime t2 = DateTime.Now;
-
-            statusStripabelDauer.Text = (t2 - t1).Seconds.ToString();
             toolStripProgressBar.Visible = false;
             toolStripProgressBar.Enabled = false;
             ///    sb.Panels("message").Text = i - 1 & " Records added"
@@ -380,10 +373,10 @@ namespace MyJukebox_EF
             buttonImport.Enabled = false;
 
             // save records
-            var result = DataGetSet.TruncateTableImportTest();
-            Debug.Print($"TruncateTableImportTest result = {result}");
-
             int recordsAffected = DataGetSet.SaveNewRecords(mp3List, checkBoxTest.Checked);
+            DateTime t2 = DateTime.Now;
+            statusStripabelDauer.Text = (t2 - t1).Milliseconds.ToString() + " ms";
+
 
             buttonImport.Enabled = true;
 
@@ -425,5 +418,9 @@ namespace MyJukebox_EF
         }
         #endregion Methodes
 
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            DataGetSet.SaveRecordTest(15480, "");
+        }
     }
 }
