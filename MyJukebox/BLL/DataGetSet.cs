@@ -222,27 +222,30 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static void SaveRecordTest(int songID, string md)
+        public static void SaveRecordTest(string catalog) // int songID, string md)
         {
-            var context = new MyJukeboxEntities();
-            // tFileInfo
-            var file = new tFileInfo();
-            file.ID_Song = songID;
-            file.FileDate = DateTime.Now;
-            file.FileSize = 12345;
-            file.ImportDate = DateTime.Now;
-            context.tFileInfoes.Add(file);
-            context.SaveChanges();
+            int catalogID = -1;
+
+            //var context = new MyJukeboxEntities();
+            //// tFileInfo
+            //var file = new tFileInfo();
+            //file.ID_Song = songID;
+            //file.FileDate = DateTime.Now;
+            //file.FileSize = 12345;
+            //file.ImportDate = DateTime.Now;
+            //context.tFileInfoes.Add(file);
+            //context.SaveChanges();
+
+            //genreID = GetGenreFromString(genre);
+            //Debug.Print(genreID.ToString());
+
+            catalogID = GetCatalogFromString(catalog);
+            Debug.Print(catalogID.ToString());
+
         }
 
         private static int SetNewRecord(MP3Record record)   // productiv
         {
-            int idSong = -1;
-            int idCatalog = -1;
-            int idGenre = -1;
-            int idInfo = -1;
-            int idFile = -1;
-
             try
             {
                 var context = new MyJukeboxEntities();
@@ -257,11 +260,11 @@ namespace MyJukebox_EF.BLL
                 context.tSongs.Add(song);
                 context.SaveChanges();
 
-                idSong = (int)GetLastSongID("tSongs");
+                int songID = (int)GetLastSongID("tSongs");
 
                 // tMd5
                 var md5 = new tMD5();
-                md5.ID_Song = idSong;
+                md5.ID_Song = songID;
                 md5.MD5 = record.MD5;
 
                 context.tMd5.Add(md5);
@@ -269,7 +272,7 @@ namespace MyJukebox_EF.BLL
 
                 // tInfo
                 var info = new tInfo();
-                info.ID_Song = idSong;
+                info.ID_Song = songID;
                 info.Media = record.Media;
                 info.Sampler = record.IsSample;
                 context.tInfos.Add(info);
@@ -277,21 +280,21 @@ namespace MyJukebox_EF.BLL
 
                 // tFileInfo
                 var file = new tFileInfo();
-                file.ID_Song = idSong;
+                file.ID_Song = songID;
                 file.FileDate = record.FileDate;
                 file.FileSize = record.FileSize;
                 file.ImportDate = DateTime.Now;
                 context.tFileInfoes.Add(file);
                 context.SaveChanges();
 
-
+                int catalogID = GetCatalogFromString(record.Katalog);
+                int genreID = GetGenreFromString(record.Genre);
 
                 // tSong
-                song.ID_Catalog = idCatalog;
-                song.ID_Genre = idGenre;
-                song.ID_Info = idInfo;
-                song.ID_File = idFile;
-                //song.ID_MD5 = idMd5;
+                song.ID_Catalog = catalogID;
+                song.ID_Genre = genreID;
+                //song.ID_Info = idInfo;
+                //song.ID_File = idFile;
                 context.SaveChanges();
 
                 return 1;
@@ -348,22 +351,65 @@ namespace MyJukebox_EF.BLL
             int? lastId = -1;
             int recCount = -1;
 
-            var context = new MyJukeboxEntities();
+            try
+            {
+                var context = new MyJukeboxEntities();
 
-            recCount = context.tTestImports
-                .Select(i => i.ID).Count();
+                if (recCount != 0 && tableName == "tTestImport")
+                {
+                    recCount = context.tTestImports
+                                    .Select(i => i.ID).Count();
 
-            if (recCount != 0 && tableName == "tTestImport")
-                lastId = context.tTestImports.Max(x => x.ID);
+                    if (recCount != 0)
+                        lastId = context.tTestImports.Max(x => x.ID);
+                }
 
-            recCount = context.tSongs
-                .Select(i => i.ID).Count();
+                if (tableName == "tSongs")
+                {
+                    recCount = context.tSongs
+                                    .Select(i => i.ID).Count();
 
-            if (recCount != 0 && tableName == "tSongs")
-                lastId = context.tSongs.Max(x => x.ID);
+                    if (recCount != 0)
+                        lastId = context.tSongs.Max(x => x.ID);
+                }
 
-            return lastId;
+                return lastId;
+            }
+            catch
+            {
+                return null;
+            }
         }
+
+        public static int GetGenreFromString(string genre)
+        {
+            List<int> genres;
+            var context = new MyJukeboxEntities();
+            genres = context.tGenres
+                        .Where(g => g.Name == genre)
+                        .Select(g => g.ID).ToList();
+
+            return genres[0];
+        }
+
+        public static int GetCatalogFromString(string catalog)
+        {
+            List<int> catalogs;
+            try
+            {
+                var context = new MyJukeboxEntities();
+                catalogs = context.tCatalogs
+                            .Where(c => c.Name == catalog)
+                            .Select(c => c.ID).ToList();
+
+                return catalogs[0];
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
         #endregion
     }
 }

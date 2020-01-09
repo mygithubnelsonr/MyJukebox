@@ -420,7 +420,7 @@ namespace MyJukebox_EF
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            DataGetSet.SaveRecordTest(15480, "");
+            DataGetSet.SaveRecordTest("Sonja");
         }
     }
 }
