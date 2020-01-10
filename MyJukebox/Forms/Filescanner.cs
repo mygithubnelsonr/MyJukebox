@@ -71,17 +71,16 @@ namespace MyJukebox_EF
         {
             try
             {
-                DirectoryInfo di = new DirectoryInfo(comboBoxStartOrdner.Text);
+                DirectoryInfo di = new DirectoryInfo(textBoxStartpath.Text);
 
                 if (di.Exists)
                 {
-                    comboBoxStartOrdner.BackColor = Color.LightGreen;
-                    //rh.SaveSetting("Settings\\Filescanner", "LastScanPfad", di.FullName);
+                    textBoxStartpath.BackColor = Color.LightGreen;
                     buttonStartScann.Enabled = true;
                 }
                 else
                 {
-                    comboBoxStartOrdner.BackColor = Color.Salmon;
+                    textBoxStartpath.BackColor = Color.Salmon;
                     buttonStartScann.Enabled = false;
                 }
             }
@@ -120,7 +119,7 @@ namespace MyJukebox_EF
         private void buttonOrdner_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.ShowDialog();
-            comboBoxStartOrdner.Text = folderBrowserDialog1.SelectedPath;
+            textBoxStartpath.Text = folderBrowserDialog1.SelectedPath;
         }
         #endregion Button_Events
 
@@ -181,7 +180,7 @@ namespace MyJukebox_EF
 
         private void Scanner()
         {
-            string startDirectory = this.comboBoxStartOrdner.Text;
+            string startDirectory = this.textBoxStartpath.Text;
             string filePattern = this.textBoxExtension.Text;
 
             if (startDirectory == "")
@@ -355,7 +354,7 @@ namespace MyJukebox_EF
                     mp3.Genre = arPath[arPath.Length - 5];
                 }
 
-                mp3.MD5 = MD5(mp3.Album + mp3.Path + mp3.FileName);
+                mp3.MD5 = MD5(mp3.Path + mp3.FileName);
                 mp3List.Add(mp3);
 
                 //StopImport:
@@ -420,7 +419,46 @@ namespace MyJukebox_EF
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            DataGetSet.SaveRecordTest("Sonja");
+            //DataGetSet.SaveRecordTest("Sonja");
+
+            var md5 = MD5(@"\\win2k16dc01\FS012\Country\Sonja\CD\Dan + Shay\Dan + Shay\" + "Dan + Shay - All To Myself.mp3");
+            Debug.Print(md5);
+        }
+
+        private void textBoxStartpath_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                listViewFileList.Items.Clear();
+
+                string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+                DirectoryInfo di;
+                di = new DirectoryInfo(filenames[0]);
+                string strFolder;
+
+                if ((di.Attributes & FileAttributes.Directory) > 0)
+                    strFolder = di.FullName;
+                else
+                    strFolder = di.Parent.FullName;
+
+                textBoxStartpath.Text = strFolder;
+                ActionStartfolder();
+
+                buttonStartScann.PerformClick();
+            }
+        }
+
+        private void textBoxStartpath_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
         }
     }
 }

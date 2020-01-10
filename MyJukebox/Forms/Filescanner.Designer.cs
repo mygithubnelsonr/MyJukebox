@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelControls = new System.Windows.Forms.Panel();
+            this.buttonTest = new System.Windows.Forms.Button();
             this.buttonStartScann = new System.Windows.Forms.Button();
             this.statusStripScann = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -47,7 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxExtension = new System.Windows.Forms.TextBox();
             this.buttonOrdner = new System.Windows.Forms.Button();
-            this.comboBoxStartOrdner = new System.Windows.Forms.ComboBox();
             this.panelDB = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.comboBoxMedium = new System.Windows.Forms.ComboBox();
@@ -79,7 +79,7 @@
             this.statusStripLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.labelShowHideDbPanel = new System.Windows.Forms.Label();
-            this.buttonTest = new System.Windows.Forms.Button();
+            this.textBoxStartpath = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panelControls.SuspendLayout();
             this.statusStripScann.SuspendLayout();
@@ -93,13 +93,13 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panel1.Controls.Add(this.textBoxStartpath);
             this.panel1.Controls.Add(this.panelControls);
             this.panel1.Controls.Add(this.listViewFileList);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.textBoxExtension);
             this.panel1.Controls.Add(this.buttonOrdner);
-            this.panel1.Controls.Add(this.comboBoxStartOrdner);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -115,6 +115,16 @@
             this.panelControls.Name = "panelControls";
             this.panelControls.Size = new System.Drawing.Size(412, 21);
             this.panelControls.TabIndex = 24;
+            // 
+            // buttonTest
+            // 
+            this.buttonTest.Location = new System.Drawing.Point(269, -1);
+            this.buttonTest.Name = "buttonTest";
+            this.buttonTest.Size = new System.Drawing.Size(38, 20);
+            this.buttonTest.TabIndex = 24;
+            this.buttonTest.Text = "Test";
+            this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // buttonStartScann
             // 
@@ -254,23 +264,6 @@
             this.buttonOrdner.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonOrdner.UseVisualStyleBackColor = true;
             this.buttonOrdner.Click += new System.EventHandler(this.buttonOrdner_Click);
-            // 
-            // comboBoxStartOrdner
-            // 
-            this.comboBoxStartOrdner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxStartOrdner.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.comboBoxStartOrdner.FormattingEnabled = true;
-            this.comboBoxStartOrdner.Items.AddRange(new object[] {
-            "",
-            "A:\\Temp",
-            "\\\\win2k16dc01\\FS012\\Country\\Sonja\\CD\\Dan + Shay\\Dan + Shay"});
-            this.comboBoxStartOrdner.Location = new System.Drawing.Point(12, 25);
-            this.comboBoxStartOrdner.Name = "comboBoxStartOrdner";
-            this.comboBoxStartOrdner.Size = new System.Drawing.Size(285, 21);
-            this.comboBoxStartOrdner.TabIndex = 8;
-            this.comboBoxStartOrdner.SelectedIndexChanged += new System.EventHandler(this.comboBoxStartOrdner_SelectedIndexChanged);
-            this.comboBoxStartOrdner.TextChanged += new System.EventHandler(this.comboBoxStartOrdner_TextChanged);
             // 
             // panelDB
             // 
@@ -583,15 +576,16 @@
             this.labelShowHideDbPanel.Text = "======";
             this.labelShowHideDbPanel.Click += new System.EventHandler(this.labelShowHideDbPanel_Click);
             // 
-            // buttonTest
+            // textBoxStartpath
             // 
-            this.buttonTest.Location = new System.Drawing.Point(269, -1);
-            this.buttonTest.Name = "buttonTest";
-            this.buttonTest.Size = new System.Drawing.Size(38, 20);
-            this.buttonTest.TabIndex = 24;
-            this.buttonTest.Text = "Test";
-            this.buttonTest.UseVisualStyleBackColor = true;
-            this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
+            this.textBoxStartpath.AllowDrop = true;
+            this.textBoxStartpath.Location = new System.Drawing.Point(15, 26);
+            this.textBoxStartpath.Name = "textBoxStartpath";
+            this.textBoxStartpath.Size = new System.Drawing.Size(282, 20);
+            this.textBoxStartpath.TabIndex = 25;
+            this.textBoxStartpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStartpath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragDrop);
+            this.textBoxStartpath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragEnter);
             // 
             // Filescanner
             // 
@@ -637,7 +631,6 @@
         private System.Windows.Forms.TextBox textBoxExtension;
         private System.Windows.Forms.Button buttonOrdner;
         private System.Windows.Forms.Button buttonStartScann;
-        private System.Windows.Forms.ComboBox comboBoxStartOrdner;
         private System.Windows.Forms.Panel panelDB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.StatusStrip statusStripImport;
@@ -684,5 +677,6 @@
         private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Label labelShowHideDbPanel;
         private System.Windows.Forms.Button buttonTest;
+        private System.Windows.Forms.TextBox textBoxStartpath;
     }
 }
