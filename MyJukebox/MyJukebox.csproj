@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\DataGetSet.cs" />
+    <Compile Include="BLL\Logging.cs" />
     <Compile Include="DAL\tActionLog.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>

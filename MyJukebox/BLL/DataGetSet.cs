@@ -174,6 +174,8 @@ namespace MyJukebox_EF.BLL
         {
             int recordsImporteds = 0;
 
+            Logging.Flush();
+
             if (testImport == true)
             {
                 var result = DataGetSet.TruncateTableImportTest();
@@ -220,28 +222,6 @@ namespace MyJukebox_EF.BLL
             {
                 return false;
             }
-        }
-
-        public static void SaveRecordTest(string catalog) // int songID, string md)
-        {
-            int catalogID = -1;
-
-            //var context = new MyJukeboxEntities();
-            //// tFileInfo
-            //var file = new tFileInfo();
-            //file.ID_Song = songID;
-            //file.FileDate = DateTime.Now;
-            //file.FileSize = 12345;
-            //file.ImportDate = DateTime.Now;
-            //context.tFileInfoes.Add(file);
-            //context.SaveChanges();
-
-            //genreID = GetGenreFromString(genre);
-            //Debug.Print(genreID.ToString());
-
-            catalogID = GetCatalogFromString(catalog);
-            Debug.Print(catalogID.ToString());
-
         }
 
         private static int SetNewRecord(MP3Record record)   // productiv
@@ -293,8 +273,6 @@ namespace MyJukebox_EF.BLL
                 // tSong
                 song.ID_Catalog = catalogID;
                 song.ID_Genre = genreID;
-                //song.ID_Info = idInfo;
-                //song.ID_File = idFile;
                 context.SaveChanges();
 
                 return 1;
@@ -335,11 +313,13 @@ namespace MyJukebox_EF.BLL
                 context.tTestImports.Add(import);
                 context.SaveChanges();
 
+                Logging.Log("1 record added");
                 return 1;
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
+                //Debug.Print(ex.Message);
+                Logging.Log(ex.Message);
                 return 0;
             }
         }
@@ -410,6 +390,32 @@ namespace MyJukebox_EF.BLL
             }
         }
 
+        public static async Task RefillMD5Table()
+        {
+            List<tMD5> rec = new List<tMD5>();
+            using (var context = new MyJukeboxEntities())
+            {
+                await Task.Run(() =>
+                {
+                    var result = context.tSongs
+                                    .OrderBy(s => s.ID)
+                                    .Select(s => new { s.ID, s.Pfad, s.FileName });
+
+                    foreach (var s in result)
+                    {
+                        string hash = Methods.MD5($"{s.Pfad}{s.FileName}");
+                        Debug.Print($"ID_Song={s.ID}, md5={hash}");
+
+
+                        rec.Add(new tMD5 { ID_Song = s.ID, MD5 = hash });
+
+                    }
+
+                    context.tMd5.AddRange(rec);
+                    context.SaveChanges();
+                });
+            }
+        }
         #endregion
     }
 }

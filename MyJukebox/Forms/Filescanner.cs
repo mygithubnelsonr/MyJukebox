@@ -66,40 +66,6 @@ namespace MyJukebox_EF
         }
         #endregion
 
-        #region ComboBox_Events
-        private void ActionStartfolder()
-        {
-            try
-            {
-                DirectoryInfo di = new DirectoryInfo(textBoxStartpath.Text);
-
-                if (di.Exists)
-                {
-                    textBoxStartpath.BackColor = Color.LightGreen;
-                    buttonStartScann.Enabled = true;
-                }
-                else
-                {
-                    textBoxStartpath.BackColor = Color.Salmon;
-                    buttonStartScann.Enabled = false;
-                }
-            }
-            catch { }
-        }
-
-        private void comboBoxStartOrdner_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            listViewFileList.Items.Clear();
-            ActionStartfolder();
-        }
-
-        private void comboBoxStartOrdner_TextChanged(object sender, EventArgs e)
-        {
-            listViewFileList.Items.Clear();
-            ActionStartfolder();
-        }
-        #endregion ComboBox_Events
-
         #region Button_Events
         private void buttonStartScann_Click(object sender, EventArgs e)
         {
@@ -354,28 +320,18 @@ namespace MyJukebox_EF
                     mp3.Genre = arPath[arPath.Length - 5];
                 }
 
-                mp3.MD5 = MD5(mp3.Path + mp3.FileName);
+                mp3.MD5 = Methods.MD5(mp3.Path + mp3.FileName);
                 mp3List.Add(mp3);
-
-                //StopImport:
-                //    gbBuisy = False
             }
 
             toolStripProgressBar.Visible = false;
             toolStripProgressBar.Enabled = false;
-            ///    sb.Panels("message").Text = i - 1 & " Records added"
-            ///    Me.MousePointer = vbNormal
-            ///    cmd_import.BackColor = &HC0FFC0
-            ///    cmd_import.Tag = "0"
-            ///    cmd_import.Caption = "Start Import"
-            ///    cmd_StartScan.Enabled = True
             buttonImport.Enabled = false;
 
             // save records
             int recordsAffected = DataGetSet.SaveNewRecords(mp3List, checkBoxTest.Checked);
             DateTime t2 = DateTime.Now;
             statusStripabelDauer.Text = (t2 - t1).Milliseconds.ToString() + " ms";
-
 
             buttonImport.Enabled = true;
 
@@ -395,34 +351,15 @@ namespace MyJukebox_EF
             return textInfo.ToTitleCase(sText);
         }
 
-        public static string MD5(string password)
-        {
-            byte[] textBytes = System.Text.Encoding.Default.GetBytes(password);
-            try
-            {
-                System.Security.Cryptography.MD5CryptoServiceProvider cryptHandler;
-                cryptHandler = new System.Security.Cryptography.MD5CryptoServiceProvider();
-                byte[] hash = cryptHandler.ComputeHash(textBytes);
-                string ret = "";
-                foreach (byte a in hash)
-                {
-                    ret += a.ToString("x2");
-                }
-                return ret;
-            }
-            catch
-            {
-                throw;
-            }
-        }
         #endregion Methodes
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            //DataGetSet.SaveRecordTest("Sonja");
+            //DataGetSet.RefillMD5Table();
 
-            var md5 = MD5(@"\\win2k16dc01\FS012\Country\Sonja\CD\Dan + Shay\Dan + Shay\" + "Dan + Shay - All To Myself.mp3");
-            Debug.Print(md5);
+            string log = Logging.GetMessages();
+            MessageBox.Show(log);
+
         }
 
         private void textBoxStartpath_DragDrop(object sender, DragEventArgs e)
@@ -460,5 +397,26 @@ namespace MyJukebox_EF
                 e.Effect = DragDropEffects.None;
             }
         }
+
+        private void ActionStartfolder()
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(textBoxStartpath.Text);
+
+                if (di.Exists)
+                {
+                    textBoxStartpath.BackColor = Color.LightGreen;
+                    buttonStartScann.Enabled = true;
+                }
+                else
+                {
+                    textBoxStartpath.BackColor = Color.Salmon;
+                    buttonStartScann.Enabled = false;
+                }
+            }
+            catch { }
+        }
+
     }
 }

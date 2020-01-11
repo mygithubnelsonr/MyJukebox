@@ -1,10 +1,9 @@
 ﻿using MyJukebox_EF.DAL;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System;
-using System.Collections.Generic;
 
 namespace MyJukebox_EF.BLL
 {
@@ -56,6 +55,27 @@ namespace MyJukebox_EF.BLL
             return record;
         }
 
+        public static string MD5(string password)
+        {
+            byte[] textBytes = System.Text.Encoding.Default.GetBytes(password);
+            try
+            {
+                System.Security.Cryptography.MD5CryptoServiceProvider cryptHandler;
+                cryptHandler = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] hash = cryptHandler.ComputeHash(textBytes);
+                string ret = "";
+                foreach (byte a in hash)
+                {
+                    ret += a.ToString("x2");
+                }
+                return ret;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public static int DirectoryCount(string startfolder)
         {
             int dirCount = 0;
@@ -80,3 +100,4 @@ namespace MyJukebox_EF.BLL
         }
     }
 }
+
