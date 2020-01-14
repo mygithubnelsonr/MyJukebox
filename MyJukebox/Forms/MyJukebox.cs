@@ -29,8 +29,6 @@ namespace MyJukebox_EF
         private TreeNode currentTreeNode;
         private TreeNode lastSelectedTreeNode;
 
-        //string _placeHolder = $"<Input SQL like Album='V8-A-1'>";
-
         // FunctionPool functions
         RandomH random = new RandomH();
 
@@ -114,12 +112,6 @@ namespace MyJukebox_EF
             // first fill
             FillDatagridViewAsynk(Settings.QueryLastQuery);
 
-            //if (dataGridView.RowCount > 0)
-            //{
-            //    GridViewSetColumsWidth();
-            //    dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
-            //    statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
-            //}
         }
 
         private void MyJukebox_Resize(object sender, EventArgs e)
@@ -197,15 +189,7 @@ namespace MyJukebox_EF
 
         private void toolStripMenuItemimportNewSongs_Click(object sender, EventArgs e)
         {
-            //Settings.FilescannerLoad();
-
             Filescanner filescanner = new Filescanner();
-
-            //filescanner.Top = Settings.FilescannerTop;
-            //filescanner.Left = Settings.FilescannerLeft;
-            //filescanner.Height = Settings.FilescannerHeight;
-            //filescanner.Width = Settings.FilescannerWidth;
-
             filescanner.Show();
         }
 
@@ -254,19 +238,13 @@ namespace MyJukebox_EF
             Debug.Print(n.ToString());
         }
 
-        private void menuMainToolsFileScanner_Click(object sender, EventArgs e)
-        {
-            Filescanner fs = new Filescanner();
-            fs.Show();
-        }
-
         private void menuMainEditRecord_Click(object sender, EventArgs e)
         {
-            EditRecord er = new EditRecord();
-            er.Show();
+            int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
+
+            EditRecord editRecord = new EditRecord(id);
+            editRecord.Show();
         }
-
-
 
         private void menuMainPlaybackPlay_Click(object sender, EventArgs e)
         {
@@ -721,7 +699,7 @@ namespace MyJukebox_EF
             tnkatalog.FirstNode.SelectedImageKey = mainNode;
             statusStripKatalog.Text = Settings.LastKatalog;
 
-            catalogues = await DataGetSet.GetKatalogsAsync();
+            catalogues = await DataGetSet.GetCatalogsAsync();
 
             tvlogic.BeginUpdate();
             foreach (string node in catalogues)
@@ -927,11 +905,10 @@ namespace MyJukebox_EF
         #region Datagrid Events
         private void dataGridView_Click(object sender, EventArgs e)
         {
-            int rowselected;
-            rowselected = dataGridView.SelectedRows[0].Index + 1;
-            statusStripRow.Text = (rowselected).ToString();
-
-            Debug.Print(dataGridView[0, rowselected].Value.ToString());
+            int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
+            int rowselected = dataGridView.SelectedRows[0].Index + 1;
+            statusStripRow.Text = rowselected.ToString();
+            Debug.Print($"ID={id}, Row={rowselected}");
         }
 
         private void dataGridView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -961,6 +938,14 @@ namespace MyJukebox_EF
             string msg = String.Format("Finished Editing Cell at ({1}, {0})", e.ColumnIndex, e.RowIndex);
             Debug.Print(msg);
         }
+
+        private void DatagridContextMenuStripEditRecord_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
+
+            EditRecord editRecord = new EditRecord(id);
+            editRecord.ShowDialog();
+        }
         #endregion Datagrid Events
 
         #region DataGrid Methodes
@@ -972,7 +957,7 @@ namespace MyJukebox_EF
         public async Task FillDatagridViewAsynk(string filter)
         {
             bool isQuery = Methods.IsQuery(filter);
-            List<vSong> songs = new List<vSong>();
+            List<tSong> songs = new List<tSong>();
 
             if (isQuery)
             {
@@ -1972,6 +1957,7 @@ namespace MyJukebox_EF
 
 
         #endregion
+
 
     }
 }

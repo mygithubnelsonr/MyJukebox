@@ -24,3 +24,4 @@ A:\Source\Repos\90_Work\MyJukebox\MyJukebox\obj\Debug\MyJukebox.pdb
 A:\Source\Repos\90_Work\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csprojAssemblyReference.cache
 A:\Source\Repos\90_Work\MyJukebox\MyJukebox\bin\Debug\FunctionPool.dll
 A:\Source\Repos\90_Work\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.Properties.Resources.resources
+A:\Source\Repos\90_Work\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.TestForm.resources

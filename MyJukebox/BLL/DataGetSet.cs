@@ -22,7 +22,7 @@ namespace MyJukebox_EF.BLL
             return genres;
         }
 
-        public static async Task<List<string>> GetKatalogsAsync()
+        public static async Task<List<string>> GetCatalogsAsync()
         {
             List<string> catalogues = null;
 
@@ -322,6 +322,40 @@ namespace MyJukebox_EF.BLL
                 Logging.Log(ex.Message);
                 return 0;
             }
+        }
+        #endregion
+
+        #region EditForm
+        public static async Task<List<string>> GetGenresFullAsync()
+        {
+            List<string> genres = null;
+            var context = new MyJukeboxEntities();
+            await Task.Run(() =>
+            {
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();
+            });
+            return genres;
+        }
+
+        public static List<string> GetSongRecord(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var songs = context.vSongs
+                        .Where(s => s.ID == id)
+                        .Select(s => new { s.ID, s.Genre, s.Catalog, s.Album, s.Interpret, s.Titel, s.Pfad, s.FileName }).ToList();
+
+            List<string> list = new List<string>();
+            list.Add(songs[0].ID.ToString());
+            list.Add(songs[0].Genre);
+            list.Add(songs[0].Catalog);
+            list.Add(songs[0].Album);
+            list.Add(songs[0].Interpret);
+            list.Add(songs[0].Titel);
+            list.Add(songs[0].Pfad);
+            list.Add(songs[0].FileName);
+
+            return list;
         }
         #endregion
 
