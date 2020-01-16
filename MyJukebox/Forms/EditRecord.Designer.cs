@@ -28,15 +28,14 @@ namespace MyJukebox_EF
         private void InitializeComponent()
         {
             this.chk_Sampler = new System.Windows.Forms.CheckBox();
-            this.chk_Link = new System.Windows.Forms.CheckBox();
-            this.cmd_Exit = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.chk_Hide = new System.Windows.Forms.CheckBox();
             this.chk_Error = new System.Windows.Forms.CheckBox();
             this.textBoxFilename = new System.Windows.Forms.TextBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
-            this.txt_Filesize = new System.Windows.Forms.TextBox();
-            this.txt_Filedate = new System.Windows.Forms.TextBox();
+            this.textBoxFilesize = new System.Windows.Forms.TextBox();
+            this.textBoxFiledate = new System.Windows.Forms.TextBox();
             this.textBoxDuration = new System.Windows.Forms.TextBox();
             this.txt_Beat = new System.Windows.Forms.TextBox();
             this.textBoxRating = new System.Windows.Forms.TextBox();
@@ -48,7 +47,6 @@ namespace MyJukebox_EF
             this.txt_Medium = new System.Windows.Forms.TextBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.Label121 = new System.Windows.Forms.Label();
-            this.Label120 = new System.Windows.Forms.Label();
             this.Label119 = new System.Windows.Forms.Label();
             this.Label118 = new System.Windows.Forms.Label();
             this.Label117 = new System.Windows.Forms.Label();
@@ -77,30 +75,23 @@ namespace MyJukebox_EF
             // chk_Sampler
             // 
             this.chk_Sampler.BackColor = System.Drawing.Color.Silver;
-            this.chk_Sampler.Location = new System.Drawing.Point(310, 278);
+            this.chk_Sampler.Location = new System.Drawing.Point(310, 331);
             this.chk_Sampler.Name = "chk_Sampler";
             this.chk_Sampler.Size = new System.Drawing.Size(17, 17);
             this.chk_Sampler.TabIndex = 12;
             this.chk_Sampler.UseVisualStyleBackColor = false;
             // 
-            // chk_Link
+            // buttonExit
             // 
-            this.chk_Link.Location = new System.Drawing.Point(403, 384);
-            this.chk_Link.Name = "chk_Link";
-            this.chk_Link.Size = new System.Drawing.Size(17, 17);
-            this.chk_Link.TabIndex = 20;
-            // 
-            // cmd_Exit
-            // 
-            this.cmd_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cmd_Exit.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.cmd_Exit.Location = new System.Drawing.Point(272, 421);
-            this.cmd_Exit.Name = "cmd_Exit";
-            this.cmd_Exit.Size = new System.Drawing.Size(97, 25);
-            this.cmd_Exit.TabIndex = 21;
-            this.cmd_Exit.Text = "Exit";
-            this.cmd_Exit.UseVisualStyleBackColor = false;
-            this.cmd_Exit.Click += new System.EventHandler(this.cmd_Exit_Click);
+            this.buttonExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonExit.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonExit.Location = new System.Drawing.Point(272, 421);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(97, 25);
+            this.buttonExit.TabIndex = 21;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.cmd_Exit_Click);
             // 
             // buttonSave
             // 
@@ -117,14 +108,14 @@ namespace MyJukebox_EF
             // 
             // chk_Hide
             // 
-            this.chk_Hide.Location = new System.Drawing.Point(422, 278);
+            this.chk_Hide.Location = new System.Drawing.Point(422, 331);
             this.chk_Hide.Name = "chk_Hide";
             this.chk_Hide.Size = new System.Drawing.Size(17, 17);
             this.chk_Hide.TabIndex = 14;
             // 
             // chk_Error
             // 
-            this.chk_Error.Location = new System.Drawing.Point(366, 278);
+            this.chk_Error.Location = new System.Drawing.Point(366, 331);
             this.chk_Error.Name = "chk_Error";
             this.chk_Error.Size = new System.Drawing.Size(17, 17);
             this.chk_Error.TabIndex = 13;
@@ -137,7 +128,7 @@ namespace MyJukebox_EF
             this.textBoxFilename.Size = new System.Drawing.Size(452, 20);
             this.textBoxFilename.TabIndex = 8;
             this.textBoxFilename.Text = "Filename";
-            this.textBoxFilename.TextChanged += new System.EventHandler(this.textBoxFilename_TextChanged);
+            this.textBoxFilename.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // textBoxPath
             // 
@@ -147,35 +138,40 @@ namespace MyJukebox_EF
             this.textBoxPath.Size = new System.Drawing.Size(452, 20);
             this.textBoxPath.TabIndex = 7;
             this.textBoxPath.Text = "Path";
-            this.textBoxPath.TextChanged += new System.EventHandler(this.textBoxPath_TextChanged);
+            this.textBoxPath.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
-            // txt_Filesize
+            // textBoxFilesize
             // 
-            this.txt_Filesize.Location = new System.Drawing.Point(16, 376);
-            this.txt_Filesize.Name = "txt_Filesize";
-            this.txt_Filesize.Size = new System.Drawing.Size(105, 20);
-            this.txt_Filesize.TabIndex = 17;
-            this.txt_Filesize.Text = "Filesize";
+            this.textBoxFilesize.Location = new System.Drawing.Point(16, 273);
+            this.textBoxFilesize.Name = "textBoxFilesize";
+            this.textBoxFilesize.Size = new System.Drawing.Size(105, 20);
+            this.textBoxFilesize.TabIndex = 17;
+            this.textBoxFilesize.Text = "Filesize";
+            this.textBoxFilesize.Enter += new System.EventHandler(this.FileValue_Changed);
             // 
-            // txt_Filedate
+            // textBoxFiledate
             // 
-            this.txt_Filedate.Location = new System.Drawing.Point(144, 376);
-            this.txt_Filedate.Name = "txt_Filedate";
-            this.txt_Filedate.Size = new System.Drawing.Size(105, 20);
-            this.txt_Filedate.TabIndex = 18;
-            this.txt_Filedate.Text = "Filedate";
+            this.textBoxFiledate.Location = new System.Drawing.Point(148, 273);
+            this.textBoxFiledate.Margin = new System.Windows.Forms.Padding(24, 3, 3, 3);
+            this.textBoxFiledate.Name = "textBoxFiledate";
+            this.textBoxFiledate.Size = new System.Drawing.Size(114, 20);
+            this.textBoxFiledate.TabIndex = 18;
+            this.textBoxFiledate.Text = "Filedate";
+            this.textBoxFiledate.Enter += new System.EventHandler(this.FileValue_Changed);
             // 
             // textBoxDuration
             // 
-            this.textBoxDuration.Location = new System.Drawing.Point(264, 376);
+            this.textBoxDuration.Location = new System.Drawing.Point(289, 273);
+            this.textBoxDuration.Margin = new System.Windows.Forms.Padding(24, 3, 3, 3);
             this.textBoxDuration.Name = "textBoxDuration";
-            this.textBoxDuration.Size = new System.Drawing.Size(105, 20);
+            this.textBoxDuration.Size = new System.Drawing.Size(114, 20);
             this.textBoxDuration.TabIndex = 19;
             this.textBoxDuration.Text = "Duration";
+            this.textBoxDuration.Enter += new System.EventHandler(this.FileValue_Changed);
             // 
             // txt_Beat
             // 
-            this.txt_Beat.Location = new System.Drawing.Point(168, 274);
+            this.txt_Beat.Location = new System.Drawing.Point(168, 327);
             this.txt_Beat.Name = "txt_Beat";
             this.txt_Beat.Size = new System.Drawing.Size(41, 20);
             this.txt_Beat.TabIndex = 11;
@@ -183,7 +179,7 @@ namespace MyJukebox_EF
             // 
             // textBoxRating
             // 
-            this.textBoxRating.Location = new System.Drawing.Point(100, 274);
+            this.textBoxRating.Location = new System.Drawing.Point(100, 327);
             this.textBoxRating.Name = "textBoxRating";
             this.textBoxRating.Size = new System.Drawing.Size(41, 20);
             this.textBoxRating.TabIndex = 10;
@@ -191,7 +187,7 @@ namespace MyJukebox_EF
             // 
             // textBoxPlayed
             // 
-            this.textBoxPlayed.Location = new System.Drawing.Point(16, 274);
+            this.textBoxPlayed.Location = new System.Drawing.Point(16, 327);
             this.textBoxPlayed.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.textBoxPlayed.Name = "textBoxPlayed";
             this.textBoxPlayed.Size = new System.Drawing.Size(57, 20);
@@ -200,7 +196,7 @@ namespace MyJukebox_EF
             // 
             // textboxComment
             // 
-            this.textboxComment.Location = new System.Drawing.Point(16, 321);
+            this.textboxComment.Location = new System.Drawing.Point(16, 374);
             this.textboxComment.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.textboxComment.Name = "textboxComment";
             this.textboxComment.Size = new System.Drawing.Size(269, 20);
@@ -215,7 +211,7 @@ namespace MyJukebox_EF
             this.textBoxTitel.Size = new System.Drawing.Size(452, 20);
             this.textBoxTitel.TabIndex = 6;
             this.textBoxTitel.Text = "Titel";
-            this.textBoxTitel.TextChanged += new System.EventHandler(this.textBoxTitel_TextChanged);
+            this.textBoxTitel.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // textBoxInterpret
             // 
@@ -225,7 +221,7 @@ namespace MyJukebox_EF
             this.textBoxInterpret.Size = new System.Drawing.Size(196, 20);
             this.textBoxInterpret.TabIndex = 5;
             this.textBoxInterpret.Text = "Interpret";
-            this.textBoxInterpret.TextChanged += new System.EventHandler(this.textBoxInterpret_TextChanged);
+            this.textBoxInterpret.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // textBoxAlbum
             // 
@@ -234,11 +230,11 @@ namespace MyJukebox_EF
             this.textBoxAlbum.Size = new System.Drawing.Size(233, 20);
             this.textBoxAlbum.TabIndex = 4;
             this.textBoxAlbum.Text = "Album";
-            this.textBoxAlbum.TextChanged += new System.EventHandler(this.textBoxAlbum_TextChanged);
+            this.textBoxAlbum.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // txt_Medium
             // 
-            this.txt_Medium.Location = new System.Drawing.Point(326, 321);
+            this.txt_Medium.Location = new System.Drawing.Point(326, 374);
             this.txt_Medium.Name = "txt_Medium";
             this.txt_Medium.Size = new System.Drawing.Size(113, 20);
             this.txt_Medium.TabIndex = 16;
@@ -258,29 +254,18 @@ namespace MyJukebox_EF
             this.Label121.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label121.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label121.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label121.Location = new System.Drawing.Point(310, 258);
+            this.Label121.Location = new System.Drawing.Point(310, 311);
             this.Label121.Name = "Label121";
             this.Label121.Size = new System.Drawing.Size(47, 17);
             this.Label121.TabIndex = 45;
             this.Label121.Text = "Sampler";
-            // 
-            // Label120
-            // 
-            this.Label120.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.Label120.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Label120.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label120.Location = new System.Drawing.Point(403, 360);
-            this.Label120.Name = "Label120";
-            this.Label120.Size = new System.Drawing.Size(46, 17);
-            this.Label120.TabIndex = 43;
-            this.Label120.Text = "Link";
             // 
             // Label119
             // 
             this.Label119.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label119.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label119.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label119.Location = new System.Drawing.Point(422, 258);
+            this.Label119.Location = new System.Drawing.Point(422, 311);
             this.Label119.Name = "Label119";
             this.Label119.Size = new System.Drawing.Size(47, 17);
             this.Label119.TabIndex = 37;
@@ -291,7 +276,7 @@ namespace MyJukebox_EF
             this.Label118.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label118.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label118.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label118.Location = new System.Drawing.Point(366, 258);
+            this.Label118.Location = new System.Drawing.Point(366, 311);
             this.Label118.Name = "Label118";
             this.Label118.Size = new System.Drawing.Size(46, 17);
             this.Label118.TabIndex = 36;
@@ -320,14 +305,13 @@ namespace MyJukebox_EF
             this.Label116.Size = new System.Drawing.Size(105, 17);
             this.Label116.TabIndex = 32;
             this.Label116.Text = "Path";
-            this.Label116.Click += new System.EventHandler(this.Label116_Click);
             // 
             // Label115
             // 
             this.Label115.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label115.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label115.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label115.Location = new System.Drawing.Point(16, 360);
+            this.Label115.Location = new System.Drawing.Point(16, 257);
             this.Label115.Name = "Label115";
             this.Label115.Size = new System.Drawing.Size(105, 17);
             this.Label115.TabIndex = 30;
@@ -338,9 +322,10 @@ namespace MyJukebox_EF
             this.Label114.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label114.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label114.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label114.Location = new System.Drawing.Point(144, 360);
+            this.Label114.Location = new System.Drawing.Point(148, 257);
+            this.Label114.Margin = new System.Windows.Forms.Padding(24, 0, 3, 0);
             this.Label114.Name = "Label114";
-            this.Label114.Size = new System.Drawing.Size(105, 17);
+            this.Label114.Size = new System.Drawing.Size(114, 17);
             this.Label114.TabIndex = 28;
             this.Label114.Text = "Filedate";
             // 
@@ -349,9 +334,10 @@ namespace MyJukebox_EF
             this.Label113.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label113.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label113.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label113.Location = new System.Drawing.Point(264, 360);
+            this.Label113.Location = new System.Drawing.Point(289, 257);
+            this.Label113.Margin = new System.Windows.Forms.Padding(24, 0, 3, 0);
             this.Label113.Name = "Label113";
-            this.Label113.Size = new System.Drawing.Size(105, 17);
+            this.Label113.Size = new System.Drawing.Size(114, 17);
             this.Label113.TabIndex = 26;
             this.Label113.Text = "Duration";
             // 
@@ -360,7 +346,7 @@ namespace MyJukebox_EF
             this.Label112.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label112.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label112.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label112.Location = new System.Drawing.Point(168, 258);
+            this.Label112.Location = new System.Drawing.Point(168, 311);
             this.Label112.Margin = new System.Windows.Forms.Padding(24, 0, 3, 0);
             this.Label112.Name = "Label112";
             this.Label112.Size = new System.Drawing.Size(41, 17);
@@ -372,7 +358,7 @@ namespace MyJukebox_EF
             this.Label111.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label111.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label111.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label111.Location = new System.Drawing.Point(100, 258);
+            this.Label111.Location = new System.Drawing.Point(100, 311);
             this.Label111.Margin = new System.Windows.Forms.Padding(24, 0, 3, 0);
             this.Label111.Name = "Label111";
             this.Label111.Size = new System.Drawing.Size(41, 17);
@@ -384,7 +370,7 @@ namespace MyJukebox_EF
             this.Label110.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label110.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label110.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label110.Location = new System.Drawing.Point(16, 258);
+            this.Label110.Location = new System.Drawing.Point(16, 311);
             this.Label110.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.Label110.Name = "Label110";
             this.Label110.Size = new System.Drawing.Size(57, 17);
@@ -396,7 +382,7 @@ namespace MyJukebox_EF
             this.Label19.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label19.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label19.Location = new System.Drawing.Point(16, 305);
+            this.Label19.Location = new System.Drawing.Point(16, 358);
             this.Label19.Margin = new System.Windows.Forms.Padding(3, 8, 3, 0);
             this.Label19.Name = "Label19";
             this.Label19.Size = new System.Drawing.Size(105, 17);
@@ -456,7 +442,7 @@ namespace MyJukebox_EF
             this.Label13.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.Label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Label13.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Label13.Location = new System.Drawing.Point(326, 305);
+            this.Label13.Location = new System.Drawing.Point(326, 358);
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(113, 17);
             this.Label13.TabIndex = 6;
@@ -498,7 +484,7 @@ namespace MyJukebox_EF
             // label2
             // 
             this.label2.BackColor = System.Drawing.Color.CadetBlue;
-            this.label2.Location = new System.Drawing.Point(16, 348);
+            this.label2.Location = new System.Drawing.Point(16, 401);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(452, 3);
@@ -508,7 +494,7 @@ namespace MyJukebox_EF
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.CadetBlue;
-            this.label3.Location = new System.Drawing.Point(16, 405);
+            this.label3.Location = new System.Drawing.Point(16, 300);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(452, 3);
             this.label3.TabIndex = 48;
@@ -521,7 +507,7 @@ namespace MyJukebox_EF
             this.comboBoxGenre.Name = "comboBoxGenre";
             this.comboBoxGenre.Size = new System.Drawing.Size(114, 21);
             this.comboBoxGenre.TabIndex = 2;
-            this.comboBoxGenre.SelectedIndexChanged += new System.EventHandler(this.comboBoxGenre_SelectedIndexChanged);
+            this.comboBoxGenre.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // comboBoxCatalog
             // 
@@ -530,7 +516,7 @@ namespace MyJukebox_EF
             this.comboBoxCatalog.Name = "comboBoxCatalog";
             this.comboBoxCatalog.Size = new System.Drawing.Size(114, 21);
             this.comboBoxCatalog.TabIndex = 3;
-            this.comboBoxCatalog.SelectedIndexChanged += new System.EventHandler(this.comboBoxCatalog_SelectedIndexChanged);
+            this.comboBoxCatalog.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
             // EditRecord
             // 
@@ -548,21 +534,19 @@ namespace MyJukebox_EF
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.chk_Sampler);
-            this.Controls.Add(this.chk_Link);
-            this.Controls.Add(this.cmd_Exit);
+            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.chk_Hide);
             this.Controls.Add(this.chk_Error);
             this.Controls.Add(this.textBoxFilename);
             this.Controls.Add(this.textBoxPath);
-            this.Controls.Add(this.txt_Filesize);
-            this.Controls.Add(this.txt_Filedate);
+            this.Controls.Add(this.textBoxFilesize);
+            this.Controls.Add(this.textBoxFiledate);
             this.Controls.Add(this.textBoxDuration);
             this.Controls.Add(this.textBoxTitel);
             this.Controls.Add(this.textBoxInterpret);
             this.Controls.Add(this.textBoxAlbum);
             this.Controls.Add(this.Label121);
-            this.Controls.Add(this.Label120);
             this.Controls.Add(this.Label119);
             this.Controls.Add(this.Label118);
             this.Controls.Add(this.Label117);
@@ -581,7 +565,7 @@ namespace MyJukebox_EF
             this.Controls.Add(this.Label13);
             this.Controls.Add(this.Label11);
             this.Controls.Add(this.Label10);
-            this.MaximumSize = new System.Drawing.Size(500, 500);
+            this.MaximumSize = new System.Drawing.Size(500, 700);
             this.MinimumSize = new System.Drawing.Size(500, 500);
             this.Name = "EditRecord";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -592,15 +576,14 @@ namespace MyJukebox_EF
         }
         #endregion
         private System.Windows.Forms.CheckBox chk_Sampler;
-        private System.Windows.Forms.CheckBox chk_Link;
-        private System.Windows.Forms.Button cmd_Exit;
+        private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.CheckBox chk_Hide;
         private System.Windows.Forms.CheckBox chk_Error;
         private System.Windows.Forms.TextBox textBoxFilename;
         private System.Windows.Forms.TextBox textBoxPath;
-        private System.Windows.Forms.TextBox txt_Filesize;
-        private System.Windows.Forms.TextBox txt_Filedate;
+        private System.Windows.Forms.TextBox textBoxFilesize;
+        private System.Windows.Forms.TextBox textBoxFiledate;
         private System.Windows.Forms.TextBox textBoxDuration;
         private System.Windows.Forms.TextBox txt_Beat;
         private System.Windows.Forms.TextBox textBoxRating;
@@ -612,7 +595,6 @@ namespace MyJukebox_EF
         private System.Windows.Forms.TextBox txt_Medium;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label Label121;
-        private System.Windows.Forms.Label Label120;
         //   private System.Windows.Forms.Unsuported shp_Changed;
         private System.Windows.Forms.Label Label119;
         private System.Windows.Forms.Label Label118;

@@ -48,9 +48,8 @@ namespace MyJukebox_EF.BLL
             record.Album = arTmp[arTmp.Length - 1];
             record.Interpret = arTmp[arTmp.Length - 2];
             record.Media = media[0];
-            record.Owner = arTmp[arTmp.Length - 4];
             record.Genre = arTmp[arTmp.Length - 5];
-            record.Katalog = arTmp[arTmp.Length - 4];
+            record.Catalog = arTmp[arTmp.Length - 4];
 
             return record;
         }

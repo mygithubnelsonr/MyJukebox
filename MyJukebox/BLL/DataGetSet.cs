@@ -130,6 +130,62 @@ namespace MyJukebox_EF.BLL
             }
         }
 
+        public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
+        {
+            List<vSong> songs = null;
+            string sql = "";
+            string[] arTokens;
+            bool findExplizit = false;
+
+            try
+            {
+                arTokens = queryText.Split('=');
+
+                if (queryText.IndexOf("==") != 0)
+                {
+                    findExplizit = true;
+                    arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
+                }
+                else
+                    findExplizit = false;
+
+                var search = arTokens[0];
+                var argument = arTokens[1];
+
+                if (argument.Substring(0, 1) == "'")
+                    argument = argument.Substring(1);
+
+                if (argument.Substring(argument.Length - 1, 1) == "'")
+                    argument = argument.Substring(0, argument.Length - 1);
+
+                if (findExplizit == true)
+                    sql = $"select * from vSongsNewShort where {search} = '{argument}'";
+                else
+                    sql = $"select * from vSongsNewShort where {search} like '%{argument}%'";
+
+                var context = new MyJukeboxEntities();
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        songs = context.vSongs
+                            .SqlQuery(sql).ToList();
+                    }
+                    catch
+                    {
+
+                    }
+
+                });
+
+                return songs;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static async Task<List<vPlaylistSong>> GetPlaylistEntries()
         {
             List<vPlaylistSong> songs = null;
@@ -267,7 +323,7 @@ namespace MyJukebox_EF.BLL
                 context.tFileInfoes.Add(file);
                 context.SaveChanges();
 
-                int catalogID = GetCatalogFromString(record.Katalog);
+                int catalogID = GetCatalogFromString(record.Catalog);
                 int genreID = GetGenreFromString(record.Genre);
 
                 // tSong
@@ -302,7 +358,7 @@ namespace MyJukebox_EF.BLL
                 import.FileSize = record.FileSize;
                 import.Genre = record.Genre;
                 import.Interpret = record.Interpret;
-                import.Katalog = record.Katalog;
+                import.Katalog = record.Catalog;
                 import.MD5 = record.MD5;
                 import.Medium = medium;
                 import.Pfad = record.Path;
@@ -357,6 +413,72 @@ namespace MyJukebox_EF.BLL
 
             return list;
         }
+
+        public static List<string> GetFileRecord(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var file = context.tFileInfoes
+                            .Where(f => f.ID_Song == id)
+                            .Select(f => new { f.FileSize, f.FileDate, f.Duration }).ToList();
+
+            List<string> list = new List<string>();
+            list.Add(file[0].FileSize.ToString());
+            list.Add(file[0].FileDate.ToString());
+            list.Add(file[0].Duration.ToString());
+
+            return list;
+        }
+
+        public static bool EditSaveSongChanges(int id, MP3Record record)
+        {
+            try
+            {
+                var context = new MyJukeboxEntities();
+                var songs = context.tSongs.Find(id);
+
+                if (songs.ID_Genre != GetGenreFromString(record.Genre))
+                    songs.ID_Genre = GetGenreFromString(record.Genre);
+
+                if (songs.ID_Catalog != GetCatalogFromString(record.Catalog))
+                    songs.ID_Catalog = GetCatalogFromString(record.Catalog);
+
+                if (songs.Album != record.Album) songs.Album = record.Album;
+                if (songs.Interpret != record.Interpret) songs.Interpret = record.Interpret;
+                if (songs.Titel != record.Titel) songs.Titel = record.Titel;
+                if (songs.Pfad != record.Path) songs.Pfad = record.Path;
+                if (songs.FileName != record.FileName) songs.FileName = record.FileName;
+
+                context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static bool EditSaveFileinfoChanges(int id, MP3Record record)
+        {
+            try
+            {
+                var context = new MyJukeboxEntities();
+                var file = context.tFileInfoes.Find(id);
+
+                if (file.FileSize != record.FileSize) file.FileSize = record.FileSize;
+                if (file.FileDate != record.FileDate) file.FileDate = record.FileDate;
+                if (file.Duration != record.Duration) file.Duration = record.Duration;
+
+                context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region Generell

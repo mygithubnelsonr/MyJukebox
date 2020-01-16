@@ -1,4 +1,4 @@
-﻿namespace MyJukebox_EF
+﻿namespace MyJukebox_EF.BLL
 {
     public class Playlist
     {

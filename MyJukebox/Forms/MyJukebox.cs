@@ -244,6 +244,8 @@ namespace MyJukebox_EF
 
             EditRecord editRecord = new EditRecord(id);
             editRecord.Show();
+
+            refreshToolStripMenuItem.PerformClick();
         }
 
         private void menuMainPlaybackPlay_Click(object sender, EventArgs e)
@@ -942,9 +944,15 @@ namespace MyJukebox_EF
         private void DatagridContextMenuStripEditRecord_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
-
             EditRecord editRecord = new EditRecord(id);
             editRecord.ShowDialog();
+            refreshToolStripMenuItem.PerformClick();
+        }
+
+        private async void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = await DataGetSet.GetTablogicalResultsAsync();
+            dataGridView.DataSource = result;
         }
         #endregion Datagrid Events
 
@@ -961,13 +969,11 @@ namespace MyJukebox_EF
 
             if (isQuery)
             {
-                var results = await GetQueryResultAsync();
-
                 int currentDatagrigRow = 0;
-
                 if (Settings.LastTab == (int)TabcontrolTab.Logical)
                     currentDatagrigRow = Settings.DatagridLastSelectedRow;
 
+                var results = await DataGetSet.GetQueryResultAsync(textBoxSearch.Text);
                 dataGridView.DataSource = results;
 
                 if (dataGridView.RowCount > 0)
@@ -1029,17 +1035,6 @@ namespace MyJukebox_EF
             statusStripTitel.Text = "";
             random.InitRandomNumbers(dataGridView.RowCount - 1);
         }
-
-        //private bool IsQuery(string filter)
-        //{
-        //    bool IsQuery = false;
-
-        //    if (filter == "" || filter == Settings.PlaceHolderText)
-        //        IsQuery = false;
-        //    else
-        //        IsQuery = true;
-        //    return IsQuery;
-        //}
 
         private void AddQueryToComboBox(string query)
         {
@@ -1897,67 +1892,5 @@ namespace MyJukebox_EF
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
-
-        #region Data Getters
-        private async Task<List<vSong>> GetQueryResultAsync()
-        {
-            List<vSong> songs = null;
-            string sql = "";
-            string[] arTokens;
-            bool findExplizit = false;
-
-            try
-            {
-                arTokens = textBoxSearch.Text.Split('=');
-
-                if (textBoxSearch.Text.IndexOf("==") != 0)
-                {
-                    findExplizit = true;
-                    arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
-                }
-                else
-                    findExplizit = false;
-
-                var search = arTokens[0];
-                var argument = arTokens[1];
-
-                if (argument.Substring(0, 1) == "'")
-                    argument = argument.Substring(1);
-
-                if (argument.Substring(argument.Length - 1, 1) == "'")
-                    argument = argument.Substring(0, argument.Length - 1);
-
-                if (findExplizit == true)
-                    sql = $"select * from vSongsNewShort where {search} = '{argument}'";
-                else
-                    sql = $"select * from vSongsNewShort where {search} like '%{argument}%'";
-
-                var context = new MyJukeboxEntities();
-                await Task.Run(() =>
-                {
-                    try
-                    {
-                        songs = context.vSongs
-                            .SqlQuery(sql).ToList();
-                    }
-                    catch
-                    {
-
-                    }
-
-                });
-
-                return songs;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-
-        #endregion
-
-
     }
 }

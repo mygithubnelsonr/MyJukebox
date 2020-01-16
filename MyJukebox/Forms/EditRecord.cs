@@ -1,7 +1,6 @@
 using MyJukebox_EF.BLL;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +15,10 @@ namespace MyJukebox_EF
         private int _id = -1;
         private bool _formloaded = false;
         private bool IsSongChanged = false;
+        private bool IsFileInfoChanged = false;
+        private bool IsSongInfoChanged = false;
+        private MP3Record mp3Record;
+
         #endregion private Fields
 
         #region CTOR
@@ -27,14 +30,16 @@ namespace MyJukebox_EF
 
             _id = id;
             FillFormAsync();
+
+            //_formloaded = true;
         }
         #endregion CTOR
 
         #region Form_Events
         private void Form_Load()
         {
-            _formloaded = false;
-            _formloaded = true;
+            //_formloaded = false;
+            //_formloaded = true;
         }
 
         private void chk_Error_Click()
@@ -80,13 +85,35 @@ namespace MyJukebox_EF
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if(IsSongChanged == true)
+            if (IsSongChanged == true)
             {
-                if(textBoxTitel.Text != (string)textBoxTitel.Tag)
-                {
+                mp3Record = new MP3Record();
+                mp3Record.Genre = comboBoxGenre.Text;
+                mp3Record.Catalog = comboBoxCatalog.Text;
+                mp3Record.Album = textBoxAlbum.Text;
+                mp3Record.Interpret = textBoxInterpret.Text;
+                mp3Record.Titel = textBoxTitel.Text;
+                mp3Record.Path = textBoxPath.Text;
+                mp3Record.FileName = textBoxFilename.Text;
 
-                }
+                bool result = DataGetSet.EditSaveSongChanges(_id, mp3Record);
             }
+
+            if (IsFileInfoChanged == true)
+            {
+                mp3Record = new MP3Record();
+                mp3Record.FileSize = Convert.ToInt32(textBoxFilesize.Text);
+                mp3Record.FileDate = Convert.ToDateTime(textBoxFiledate.Text);
+                mp3Record.Duration = TimeSpan.Parse(textBoxDuration.Text);
+
+                bool result = DataGetSet.EditSaveFileinfoChanges(_id, mp3Record);
+            }
+
+            #region Zeuch
+            //if (textBoxTitel.Text != (string)textBoxTitel.Tag)
+            //{
+
+            //}
 
             //foreach( c In Me)
             //{
@@ -99,46 +126,7 @@ namespace MyJukebox_EF
             //        }
             //    }
             //}
-
-        }
-
-        private void txt_Album_KeyUp(object sender, EventArgs e)
-        {
-            textBoxAlbum.BackColor = Color.Salmon;
-        }
-
-        private void txt_Filename_KeyUp(object sender, EventArgs e)
-        {
-            textBoxFilename.BackColor = Color.Salmon;
-        }
-
-        private void txt_Genre_KeyUp(object sender, EventArgs e)
-        {
-        }
-
-        private void txt_Interpret_KeyUp(object sender, EventArgs e)
-        {
-            textBoxInterpret.BackColor = Color.Salmon;
-        }
-
-        private void txt_Lenght_KeyUp(object sender, EventArgs e)
-        {
-            textBoxDuration.BackColor = Color.Salmon;
-        }
-
-        private void txt_K2_KeyUp(object sender, EventArgs e)
-        {
-            textboxComment.BackColor = Color.Salmon;
-        }
-
-        private void txt_Pfad_KeyUp(object sender, EventArgs e)
-        {
-            textBoxPath.BackColor = Color.Salmon;
-        }
-
-        private void txt_Titel_KeyUp(object sender, EventArgs e)
-        {
-            textBoxTitel.BackColor = Color.Salmon;
+            #endregion
         }
 
         private void cmd_Exit_Click()
@@ -151,40 +139,35 @@ namespace MyJukebox_EF
 
         }
 
-        private void Label116_Click(object sender, EventArgs e)
-        {
+        //bool IsFieldChanged(Control c)
+        //{
+        //    //Dim strValueNew$, strValueOld$, strFieldName$, strCtype
 
-        }
+        //    //bool IsFieldChanged = false;
 
-        bool IsFieldChanged(Control c)
-        {
-            //Dim strValueNew$, strValueOld$, strFieldName$, strCtype
+        //    //strCtype = TypeName(Contr)
+        //    //Debug.Print strCtype
 
-            //bool IsFieldChanged = false;
+        //    //Select Case strCtype
+        //    //  Case "TextBox"
+        //    //      strValueOld = Contr.Tag
+        //    //      strValueNew = Contr.Text
 
-            //strCtype = TypeName(Contr)
-            //Debug.Print strCtype
+        //    //  Case "CheckBox"
+        //    //      strValueOld = Contr.Tag
+        //    //      strValueNew = Contr.Value
 
-            //Select Case strCtype
-            //  Case "TextBox"
-            //      strValueOld = Contr.Tag
-            //      strValueNew = Contr.Text
+        //    //  Case Else
 
-            //  Case "CheckBox"
-            //      strValueOld = Contr.Tag
-            //      strValueNew = Contr.Value
+        //    //End Select
 
-            //  Case Else
+        //    //If strValueOld = strValueNew Then
+        //    //  IsFieldChanged = False
+        //    //Else
+        //    return true;
+        //    //End If
 
-            //End Select
-
-            //If strValueOld = strValueNew Then
-            //  IsFieldChanged = False
-            //Else
-            return true;
-            //End If
-
-        }
+        //}
 
         #endregion
 
@@ -196,7 +179,6 @@ namespace MyJukebox_EF
             try
             {
                 // fill combo genres
-                //List<string> genres = null;
                 List<string> genres = await DataGetSet.GetGenresFullAsync();
                 foreach (string genre in genres)
                     comboBoxGenre.Items.Add(genre);
@@ -212,48 +194,42 @@ namespace MyJukebox_EF
                 comboBoxCatalog.Text = record[2];
                 textBoxAlbum.Text = record[3];
                 textBoxInterpret.Text = record[4];
-                textBoxTitel.Tag = record[5];
                 textBoxTitel.Text = record[5];
                 textBoxPath.Text = record[6];
                 textBoxFilename.Text = record[7];
+
+                record = DataGetSet.GetFileRecord(_id);
+                textBoxFilesize.Text = record[0];
+                textBoxFiledate.Text = record[1];
+                textBoxDuration.Text = record[2];
+
+
             }
             catch
             { }
+
+            _formloaded = true;
         }
         #endregion
 
-        private void comboBoxGenre_SelectedIndexChanged(object sender, EventArgs e)
+        private void SongValue_Changed(object sender, EventArgs e)
         {
+            if (_formloaded == true)
+                IsSongChanged = true;
 
         }
 
-        private void comboBoxCatalog_SelectedIndexChanged(object sender, EventArgs e)
+        private void FileValue_Changed(object sender, EventArgs e)
         {
+            if (_formloaded == true)
+                IsFileInfoChanged = true;
 
         }
 
-        private void textBoxAlbum_TextChanged(object sender, EventArgs e)
+        private void InfoValue_Changed(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBoxInterpret_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxTitel_TextChanged(object sender, EventArgs e)
-        {
-            IsSongChanged = true;
-        }
-
-        private void textBoxPath_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxFilename_TextChanged(object sender, EventArgs e)
-        {
+            if (_formloaded == true)
+                IsSongInfoChanged = true;
 
         }
     }

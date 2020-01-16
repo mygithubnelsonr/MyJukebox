@@ -1,6 +1,6 @@
 ﻿namespace MyJukebox_EF
 {
-    public enum ColorsUsed
+    public enum UsedColors
     {
         Playing,
         Played,

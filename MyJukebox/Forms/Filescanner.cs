@@ -198,7 +198,7 @@ namespace MyJukebox_EF
             if (record != null)
             {
                 comboBoxGenre.Text = record.Genre;
-                comboBoxKatalog.Text = record.Katalog;
+                comboBoxKatalog.Text = record.Catalog;
                 comboBoxAlbum.Text = record.Album;
                 comboBoxMedium.SelectedIndex = record.Media;
             }
@@ -275,7 +275,7 @@ namespace MyJukebox_EF
                     mp3.Genre = comboBoxGenre.Text;
                     mp3.Album = comboBoxAlbum.Text;  //arPath[arPath.Length - 1];
                     mp3.Media = comboBoxMedium.SelectedIndex;
-                    mp3.Katalog = comboBoxKatalog.Text;
+                    mp3.Catalog = comboBoxKatalog.Text;
                     catalogue = comboBoxKatalog.Text;
                 }
                 else
@@ -316,7 +316,7 @@ namespace MyJukebox_EF
                     mp3.Media = media[0];
                     mp3.Album = arPath[arPath.Length - 1];
                     mp3.Interpret = arPath[arPath.Length - 2];
-                    mp3.Katalog = arPath[arPath.Length - 4];
+                    mp3.Catalog = arPath[arPath.Length - 4];
                     mp3.Genre = arPath[arPath.Length - 5];
                 }
 
