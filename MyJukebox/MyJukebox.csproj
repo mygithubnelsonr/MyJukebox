@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="BLL\DataGetSet.cs" />
     <Compile Include="BLL\Logging.cs" />
+    <Compile Include="BLL\TreeViewStates.cs" />
     <Compile Include="DAL\tActionLog.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
@@ -139,11 +140,8 @@
     <Compile Include="DAL\vSong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\TestForm.Designer.cs">
-      <DependentUpon>TestForm.cs</DependentUpon>
+    <Compile Include="DAL\vSongsLong.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Colors.cs" />
     <Compile Include="Helpers\UsedColors.cs" />
@@ -206,9 +204,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MyJukebox.resx">
       <DependentUpon>MyJukebox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TestForm.resx">
-      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

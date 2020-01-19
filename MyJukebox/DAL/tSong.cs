@@ -10,8 +10,7 @@
 namespace MyJukebox_EF.DAL
 {
     using System;
-    using System.Collections.Generic;
-    
+
     public partial class tSong
     {
         public int ID { get; set; }
@@ -25,11 +24,10 @@ namespace MyJukebox_EF.DAL
         public Nullable<int> ID_Media { get; set; }
         public Nullable<int> ID_Info { get; set; }
         public Nullable<int> ID_File { get; set; }
-    
-        public virtual tCatalog tCatalog { get; set; }
         public virtual tFileInfo tFileInfo { get; set; }
         public virtual tGenre tGenre { get; set; }
         public virtual tInfo tInfo { get; set; }
         public virtual tMedia tMedia { get; set; }
+        public virtual tCatalog tCatalog { get; set; }
     }
 }

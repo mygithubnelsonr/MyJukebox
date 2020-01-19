@@ -27,6 +27,47 @@ namespace MyJukebox_EF.BLL
             return IsQuery;
         }
 
+        public static string GetQueryString(string queryText)
+        {
+            List<string> tokens = new List<string>();
+            string[] arTokens = null;
+            string sql = "";
+            bool findExplizit = false;
+
+            try
+            {
+                arTokens = queryText.Split('=');
+
+                if (queryText.IndexOf(@"==") == -1)
+                    findExplizit = false;
+                else
+                {
+                    findExplizit = true;
+                    arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
+                }
+
+                var search = arTokens[0];
+                var argument = arTokens[1];
+
+                if (argument.Substring(0, 1) == "'")
+                    argument = argument.Substring(1);
+
+                if (argument.Substring(argument.Length - 1, 1) == "'")
+                    argument = argument.Substring(0, argument.Length - 1);
+
+                if (findExplizit == true)
+                    sql = $"select * from vSongs where {search} = '{argument}'";
+                else
+                    sql = $"select * from vSongs where {search} like '%{argument}%'";
+
+                return sql;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public static MP3Record GetRecordInfo(string startDirectory)
         {
             MP3Record record = null;

@@ -16,8 +16,8 @@ namespace MyJukebox_EF.BLL
             var context = new MyJukeboxEntities();
             await Task.Run(() =>
             {
-                genres = context.vSongs
-                    .Select(g => g.Genre).Distinct().OrderBy(g => g).ToList();
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();  // .Distinct().OrderBy(g => g).ToList();
             });
             return genres;
         }
@@ -31,7 +31,7 @@ namespace MyJukebox_EF.BLL
                 await Task.Run(() =>
                 {
                     catalogues = context.vSongs
-                                        .Where(c => c.Genre == Settings.LastGenre)
+                                        .Where(c => c.Genre == TreeViewStates.Genre)
                                         .Select(c => c.Catalog)
                                         .Distinct().OrderBy(c => c).ToList();
                 });
@@ -49,7 +49,7 @@ namespace MyJukebox_EF.BLL
                 await Task.Run(() =>
                 {
                     albums = context.vSongs
-                                    .Where(a => a.Genre == Settings.LastGenre && a.Catalog == Settings.LastKatalog)
+                                    .Where(a => a.Genre == TreeViewStates.Genre && a.Catalog == TreeViewStates.Catalog)
                                     .Select(a => a.Album)
                                     .Distinct().OrderBy(a => a).ToList();
                 });
@@ -67,7 +67,7 @@ namespace MyJukebox_EF.BLL
                 await Task.Run(() =>
                 {
                     interprer = context.vSongs
-                                    .Where(i => i.Genre == Settings.LastGenre && i.Catalog == Settings.LastKatalog)
+                                    .Where(i => i.Genre == TreeViewStates.Genre && i.Catalog == TreeViewStates.Catalog)
                                     .Select(i => i.Interpret)
                                     .Distinct().OrderBy(i => i).ToList();
                 });
@@ -105,19 +105,15 @@ namespace MyJukebox_EF.BLL
 
             try
             {
-                var genre = Settings.LastGenre == "Alle" ? "" : Settings.LastGenre;
-                var album = Settings.LastAlbum == "Alle" ? "" : Settings.LastAlbum;
-                var catalog = Settings.LastKatalog == "Alle" ? "" : Settings.LastKatalog;
-                var artist = Settings.LastInterpret == "Alle" ? "" : Settings.LastInterpret;
-
                 var context = new MyJukeboxEntities();
                 await Task.Run(() =>
                 {
                     songs = context.vSongs
-                        .Where(s => (s.Genre.Contains(genre)) &&
-                            (s.Catalog.Contains(catalog)) &&
-                            (s.Album.Contains(album)) &&
-                            (s.Interpret.Contains(artist))
+                        .Where(s =>
+                            (s.Genre.Contains(TreeViewStates.Genre)) &&
+                            (s.Catalog.Contains(TreeViewStates.Catalog)) &&
+                            (s.Album.Contains(TreeViewStates.Album)) &&
+                            (s.Interpret.Contains(TreeViewStates.Interpret))
                             ).ToList();
                 });
 
@@ -133,55 +129,24 @@ namespace MyJukebox_EF.BLL
         public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
         {
             List<vSong> songs = null;
-            string sql = "";
-            string[] arTokens;
-            bool findExplizit = false;
 
             try
             {
-                arTokens = queryText.Split('=');
-
-                if (queryText.IndexOf("==") != 0)
-                {
-                    findExplizit = true;
-                    arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
-                }
-                else
-                    findExplizit = false;
-
-                var search = arTokens[0];
-                var argument = arTokens[1];
-
-                if (argument.Substring(0, 1) == "'")
-                    argument = argument.Substring(1);
-
-                if (argument.Substring(argument.Length - 1, 1) == "'")
-                    argument = argument.Substring(0, argument.Length - 1);
-
-                if (findExplizit == true)
-                    sql = $"select * from vSongsNewShort where {search} = '{argument}'";
-                else
-                    sql = $"select * from vSongsNewShort where {search} like '%{argument}%'";
+                string sql = Methods.GetQueryString(queryText);
 
                 var context = new MyJukeboxEntities();
                 await Task.Run(() =>
-                {
-                    try
-                    {
-                        songs = context.vSongs
-                            .SqlQuery(sql).ToList();
-                    }
-                    catch
-                    {
+                        {
+                            songs = context.vSongs
+                                      .SqlQuery(sql).ToList();
 
-                    }
-
-                });
+                        });
 
                 return songs;
             }
-            catch
+            catch (Exception ex)
             {
+                Debug.Print(ex.Message);
                 return null;
             }
         }
@@ -206,6 +171,52 @@ namespace MyJukebox_EF.BLL
             {
                 return null;
             }
+        }
+
+        // ToDo: add async
+        public static void SetRating(int id, int rating)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tInfos.SingleOrDefault(s => s.ID_Song == id);
+
+            if (result != null)
+            {
+                result.Rating = rating;
+                context.SaveChanges();
+            };
+        }
+
+        // ToDo: add async
+        public static void AddSongToPlaylist(int id, string playlistName)
+        {
+            var context = new MyJukeboxEntities();
+            var playlist = context.tPlaylists
+                                .Where(p => p.Name == playlistName)
+                                .Select(p => p.ID).ToList();
+
+            if (playlist == null)
+                //    playlistID = playlist[0];
+                //else
+                throw new Exception("Wrong playlist!");
+
+            var entry = new tPLentry()
+            {
+                PLID = playlist[0],
+                SongID = id,
+                Pos = 1
+            };
+
+            context.tPLentries.Add(entry);
+            context.SaveChanges();
+        }
+
+        public static void DeleteSong(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var songs = context.tSongs.First(s => s.ID == id);
+            context.tSongs.Remove(songs);
+            context.SaveChanges();
+
         }
         #endregion
 
@@ -265,7 +276,7 @@ namespace MyJukebox_EF.BLL
         private static bool MD5Exist(string MD5)
         {
             var context = new MyJukeboxEntities();
-            var result = context.tMd5
+            var result = context.tMD5
                             .Where(m => m.MD5 == MD5)
                             .Select(m => m.MD5).ToList();
 
@@ -303,7 +314,7 @@ namespace MyJukebox_EF.BLL
                 md5.ID_Song = songID;
                 md5.MD5 = record.MD5;
 
-                context.tMd5.Add(md5);
+                context.tMD5.Add(md5);
                 context.SaveChanges();
 
                 // tInfo
@@ -360,7 +371,7 @@ namespace MyJukebox_EF.BLL
                 import.Interpret = record.Interpret;
                 import.Katalog = record.Catalog;
                 import.MD5 = record.MD5;
-                import.Medium = medium;
+                //import.Medium = medium;
                 import.Pfad = record.Path;
                 import.IsSampler = record.IsSample;
                 import.Titel = record.Titel;
@@ -417,14 +428,33 @@ namespace MyJukebox_EF.BLL
         public static List<string> GetFileRecord(int id)
         {
             var context = new MyJukeboxEntities();
-            var file = context.tFileInfoes
+            var files = context.tFileInfoes
                             .Where(f => f.ID_Song == id)
                             .Select(f => new { f.FileSize, f.FileDate, f.Duration }).ToList();
 
             List<string> list = new List<string>();
-            list.Add(file[0].FileSize.ToString());
-            list.Add(file[0].FileDate.ToString());
-            list.Add(file[0].Duration.ToString());
+            list.Add(files[0].FileSize.ToString());
+            list.Add(files[0].FileDate.ToString());
+            list.Add(files[0].Duration.ToString());
+
+            return list;
+        }
+
+        public static List<string> GetInfoRecord(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var infos = context.tInfos
+                            .Where(i => i.ID_Song == id)
+                            .Select(i => new { i.Beat, i.Comment, i.Media, i.Played, i.Rating, i.Sampler, i.Error }).ToList();
+
+            List<string> list = new List<string>();
+            list.Add(infos[0].Beat.ToString());
+            list.Add(infos[0].Comment.ToString());
+            list.Add(infos[0].Media.ToString());
+            list.Add(infos[0].Played.ToString());
+            list.Add(infos[0].Rating.ToString());
+            list.Add(infos[0].Sampler.ToString());
+            list.Add(infos[0].Error.ToString());
 
             return list;
         }
@@ -567,7 +597,7 @@ namespace MyJukebox_EF.BLL
 
                     }
 
-                    context.tMd5.AddRange(rec);
+                    context.tMD5.AddRange(rec);
                     context.SaveChanges();
                 });
             }

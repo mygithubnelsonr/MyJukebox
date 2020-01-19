@@ -109,11 +109,11 @@ namespace MyJukebox_EF
             #endregion
 
             #region Treeview Settings
-            LastGenre = rh.GetSetting("Settings\\Logical\\Genre", "LastGenre", "Alle");
-            LastKatalog = rh.GetSetting("Settings\\Logical\\Katalog", "LastKatalog", "Alle");
-            LastAlbum = rh.GetSetting("Settings\\Logical\\Album", "LastAlbum", "Alle");
-            LastInterpret = rh.GetSetting("Settings\\Logical\\Interpret", "LastInterpret", "Alle");
-            PlaylistCurrentName = rh.GetSetting("Settings\\Playlists", "LastPlaylist", "Alle");
+            LastGenre = rh.GetSetting("Settings\\Logical\\Genre", "LastGenre", "");
+            LastKatalog = rh.GetSetting("Settings\\Logical\\Katalog", "LastKatalog", "");
+            LastAlbum = rh.GetSetting("Settings\\Logical\\Album", "LastAlbum", "");
+            LastInterpret = rh.GetSetting("Settings\\Logical\\Interpret", "LastInterpret", "");
+            PlaylistCurrentName = rh.GetSetting("Settings\\Playlists", "LastPlaylist", "");
             PlaylistCurrentID = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastID", "0"));
             PlaylistCurrentSelected = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastSelected", "0"));
             #endregion

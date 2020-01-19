@@ -11,8 +11,6 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
-// ToDo: implement productive db import
-
 namespace MyJukebox_EF
 {
     public partial class Filescanner : Form
@@ -87,6 +85,12 @@ namespace MyJukebox_EF
             folderBrowserDialog1.ShowDialog();
             textBoxStartpath.Text = folderBrowserDialog1.SelectedPath;
         }
+
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            string log = Logging.GetMessages();
+            MessageBox.Show(log);
+        }
         #endregion Button_Events
 
         #region CheckBox_Events
@@ -98,9 +102,67 @@ namespace MyJukebox_EF
         private void labelShowHideDbPanel_Click(object sender, EventArgs e)
         {
             if (this.Height > 294)
+            {
                 this.Height = 294;
+            }
             else
                 this.Height = 540;
+        }
+
+        private void textBoxStartpath_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                listViewFileList.Items.Clear();
+
+                string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+                DirectoryInfo di;
+                di = new DirectoryInfo(filenames[0]);
+                string strFolder;
+
+                if ((di.Attributes & FileAttributes.Directory) > 0)
+                    strFolder = di.FullName;
+                else
+                    strFolder = di.Parent.FullName;
+
+                textBoxStartpath.Text = strFolder;
+                ActionStartfolder();
+
+                buttonStartScann.PerformClick();
+            }
+        }
+
+        private void textBoxStartpath_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void ActionStartfolder()
+        {
+            try
+            {
+                DirectoryInfo di = new DirectoryInfo(textBoxStartpath.Text);
+
+                if (di.Exists)
+                {
+                    textBoxStartpath.BackColor = Color.LightGreen;
+                    buttonStartScann.Enabled = true;
+                }
+                else
+                {
+                    textBoxStartpath.BackColor = Color.Salmon;
+                    buttonStartScann.Enabled = false;
+                }
+            }
+            catch { }
         }
 
         #region Methodes
@@ -352,71 +414,6 @@ namespace MyJukebox_EF
         }
 
         #endregion Methodes
-
-        private void buttonTest_Click(object sender, EventArgs e)
-        {
-            //DataGetSet.RefillMD5Table();
-
-            string log = Logging.GetMessages();
-            MessageBox.Show(log);
-
-        }
-
-        private void textBoxStartpath_DragDrop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                listViewFileList.Items.Clear();
-
-                string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
-
-                DirectoryInfo di;
-                di = new DirectoryInfo(filenames[0]);
-                string strFolder;
-
-                if ((di.Attributes & FileAttributes.Directory) > 0)
-                    strFolder = di.FullName;
-                else
-                    strFolder = di.Parent.FullName;
-
-                textBoxStartpath.Text = strFolder;
-                ActionStartfolder();
-
-                buttonStartScann.PerformClick();
-            }
-        }
-
-        private void textBoxStartpath_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-        private void ActionStartfolder()
-        {
-            try
-            {
-                DirectoryInfo di = new DirectoryInfo(textBoxStartpath.Text);
-
-                if (di.Exists)
-                {
-                    textBoxStartpath.BackColor = Color.LightGreen;
-                    buttonStartScann.Enabled = true;
-                }
-                else
-                {
-                    textBoxStartpath.BackColor = Color.Salmon;
-                    buttonStartScann.Enabled = false;
-                }
-            }
-            catch { }
-        }
 
     }
 }

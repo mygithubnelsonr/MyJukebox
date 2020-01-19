@@ -9,36 +9,38 @@
 
 namespace MyJukebox_EF.DAL
 {
+    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class MyJukeboxEntities : DbContext
     {
         public MyJukeboxEntities()
             : base("name=MyJukeboxEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<tActionLog> tActionLogs { get; set; }
         public virtual DbSet<tBeat> tBeats { get; set; }
         public virtual DbSet<tColumn> tColumns { get; set; }
         public virtual DbSet<tGenre> tGenres { get; set; }
         public virtual DbSet<tInfo> tInfos { get; set; }
-        public virtual DbSet<tMD5> tMd5 { get; set; }
+        public virtual DbSet<tMD5> tMD5 { get; set; }
         public virtual DbSet<tMedia> tMedias { get; set; }
         public virtual DbSet<tPlaylist> tPlaylists { get; set; }
         public virtual DbSet<tPLentry> tPLentries { get; set; }
-        public virtual DbSet<vPlaylistSong> vPlaylistSongs { get; set; }
         public virtual DbSet<tTestImport> tTestImports { get; set; }
         public virtual DbSet<tAlbum> tAlbums { get; set; }
-        public virtual DbSet<tCatalog> tCatalogs { get; set; }
         public virtual DbSet<tFileInfo> tFileInfoes { get; set; }
         public virtual DbSet<tSong> tSongs { get; set; }
         public virtual DbSet<vSong> vSongs { get; set; }
+        public virtual DbSet<vSongsLong> vSongsLongs { get; set; }
+        public virtual DbSet<vPlaylistSong> vPlaylistSongs { get; set; }
+        public virtual DbSet<tCatalog> tCatalogs { get; set; }
     }
 }

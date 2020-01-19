@@ -114,11 +114,11 @@ namespace MyJukebox_EF
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripPlaybackButtonSpeaker = new System.Windows.Forms.ToolStripButton();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.DatagridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.datagridContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sendToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.DatagridContextMenuStripSendToPlaylist = new System.Windows.Forms.ToolStripMenuItem();
+            this.datagridContextMenuStripSendToPlaylist = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripSendToNewPlaylist = new System.Windows.Forms.ToolStripMenuItem();
-            this.DatagridContextMenuStripSendToKatalog = new System.Windows.Forms.ToolStripMenuItem();
+            this.datagridContextMenuStripSendToKatalog = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripSendToNewKatalog = new System.Windows.Forms.ToolStripMenuItem();
             this.rateItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripRating0 = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,6 +140,7 @@ namespace MyJukebox_EF
             this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setLinkToToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.moveEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSearch = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
@@ -158,7 +159,6 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -176,7 +176,7 @@ namespace MyJukebox_EF
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).BeginInit();
             this.toolStripPlayback.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.DatagridContextMenuStrip.SuspendLayout();
+            this.datagridContextMenuStrip.SuspendLayout();
             this.panelSearch.SuspendLayout();
             this.toolStripFile.SuspendLayout();
             this.SuspendLayout();
@@ -545,7 +545,7 @@ namespace MyJukebox_EF
             // 
             // pictureBoxFoto
             // 
-            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(25)))), ((int)(((byte)(52)))));
             this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 380);
@@ -557,7 +557,7 @@ namespace MyJukebox_EF
             // 
             // axWindowsMediaPlayer1
             // 
-            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 256);
@@ -574,8 +574,8 @@ namespace MyJukebox_EF
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabLogical);
             this.tabControl.Controls.Add(this.tabPlayLists);
@@ -712,8 +712,8 @@ namespace MyJukebox_EF
             // 
             // tvplaylist
             // 
-            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvplaylist.BackColor = System.Drawing.Color.LightSlateGray;
             this.tvplaylist.ForeColor = System.Drawing.Color.Gold;
@@ -899,8 +899,8 @@ namespace MyJukebox_EF
             this.dataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
             this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -912,7 +912,7 @@ namespace MyJukebox_EF
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.ColumnHeadersHeight = 28;
-            this.dataGridView.ContextMenuStrip = this.DatagridContextMenuStrip;
+            this.dataGridView.ContextMenuStrip = this.datagridContextMenuStrip;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -936,7 +936,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(624, 448);
+            this.dataGridView.Size = new System.Drawing.Size(647, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -945,10 +945,10 @@ namespace MyJukebox_EF
             this.dataGridView.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView_Scroll);
             this.dataGridView.Click += new System.EventHandler(this.dataGridView_Click);
             // 
-            // DatagridContextMenuStrip
+            // datagridContextMenuStrip
             // 
-            this.DatagridContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.DatagridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.datagridContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.datagridContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sendToToolStripMenuItem,
             this.rateItemsToolStripMenuItem,
             this.beatToolStripMenuItem,
@@ -962,15 +962,15 @@ namespace MyJukebox_EF
             this.setLinkToToolStripMenuItem1,
             this.moveEntryToolStripMenuItem,
             this.refreshToolStripMenuItem});
-            this.DatagridContextMenuStrip.Name = "DatagridContextMenuStrip";
-            this.DatagridContextMenuStrip.Size = new System.Drawing.Size(208, 312);
+            this.datagridContextMenuStrip.Name = "DatagridContextMenuStrip";
+            this.datagridContextMenuStrip.Size = new System.Drawing.Size(208, 312);
             // 
             // sendToToolStripMenuItem
             // 
             this.sendToToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.DatagridContextMenuStripSendToPlaylist,
+            this.datagridContextMenuStripSendToPlaylist,
             this.DatagridContextMenuStripSendToNewPlaylist,
-            this.DatagridContextMenuStripSendToKatalog,
+            this.datagridContextMenuStripSendToKatalog,
             this.DatagridContextMenuStripSendToNewKatalog});
             this.sendToToolStripMenuItem.Name = "sendToToolStripMenuItem";
             this.sendToToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
@@ -978,9 +978,9 @@ namespace MyJukebox_EF
             // 
             // DatagridContextMenuStripSendToPlaylist
             // 
-            this.DatagridContextMenuStripSendToPlaylist.Name = "DatagridContextMenuStripSendToPlaylist";
-            this.DatagridContextMenuStripSendToPlaylist.Size = new System.Drawing.Size(141, 22);
-            this.DatagridContextMenuStripSendToPlaylist.Text = "Playlist";
+            this.datagridContextMenuStripSendToPlaylist.Name = "DatagridContextMenuStripSendToPlaylist";
+            this.datagridContextMenuStripSendToPlaylist.Size = new System.Drawing.Size(141, 22);
+            this.datagridContextMenuStripSendToPlaylist.Text = "Playlist";
             // 
             // DatagridContextMenuStripSendToNewPlaylist
             // 
@@ -990,9 +990,9 @@ namespace MyJukebox_EF
             // 
             // DatagridContextMenuStripSendToKatalog
             // 
-            this.DatagridContextMenuStripSendToKatalog.Name = "DatagridContextMenuStripSendToKatalog";
-            this.DatagridContextMenuStripSendToKatalog.Size = new System.Drawing.Size(141, 22);
-            this.DatagridContextMenuStripSendToKatalog.Text = "Katalog";
+            this.datagridContextMenuStripSendToKatalog.Name = "DatagridContextMenuStripSendToKatalog";
+            this.datagridContextMenuStripSendToKatalog.Size = new System.Drawing.Size(141, 22);
+            this.datagridContextMenuStripSendToKatalog.Text = "Katalog";
             // 
             // DatagridContextMenuStripSendToNewKatalog
             // 
@@ -1019,7 +1019,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating0.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating0.Tag = "0";
             this.DatagridContextMenuStripRating0.Text = "(No Rating)";
-            this.DatagridContextMenuStripRating0.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating0.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // DatagridContextMenuStripRating1
             // 
@@ -1027,7 +1027,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating1.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating1.Tag = "1";
             this.DatagridContextMenuStripRating1.Text = "*";
-            this.DatagridContextMenuStripRating1.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating1.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // DatagridContextMenuStripRating2
             // 
@@ -1035,7 +1035,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating2.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating2.Tag = "2";
             this.DatagridContextMenuStripRating2.Text = "**";
-            this.DatagridContextMenuStripRating2.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating2.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // DatagridContextMenuStripRating3
             // 
@@ -1043,7 +1043,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating3.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating3.Tag = "3";
             this.DatagridContextMenuStripRating3.Text = "***";
-            this.DatagridContextMenuStripRating3.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating3.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // DatagridContextMenuStripRating4
             // 
@@ -1051,7 +1051,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating4.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating4.Tag = "4";
             this.DatagridContextMenuStripRating4.Text = "****";
-            this.DatagridContextMenuStripRating4.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating4.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // DatagridContextMenuStripRating5
             // 
@@ -1059,7 +1059,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripRating5.Size = new System.Drawing.Size(135, 22);
             this.DatagridContextMenuStripRating5.Tag = "5";
             this.DatagridContextMenuStripRating5.Text = "*****";
-            this.DatagridContextMenuStripRating5.Click += new System.EventHandler(this.DatagridContextMenuStripRating_Click);
+            this.DatagridContextMenuStripRating5.Click += new System.EventHandler(this.datagridContextMenuStripRating_Click);
             // 
             // beatToolStripMenuItem
             // 
@@ -1094,14 +1094,14 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripCopyToClip.Name = "DatagridContextMenuStripCopyToClip";
             this.DatagridContextMenuStripCopyToClip.Size = new System.Drawing.Size(207, 22);
             this.DatagridContextMenuStripCopyToClip.Text = "Copy to Clip";
-            this.DatagridContextMenuStripCopyToClip.Click += new System.EventHandler(this.DatagridContextMenuStripCopyToClip_Click);
+            this.DatagridContextMenuStripCopyToClip.Click += new System.EventHandler(this.datagridContextMenuStripCopyToClip_Click);
             // 
             // toolStripMenuItemEditRecord
             // 
             this.toolStripMenuItemEditRecord.Name = "toolStripMenuItemEditRecord";
             this.toolStripMenuItemEditRecord.Size = new System.Drawing.Size(207, 22);
             this.toolStripMenuItemEditRecord.Text = "Edit Record";
-            this.toolStripMenuItemEditRecord.Click += new System.EventHandler(this.DatagridContextMenuStripEditRecord_Click);
+            this.toolStripMenuItemEditRecord.Click += new System.EventHandler(this.datagridContextMenuStripEditRecord_Click);
             // 
             // setLinkToToolStripMenuItem
             // 
@@ -1120,6 +1120,7 @@ namespace MyJukebox_EF
             this.deleteEntrysToolStripMenuItem.Name = "deleteEntrysToolStripMenuItem";
             this.deleteEntrysToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.deleteEntrysToolStripMenuItem.Text = "Delete Entry(s)";
+            this.deleteEntrysToolStripMenuItem.Click += new System.EventHandler(this.datagridContextMenuStripdeleteEntrys_Click);
             // 
             // deleteFilesAndEntrysToolStripMenuItem
             // 
@@ -1145,9 +1146,16 @@ namespace MyJukebox_EF
             this.moveEntryToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.moveEntryToolStripMenuItem.Text = "move entry";
             // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
             // panelSearch
             // 
-            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelSearch.BackColor = System.Drawing.Color.LightSlateGray;
             this.panelSearch.Controls.Add(this.label2);
@@ -1159,7 +1167,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(624, 28);
+            this.panelSearch.Size = new System.Drawing.Size(612, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1167,7 +1175,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(358, 9);
+            this.label2.Location = new System.Drawing.Point(346, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1189,7 +1197,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(596, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(584, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1201,7 +1209,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(409, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(397, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1300,13 +1308,6 @@ namespace MyJukebox_EF
             // 
             this.timerShowMyBitmap.Interval = 10000;
             // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.refreshToolStripMenuItem.Text = "Refresh";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
-            // 
             // MyJukebox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1347,7 +1348,7 @@ namespace MyJukebox_EF
             this.toolStripPlayback.ResumeLayout(false);
             this.toolStripPlayback.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.DatagridContextMenuStrip.ResumeLayout(false);
+            this.datagridContextMenuStrip.ResumeLayout(false);
             this.panelSearch.ResumeLayout(false);
             this.panelSearch.PerformLayout();
             this.toolStripFile.ResumeLayout(false);
@@ -1435,7 +1436,7 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripRename;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripScanner;
-        private System.Windows.Forms.ContextMenuStrip DatagridContextMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip datagridContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripCopyToClip;
         private System.Windows.Forms.ToolStripMenuItem sendToToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripSendToNewPlaylist;
@@ -1471,8 +1472,8 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStrip toolStripFile;
         private System.Windows.Forms.ToolStripButton toolStripFileButtonOpen;
         private System.Windows.Forms.ToolStripButton toolStripFileButtonDelete;
-        private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripSendToPlaylist;
-        private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripSendToKatalog;
+        private System.Windows.Forms.ToolStripMenuItem datagridContextMenuStripSendToPlaylist;
+        private System.Windows.Forms.ToolStripMenuItem datagridContextMenuStripSendToKatalog;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Timer timerShowMyBitmap;
         private System.Windows.Forms.Label label2;

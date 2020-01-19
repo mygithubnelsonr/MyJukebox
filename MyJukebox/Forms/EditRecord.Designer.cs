@@ -27,24 +27,24 @@ namespace MyJukebox_EF
         /// </summary>
         private void InitializeComponent()
         {
-            this.chk_Sampler = new System.Windows.Forms.CheckBox();
+            this.chechBoxSampler = new System.Windows.Forms.CheckBox();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.chk_Hide = new System.Windows.Forms.CheckBox();
-            this.chk_Error = new System.Windows.Forms.CheckBox();
+            this.checkBoxHide = new System.Windows.Forms.CheckBox();
+            this.checkBoxError = new System.Windows.Forms.CheckBox();
             this.textBoxFilename = new System.Windows.Forms.TextBox();
             this.textBoxPath = new System.Windows.Forms.TextBox();
             this.textBoxFilesize = new System.Windows.Forms.TextBox();
             this.textBoxFiledate = new System.Windows.Forms.TextBox();
             this.textBoxDuration = new System.Windows.Forms.TextBox();
-            this.txt_Beat = new System.Windows.Forms.TextBox();
+            this.textBoxBeat = new System.Windows.Forms.TextBox();
             this.textBoxRating = new System.Windows.Forms.TextBox();
             this.textBoxPlayed = new System.Windows.Forms.TextBox();
             this.textboxComment = new System.Windows.Forms.TextBox();
             this.textBoxTitel = new System.Windows.Forms.TextBox();
             this.textBoxInterpret = new System.Windows.Forms.TextBox();
             this.textBoxAlbum = new System.Windows.Forms.TextBox();
-            this.txt_Medium = new System.Windows.Forms.TextBox();
+            this.textBoxMedia = new System.Windows.Forms.TextBox();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.Label121 = new System.Windows.Forms.Label();
             this.Label119 = new System.Windows.Forms.Label();
@@ -72,14 +72,15 @@ namespace MyJukebox_EF
             this.comboBoxCatalog = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // chk_Sampler
+            // chechBoxSampler
             // 
-            this.chk_Sampler.BackColor = System.Drawing.Color.Silver;
-            this.chk_Sampler.Location = new System.Drawing.Point(310, 331);
-            this.chk_Sampler.Name = "chk_Sampler";
-            this.chk_Sampler.Size = new System.Drawing.Size(17, 17);
-            this.chk_Sampler.TabIndex = 12;
-            this.chk_Sampler.UseVisualStyleBackColor = false;
+            this.chechBoxSampler.BackColor = System.Drawing.Color.Silver;
+            this.chechBoxSampler.Location = new System.Drawing.Point(310, 331);
+            this.chechBoxSampler.Name = "chechBoxSampler";
+            this.chechBoxSampler.Size = new System.Drawing.Size(17, 17);
+            this.chechBoxSampler.TabIndex = 12;
+            this.chechBoxSampler.UseVisualStyleBackColor = false;
+            this.chechBoxSampler.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // buttonExit
             // 
@@ -106,19 +107,21 @@ namespace MyJukebox_EF
             this.buttonSave.UseVisualStyleBackColor = false;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // chk_Hide
+            // checkBoxHide
             // 
-            this.chk_Hide.Location = new System.Drawing.Point(422, 331);
-            this.chk_Hide.Name = "chk_Hide";
-            this.chk_Hide.Size = new System.Drawing.Size(17, 17);
-            this.chk_Hide.TabIndex = 14;
+            this.checkBoxHide.Location = new System.Drawing.Point(422, 331);
+            this.checkBoxHide.Name = "checkBoxHide";
+            this.checkBoxHide.Size = new System.Drawing.Size(17, 17);
+            this.checkBoxHide.TabIndex = 14;
+            this.checkBoxHide.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
-            // chk_Error
+            // checkBoxError
             // 
-            this.chk_Error.Location = new System.Drawing.Point(366, 331);
-            this.chk_Error.Name = "chk_Error";
-            this.chk_Error.Size = new System.Drawing.Size(17, 17);
-            this.chk_Error.TabIndex = 13;
+            this.checkBoxError.Location = new System.Drawing.Point(366, 331);
+            this.checkBoxError.Name = "checkBoxError";
+            this.checkBoxError.Size = new System.Drawing.Size(17, 17);
+            this.checkBoxError.TabIndex = 13;
+            this.checkBoxError.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textBoxFilename
             // 
@@ -169,13 +172,14 @@ namespace MyJukebox_EF
             this.textBoxDuration.Text = "Duration";
             this.textBoxDuration.Enter += new System.EventHandler(this.FileValue_Changed);
             // 
-            // txt_Beat
+            // textBoxBeat
             // 
-            this.txt_Beat.Location = new System.Drawing.Point(168, 327);
-            this.txt_Beat.Name = "txt_Beat";
-            this.txt_Beat.Size = new System.Drawing.Size(41, 20);
-            this.txt_Beat.TabIndex = 11;
-            this.txt_Beat.Text = "Beat";
+            this.textBoxBeat.Location = new System.Drawing.Point(168, 327);
+            this.textBoxBeat.Name = "textBoxBeat";
+            this.textBoxBeat.Size = new System.Drawing.Size(41, 20);
+            this.textBoxBeat.TabIndex = 11;
+            this.textBoxBeat.Text = "Beat";
+            this.textBoxBeat.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textBoxRating
             // 
@@ -184,6 +188,7 @@ namespace MyJukebox_EF
             this.textBoxRating.Size = new System.Drawing.Size(41, 20);
             this.textBoxRating.TabIndex = 10;
             this.textBoxRating.Text = "Rating";
+            this.textBoxRating.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textBoxPlayed
             // 
@@ -193,6 +198,7 @@ namespace MyJukebox_EF
             this.textBoxPlayed.Size = new System.Drawing.Size(57, 20);
             this.textBoxPlayed.TabIndex = 9;
             this.textBoxPlayed.Text = "Played";
+            this.textBoxPlayed.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textboxComment
             // 
@@ -202,6 +208,7 @@ namespace MyJukebox_EF
             this.textboxComment.Size = new System.Drawing.Size(269, 20);
             this.textboxComment.TabIndex = 15;
             this.textboxComment.Text = "Comment";
+            this.textboxComment.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textBoxTitel
             // 
@@ -232,13 +239,14 @@ namespace MyJukebox_EF
             this.textBoxAlbum.Text = "Album";
             this.textBoxAlbum.Enter += new System.EventHandler(this.SongValue_Changed);
             // 
-            // txt_Medium
+            // textBoxMedia
             // 
-            this.txt_Medium.Location = new System.Drawing.Point(326, 374);
-            this.txt_Medium.Name = "txt_Medium";
-            this.txt_Medium.Size = new System.Drawing.Size(113, 20);
-            this.txt_Medium.TabIndex = 16;
-            this.txt_Medium.Text = "Medium";
+            this.textBoxMedia.Location = new System.Drawing.Point(326, 374);
+            this.textBoxMedia.Name = "textBoxMedia";
+            this.textBoxMedia.Size = new System.Drawing.Size(113, 20);
+            this.textBoxMedia.TabIndex = 16;
+            this.textBoxMedia.Text = "Media";
+            this.textBoxMedia.Enter += new System.EventHandler(this.InfoValue_Changed);
             // 
             // textBoxID
             // 
@@ -446,7 +454,7 @@ namespace MyJukebox_EF
             this.Label13.Name = "Label13";
             this.Label13.Size = new System.Drawing.Size(113, 17);
             this.Label13.TabIndex = 6;
-            this.Label13.Text = "Medium";
+            this.Label13.Text = "Media";
             // 
             // Label11
             // 
@@ -524,20 +532,20 @@ namespace MyJukebox_EF
             this.ClientSize = new System.Drawing.Size(484, 461);
             this.Controls.Add(this.comboBoxCatalog);
             this.Controls.Add(this.comboBoxGenre);
-            this.Controls.Add(this.txt_Medium);
+            this.Controls.Add(this.textBoxMedia);
             this.Controls.Add(this.textboxComment);
-            this.Controls.Add(this.txt_Beat);
+            this.Controls.Add(this.textBoxBeat);
             this.Controls.Add(this.textBoxRating);
             this.Controls.Add(this.textBoxPlayed);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.chk_Sampler);
+            this.Controls.Add(this.chechBoxSampler);
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.chk_Hide);
-            this.Controls.Add(this.chk_Error);
+            this.Controls.Add(this.checkBoxHide);
+            this.Controls.Add(this.checkBoxError);
             this.Controls.Add(this.textBoxFilename);
             this.Controls.Add(this.textBoxPath);
             this.Controls.Add(this.textBoxFilesize);
@@ -575,24 +583,24 @@ namespace MyJukebox_EF
 
         }
         #endregion
-        private System.Windows.Forms.CheckBox chk_Sampler;
+        private System.Windows.Forms.CheckBox chechBoxSampler;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.CheckBox chk_Hide;
-        private System.Windows.Forms.CheckBox chk_Error;
+        private System.Windows.Forms.CheckBox checkBoxHide;
+        private System.Windows.Forms.CheckBox checkBoxError;
         private System.Windows.Forms.TextBox textBoxFilename;
         private System.Windows.Forms.TextBox textBoxPath;
         private System.Windows.Forms.TextBox textBoxFilesize;
         private System.Windows.Forms.TextBox textBoxFiledate;
         private System.Windows.Forms.TextBox textBoxDuration;
-        private System.Windows.Forms.TextBox txt_Beat;
+        private System.Windows.Forms.TextBox textBoxBeat;
         private System.Windows.Forms.TextBox textBoxRating;
         private System.Windows.Forms.TextBox textBoxPlayed;
         private System.Windows.Forms.TextBox textboxComment;
         private System.Windows.Forms.TextBox textBoxTitel;
         private System.Windows.Forms.TextBox textBoxInterpret;
         private System.Windows.Forms.TextBox textBoxAlbum;
-        private System.Windows.Forms.TextBox txt_Medium;
+        private System.Windows.Forms.TextBox textBoxMedia;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label Label121;
         //   private System.Windows.Forms.Unsuported shp_Changed;

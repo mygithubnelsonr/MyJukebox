@@ -6,7 +6,7 @@ namespace MyJukebox_EF.BLL
     {
         public string Genre { get; set; }
         public string Catalog { get; set; }
-        public int Media { get; set; }
+        //public int Media { get; set; }
         public string Album { get; set; }
         public string Interpret { get; set; }
         public string Titel { get; set; }
@@ -16,6 +16,13 @@ namespace MyJukebox_EF.BLL
         public TimeSpan Duration { get; set; }
         public DateTime FileDate { get; set; }
         public string MD5 { get; set; }
+        public int Played { get; set; }
+        public int Rating { get; set; }
+        public string Beat { get; set; }
+        public string Comment { get; set; }
+        public int Media { get; set; }
         public bool IsSample { get; set; }
+        public bool Error { get; set; }
+        public bool Hide { get; set; }
     }
 }

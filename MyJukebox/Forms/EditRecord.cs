@@ -39,7 +39,7 @@ namespace MyJukebox_EF
         private void Form_Load()
         {
             //_formloaded = false;
-            //_formloaded = true;
+            _formloaded = true;
         }
 
         private void chk_Error_Click()
@@ -107,6 +107,16 @@ namespace MyJukebox_EF
                 mp3Record.Duration = TimeSpan.Parse(textBoxDuration.Text);
 
                 bool result = DataGetSet.EditSaveFileinfoChanges(_id, mp3Record);
+            }
+
+            if (IsSongInfoChanged == true)
+            {
+                mp3Record = new MP3Record();
+                mp3Record.IsSample = chechBoxSampler.Checked;
+                mp3Record.Error = checkBoxError.Checked;
+                mp3Record.Hide = checkBoxHide.Checked;
+                mp3Record.Comment = textboxComment.Text;
+                mp3Record.Media = Convert.ToInt32(textBoxMedia.Text);
             }
 
             #region Zeuch
@@ -203,7 +213,14 @@ namespace MyJukebox_EF
                 textBoxFiledate.Text = record[1];
                 textBoxDuration.Text = record[2];
 
-
+                record = DataGetSet.GetInfoRecord(_id);
+                textBoxBeat.Text = record[0];
+                textboxComment.Text = record[1];
+                textBoxMedia.Text = record[2];
+                textBoxPlayed.Text = record[3];
+                textBoxRating.Text = record[4];
+                chechBoxSampler.Text = record[5];
+                checkBoxError.Checked = Convert.ToBoolean(record[6]);
             }
             catch
             { }

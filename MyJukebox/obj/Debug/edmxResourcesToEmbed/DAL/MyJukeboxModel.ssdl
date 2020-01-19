@@ -149,18 +149,17 @@ warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a prim
   <EntityType Name="vPlaylistSongs">
     <Key>
       <PropertyRef Name="ID" />
+      <PropertyRef Name="SongID" />
       <PropertyRef Name="Titel" />
       <PropertyRef Name="PLID" />
       <PropertyRef Name="Pos" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="24" />
+    <Property Name="SongID" Type="int" Nullable="false" />
     <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
     <Property Name="Album" Type="nvarchar" MaxLength="50" />
-    <Property Name="Genre" Type="nvarchar" MaxLength="12" />
-    <Property Name="Katalog" Type="nvarchar" MaxLength="50" />
-    <Property Name="Medium" Type="nvarchar" MaxLength="2" />
-    <Property Name="Gespielt" Type="int" />
     <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
     <Property Name="FileName" Type="nvarchar" MaxLength="156" />
     <Property Name="PLID" Type="int" Nullable="false" />
@@ -181,6 +180,26 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
     <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
     <Property Name="FileName" Type="nvarchar" MaxLength="156" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vSongsLong">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Titel" />
+      <PropertyRef Name="MD5" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+    <Property Name="Catalog" Type="nvarchar" MaxLength="12" />
+    <Property Name="Album" Type="nvarchar" MaxLength="50" />
+    <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
+    <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
+    <Property Name="FileName" Type="nvarchar" MaxLength="156" />
+    <Property Name="MD5" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Media" Type="nvarchar" MaxLength="12" />
+    <Property Name="FileSize" Type="int" />
   </EntityType>
   <Association Name="FK_tPLentries_tPlaylists">
     <End Role="tPlaylists" Type="Self.tPlaylists" Multiplicity="1" />
@@ -272,13 +291,11 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
     <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 
+    [vPlaylistSongs].[Name] AS [Name], 
+    [vPlaylistSongs].[SongID] AS [SongID], 
     [vPlaylistSongs].[Titel] AS [Titel], 
     [vPlaylistSongs].[Interpret] AS [Interpret], 
     [vPlaylistSongs].[Album] AS [Album], 
-    [vPlaylistSongs].[Genre] AS [Genre], 
-    [vPlaylistSongs].[Katalog] AS [Katalog], 
-    [vPlaylistSongs].[Medium] AS [Medium], 
-    [vPlaylistSongs].[Gespielt] AS [Gespielt], 
     [vPlaylistSongs].[Pfad] AS [Pfad], 
     [vPlaylistSongs].[FileName] AS [FileName], 
     [vPlaylistSongs].[PLID] AS [PLID], 
@@ -296,6 +313,21 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
     [vSongs].[Pfad] AS [Pfad], 
     [vSongs].[FileName] AS [FileName]
     FROM [dbo].[vSongs] AS [vSongs]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vSongsLong" EntityType="Self.vSongsLong" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vSongsLong].[ID] AS [ID], 
+    [vSongsLong].[Genre] AS [Genre], 
+    [vSongsLong].[Catalog] AS [Catalog], 
+    [vSongsLong].[Album] AS [Album], 
+    [vSongsLong].[Titel] AS [Titel], 
+    [vSongsLong].[Interpret] AS [Interpret], 
+    [vSongsLong].[Pfad] AS [Pfad], 
+    [vSongsLong].[FileName] AS [FileName], 
+    [vSongsLong].[MD5] AS [MD5], 
+    [vSongsLong].[Media] AS [Media], 
+    [vSongsLong].[FileSize] AS [FileSize]
+    FROM [dbo].[vSongsLong] AS [vSongsLong]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_tPLentries_tPlaylists" Association="Self.FK_tPLentries_tPlaylists">
       <End Role="tPlaylists" EntitySet="tPlaylists" />
