@@ -5,6 +5,7 @@
         Playing,
         Played,
         NotFound,
-        Nutreal
+        Nutreal,
+        Standard
     }
 }

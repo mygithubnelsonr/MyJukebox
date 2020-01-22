@@ -936,7 +936,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(647, 448);
+            this.dataGridView.Size = new System.Drawing.Size(643, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -976,9 +976,9 @@ namespace MyJukebox_EF
             this.sendToToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.sendToToolStripMenuItem.Text = "Send to";
             // 
-            // DatagridContextMenuStripSendToPlaylist
+            // datagridContextMenuStripSendToPlaylist
             // 
-            this.datagridContextMenuStripSendToPlaylist.Name = "DatagridContextMenuStripSendToPlaylist";
+            this.datagridContextMenuStripSendToPlaylist.Name = "datagridContextMenuStripSendToPlaylist";
             this.datagridContextMenuStripSendToPlaylist.Size = new System.Drawing.Size(141, 22);
             this.datagridContextMenuStripSendToPlaylist.Text = "Playlist";
             // 
@@ -988,9 +988,9 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripSendToNewPlaylist.Size = new System.Drawing.Size(141, 22);
             this.DatagridContextMenuStripSendToNewPlaylist.Text = "New Playlist";
             // 
-            // DatagridContextMenuStripSendToKatalog
+            // datagridContextMenuStripSendToKatalog
             // 
-            this.datagridContextMenuStripSendToKatalog.Name = "DatagridContextMenuStripSendToKatalog";
+            this.datagridContextMenuStripSendToKatalog.Name = "datagridContextMenuStripSendToKatalog";
             this.datagridContextMenuStripSendToKatalog.Size = new System.Drawing.Size(141, 22);
             this.datagridContextMenuStripSendToKatalog.Text = "Katalog";
             // 
@@ -1133,6 +1133,7 @@ namespace MyJukebox_EF
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
             this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.openFolderToolStripMenuItem.Text = "open Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // setLinkToToolStripMenuItem1
             // 
@@ -1167,7 +1168,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(612, 28);
+            this.panelSearch.Size = new System.Drawing.Size(608, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1175,7 +1176,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(346, 9);
+            this.label2.Location = new System.Drawing.Point(342, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1197,7 +1198,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(584, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(580, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1209,7 +1210,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(397, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(393, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);

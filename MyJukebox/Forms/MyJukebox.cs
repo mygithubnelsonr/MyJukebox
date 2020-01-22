@@ -38,6 +38,7 @@ namespace MyJukebox_EF
         public MyJukebox()
         {
             InitializeComponent();
+            Colors.Initialize();
             MyJukebox_Initialize();
         }
         #endregion CTor
@@ -230,6 +231,10 @@ namespace MyJukebox_EF
                 moveEntryToolStripMenuItem
              */
             #endregion
+
+            Colors.Initialize();
+            Colors.Playing = Color.Bisque;
+            dataGridView.CurrentRow.DefaultCellStyle.BackColor = Colors.Playing;
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
@@ -964,7 +969,6 @@ namespace MyJukebox_EF
             Debug.Print(msg);
         }
 
-
         private async void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = await DataGetSet.GetTablogicalResultsAsync();
@@ -1173,7 +1177,7 @@ namespace MyJukebox_EF
             }
             else
             {
-                dataGridView.Rows[currentRow].DefaultCellStyle.BackColor = Colors.Played;
+                //dataGridView.Rows[currentRow].DefaultCellStyle.BackColor = Colors.Played;
                 Settings.DatagridLastSelectedRow = currentRow; // 0 based
 
                 axWindowsMediaPlayer1.URL = filespec;
@@ -1545,26 +1549,27 @@ namespace MyJukebox_EF
 
         private void timerDuration_Tick(object sender, EventArgs e)
         {
-            var pos = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
-            toolStripPlaybackTrackBarPosition.Value = pos;
+            double max = toolStripPlaybackTrackBarPosition.Maximum;
+            double pos = axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+            string position = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            var percentige = 0;
 
-            //var max = toolStripPlaybackTrackBarPosition.Maximum;
+            toolStripPlaybackTrackBarPosition.Value = (int)pos;
+            statusStripPosition.Text = position;
 
-            var val = pos / (toolStripPlaybackTrackBarPosition.Maximum / 100);
-
-            toolTipPosition.SetToolTip(toolStripPlaybackTrackBarPosition, "Position " + val.ToString() + "%");
-            statusStripPosition.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+            try
+            {
+                percentige = (int)(pos / (max / 100));
+                toolTipPosition.SetToolTip(toolStripPlaybackTrackBarPosition, $"Position {(int)percentige}%");
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
         }
         #endregion Timer Events
 
         #region Public Methodes
-
-        //private void TextBoxSearchClear()
-        //{
-        //    textBoxSearch.Text = _placeHolder;
-        //    textBoxSearch.ForeColor = Color.Gray;
-        //}
-
         public void FillQueryCombo()
         {
             comboBoxQueries.Items.Clear();
@@ -1865,7 +1870,7 @@ namespace MyJukebox_EF
             DataGetSet.AddSongToPlaylist(Convert.ToInt32(titelID), playlistName);
         }
 
-
+        #region PlaceHolderTextBox
         private void textBoxSearch_Enter(object sender, EventArgs e)
         {
             if (textBoxSearch.Text == Settings.PlaceHolderText)
@@ -1883,7 +1888,12 @@ namespace MyJukebox_EF
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
+        #endregion
 
-
+        private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var path = dataGridView.CurrentRow.Cells["Pfad"].Value.ToString();
+            Process.Start("explorer.exe", path);
+        }
     }
 }
