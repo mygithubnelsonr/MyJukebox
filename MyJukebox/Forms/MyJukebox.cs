@@ -1,5 +1,4 @@
 ﻿using MyJukebox_EF.BLL;
-using MyJukebox_EF.DAL;
 using NRSoft.FunctionPool;
 using System;
 using System.Collections;
@@ -414,7 +413,7 @@ namespace MyJukebox_EF
             lastSelectedTreeNode = currentTreeNode;
 
             Debug.Print("tvlogic_Click");
-            FillDatagridView();
+            FillDatagridViewAsynk();
             random.InitRandomNumbers(dataGridView.RowCount - 1, 0);
             //GridViewSetColumsWidth();
 
@@ -871,7 +870,7 @@ namespace MyJukebox_EF
             Settings.PlaylistCurrentID = Convert.ToInt32(tn.Tag);
             TreeviewFindNodeByText(tn.Parent, Settings.PlaylistCurrentName, true, true);
 
-            FillDatagridView();
+            FillDatagridViewAsynk();
             random.InitRandomNumbers(dataGridView.RowCount - 1);
             GridViewSetColumsWidth();
 
@@ -935,10 +934,11 @@ namespace MyJukebox_EF
         #region Datagrid Events
         private void dataGridView_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value.ToString());
-            int rowselected = dataGridView.SelectedRows[0].Index + 1;
-            statusStripRow.Text = rowselected.ToString();
-            Debug.Print($"ID={id}, Row={rowselected}");
+            int id = Convert.ToInt32(dataGridView.CurrentRow.Cells["ID"].Value);
+            int row = dataGridView.CurrentCellAddress.Y + 1;
+            int column = dataGridView.CurrentCellAddress.X;
+            statusStripRow.Text = row.ToString();
+            Debug.Print($"dataGridView_Click: ID={id}, Row={row}, Column={column}");
         }
 
         private void dataGridView_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -981,12 +981,23 @@ namespace MyJukebox_EF
         {
             int r = this.dataGridView.CurrentCellAddress.Y;
             int c = this.dataGridView.CurrentCellAddress.X;
-
-            string strCellInhalt = this.dataGridView.Rows[r].Cells[c].Value.ToString();
-            Console.WriteLine(strCellInhalt);
+            Debug.Print($"{dataGridView.Rows[r].Cells[c].Value}");
 
             Clipboard.Clear();
-            Clipboard.SetText(strCellInhalt);
+            Clipboard.SetText($"{dataGridView.Rows[r].Cells[c].Value}");
+        }
+
+        private void DatagridContextMenuStripCopyLineToClip_Click(object sender, EventArgs e)
+        {
+            string text = "";
+            int row = this.dataGridView.CurrentRow.Index;
+            int colums = this.dataGridView.ColumnCount;
+
+            for (int column = 1; column < colums; column++)
+                text += dataGridView.Rows[row].Cells[column].Value.ToString() + ";";
+
+            Clipboard.Clear();
+            Clipboard.SetText(text + Environment.NewLine);
         }
 
         private void datagridContextMenuStripEditRecord_Click(object sender, EventArgs e)
@@ -1016,69 +1027,52 @@ namespace MyJukebox_EF
         #endregion
 
         #region DataGrid Methodes
-        public void FillDatagridView()
-        {
-            FillDatagridViewAsynk(string.Empty);
-        }
-
-        public async Task FillDatagridViewAsynk(string filter)
+        public async Task FillDatagridViewAsynk(string filter = "")
         {
             bool isQuery = Methods.IsQuery(filter);
-            List<tSong> songs = new List<tSong>();
 
-            if (isQuery)
+            #region FillDatagridByQuery
+            if (isQuery == true)
             {
-                int currentDatagrigRow = 0;
-                if (Settings.LastTab == (int)TabcontrolTab.Logical)
-                    currentDatagrigRow = Settings.DatagridLastSelectedRow;
-
-                var results = await DataGetSet.GetQueryResultAsync(textBoxSearch.Text);
-                dataGridView.DataSource = results;
-
-                if (dataGridView.RowCount > 0)
-                {
-                    dataGridView.Columns["ID"].Visible = false;
-                    GridViewSetColumsWidth();
-                    dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
-                    statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
-                }
-
+                await FillDatagridByQuery();
                 return;
             }
+            #endregion
 
+            #region FillDatagrid by Logical Tab
             if (tabControl.SelectedTab == tabLogical)
             {
                 var results = await DataGetSet.GetTablogicalResultsAsync();
 
-                int currentDatagrigRow = 0;
-
-                dataGridView.DataSource = results;
-
-                if (dataGridView.RowCount > 0)
-                {
-                    dataGridView.Columns["ID"].Visible = false;
-                    GridViewSetColumsWidth();
-                    dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
-                    statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
-                }
-
-            }
-
-            if (tabControl.SelectedTab == tabPlayLists)
-            {
-                var results = DataGetSet.GetPlaylistEntries();
                 dataGridView.SuspendLayout();
                 dataGridView.DataSource = results;
-            }
+                dataGridView.ResumeLayout();
 
-            Settings.QueryLastQuery = "";
+            }
+            #endregion
+
+            #region Fill Datagrid by Playlist
+            if (tabControl.SelectedTab == tabPlayLists)
+            {
+                var results = await DataGetSet.GetPlaylistEntries();
+                dataGridView.SuspendLayout();
+                dataGridView.DataSource = results;
+                dataGridView.ResumeLayout();
+            }
+            #endregion
+
+            #region format datagridview
+            if (dataGridView.RowCount > 0)
+            {
+                GridViewSetColumsWidth();
+                dataGridView.CurrentCell = dataGridView[1, 0];
+            }
 
             try
             {
                 if (dataGridView.CurrentRow != null)
                 {
                     dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
-
                     statusStripRow.Text = Convert.ToString(dataGridView.CurrentRow.Index + 1);
                     statusStripRowcount.Text = this.dataGridView.RowCount.ToString();
                 }
@@ -1091,14 +1085,33 @@ namespace MyJukebox_EF
                 Debug.Print($"FillDatagridView_Error: {ex.Message}");
             }
 
+            Settings.QueryLastQuery = "";
             statusStripTitel.Text = "";
             random.InitRandomNumbers(dataGridView.RowCount - 1);
+            #endregion
+        }
+
+        private async Task FillDatagridByQuery()
+        {
+            int currentDatagrigRow = 0;
+            if (Settings.LastTab == (int)TabcontrolTab.Logical)
+                currentDatagrigRow = Settings.DatagridLastSelectedRow;
+
+            var results = await DataGetSet.GetQueryResultAsync(textBoxSearch.Text);
+            dataGridView.DataSource = results;
+
+            if (dataGridView.RowCount > 0)
+            {
+                dataGridView.Columns["ID"].Visible = false;
+                GridViewSetColumsWidth();
+                dataGridView.CurrentCell = dataGridView[1, currentDatagrigRow];
+                statusStripRow.Text = Convert.ToString(currentDatagrigRow + 1);
+            }
         }
 
         private void AddQueryToComboBox(string query)
         {
             bool itemExist = false;
-
             foreach (var item in comboBoxQueries.Items)
             {
                 if (item.ToString().ToUpper() == query.ToUpper())
@@ -1131,7 +1144,7 @@ namespace MyJukebox_EF
         #endregion DataGrid Methodes
         #endregion Datagrid
 
-        #region toolStrip Button Events
+        #region toolStripPlaybackButtons Events
         private void toolStripPlaybackButtonPreviuos_Click(object sender, EventArgs e)
         {
             Debug.Print("buttonPrevious_Click");
@@ -1209,10 +1222,11 @@ namespace MyJukebox_EF
         private void toolStripPlaybackButtonStop_Click(object sender, EventArgs e)
         {
             _buttonStop = true;
+            Debug.Print("buttonPlay_Click");
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             timerImageFlip.Enabled = false;
 
-            //ToDo: place a timeout thred
+            //ToDo: place a timeout thred here ??
             Task.Delay(TimeSpan.FromSeconds(2.0));
             pictureBoxFoto.Image = Properties.Resources.MyBitmap;
         }
@@ -1240,6 +1254,9 @@ namespace MyJukebox_EF
         private void toolStripButtonRandom_Click(object sender, EventArgs e)
         {
             _isloop = false;
+            Debug.Print("buttonRandom_Click");
+
+
             toolStripPlaybackButtonLoop.Checked = false;
             toolStripPlaybackButtonLoop.BackColor = Color.LightSlateGray;
 
@@ -1257,6 +1274,8 @@ namespace MyJukebox_EF
         private void toolStripPlaybackButtonLoop_Click(object sender, EventArgs e)
         {
             Settings.IsRandom = false;
+            Debug.Print("buttonLoop_Click");
+
             toolStripPlaybackButtonRandom.Checked = false;
             toolStripPlaybackButtonRandom.BackColor = Color.LightSlateGray;
 
@@ -1273,6 +1292,8 @@ namespace MyJukebox_EF
 
         private void toolStripPlaybackButtonSpeaker_Click(object sender, EventArgs e)
         {
+            Debug.Print("buttonSpeaker_Click");
+
             if (toolStripPlaybackButtonSpeaker.Checked)
             {
                 toolStripPlaybackButtonSpeaker.Image = Properties.Resources.SpeakerOff.ToBitmap();
@@ -1357,6 +1378,7 @@ namespace MyJukebox_EF
             switch (intTabIndex)
             {
                 case 0:     // logical
+                    Debug.Print("tvlogic Tap clicked");
                     string strLastAlbum = Settings.LastAlbum;
                     if (strLastAlbum != "Alle")
                     {
@@ -1370,25 +1392,20 @@ namespace MyJukebox_EF
                         tvlogic.Nodes["root"].Nodes["interpret"].Tag = strLastInterpret;
                     }
 
-                    Debug.Print("tvplaylist_Click");
-                    FillDatagridView();
-
-
-                    //' column breite setzen
-                    GridViewSetColumsWidth();
+                    FillDatagridViewAsynk();
                     break;
 
                 case 1:     // playlist
-                    Debug.Print("tabControl_Click");
-                    FillDatagridView();
-
-
-                    GridViewSetColumsWidth();
+                    Debug.Print("tvplaylist Tap clicked");
+                    FillDatagridViewAsynk();
                     break;
 
                 case 2:     // Folders and files
+                    Debug.Print("tvphysical Tap clicked");
                     break;
             }
+            //' column breite setzen
+            GridViewSetColumsWidth();
         }
 
         private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
@@ -1450,13 +1467,11 @@ namespace MyJukebox_EF
                         tvlogic.Nodes["root"].Nodes["interpret"].ExpandAll();
                         tvlogic.Nodes["root"].Nodes["interpret"].Tag = strLastInterpret;
                     }
-                    //FillDatagridView();
                     //' column breite setzen
                     //GridViewSetColumsWidth();
                     break;
 
                 case (int)TabcontrolTab.Playlist:
-                    //FillDatagridView();
                     //GridViewSetColumsWidth();
                     break;
 
@@ -1467,7 +1482,6 @@ namespace MyJukebox_EF
             Settings.LastTab = currentTabIndex;
 
             Debug.Print("tabControl_Click");
-            //FillDatagridView();
             //GridViewSetColumsWidth();
 
         }
@@ -1510,7 +1524,7 @@ namespace MyJukebox_EF
             TreeviewFindNodeByText(xNod.Parent, xNod.Text, true, false);
 
             Debug.Print("tvlogicContextMenuStripAdd_Click");
-            FillDatagridView();
+            FillDatagridViewAsynk();
 
 
             GridViewSetColumsWidth();
@@ -1525,7 +1539,7 @@ namespace MyJukebox_EF
                 comboBoxQueries.Text = "";
             }
 
-            FillDatagridView();
+            FillDatagridViewAsynk();
         }
 
         #endregion other controls
@@ -1583,63 +1597,6 @@ namespace MyJukebox_EF
                 }
             }
         }
-
-        //public bool ImportData(MP3Record mp3Data, bool Test)
-        //{
-        //    //const string scQuelle = "ImportData";
-        //    //var dh = factory.GetDatabaseH(Factory.dbType.mssql);
-        //    string _testTable = "tTestImport";
-        //    string _mainTable = "vSongsNewShort";
-        //    string Katalog, Owner, Media, Album, Interpret, Titel, Genre, Path, FileName, SQL, TableName, MD5;
-        //    long FileSize;
-        //    DateTime FileDate;
-
-        //    TableName = (Test) ? _testTable : _mainTable;
-
-        //    Katalog = mp3Data.Katalog;
-        //    Owner = mp3Data.Owner;
-        //    Media = mp3Data.Media;
-        //    Album = mp3Data.Album;
-        //    Interpret = mp3Data.Interpret;
-        //    Titel = mp3Data.Titel;
-        //    Genre = mp3Data.Genre;
-        //    Path = mp3Data.Path;
-        //    FileName = mp3Data.FileName;
-        //    FileSize = mp3Data.FileSize;
-        //    FileDate = mp3Data.FileDate;
-        //    MD5 = mp3Data.MD5;
-
-        //    SQL = "insert into " + TableName + " (katalog, quelle, medium, interpret, album, titel, genre, pfad, filename, filesize, filedate, md5) " +
-        //        "values (" + "\"" +
-        //        Katalog + "\",\"" +
-        //        Owner + "\",\"" +
-        //        Media + "\",\"" +
-        //        Interpret + "\",\"" +
-        //        Album + "\",\"" +
-        //        Titel + "\",\"" +
-        //        Genre + "\",\"" +
-        //        Path + "\",\"" +
-        //        FileName + "\",'" +
-        //        FileSize + "','" +
-        //        FileDate + "','" +
-        //        MD5 + "')";
-        //    Console.WriteLine(SQL);
-        //    try
-        //    {
-        //        //dh.ExecuteNonQuery(SQL);
-        //        return true;
-        //    }
-        //    catch
-        //    {
-        //        //    al.FaultType = alError
-        //        //    al.FaultSource = scQuelle
-        //        //    al.FaultMsg = Err.Description
-        //        //    al.AddEntry
-
-        //        return false;
-        //    }
-        //    finally { };
-        //}
 
         public string QueryBuilder()
         {
@@ -1895,5 +1852,17 @@ namespace MyJukebox_EF
             var path = dataGridView.CurrentRow.Cells["Pfad"].Value.ToString();
             Process.Start("explorer.exe", path);
         }
+
+        private void tvlogicContextMenuStripCollaps_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tvlogicContextMenuStripExpand_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

@@ -90,13 +90,6 @@ namespace MyJukebox_EF
             this.tvlogicContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tvlogicContextMenuStripCollaps = new System.Windows.Forms.ToolStripMenuItem();
             this.tvlogicContextMenuStripExpand = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.tvlogicContextMenuStripAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.tvlogicContextMenuStripNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.tvlogicContextMenuStripDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tvlogicContextMenuStripRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.tvlogicContextMenuStripScanner = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPlayLists = new System.Windows.Forms.TabPage();
             this.tvplaylist = new System.Windows.Forms.TreeView();
             this.tabPhysical = new System.Windows.Forms.TabPage();
@@ -131,7 +124,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripBeatF = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripBeatM = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripBeatS = new System.Windows.Forms.ToolStripMenuItem();
-            this.DatagridContextMenuStripCopyToClip = new System.Windows.Forms.ToolStripMenuItem();
+            this.DatagridContextMenuStripCopyCellToClip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemEditRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.setLinkToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetErrorflagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,6 +152,7 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
+            this.DatagridContextMenuStripCopyLineToClip = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -635,69 +629,23 @@ namespace MyJukebox_EF
             this.tvlogicContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tvlogicContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tvlogicContextMenuStripCollaps,
-            this.tvlogicContextMenuStripExpand,
-            this.toolStripSeparator8,
-            this.tvlogicContextMenuStripAdd,
-            this.tvlogicContextMenuStripNew,
-            this.tvlogicContextMenuStripDelete,
-            this.tvlogicContextMenuStripRename,
-            this.toolStripSeparator7,
-            this.tvlogicContextMenuStripScanner});
+            this.tvlogicContextMenuStripExpand});
             this.tvlogicContextMenuStrip.Name = "tvlogicContextMenuStrip";
-            this.tvlogicContextMenuStrip.Size = new System.Drawing.Size(149, 170);
+            this.tvlogicContextMenuStrip.Size = new System.Drawing.Size(114, 48);
             // 
             // tvlogicContextMenuStripCollaps
             // 
             this.tvlogicContextMenuStripCollaps.Name = "tvlogicContextMenuStripCollaps";
-            this.tvlogicContextMenuStripCollaps.Size = new System.Drawing.Size(148, 22);
+            this.tvlogicContextMenuStripCollaps.Size = new System.Drawing.Size(113, 22);
             this.tvlogicContextMenuStripCollaps.Text = "Collaps";
+            this.tvlogicContextMenuStripCollaps.Click += new System.EventHandler(this.tvlogicContextMenuStripCollaps_Click);
             // 
             // tvlogicContextMenuStripExpand
             // 
             this.tvlogicContextMenuStripExpand.Name = "tvlogicContextMenuStripExpand";
-            this.tvlogicContextMenuStripExpand.Size = new System.Drawing.Size(148, 22);
+            this.tvlogicContextMenuStripExpand.Size = new System.Drawing.Size(113, 22);
             this.tvlogicContextMenuStripExpand.Text = "Expand";
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(145, 6);
-            // 
-            // tvlogicContextMenuStripAdd
-            // 
-            this.tvlogicContextMenuStripAdd.Name = "tvlogicContextMenuStripAdd";
-            this.tvlogicContextMenuStripAdd.Size = new System.Drawing.Size(148, 22);
-            this.tvlogicContextMenuStripAdd.Text = "add to Playlist";
-            this.tvlogicContextMenuStripAdd.Click += new System.EventHandler(this.tvlogicContextMenuStripAdd_Click);
-            // 
-            // tvlogicContextMenuStripNew
-            // 
-            this.tvlogicContextMenuStripNew.Name = "tvlogicContextMenuStripNew";
-            this.tvlogicContextMenuStripNew.Size = new System.Drawing.Size(148, 22);
-            this.tvlogicContextMenuStripNew.Text = "Neu";
-            // 
-            // tvlogicContextMenuStripDelete
-            // 
-            this.tvlogicContextMenuStripDelete.Name = "tvlogicContextMenuStripDelete";
-            this.tvlogicContextMenuStripDelete.Size = new System.Drawing.Size(148, 22);
-            this.tvlogicContextMenuStripDelete.Text = "Löschen";
-            // 
-            // tvlogicContextMenuStripRename
-            // 
-            this.tvlogicContextMenuStripRename.Name = "tvlogicContextMenuStripRename";
-            this.tvlogicContextMenuStripRename.Size = new System.Drawing.Size(148, 22);
-            this.tvlogicContextMenuStripRename.Text = "Rename";
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(145, 6);
-            // 
-            // tvlogicContextMenuStripScanner
-            // 
-            this.tvlogicContextMenuStripScanner.Name = "tvlogicContextMenuStripScanner";
-            this.tvlogicContextMenuStripScanner.Size = new System.Drawing.Size(148, 22);
-            this.tvlogicContextMenuStripScanner.Text = "open Scanner";
+            this.tvlogicContextMenuStripExpand.Click += new System.EventHandler(this.tvlogicContextMenuStripExpand_Click);
             // 
             // tabPlayLists
             // 
@@ -936,7 +884,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(643, 448);
+            this.dataGridView.Size = new System.Drawing.Size(639, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -952,7 +900,8 @@ namespace MyJukebox_EF
             this.sendToToolStripMenuItem,
             this.rateItemsToolStripMenuItem,
             this.beatToolStripMenuItem,
-            this.DatagridContextMenuStripCopyToClip,
+            this.DatagridContextMenuStripCopyCellToClip,
+            this.DatagridContextMenuStripCopyLineToClip,
             this.toolStripMenuItemEditRecord,
             this.setLinkToToolStripMenuItem,
             this.resetErrorflagToolStripMenuItem,
@@ -963,7 +912,7 @@ namespace MyJukebox_EF
             this.moveEntryToolStripMenuItem,
             this.refreshToolStripMenuItem});
             this.datagridContextMenuStrip.Name = "DatagridContextMenuStrip";
-            this.datagridContextMenuStrip.Size = new System.Drawing.Size(208, 312);
+            this.datagridContextMenuStrip.Size = new System.Drawing.Size(208, 334);
             // 
             // sendToToolStripMenuItem
             // 
@@ -1089,12 +1038,12 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripBeatS.Size = new System.Drawing.Size(85, 22);
             this.DatagridContextMenuStripBeatS.Text = "S";
             // 
-            // DatagridContextMenuStripCopyToClip
+            // DatagridContextMenuStripCopyCellToClip
             // 
-            this.DatagridContextMenuStripCopyToClip.Name = "DatagridContextMenuStripCopyToClip";
-            this.DatagridContextMenuStripCopyToClip.Size = new System.Drawing.Size(207, 22);
-            this.DatagridContextMenuStripCopyToClip.Text = "Copy to Clip";
-            this.DatagridContextMenuStripCopyToClip.Click += new System.EventHandler(this.datagridContextMenuStripCopyToClip_Click);
+            this.DatagridContextMenuStripCopyCellToClip.Name = "DatagridContextMenuStripCopyCellToClip";
+            this.DatagridContextMenuStripCopyCellToClip.Size = new System.Drawing.Size(207, 22);
+            this.DatagridContextMenuStripCopyCellToClip.Text = "Copy Cell to Clip";
+            this.DatagridContextMenuStripCopyCellToClip.Click += new System.EventHandler(this.datagridContextMenuStripCopyToClip_Click);
             // 
             // toolStripMenuItemEditRecord
             // 
@@ -1168,7 +1117,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(608, 28);
+            this.panelSearch.Size = new System.Drawing.Size(604, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1176,7 +1125,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(342, 9);
+            this.label2.Location = new System.Drawing.Point(338, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1198,7 +1147,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(580, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(576, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1210,7 +1159,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(393, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(389, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1308,6 +1257,13 @@ namespace MyJukebox_EF
             // timerShowMyBitmap
             // 
             this.timerShowMyBitmap.Interval = 10000;
+            // 
+            // DatagridContextMenuStripCopyLineToClip
+            // 
+            this.DatagridContextMenuStripCopyLineToClip.Name = "DatagridContextMenuStripCopyLineToClip";
+            this.DatagridContextMenuStripCopyLineToClip.Size = new System.Drawing.Size(207, 22);
+            this.DatagridContextMenuStripCopyLineToClip.Text = "Copy Line to Clip";
+            this.DatagridContextMenuStripCopyLineToClip.Click += new System.EventHandler(this.DatagridContextMenuStripCopyLineToClip_Click);
             // 
             // MyJukebox
             // 
@@ -1430,15 +1386,8 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ContextMenuStrip tvlogicContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripCollaps;
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripExpand;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripAdd;
-        private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripNew;
-        private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripDelete;
-        private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripRename;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripScanner;
         private System.Windows.Forms.ContextMenuStrip datagridContextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripCopyToClip;
+        private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripCopyCellToClip;
         private System.Windows.Forms.ToolStripMenuItem sendToToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripSendToNewPlaylist;
         private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripSendToNewKatalog;
@@ -1481,6 +1430,7 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripMenuItem importNewSongsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripCopyLineToClip;
     }
 }
 
