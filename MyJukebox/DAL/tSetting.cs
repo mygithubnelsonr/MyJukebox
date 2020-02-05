@@ -12,12 +12,10 @@ namespace MyJukebox_EF.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class tActionLog
+    public partial class tSetting
     {
         public int ID { get; set; }
-        public string FaultType { get; set; }
-        public string FaultSource { get; set; }
-        public string Message { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -25,9 +25,7 @@ namespace MyJukebox_EF.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tActionLog> tActionLogs { get; set; }
         public virtual DbSet<tBeat> tBeats { get; set; }
-        public virtual DbSet<tColumn> tColumns { get; set; }
         public virtual DbSet<tGenre> tGenres { get; set; }
         public virtual DbSet<tInfo> tInfos { get; set; }
         public virtual DbSet<tMD5> tMD5 { get; set; }
@@ -42,5 +40,7 @@ namespace MyJukebox_EF.DAL
         public virtual DbSet<vSongsLong> vSongsLongs { get; set; }
         public virtual DbSet<vPlaylistSong> vPlaylistSongs { get; set; }
         public virtual DbSet<tCatalog> tCatalogs { get; set; }
+        public virtual DbSet<tColumn> tColumns { get; set; }
+        public virtual DbSet<tSetting> tSettings { get; set; }
     }
 }

@@ -15,9 +15,7 @@ namespace MyJukebox_EF.DAL
     public partial class tColumn
     {
         public int ID { get; set; }
-        public string Caption { get; set; }
-        public Nullable<int> DefaultWidth { get; set; }
-        public Nullable<bool> Active { get; set; }
-        public byte[] SSMA_TimeStamp { get; set; }
+        public string Name { get; set; }
+        public Nullable<int> Width { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MyJukebox_EF.DAL;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -138,6 +139,15 @@ namespace MyJukebox_EF.BLL
 
             return dirCount;
         }
+
+        public static string CamelSpaceOut(string str)
+        {
+            for (int i = 1; i < str.Length; i++)
+                if (Char.IsUpper(str[i]))
+                    str = str.Insert(i++, " ");
+            return str;
+        }
+
     }
 }
 

@@ -10,183 +10,7 @@ namespace MyJukebox_EF.BLL
     public static class DataGetSet
     {
         #region MyjukeBox
-        public static async Task<List<string>> GetGenresAsync()
-        {
-            List<string> genres = null;
-            var context = new MyJukeboxEntities();
-            await Task.Run(() =>
-            {
-                genres = context.tGenres
-                    .Select(g => g.Name).ToList();  // .Distinct().OrderBy(g => g).ToList();
-            });
-            return genres;
-        }
-
-        public static async Task<List<string>> GetCatalogsAsync()
-        {
-            List<string> catalogues = null;
-
-            using (var context = new MyJukeboxEntities())
-            {
-                await Task.Run(() =>
-                {
-                    catalogues = context.vSongs
-                                        .Where(c => c.Genre == TreeViewStates.Genre)
-                                        .Select(c => c.Catalog)
-                                        .Distinct().OrderBy(c => c).ToList();
-                });
-
-                return catalogues;
-            }
-        }
-
-        public static async Task<List<string>> GetAlbumsAsync()
-        {
-            List<string> albums = null;
-
-            using (var context = new MyJukeboxEntities())
-            {
-                await Task.Run(() =>
-                {
-                    albums = context.vSongs
-                                    .Where(a => a.Genre == TreeViewStates.Genre && a.Catalog == TreeViewStates.Catalog)
-                                    .Select(a => a.Album)
-                                    .Distinct().OrderBy(a => a).ToList();
-                });
-
-                return albums;
-            }
-        }
-
-        public static async Task<List<string>> GetInterpretenAsync()
-        {
-            List<string> interprer = null;
-
-            using (var context = new MyJukeboxEntities())
-            {
-                await Task.Run(() =>
-                {
-                    interprer = context.vSongs
-                                    .Where(i => i.Genre == TreeViewStates.Genre && i.Catalog == TreeViewStates.Catalog)
-                                    .Select(i => i.Interpret)
-                                    .Distinct().OrderBy(i => i).ToList();
-                });
-
-                return interprer;
-            }
-        }
-
-        public static async Task<List<Playlist>> GetPlaylistsAsync()
-        {
-            List<Playlist> playLists = new List<Playlist>();
-
-            using (var context = new MyJukeboxEntities())
-            {
-                await Task.Run(() =>
-                {
-                    var playlists = context.tPlaylists
-                                 .OrderBy(p => p.Name)
-                                 .Select(p => new { p.ID, p.Name, p.Pos });
-
-                    foreach (var p in playlists)
-                    {
-                        playLists.Add(new Playlist { ID = p.ID, Name = p.Name, Pos = p.Pos });
-                    }
-
-                });
-
-                return playLists;
-            }
-        }
-
-        public static async Task<List<vSong>> GetTablogicalResultsAsync()
-        {
-            List<vSong> songs = null;
-
-            try
-            {
-                var context = new MyJukeboxEntities();
-                await Task.Run(() =>
-                {
-                    songs = context.vSongs
-                        .Where(s =>
-                            (s.Genre.Contains(TreeViewStates.Genre)) &&
-                            (s.Catalog.Contains(TreeViewStates.Catalog)) &&
-                            (s.Album.Contains(TreeViewStates.Album)) &&
-                            (s.Interpret.Contains(TreeViewStates.Interpret))
-                            ).ToList();
-                });
-
-                return songs;
-
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
-        {
-            List<vSong> songs = null;
-
-            try
-            {
-                string sql = Methods.GetQueryString(queryText);
-
-                var context = new MyJukeboxEntities();
-                await Task.Run(() =>
-                        {
-                            songs = context.vSongs
-                                      .SqlQuery(sql).ToList();
-
-                        });
-
-                return songs;
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                return null;
-            }
-        }
-
-        public static async Task<List<vPlaylistSong>> GetPlaylistEntries()
-        {
-            List<vPlaylistSong> songs = null;
-
-            try
-            {
-                var context = new MyJukeboxEntities();
-
-                await Task.Run(() =>
-                {
-                    songs = context.vPlaylistSongs
-                        .Where(i => i.PLID == Settings.PlaylistCurrentID).ToList();
-                });
-
-                return songs;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        // ToDo: add async
-        public static void SetRating(int id, int rating)
-        {
-            var context = new MyJukeboxEntities();
-            var result = context.tInfos.SingleOrDefault(s => s.ID_Song == id);
-
-            if (result != null)
-            {
-                result.Rating = rating;
-                context.SaveChanges();
-            };
-        }
-
-        // ToDo: add async
+        // ToDo: check this !
         public static void AddSongToPlaylist(int id, string playlistName)
         {
             var context = new MyJukeboxEntities();
@@ -195,8 +19,6 @@ namespace MyJukebox_EF.BLL
                                 .Select(p => p.ID).ToList();
 
             if (playlist == null)
-                //    playlistID = playlist[0];
-                //else
                 throw new Exception("Wrong playlist!");
 
             var entry = new tPLentry()
@@ -218,25 +40,340 @@ namespace MyJukebox_EF.BLL
             context.SaveChanges();
 
         }
-        #endregion
 
-        #region FileScanner
-        public static bool TruncateTableImportTest()
+        public static async Task<List<string>> GetAlbumsAsync()
         {
+            List<string> albums = null;
+
+            using (var context = new MyJukeboxEntities())
+            {
+                await Task.Run(() =>
+                {
+                    albums = context.vSongs
+                                    .Where(a => a.Genre == TreeViewLogicStates.Genre && a.Catalog == TreeViewLogicStates.Catalog)
+                                    .Select(a => a.Album)
+                                    .Distinct().OrderBy(a => a).ToList();
+                });
+
+                return albums;
+            }
+        }
+
+        public static async Task<List<string>> GetCatalogsAsync()
+        {
+            List<string> catalogues = null;
+
+            using (var context = new MyJukeboxEntities())
+            {
+                await Task.Run(() =>
+                {
+                    catalogues = context.vSongs
+                                        .Where(c => c.Genre == TreeViewLogicStates.Genre)
+                                        .Select(c => c.Catalog)
+                                        .Distinct().OrderBy(c => c).ToList();
+                });
+
+                return catalogues;
+            }
+        }
+
+        public static async Task<List<string>> GetGenresAsync()
+        {
+            List<string> genres = null;
+            var context = new MyJukeboxEntities();
+            await Task.Run(() =>
+            {
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();  // .Distinct().OrderBy(g => g).ToList();
+            });
+            return genres;
+        }
+
+        public static async Task<List<string>> GetInterpretenAsync()
+        {
+            List<string> interprer = null;
+
+            using (var context = new MyJukeboxEntities())
+            {
+                await Task.Run(() =>
+                {
+                    interprer = context.vSongs
+                                    .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog)
+                                    .Select(i => i.Interpret)
+                                    .Distinct().OrderBy(i => i).ToList();
+                });
+
+                return interprer;
+            }
+        }
+
+        public static List<vPlaylistSong> GetPlaylistEntries(int playlistID)
+        {
+            List<vPlaylistSong> songs = null;
             try
             {
                 var context = new MyJukeboxEntities();
-                var result = context.Database.ExecuteSqlCommand("truncate table [tTestImport]");
+                    songs = context.vPlaylistSongs
+                        .Where(i => i.PLID == playlistID).ToList();
 
-                return true;
+                return songs;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                Debug.Print($"GetPlaylistEntries_Error: {ex.Message}");
+                return null;
             }
-
         }
 
+        public static async Task<List<vPlaylistSong>> GetPlaylistEntriesAsync(int playlistID)
+        {
+            List<vPlaylistSong> songs = null;
+            try
+            {
+                var context = new MyJukeboxEntities();
+                await Task.Run(() =>
+                {
+                    songs = context.vPlaylistSongs
+                        .Where(i => i.PLID == playlistID).ToList();
+                });
+
+                return songs;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"GetPlaylistEntries_Error: {ex.Message}");
+                return null;
+            }
+        }
+
+        public static List<Playlist> GetPlaylists()
+        {
+            List<Playlist> playLists = new List<Playlist>();
+
+            using (var context = new MyJukeboxEntities())
+            {
+                var playlists = context.tPlaylists
+                                .OrderBy(p => p.Name)
+                                .Select(p => new { p.ID, p.Name, p.Row });
+
+                foreach (var p in playlists)
+                {
+                    playLists.Add(new Playlist { ID = p.ID, Name = p.Name, Pos = p.Row });
+                }
+
+                return playLists;
+            }
+        }
+
+        //public static async Task<List<Playlist>> GetPlaylistsAsync()
+        //{
+        //    List<Playlist> playLists = new List<Playlist>();
+
+        //    using (var context = new MyJukeboxEntities())
+        //    {
+        //        await Task.Run(() =>
+        //        {
+        //            var playlists = context.tPlaylists
+        //                         .OrderBy(p => p.Name)
+        //                         .Select(p => new { p.ID, p.Name, p.Row });
+
+        //            foreach (var p in playlists)
+        //            {
+        //                playLists.Add(new Playlist { ID = p.ID, Name = p.Name, Pos = p.Row });
+        //            }
+
+        //        });
+
+        //        return playLists;
+        //    }
+        //}
+
+        public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
+        {
+            List<vSong> songs = null;
+
+            try
+            {
+                string sql = Methods.GetQueryString(queryText);
+
+                var context = new MyJukeboxEntities();
+                await Task.Run(() =>
+                        {
+                            songs = context.vSongs
+                                      .SqlQuery(sql).ToList();
+
+                        });
+
+                return songs;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"GetQueryResultAsync: {ex.Message}");
+                return null;
+            }
+        }
+
+        public static async Task<List<vSong>> GetTablogicalResultsAsync()
+        {
+            List<vSong> songs = null;
+
+            try
+            {
+                var context = new MyJukeboxEntities();
+                await Task.Run(() =>
+                {
+                    songs = context.vSongs
+                        .Where(s =>
+                            (s.Genre.Contains(TreeViewLogicStates.Genre)) &&
+                            (s.Catalog.Contains(TreeViewLogicStates.Catalog)) &&
+                            (s.Album.Contains(TreeViewLogicStates.Album)) &&
+                            (s.Interpret.Contains(TreeViewLogicStates.Interpret))
+                            ).ToList();
+                });
+
+                return songs;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"GetTablogicalResultsAsync: {ex.Message}");
+                return null;
+            }
+        }
+
+        public static List<vSong> GetTablogicalResults()
+        {
+            List<vSong> songs = null;
+
+            try
+            {
+                var context = new MyJukeboxEntities();
+                songs = context.vSongs
+                    .Where(s =>
+                        (s.Genre.Contains(TreeViewLogicStates.Genre)) &&
+                        (s.Catalog.Contains(TreeViewLogicStates.Catalog)) &&
+                        (s.Album.Contains(TreeViewLogicStates.Album)) &&
+                        (s.Interpret.Contains(TreeViewLogicStates.Interpret))
+                        ).ToList();
+
+                return songs;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"GetTablogicalResultsAsync: {ex.Message}");
+                return null;
+            }
+        }
+
+        internal static List<tColumn> GetColumsWidth()
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tColumns
+                            .Select(c => c).ToList();
+
+            return result;
+        }
+
+        public static void SetRating(int id, int rating)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tInfos.SingleOrDefault(s => s.ID_Song == id);
+
+            if (result != null)
+            {
+                result.Rating = rating;
+                context.SaveChanges();
+            };
+        }
+
+        public static void SetColumnWidth(string name, int width)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tColumns.SingleOrDefault(n => n.Name == name);
+
+            if (result != null)
+                result.Width = width;
+            else
+                context.tColumns.Add(new tColumn { Name = name, Width = width });
+
+            context.SaveChanges();
+        }
+
+        internal static void SetPlaylistLastSelected(int id)
+        {
+            var context = new MyJukeboxEntities();
+
+            int last = GetLastselectedPlaylist();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == last);
+            if (result != null) result.Last = false;
+
+            result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
+            if (result != null) result.Last = true;
+
+            context.SaveChanges();
+        }
+
+        internal static int GetLastselectedPlaylist()
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.Last == true);
+
+            if (result != null)
+                return result.ID;
+            else
+                return 1;
+        }
+
+        internal static PlaylistInfo GetPlaylistInfos(int id)
+        {
+            PlaylistInfo info = null;
+
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
+
+            if (result != null)
+            {
+                return info = new PlaylistInfo
+                {
+                    ID = result.ID,
+                    Name = result.Name,
+                    Row = result.Row != null ? (int)result.Row : 2,
+                    Last = result.Last != null ? (bool)result.Last : false
+                };
+            }
+            else
+                return null;
+        }
+
+        internal static void SetPlaylistInfos(PlaylistInfo playlist)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == playlist.ID);
+
+            if (result != null)
+            {
+                if (playlist.Name != null) result.Name = playlist.Name;
+                if (playlist.Row != null) result.Row = playlist.Row;
+                if (playlist.Last != null) result.Last = playlist.Last;
+
+                context.SaveChanges();
+            }
+        }
+
+        internal static int GetLastselectedPlaylistRow(int currentPlaylist)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == currentPlaylist);
+
+            if (result != null && result.Row != null)
+                return (int)result.Row;
+            else
+                return 2;
+        }
+
+        #endregion
+
+        #region FileScanner
         public static int SaveNewRecords(List<MP3Record> mP3Records, bool testImport)
         {
             int recordsImporteds = 0;
@@ -257,22 +394,22 @@ namespace MyJukebox_EF.BLL
             return recordsImporteds;
         }
 
-        private static int SaveNewRecord(MP3Record record, bool testImport)
+        public static bool TruncateTableImportTest()
         {
-            int recordsImported = 0;
-
-            if (testImport == true)
-                recordsImported += SetNewTestRecord(record);
-            else
+            try
             {
-                if (MD5Exist(record.MD5) == false)
-                {
-                    recordsImported += SetNewRecord(record);
-                }
-            }
-            return recordsImported;
-        }
+                var context = new MyJukeboxEntities();
+                var result = context.Database.ExecuteSqlCommand("truncate table [tTestImport]");
 
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"TruncateTableImportTest_Error: {ex.Message}");
+                return false;
+            }
+
+        }
         private static bool MD5Exist(string MD5)
         {
             var context = new MyJukeboxEntities();
@@ -289,6 +426,22 @@ namespace MyJukebox_EF.BLL
             {
                 return false;
             }
+        }
+
+        private static int SaveNewRecord(MP3Record record, bool testImport)
+        {
+            int recordsImported = 0;
+
+            if (testImport == true)
+                recordsImported += SetNewTestRecord(record);
+            else
+            {
+                if (MD5Exist(record.MD5) == false)
+                {
+                    recordsImported += SetNewRecord(record);
+                }
+            }
+            return recordsImported;
         }
 
         private static int SetNewRecord(MP3Record record)   // productiv
@@ -346,7 +499,7 @@ namespace MyJukebox_EF.BLL
             }
             catch (Exception ex)
             {
-                Debug.Print(ex.Message);
+                Debug.Print("SetNewRecord_Error: {ex.Message}");
                 return 0;
             }
         }
@@ -385,7 +538,7 @@ namespace MyJukebox_EF.BLL
             }
             catch (Exception ex)
             {
-                //Debug.Print(ex.Message);
+                Debug.Print($"SetNewTestRecord_Error: {ex.Message}");
                 Logging.Log(ex.Message);
                 return 0;
             }
@@ -393,70 +546,25 @@ namespace MyJukebox_EF.BLL
         #endregion
 
         #region EditForm
-        public static async Task<List<string>> GetGenresFullAsync()
+        public static bool EditSaveFileinfoChanges(int id, MP3Record record)
         {
-            List<string> genres = null;
-            var context = new MyJukeboxEntities();
-            await Task.Run(() =>
+            try
             {
-                genres = context.tGenres
-                    .Select(g => g.Name).ToList();
-            });
-            return genres;
-        }
+                var context = new MyJukeboxEntities();
+                var file = context.tFileInfoes.Find(id);
 
-        public static List<string> GetSongRecord(int id)
-        {
-            var context = new MyJukeboxEntities();
-            var songs = context.vSongs
-                        .Where(s => s.ID == id)
-                        .Select(s => new { s.ID, s.Genre, s.Catalog, s.Album, s.Interpret, s.Titel, s.Pfad, s.FileName }).ToList();
+                if (file.FileSize != record.FileSize) file.FileSize = record.FileSize;
+                if (file.FileDate != record.FileDate) file.FileDate = record.FileDate;
+                if (file.Duration != record.Duration) file.Duration = record.Duration;
 
-            List<string> list = new List<string>();
-            list.Add(songs[0].ID.ToString());
-            list.Add(songs[0].Genre);
-            list.Add(songs[0].Catalog);
-            list.Add(songs[0].Album);
-            list.Add(songs[0].Interpret);
-            list.Add(songs[0].Titel);
-            list.Add(songs[0].Pfad);
-            list.Add(songs[0].FileName);
+                context.SaveChanges();
 
-            return list;
-        }
-
-        public static List<string> GetFileRecord(int id)
-        {
-            var context = new MyJukeboxEntities();
-            var files = context.tFileInfoes
-                            .Where(f => f.ID_Song == id)
-                            .Select(f => new { f.FileSize, f.FileDate, f.Duration }).ToList();
-
-            List<string> list = new List<string>();
-            list.Add(files[0].FileSize.ToString());
-            list.Add(files[0].FileDate.ToString());
-            list.Add(files[0].Duration.ToString());
-
-            return list;
-        }
-
-        public static List<string> GetInfoRecord(int id)
-        {
-            var context = new MyJukeboxEntities();
-            var infos = context.tInfos
-                            .Where(i => i.ID_Song == id)
-                            .Select(i => new { i.Beat, i.Comment, i.Media, i.Played, i.Rating, i.Sampler, i.Error }).ToList();
-
-            List<string> list = new List<string>();
-            list.Add(infos[0].Beat.ToString());
-            list.Add(infos[0].Comment.ToString());
-            list.Add(infos[0].Media.ToString());
-            list.Add(infos[0].Played.ToString());
-            list.Add(infos[0].Rating.ToString());
-            list.Add(infos[0].Sampler.ToString());
-            list.Add(infos[0].Error.ToString());
-
-            return list;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public static bool EditSaveSongChanges(int id, MP3Record record)
@@ -488,30 +596,131 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static bool EditSaveFileinfoChanges(int id, MP3Record record)
+        public static List<string> GetFileRecord(int id)
         {
-            try
-            {
-                var context = new MyJukeboxEntities();
-                var file = context.tFileInfoes.Find(id);
+            var context = new MyJukeboxEntities();
+            var files = context.tFileInfoes
+                            .Where(f => f.ID_Song == id)
+                            .Select(f => new { f.FileSize, f.FileDate, f.Duration }).ToList();
 
-                if (file.FileSize != record.FileSize) file.FileSize = record.FileSize;
-                if (file.FileDate != record.FileDate) file.FileDate = record.FileDate;
-                if (file.Duration != record.Duration) file.Duration = record.Duration;
+            List<string> list = new List<string>();
+            list.Add(files[0].FileSize.ToString());
+            list.Add(files[0].FileDate.ToString());
+            list.Add(files[0].Duration.ToString());
 
-                context.SaveChanges();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return list;
         }
 
+        public static async Task<List<string>> GetGenresFullAsync()
+        {
+            List<string> genres = null;
+            var context = new MyJukeboxEntities();
+            await Task.Run(() =>
+            {
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();
+            });
+            return genres;
+        }
+
+        public static List<string> GetInfoRecord(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var infos = context.tInfos
+                            .Where(i => i.ID_Song == id)
+                            .Select(i => new { i.Beat, i.Comment, i.Media, i.Played, i.Rating, i.Sampler, i.Error }).ToList();
+
+            List<string> list = new List<string>();
+            list.Add(infos[0].Beat.ToString());
+            list.Add(infos[0].Comment.ToString());
+            list.Add(infos[0].Media.ToString());
+            list.Add(infos[0].Played.ToString());
+            list.Add(infos[0].Rating.ToString());
+            list.Add(infos[0].Sampler.ToString());
+            list.Add(infos[0].Error.ToString());
+
+            return list;
+        }
+
+        public static List<string> GetSongRecord(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var songs = context.vSongs
+                        .Where(s => s.ID == id)
+                        .Select(s => new { s.ID, s.Genre, s.Catalog, s.Album, s.Interpret, s.Titel, s.Pfad, s.FileName }).ToList();
+
+            List<string> list = new List<string>();
+            list.Add(songs[0].ID.ToString());
+            list.Add(songs[0].Genre);
+            list.Add(songs[0].Catalog);
+            list.Add(songs[0].Album);
+            list.Add(songs[0].Interpret);
+            list.Add(songs[0].Titel);
+            list.Add(songs[0].Pfad);
+            list.Add(songs[0].FileName);
+
+            return list;
+        }
+        #endregion
+
+        #region Settings
+
+        internal static object GetSetting(string name, string init = "0")
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tSettings.SingleOrDefault(s => s.Name == name);
+
+            if (result != null)
+                return result.Value;
+            else
+                DataGetSet.SetSetting(name, init);
+            return init;
+        }
+
+        internal static void SetSetting(string name, string value)
+        {
+            var context = new MyJukeboxEntities();
+            var setting = context.tSettings.SingleOrDefault(s => s.Name == name);
+
+            if (setting == null)
+                context.tSettings.Add(new tSetting { Name = name, Value = value });
+            else
+                setting.Value = value;
+
+            context.SaveChanges();
+        }
         #endregion
 
         #region Generell
+        public static int GetCatalogFromString(string catalog)
+        {
+            List<int> catalogs;
+            try
+            {
+                var context = new MyJukeboxEntities();
+                catalogs = context.tCatalogs
+                            .Where(c => c.Name == catalog)
+                            .Select(c => c.ID).ToList();
+
+                return catalogs[0];
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        public static int GetGenreFromString(string genre)
+        {
+            List<int> genres;
+            var context = new MyJukeboxEntities();
+            genres = context.tGenres
+                        .Where(g => g.Name == genre)
+                        .Select(g => g.ID).ToList();
+
+            return genres[0];
+        }
+
         public static int? GetLastSongID(string tableName)
         {
             int? lastId = -1;
@@ -547,35 +756,6 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static int GetGenreFromString(string genre)
-        {
-            List<int> genres;
-            var context = new MyJukeboxEntities();
-            genres = context.tGenres
-                        .Where(g => g.Name == genre)
-                        .Select(g => g.ID).ToList();
-
-            return genres[0];
-        }
-
-        public static int GetCatalogFromString(string catalog)
-        {
-            List<int> catalogs;
-            try
-            {
-                var context = new MyJukeboxEntities();
-                catalogs = context.tCatalogs
-                            .Where(c => c.Name == catalog)
-                            .Select(c => c.ID).ToList();
-
-                return catalogs[0];
-            }
-            catch
-            {
-                return -1;
-            }
-        }
-
         public static async Task RefillMD5Table()
         {
             List<tMD5> rec = new List<tMD5>();
@@ -602,6 +782,7 @@ namespace MyJukebox_EF.BLL
                 });
             }
         }
+
         #endregion
     }
 }

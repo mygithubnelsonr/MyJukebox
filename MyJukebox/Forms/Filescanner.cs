@@ -15,12 +15,14 @@ namespace MyJukebox_EF
 {
     public partial class Filescanner : Form
     {
-
         #region private Fields
+
         //private bool _dbPanelVisible;
-        #endregion
+
+        #endregion private Fields
 
         #region CTOR
+
         public Filescanner()
         {
             InitializeComponent();
@@ -34,9 +36,11 @@ namespace MyJukebox_EF
             //    ClientSize = new System.Drawing.Size(426, 272);
             //}
         }
-        #endregion
+
+        #endregion CTOR
 
         #region Form_Events
+
         private void Filescanner_Load(object sender, EventArgs e)
         {
             Settings.FilescannerLoad();
@@ -51,7 +55,6 @@ namespace MyJukebox_EF
 
             //MaximumSize = new System.Drawing.Size(434, 272);
             //ClientSize = new System.Drawing.Size(434, 272 - 34);
-
         }
 
         private void Filescanner_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,9 +65,11 @@ namespace MyJukebox_EF
             //rh.SaveSetting("Settings\\Filescanner", "Left", Left.ToString());
             //rh.SaveSetting("Settings\\Filescanner", "State", WindowState.ToString());
         }
-        #endregion
+
+        #endregion Form_Events
 
         #region Button_Events
+
         private void buttonStartScann_Click(object sender, EventArgs e)
         {
             Scanner();
@@ -91,12 +96,15 @@ namespace MyJukebox_EF
             string log = Logging.GetMessages();
             MessageBox.Show(log);
         }
+
         #endregion Button_Events
 
         #region CheckBox_Events
+
         private void checkBoxSpecialImport_CheckedChanged(object sender, EventArgs e)
         {
         }
+
         #endregion CheckBox_Events
 
         private void labelShowHideDbPanel_Click(object sender, EventArgs e)
@@ -166,6 +174,7 @@ namespace MyJukebox_EF
         }
 
         #region Methodes
+
         private void FillCombos()
         {
             List<string> list = null;
@@ -414,6 +423,5 @@ namespace MyJukebox_EF
         }
 
         #endregion Methodes
-
     }
 }

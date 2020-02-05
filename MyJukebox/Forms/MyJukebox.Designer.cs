@@ -92,8 +92,6 @@ namespace MyJukebox_EF
             this.tvlogicContextMenuStripExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPlayLists = new System.Windows.Forms.TabPage();
             this.tvplaylist = new System.Windows.Forms.TreeView();
-            this.tabPhysical = new System.Windows.Forms.TabPage();
-            this.tvphysical = new System.Windows.Forms.TreeView();
             this.toolStripPlaybackTrackBarPosition = new System.Windows.Forms.TrackBar();
             this.toolStripPlaybackTrackBarVolume = new System.Windows.Forms.TrackBar();
             this.toolStripPlayback = new System.Windows.Forms.ToolStrip();
@@ -125,6 +123,7 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripBeatM = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripBeatS = new System.Windows.Forms.ToolStripMenuItem();
             this.DatagridContextMenuStripCopyCellToClip = new System.Windows.Forms.ToolStripMenuItem();
+            this.DatagridContextMenuStripCopyLineToClip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemEditRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.setLinkToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetErrorflagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +151,6 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
-            this.DatagridContextMenuStripCopyLineToClip = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -165,7 +163,6 @@ namespace MyJukebox_EF
             this.tabLogical.SuspendLayout();
             this.tvlogicContextMenuStrip.SuspendLayout();
             this.tabPlayLists.SuspendLayout();
-            this.tabPhysical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).BeginInit();
             this.toolStripPlayback.SuspendLayout();
@@ -573,7 +570,6 @@ namespace MyJukebox_EF
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabLogical);
             this.tabControl.Controls.Add(this.tabPlayLists);
-            this.tabControl.Controls.Add(this.tabPhysical);
             this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(3, 6);
             this.tabControl.Name = "tabControl";
@@ -581,9 +577,6 @@ namespace MyJukebox_EF
             this.tabControl.Size = new System.Drawing.Size(222, 244);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
-            this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
-            this.tabControl.TabIndexChanged += new System.EventHandler(this.tabControl_TabIndexChanged);
-            this.tabControl.Click += new System.EventHandler(this.tabControl_Click);
             // 
             // tabLogical
             // 
@@ -621,7 +614,6 @@ namespace MyJukebox_EF
             this.tvlogic.TabIndex = 0;
             this.tvlogic.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.tvlogic_AfterExpand);
             this.tvlogic.Click += new System.EventHandler(this.tvlogic_Click);
-            this.tvlogic.DoubleClick += new System.EventHandler(this.tvlogic_DoubleClick);
             this.tvlogic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvlogic_MouseDown);
             // 
             // tvlogicContextMenuStrip
@@ -679,29 +671,7 @@ namespace MyJukebox_EF
             this.tvplaylist.Size = new System.Drawing.Size(211, 215);
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
-            this.tvplaylist.DoubleClick += new System.EventHandler(this.tvplaylist_DoubleClick);
-            this.tvplaylist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvPlaylist_MouseDown);
-            // 
-            // tabPhysical
-            // 
-            this.tabPhysical.BackColor = System.Drawing.Color.LightSlateGray;
-            this.tabPhysical.Controls.Add(this.tvphysical);
-            this.tabPhysical.Location = new System.Drawing.Point(4, 24);
-            this.tabPhysical.Name = "tabPhysical";
-            this.tabPhysical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPhysical.Size = new System.Drawing.Size(214, 216);
-            this.tabPhysical.TabIndex = 2;
-            this.tabPhysical.Text = "Physical";
-            this.tabPhysical.UseVisualStyleBackColor = true;
-            // 
-            // tvphysical
-            // 
-            this.tvphysical.BackColor = System.Drawing.Color.LightSlateGray;
-            this.tvphysical.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvphysical.Location = new System.Drawing.Point(3, 3);
-            this.tvphysical.Name = "tvphysical";
-            this.tvphysical.Size = new System.Drawing.Size(208, 210);
-            this.tvphysical.TabIndex = 0;
+            this.tvplaylist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvplaylist_MouseDown);
             // 
             // toolStripPlaybackTrackBarPosition
             // 
@@ -884,7 +854,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(639, 448);
+            this.dataGridView.Size = new System.Drawing.Size(644, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -912,7 +882,7 @@ namespace MyJukebox_EF
             this.moveEntryToolStripMenuItem,
             this.refreshToolStripMenuItem});
             this.datagridContextMenuStrip.Name = "DatagridContextMenuStrip";
-            this.datagridContextMenuStrip.Size = new System.Drawing.Size(208, 334);
+            this.datagridContextMenuStrip.Size = new System.Drawing.Size(208, 312);
             // 
             // sendToToolStripMenuItem
             // 
@@ -1045,6 +1015,13 @@ namespace MyJukebox_EF
             this.DatagridContextMenuStripCopyCellToClip.Text = "Copy Cell to Clip";
             this.DatagridContextMenuStripCopyCellToClip.Click += new System.EventHandler(this.datagridContextMenuStripCopyToClip_Click);
             // 
+            // DatagridContextMenuStripCopyLineToClip
+            // 
+            this.DatagridContextMenuStripCopyLineToClip.Name = "DatagridContextMenuStripCopyLineToClip";
+            this.DatagridContextMenuStripCopyLineToClip.Size = new System.Drawing.Size(207, 22);
+            this.DatagridContextMenuStripCopyLineToClip.Text = "Copy Line to Clip";
+            this.DatagridContextMenuStripCopyLineToClip.Click += new System.EventHandler(this.DatagridContextMenuStripCopyLineToClip_Click);
+            // 
             // toolStripMenuItemEditRecord
             // 
             this.toolStripMenuItemEditRecord.Name = "toolStripMenuItemEditRecord";
@@ -1117,7 +1094,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(604, 28);
+            this.panelSearch.Size = new System.Drawing.Size(596, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1125,7 +1102,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(338, 9);
+            this.label2.Location = new System.Drawing.Point(330, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1147,7 +1124,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(576, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(568, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1159,7 +1136,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(389, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(381, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1258,13 +1235,6 @@ namespace MyJukebox_EF
             // 
             this.timerShowMyBitmap.Interval = 10000;
             // 
-            // DatagridContextMenuStripCopyLineToClip
-            // 
-            this.DatagridContextMenuStripCopyLineToClip.Name = "DatagridContextMenuStripCopyLineToClip";
-            this.DatagridContextMenuStripCopyLineToClip.Size = new System.Drawing.Size(207, 22);
-            this.DatagridContextMenuStripCopyLineToClip.Text = "Copy Line to Clip";
-            this.DatagridContextMenuStripCopyLineToClip.Click += new System.EventHandler(this.DatagridContextMenuStripCopyLineToClip_Click);
-            // 
             // MyJukebox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1299,7 +1269,6 @@ namespace MyJukebox_EF
             this.tabLogical.ResumeLayout(false);
             this.tvlogicContextMenuStrip.ResumeLayout(false);
             this.tabPlayLists.ResumeLayout(false);
-            this.tabPhysical.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).EndInit();
             this.toolStripPlayback.ResumeLayout(false);
@@ -1327,7 +1296,6 @@ namespace MyJukebox_EF
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabLogical;
         private System.Windows.Forms.TabPage tabPlayLists;
-        private System.Windows.Forms.TabPage tabPhysical;
         private System.Windows.Forms.TreeView tvlogic;
         private System.Windows.Forms.Panel panelSearch;
         private System.Windows.Forms.DataGridView dataGridView;
@@ -1352,7 +1320,6 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
         private System.Windows.Forms.Timer timerMusic;
         private System.Windows.Forms.TreeView tvplaylist;
-        private System.Windows.Forms.TreeView tvphysical;
         private System.Windows.Forms.ToolStrip toolStripPlayback;
         private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonPlay;
         private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonPause;

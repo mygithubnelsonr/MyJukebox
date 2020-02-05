@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyJukeboxContext.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="tActionLog">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="FaultType" Type="nvarchar" MaxLength="50" />
-    <Property Name="FaultSource" Type="nvarchar" MaxLength="50" />
-    <Property Name="Message" Type="nvarchar" MaxLength="254" />
-    <Property Name="Date" Type="datetime2" Precision="0" />
-  </EntityType>
   <EntityType Name="tAlbums">
     <Key>
       <PropertyRef Name="ID" />
@@ -37,10 +27,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Caption" Type="nvarchar" MaxLength="255" />
-    <Property Name="DefaultWidth" Type="int" />
-    <Property Name="Active" Type="bit" />
-    <Property Name="SSMA_TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="25" />
+    <Property Name="Width" Type="int" />
   </EntityType>
   <EntityType Name="tFileInfos">
     <Key>
@@ -97,7 +85,8 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="24" />
-    <Property Name="Pos" Type="int" />
+    <Property Name="Last" Type="bit" />
+    <Property Name="Row" Type="int" />
   </EntityType>
   <EntityType Name="tPLentries">
     <Key>
@@ -107,6 +96,14 @@
     <Property Name="PLID" Type="int" Nullable="false" />
     <Property Name="SongID" Type="int" Nullable="false" />
     <Property Name="Pos" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tSettings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="tSongs">
     <Key>
@@ -149,21 +146,18 @@ warning 6002: The table/view 'MyJukebox.dbo.vPlaylistSongs' does not have a prim
   <EntityType Name="vPlaylistSongs">
     <Key>
       <PropertyRef Name="ID" />
-      <PropertyRef Name="SongID" />
       <PropertyRef Name="Titel" />
       <PropertyRef Name="PLID" />
-      <PropertyRef Name="Pos" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="24" />
-    <Property Name="SongID" Type="int" Nullable="false" />
-    <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
+    <Property Name="Genre" Type="nvarchar" MaxLength="12" />
+    <Property Name="Catalog" Type="nvarchar" MaxLength="12" />
     <Property Name="Album" Type="nvarchar" MaxLength="50" />
+    <Property Name="Interpret" Type="nvarchar" MaxLength="126" />
+    <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
     <Property Name="FileName" Type="nvarchar" MaxLength="156" />
     <Property Name="PLID" Type="int" Nullable="false" />
-    <Property Name="Pos" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -274,7 +268,6 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MyJukeboxContextStoreContainer">
-    <EntitySet Name="tActionLog" EntityType="Self.tActionLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tAlbums" EntityType="Self.tAlbums" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tBeat" EntityType="Self.tBeat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tCatalogs" EntityType="Self.tCatalogs" Schema="dbo" store:Type="Tables" />
@@ -286,20 +279,20 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
     <EntitySet Name="tMedia" EntityType="Self.tMedia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tPlaylists" EntityType="Self.tPlaylists" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tPLentries" EntityType="Self.tPLentries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tSettings" EntityType="Self.tSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tSongs" EntityType="Self.tSongs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tTestImport" EntityType="Self.tTestImport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 
-    [vPlaylistSongs].[Name] AS [Name], 
-    [vPlaylistSongs].[SongID] AS [SongID], 
-    [vPlaylistSongs].[Titel] AS [Titel], 
-    [vPlaylistSongs].[Interpret] AS [Interpret], 
+    [vPlaylistSongs].[Genre] AS [Genre], 
+    [vPlaylistSongs].[Catalog] AS [Catalog], 
     [vPlaylistSongs].[Album] AS [Album], 
+    [vPlaylistSongs].[Interpret] AS [Interpret], 
+    [vPlaylistSongs].[Titel] AS [Titel], 
     [vPlaylistSongs].[Pfad] AS [Pfad], 
     [vPlaylistSongs].[FileName] AS [FileName], 
-    [vPlaylistSongs].[PLID] AS [PLID], 
-    [vPlaylistSongs].[Pos] AS [Pos]
+    [vPlaylistSongs].[PLID] AS [PLID]
     FROM [dbo].[vPlaylistSongs] AS [vPlaylistSongs]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vSongs" EntityType="Self.vSongs" store:Type="Views" store:Schema="dbo">

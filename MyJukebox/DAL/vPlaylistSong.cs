@@ -14,15 +14,14 @@ namespace MyJukebox_EF.DAL
     
     public partial class vPlaylistSong
     {
-        public string Name { get; set; }
-        public int SongID { get; set; }
-        public string Titel { get; set; }
-        public string Interpret { get; set; }
+        public int ID { get; set; }
+        public string Genre { get; set; }
+        public string Catalog { get; set; }
         public string Album { get; set; }
+        public string Interpret { get; set; }
+        public string Titel { get; set; }
         public string Pfad { get; set; }
         public string FileName { get; set; }
         public int PLID { get; set; }
-        public int Pos { get; set; }
-        public int ID { get; set; }
     }
 }

@@ -1,31 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyJukeboxContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="tActionLog">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FaultType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FaultSource" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Message" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="Date" Type="DateTime" Precision="0" />
-  </EntityType>
   <EntityType Name="tBeat">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tColumn">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Caption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="DefaultWidth" Type="Int32" />
-    <Property Name="Active" Type="Boolean" />
-    <Property Name="SSMA_TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="tGenre">
     <Key>
@@ -73,8 +53,9 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
-    <Property Name="Pos" Type="Int32" />
     <NavigationProperty Name="tPLentries" Relationship="Self.FK_tPLentries_tPlaylists" FromRole="tPlaylists" ToRole="tPLentries" />
+    <Property Name="Last" Type="Boolean" />
+    <Property Name="Row" Type="Int32" />
   </EntityType>
   <EntityType Name="tPLentry">
     <Key>
@@ -99,9 +80,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="MyJukeboxEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="tActionLogs" EntityType="Self.tActionLog" />
     <EntitySet Name="tBeats" EntityType="Self.tBeat" />
-    <EntitySet Name="tColumns" EntityType="Self.tColumn" />
     <EntitySet Name="tGenres" EntityType="MyJukeboxContext.tGenre" />
     <EntitySet Name="tInfos" EntityType="Self.tInfo" />
     <EntitySet Name="tMD5" EntityType="MyJukeboxContext.tMD5" />
@@ -140,6 +119,8 @@
       <End Role="tCatalog" EntitySet="tCatalogs" />
       <End Role="tSong" EntitySet="tSongs" />
     </AssociationSet>
+    <EntitySet Name="tColumns" EntityType="MyJukeboxContext.tColumn" />
+    <EntitySet Name="tSettings" EntityType="MyJukeboxContext.tSetting" />
   </EntityContainer>
   <EntityType Name="tTestImport">
     <Key>
@@ -283,22 +264,19 @@
   </EntityType>
   <EntityType Name="vPlaylistSong">
     <Key>
-      <PropertyRef Name="SongID" />
       <PropertyRef Name="Titel" />
       <PropertyRef Name="PLID" />
-      <PropertyRef Name="Pos" />
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Name" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
-    <Property Name="SongID" Type="Int32" Nullable="false" />
-    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
     <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Interpret" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
     <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
     <Property Name="PLID" Type="Int32" Nullable="false" />
-    <Property Name="Pos" Type="Int32" Nullable="false" />
-    <Property Name="ID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="tCatalog">
     <Key>
@@ -321,4 +299,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tColumn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="Width" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

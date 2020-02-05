@@ -91,10 +91,8 @@
   <ItemGroup>
     <Compile Include="BLL\DataGetSet.cs" />
     <Compile Include="BLL\Logging.cs" />
+    <Compile Include="BLL\PlaylistInfo.cs" />
     <Compile Include="BLL\TreeViewStates.cs" />
-    <Compile Include="DAL\tActionLog.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\tAlbum.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
@@ -126,6 +124,9 @@
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\tPLentry.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\tSetting.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\tSong.cs">
