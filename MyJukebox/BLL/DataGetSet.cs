@@ -91,19 +91,19 @@ namespace MyJukebox_EF.BLL
 
         public static async Task<List<string>> GetInterpretenAsync()
         {
-            List<string> interprer = null;
+            List<string> interpreter = null;
 
             using (var context = new MyJukeboxEntities())
             {
                 await Task.Run(() =>
                 {
-                    interprer = context.vSongs
-                                    .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog)
+                    interpreter = context.vSongs
+                                    .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog && i.Album == TreeViewLogicStates.Album)
                                     .Select(i => i.Interpret)
                                     .Distinct().OrderBy(i => i).ToList();
                 });
 
-                return interprer;
+                return interpreter;
             }
         }
 
@@ -113,8 +113,8 @@ namespace MyJukebox_EF.BLL
             try
             {
                 var context = new MyJukeboxEntities();
-                    songs = context.vPlaylistSongs
-                        .Where(i => i.PLID == playlistID).ToList();
+                songs = context.vPlaylistSongs
+                    .Where(i => i.PLID == playlistID).ToList();
 
                 return songs;
             }
@@ -419,7 +419,7 @@ namespace MyJukebox_EF.BLL
 
             if (result.Count > 0)
             {
-                Debug.Print("title allready exist!");
+                Debug.Print($"title allready exist! (MD5={result[0]})");
                 return true;
             }
             else
@@ -436,6 +436,8 @@ namespace MyJukebox_EF.BLL
                 recordsImported += SetNewTestRecord(record);
             else
             {
+                var exist = MD5Exist(record.MD5);
+
                 if (MD5Exist(record.MD5) == false)
                 {
                     recordsImported += SetNewRecord(record);

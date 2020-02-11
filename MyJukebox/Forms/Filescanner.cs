@@ -93,8 +93,10 @@ namespace MyJukebox_EF
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            string log = Logging.GetMessages();
-            MessageBox.Show(log);
+            foreach (ListViewItem item in listViewFileList.Items)
+            {
+                item.Selected = true;
+            }
         }
 
         #endregion Button_Events
@@ -304,9 +306,8 @@ namespace MyJukebox_EF
             toolStripProgressBar.Visible = true;
             toolStripProgressBar.Enabled = true;
 
-            foreach (ListViewItem item in listViewFileList.Items)
+            foreach (ListViewItem item in listViewFileList.SelectedItems)
             {
-                //Application.DoEvents();
                 statusStripImport.Refresh();
 
                 if (Convert.ToBoolean(buttonCancelImport.Tag) == true)
@@ -386,7 +387,7 @@ namespace MyJukebox_EF
 
                     mp3.Media = media[0];
                     mp3.Album = arPath[arPath.Length - 1];
-                    mp3.Interpret = arPath[arPath.Length - 2];
+                    //mp3.Interpret = arPath[arPath.Length - 2];
                     mp3.Catalog = arPath[arPath.Length - 4];
                     mp3.Genre = arPath[arPath.Length - 5];
                 }
@@ -423,5 +424,16 @@ namespace MyJukebox_EF
         }
 
         #endregion Methodes
+
+        private void listViewFileList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control)
+            {
+                foreach (ListViewItem item in listViewFileList.Items)
+                {
+                    item.Selected = true;
+                }
+            }
+        }
     }
 }

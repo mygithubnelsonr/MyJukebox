@@ -1,4 +1,5 @@
-﻿using NRSoft.FunctionPool;
+﻿using MyJukebox_EF.BLL;
+using NRSoft.FunctionPool;
 using System;
 using System.Collections.Generic;
 
@@ -7,11 +8,11 @@ namespace MyJukebox_EF
     [Serializable]
     public class Settings
     {
-        public static string PlaceHolderText = $"< Input SQL like Album='V8-A-1'>";
         private static MyJukebox form = new MyJukebox();
         private static RegistryH rh;
-        #region public properties
 
+        #region public properties
+        public static string PlaceHolderText = $"< Input SQL like Album='V8-A-1' >";
         public static SortedList<string, int> DatagridColums = new SortedList<string, int>();
         // Query
         public static List<string> QueryList = new List<string>();
@@ -80,27 +81,29 @@ namespace MyJukebox_EF
 
         public static void Initialize()
         {
+
             rh = new RegistryH(
                 Properties.Settings.Default.CompanyName,
                 Properties.Settings.Default.ProductName
             );
 
-            string firstRunDate = rh.GetSetting("", "FirstRunDate", "");
+            //string firstRunDate = rh.GetSetting("", "FirstRunDate", "");
+            string firstRunDate = DataGetSet.GetSetting("FirstRunDate").ToString();
             if (string.IsNullOrEmpty(firstRunDate))
             {
-                rh.CompanyName = Properties.Settings.Default.CompanyName;
-                rh.ProductName = Properties.Settings.Default.ProductName;
-                rh.SaveSetting("", "FirstRunDate", DateTime.UtcNow.ToString());
-                rh.SaveSetting("Settings", "LastTab", "0");
-                rh.SaveSetting("Settings", "ImagePath", "_Images");
-                rh.SaveSetting("Settings", "RootImagePath", @"\\win2k16dc01\FS012");
-                rh.SaveSetting("Settings\\Logical\\Genre", "LastGenre", "Alle");
-                rh.SaveSetting("Settings\\Logical\\Katalog", "LastKatalog", "Alle");
-                rh.SaveSetting("Settings\\Logical\\Album", "LastAlbum", "Alle");
-                rh.SaveSetting("Settings\\Logical\\Interpret", "LastInterpret", "Alle");
-                rh.SaveSetting("Settings\\Playlists", "LastID", "0");
-                rh.SaveSetting("Settings\\Queries", "LastQuery", "0");
-                rh.SaveSetting("Settings\\Queries", "Count", "0");
+                DataGetSet.SetSetting("CompanyName", Properties.Settings.Default.CompanyName);
+                DataGetSet.SetSetting("ProductName", Properties.Settings.Default.ProductName);
+                DataGetSet.SetSetting("FirstRunDate", DateTime.UtcNow.ToString());
+                DataGetSet.SetSetting("LastTab", "0");
+                DataGetSet.SetSetting("ImagePath", "_Images");
+                DataGetSet.SetSetting("RootImagePath", @"\\win2k16dc01\FS012");
+                DataGetSet.SetSetting("LastGenre", "");
+                DataGetSet.SetSetting("LastKatalog", "");
+                DataGetSet.SetSetting("LastAlbum", "");
+                DataGetSet.SetSetting("LastInterpret", "");
+                //DataGetSet.SetSetting("LastID", "0");
+                DataGetSet.SetSetting("LastQuery", "");
+                DataGetSet.SetSetting("QueryCount", "0");
             }
         }
 
@@ -128,13 +131,13 @@ namespace MyJukebox_EF
 
             #region Treeview Settings
 
-            LastGenre = rh.GetSetting("Settings\\Logical\\Genre", "LastGenre", "");
-            LastKatalog = rh.GetSetting("Settings\\Logical\\Katalog", "LastKatalog", "");
-            LastAlbum = rh.GetSetting("Settings\\Logical\\Album", "LastAlbum", "");
-            LastInterpret = rh.GetSetting("Settings\\Logical\\Interpret", "LastInterpret", "");
-            PlaylistCurrentName = rh.GetSetting("Settings\\Playlists", "LastPlaylist", "");
-            PlaylistCurrentID = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastID", "0"));
-            PlaylistCurrentSelected = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastSelected", "0"));
+            //LastGenre = rh.GetSetting("Settings\\Logical\\Genre", "LastGenre", "");
+            //LastKatalog = rh.GetSetting("Settings\\Logical\\Katalog", "LastKatalog", "");
+            //LastAlbum = rh.GetSetting("Settings\\Logical\\Album", "LastAlbum", "");
+            //LastInterpret = rh.GetSetting("Settings\\Logical\\Interpret", "LastInterpret", "");
+            //PlaylistCurrentName = rh.GetSetting("Settings\\Playlists", "LastPlaylist", "");
+            //PlaylistCurrentID = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastID", "0"));
+            //PlaylistCurrentSelected = Convert.ToInt16(rh.GetSetting("Settings\\Playlists", "LastSelected", "0"));
 
             #endregion Treeview Settings
 
@@ -188,15 +191,15 @@ namespace MyJukebox_EF
 
             #region Treeview Settings
 
-            rh.SaveSetting("Settings\\Logical\\Genre", "LastGenre", LastGenre);
-            rh.SaveSetting("Settings\\Logical\\Katalog", "LastKatalog", LastKatalog);
-            rh.SaveSetting("Settings\\Logical\\Album", "LastAlbum", LastAlbum);
-            rh.SaveSetting("Settings\\Logical\\Interpret", "LastInterpret", LastInterpret);
-            rh.SaveSetting("Settings\\Logical", "LastQuery", QueryLastQuery);
+            //rh.SaveSetting("Settings\\Logical\\Genre", "LastGenre", LastGenre);
+            //rh.SaveSetting("Settings\\Logical\\Katalog", "LastKatalog", LastKatalog);
+            //rh.SaveSetting("Settings\\Logical\\Album", "LastAlbum", LastAlbum);
+            //rh.SaveSetting("Settings\\Logical\\Interpret", "LastInterpret", LastInterpret);
+            //rh.SaveSetting("Settings\\Logical", "LastQuery", QueryLastQuery);
             //rh.SaveSetting("Settings\\Logical", "LastSelected", QueryLastSelected.ToString());
-            rh.SaveSetting("Settings\\Playlists", "LastID", PlaylistCurrentID.ToString());
-            rh.SaveSetting("Settings\\Playlists", "LastPlaylist", PlaylistCurrentName);
-            rh.SaveSetting("Settings\\Playlists", "LastSelected", PlaylistCurrentSelected.ToString());
+            //rh.SaveSetting("Settings\\Playlists", "LastID", PlaylistCurrentID.ToString());
+            //rh.SaveSetting("Settings\\Playlists", "LastPlaylist", PlaylistCurrentName);
+            //rh.SaveSetting("Settings\\Playlists", "LastSelected", PlaylistCurrentSelected.ToString());
 
             #endregion Treeview Settings
 

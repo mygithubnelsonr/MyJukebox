@@ -86,14 +86,23 @@ namespace MyJukebox_EF.BLL
                         .Where(m => m.Type == type)
                         .Select(m => m.ID).ToList();
 
-            record = new MP3Record();
-            record.Album = arTmp[arTmp.Length - 1];
-            record.Interpret = arTmp[arTmp.Length - 2];
-            record.Media = media[0];
-            record.Genre = arTmp[arTmp.Length - 5];
-            record.Catalog = arTmp[arTmp.Length - 4];
 
-            return record;
+            try
+            {
+                record = new MP3Record();
+                record.Album = arTmp[arTmp.Length - 1];
+                record.Interpret = arTmp[arTmp.Length - 2];
+                record.Media = media[0];
+                record.Genre = arTmp[arTmp.Length - 5];
+                record.Catalog = arTmp[arTmp.Length - 4];
+
+                return record;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Media Type not found!", ex.Message);
+                return null;
+            }
         }
 
         public static string MD5(string password)

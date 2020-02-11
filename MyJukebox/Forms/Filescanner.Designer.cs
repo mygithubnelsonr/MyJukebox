@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxStartpath = new System.Windows.Forms.TextBox();
             this.panelControls = new System.Windows.Forms.Panel();
             this.buttonTest = new System.Windows.Forms.Button();
             this.buttonStartScann = new System.Windows.Forms.Button();
@@ -79,7 +80,6 @@
             this.statusStripLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.labelShowHideDbPanel = new System.Windows.Forms.Label();
-            this.textBoxStartpath = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panelControls.SuspendLayout();
             this.statusStripScann.SuspendLayout();
@@ -105,6 +105,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(424, 219);
             this.panel1.TabIndex = 8;
+            // 
+            // textBoxStartpath
+            // 
+            this.textBoxStartpath.AllowDrop = true;
+            this.textBoxStartpath.Location = new System.Drawing.Point(15, 26);
+            this.textBoxStartpath.Name = "textBoxStartpath";
+            this.textBoxStartpath.Size = new System.Drawing.Size(282, 20);
+            this.textBoxStartpath.TabIndex = 25;
+            this.textBoxStartpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxStartpath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragDrop);
+            this.textBoxStartpath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragEnter);
             // 
             // panelControls
             // 
@@ -206,6 +217,7 @@
             this.listViewFileList.TabIndex = 16;
             this.listViewFileList.UseCompatibleStateImageBehavior = false;
             this.listViewFileList.View = System.Windows.Forms.View.Details;
+            this.listViewFileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewFileList_KeyDown);
             // 
             // columnHeaderFileName
             // 
@@ -575,17 +587,6 @@
             this.labelShowHideDbPanel.TabIndex = 17;
             this.labelShowHideDbPanel.Text = "======";
             this.labelShowHideDbPanel.Click += new System.EventHandler(this.labelShowHideDbPanel_Click);
-            // 
-            // textBoxStartpath
-            // 
-            this.textBoxStartpath.AllowDrop = true;
-            this.textBoxStartpath.Location = new System.Drawing.Point(15, 26);
-            this.textBoxStartpath.Name = "textBoxStartpath";
-            this.textBoxStartpath.Size = new System.Drawing.Size(282, 20);
-            this.textBoxStartpath.TabIndex = 25;
-            this.textBoxStartpath.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxStartpath.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragDrop);
-            this.textBoxStartpath.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxStartpath_DragEnter);
             // 
             // Filescanner
             // 
