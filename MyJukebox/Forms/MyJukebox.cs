@@ -186,7 +186,7 @@ namespace MyJukebox_EF
             DataGetSet.SetSetting("LastAlbum", TreeViewLogicStates.Album);
             DataGetSet.SetSetting("LastInterpret", TreeViewLogicStates.Interpret);
 
-            Settings.Save();
+            //Settings.Save();
         }
 
         private void TreeviewsFirstFill()
@@ -255,10 +255,13 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest1_Click(object sender, EventArgs e)
         {
-            TreeNode tngenre = tvlogic.Nodes["root"].Nodes["genre"];
-            tvlogic_RemoveNodes(tngenre);
+            List<string> result = null;
 
-            TreeviewsFirstFill();
+            result = DataGetSet.GetInterpretenAsyncTest(TreeViewLogicStates.Genre, "Gabriele", "");
+
+            foreach(var interpret in result)
+                Debug.Print(interpret);
+
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
@@ -384,9 +387,23 @@ namespace MyJukebox_EF
 
             if (mainNode == "katalog")
             {
-                DataGetSet.SetSetting("LastCatalog", currentTreeNode.Text);
-                TreeViewLogicStates.Catalog = statusStripKatalog.Text = currentTreeNode.Text;
-                TreeviewFindNodeByText(currentTreeNode.Parent, TreeViewLogicStates.Catalog, true, true);
+                var catalog = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
+
+                DataGetSet.SetSetting("LastCatalog", catalog);
+                DataGetSet.SetSetting("LastAlbum", "");
+                DataGetSet.SetSetting("LastInterpret", "");
+
+                TreeViewLogicStates.Catalog = catalog;
+                TreeViewLogicStates.Album = "";
+                TreeViewLogicStates.Interpret = "";
+
+                TreeviewFindNodeByText(currentTreeNode.Parent, catalog, true, true);
+                TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["album"], "Alle", true, true);
+                TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["interpret"], "Alle", true, true);
+
+                statusStripKatalog.Text = currentTreeNode.Text;
+                statusStripAlbum.Text = "Alle";
+                statusStripInterpret.Text = "Alle";
 
                 tvlogicFillAlbumAsync();
                 tvlogicFillInterpretAsync();
@@ -394,16 +411,17 @@ namespace MyJukebox_EF
 
             if (mainNode == "album")
             {
-                var value = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
+                var album = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
 
-                DataGetSet.SetSetting("LastAlbum", value);
+                DataGetSet.SetSetting("LastAlbum", album);
                 DataGetSet.SetSetting("LastInterpret", "");
-                TreeViewLogicStates.Album = value;
+                TreeViewLogicStates.Album = album;
                 TreeViewLogicStates.Interpret = "";
-                statusStripAlbum.Text = value;
+                statusStripAlbum.Text = album;
 
-                TreeviewFindNodeByText(currentTreeNode.Parent, value, true, true);
-                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["album"].Nodes[value];
+                TreeviewFindNodeByText(currentTreeNode.Parent, album, true, true);
+                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["album"].Nodes[album];
+
                 tvlogicFillInterpretAsync();
 
                 if (tvlogic.Nodes["root"].Nodes["Interpret"].Nodes.Count > 1)   // node interpreter wurde bereits aufgeklappt
@@ -415,21 +433,28 @@ namespace MyJukebox_EF
 
             if (mainNode == "interpret")
             {
-                var value = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
+                var interpret = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
 
-                DataGetSet.SetSetting("LastInterpret", value);
+                DataGetSet.SetSetting("LastInterpret", interpret);
                 DataGetSet.SetSetting("LastAlbum", "");
-                TreeViewLogicStates.Interpret = "";
-                statusStripInterpret.Text = currentTreeNode.Text;
+                DataGetSet.SetSetting("LastCatalog", "");
 
-                TreeviewFindNodeByText(currentTreeNode.Parent, currentTreeNode.Text, true, true);
-                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["interpret"].Nodes[value];
+                TreeViewLogicStates.Catalog = "";
+                TreeViewLogicStates.Album = "";
+                TreeViewLogicStates.Interpret = interpret;
+
+                statusStripKatalog.Text = "Alle";
+                statusStripAlbum.Text = "Alle";
+                statusStripInterpret.Text = interpret;
+
+                TreeviewFindNodeByText(currentTreeNode.Parent, interpret, true, true);
+
+                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["interpret"].Nodes[interpret];
+
                 if (tvlogic.Nodes["root"].Nodes["Interpret"].Nodes.Count > 1)   // node album wurde bereits aufgeklappt
                 {
-                    //tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["Album"];
-                    //tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["Album"].Nodes["Alle"];
-                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["Album"], "Alle", true, true);
-                    TreeViewLogicStates.Album = "";
+                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["katalog"], "Alle", true, true);
+                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["album"], "Alle", true, true);
                 }
             }
 
@@ -771,7 +796,6 @@ namespace MyJukebox_EF
             string mainNode = "album";
             List<string> albums = null;
 
-            albums = await DataGetSet.GetAlbumsAsync();
 
             if (TreeViewLogicStates.Genre == "" || TreeViewLogicStates.Catalog == "")
             {
@@ -787,7 +811,10 @@ namespace MyJukebox_EF
                 return;
             }
 
+            albums = await DataGetSet.GetAlbumsAsync();
+
             TreeNode tnalbum = new TreeNode();
+
             tnalbum = tvlogic.Nodes["root"].Nodes[mainNode];
             tnalbum.Nodes.Clear();
             tnalbum.Nodes.Add("Alle");
@@ -818,7 +845,7 @@ namespace MyJukebox_EF
             string mainNode = "interpret";
             List<string> interpreters = null;
 
-            if (DataGetSet.GetSetting("LastGenre").ToString() == "" || DataGetSet.GetSetting("LastCatalog").ToString() == "")
+            if (TreeViewLogicStates.Genre == "" || TreeViewLogicStates.Catalog == "")
             {
                 tvlogic.Nodes["root"].Nodes[mainNode].Nodes.Clear();
                 tvlogic.Nodes["root"].Nodes[mainNode].Nodes.Add(mainNode + "_alle", "Alle");

@@ -10,6 +10,8 @@ namespace MyJukebox_EF.BLL
     public static class DataGetSet
     {
         #region MyjukeBox
+
+
         // ToDo: check this !
         public static void AddSongToPlaylist(int id, string playlistName)
         {
@@ -41,22 +43,16 @@ namespace MyJukebox_EF.BLL
 
         }
 
-        public static async Task<List<string>> GetAlbumsAsync()
+        public static async Task<List<string>> GetGenresAsync()
         {
-            List<string> albums = null;
-
-            using (var context = new MyJukeboxEntities())
+            List<string> genres = null;
+            var context = new MyJukeboxEntities();
+            await Task.Run(() =>
             {
-                await Task.Run(() =>
-                {
-                    albums = context.vSongs
-                                    .Where(a => a.Genre == TreeViewLogicStates.Genre && a.Catalog == TreeViewLogicStates.Catalog)
-                                    .Select(a => a.Album)
-                                    .Distinct().OrderBy(a => a).ToList();
-                });
-
-                return albums;
-            }
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();  // .Distinct().OrderBy(g => g).ToList();
+            });
+            return genres;
         }
 
         public static async Task<List<string>> GetCatalogsAsync()
@@ -77,16 +73,45 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static async Task<List<string>> GetGenresAsync()
+        public static async Task<List<string>> GetAlbumsAsync()
         {
-            List<string> genres = null;
-            var context = new MyJukeboxEntities();
-            await Task.Run(() =>
+            List<string> albums = null;
+
+            using (var context = new MyJukeboxEntities())
             {
-                genres = context.tGenres
-                    .Select(g => g.Name).ToList();  // .Distinct().OrderBy(g => g).ToList();
-            });
-            return genres;
+                await Task.Run(() =>
+                {
+                    albums = context.vSongs
+                                    .Where(a => a.Genre == TreeViewLogicStates.Genre && a.Catalog == TreeViewLogicStates.Catalog)
+                                    .Select(a => a.Album)
+                                    .Distinct().OrderBy(a => a).ToList();
+                });
+
+                return albums;
+            }
+        }
+
+        public static List<string> GetInterpretenAsyncTest(string genre, string catalog, string album)
+        {
+            List<string> interpretes = null;
+
+            using (var context = new MyJukeboxEntities())
+            {
+                try
+                {
+                    interpretes = context.vSongs
+                                    .Where(i => i.Genre == genre && i.Catalog == catalog && i.Album.Contains(album))
+                                    .Select(i => i.Interpret)
+                                    .Distinct().OrderBy(i => i).ToList();
+
+                    return interpretes;
+
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
         }
 
         public static async Task<List<string>> GetInterpretenAsync()
@@ -98,7 +123,7 @@ namespace MyJukebox_EF.BLL
                 await Task.Run(() =>
                 {
                     interpreter = context.vSongs
-                                    .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog && i.Album == TreeViewLogicStates.Album)
+                                    .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog && i.Album.Contains(TreeViewLogicStates.Album))
                                     .Select(i => i.Interpret)
                                     .Distinct().OrderBy(i => i).ToList();
                 });
@@ -165,28 +190,6 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        //public static async Task<List<Playlist>> GetPlaylistsAsync()
-        //{
-        //    List<Playlist> playLists = new List<Playlist>();
-
-        //    using (var context = new MyJukeboxEntities())
-        //    {
-        //        await Task.Run(() =>
-        //        {
-        //            var playlists = context.tPlaylists
-        //                         .OrderBy(p => p.Name)
-        //                         .Select(p => new { p.ID, p.Name, p.Row });
-
-        //            foreach (var p in playlists)
-        //            {
-        //                playLists.Add(new Playlist { ID = p.ID, Name = p.Name, Pos = p.Row });
-        //            }
-
-        //        });
-
-        //        return playLists;
-        //    }
-        //}
 
         public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
         {
@@ -666,6 +669,12 @@ namespace MyJukebox_EF.BLL
         #endregion
 
         #region Settings
+
+        public static async Task<List<string>> GetAllSettings()
+        {
+            // ToDo: implement GetAllSettings
+            return null;
+        }
 
         internal static object GetSetting(string name, string init = "0")
         {
