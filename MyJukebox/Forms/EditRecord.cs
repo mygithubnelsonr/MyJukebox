@@ -36,9 +36,9 @@ namespace MyJukebox_EF
         #endregion CTOR
 
         #region Form_Events
-        private void Form_Load()
+
+        private void EditRecord_Load(object sender, EventArgs e)
         {
-            //_formloaded = false;
             _formloaded = true;
         }
 
@@ -249,5 +249,7 @@ namespace MyJukebox_EF
                 IsSongInfoChanged = true;
 
         }
+
+
     }
 }

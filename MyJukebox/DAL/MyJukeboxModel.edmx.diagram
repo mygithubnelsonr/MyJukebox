@@ -28,6 +28,7 @@
         <AssociationConnector Association="MyJukeboxContext.FK_tSongsNew_tCatalogs" />
         <EntityTypeShape EntityType="MyJukeboxContext.tColumn" Width="1.5" PointX="10.75" PointY="4.75" />
         <EntityTypeShape EntityType="MyJukeboxContext.tSetting" Width="1.5" PointX="10.75" PointY="7.75" />
+        <EntityTypeShape EntityType="MyJukeboxContext.tQuery" Width="1.5" PointX="3.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

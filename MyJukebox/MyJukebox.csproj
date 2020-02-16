@@ -126,6 +126,9 @@
     <Compile Include="DAL\tPLentry.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\tQuery.cs">
+      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\tSetting.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
@@ -144,7 +147,14 @@
     <Compile Include="DAL\vSongsLong.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forms\InputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InputDialog.Designer.cs">
+      <DependentUpon>InputDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Colors.cs" />
+    <Compile Include="BLL\SettingsDb.cs" />
     <Compile Include="Helpers\UsedColors.cs" />
     <Compile Include="DAL\MyJukeboxModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -185,14 +195,13 @@
     <Compile Include="Forms\MyJukebox.Designer.cs">
       <DependentUpon>MyJukebox.cs</DependentUpon>
     </Compile>
-    <Compile Include="BLL\Methods.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="Resources\GetFiles.cs" />
     <Compile Include="Helpers\ImageCollector.cs" />
     <Compile Include="BLL\Mp3Record.cs" />
     <Compile Include="BLL\Playlist.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="BLL\TabcontrolTab.cs" />
     <EmbeddedResource Include="Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -202,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Filescanner.resx">
       <DependentUpon>Filescanner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InputDialog.resx">
+      <DependentUpon>InputDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MyJukebox.resx">
       <DependentUpon>MyJukebox.cs</DependentUpon>

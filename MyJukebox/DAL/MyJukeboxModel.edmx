@@ -102,6 +102,16 @@
           <Property Name="SongID" Type="int" Nullable="false" />
           <Property Name="Pos" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'MyJukebox.dbo.tQueries' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tQueries">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Query" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Query" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tSettings">
           <Key>
             <PropertyRef Name="ID" />
@@ -287,6 +297,12 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
           <EntitySet Name="tSettings" EntityType="Self.tSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tSongs" EntityType="Self.tSongs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTestImport" EntityType="Self.tTestImport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tQueries" EntityType="Self.tQueries" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tQueries].[ID] AS [ID], 
+    [tQueries].[Query] AS [Query]
+    FROM [dbo].[tQueries] AS [tQueries]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vPlaylistSongs" EntityType="Self.vPlaylistSongs" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vPlaylistSongs].[ID] AS [ID], 
@@ -477,6 +493,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
           </AssociationSet>
           <EntitySet Name="tColumns" EntityType="MyJukeboxContext.tColumn" />
           <EntitySet Name="tSettings" EntityType="MyJukeboxContext.tSetting" />
+          <EntitySet Name="tQueries" EntityType="MyJukeboxContext.tQuery" />
           </EntityContainer>
         <EntityType Name="tTestImport">
           <Key>
@@ -670,6 +687,14 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tQuery">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Query" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Query" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -873,6 +898,14 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
               <MappingFragment StoreEntitySet="tSettings">
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tQueries">
+            <EntityTypeMapping TypeName="MyJukeboxContext.tQuery">
+              <MappingFragment StoreEntitySet="tQueries">
+                <ScalarProperty Name="Query" ColumnName="Query" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

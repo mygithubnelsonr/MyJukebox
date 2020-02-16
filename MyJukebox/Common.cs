@@ -1,4 +1,4 @@
-﻿using MyJukebox_EF.DAL;
+﻿using MyJukebox_EF.BLL;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,13 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MyJukebox_EF.BLL
+namespace MyJukebox_EF
 {
-    public static class Methods
+    public static class Common
     {
         public static void TextBoxSearchClear(TextBox textBox)
         {
-            textBox.Text = Settings.PlaceHolderText;
+            textBox.Text = DataGetSet.GetSetting("PlaceHolderText").ToString();
             textBox.ForeColor = Color.Gray;
         }
 
@@ -20,7 +20,7 @@ namespace MyJukebox_EF.BLL
         {
             bool IsQuery = false;
 
-            if (filter == "" || filter == Settings.PlaceHolderText)
+            if (filter == "" || filter == DataGetSet.GetSetting("PlaceHolderText").ToString())
                 IsQuery = false;
             else
                 IsQuery = true;
@@ -65,42 +65,6 @@ namespace MyJukebox_EF.BLL
             }
             catch
             {
-                return null;
-            }
-        }
-
-        public static MP3Record GetRecordInfo(string startDirectory)
-        {
-            MP3Record record = null;
-
-            // no special import
-            string[] arTmp = startDirectory.Split('\\');
-
-            if (arTmp.Length < 5)
-                return record;
-
-            List<int> media;
-            string type = arTmp[arTmp.Length - 3];
-            var context = new MyJukeboxEntities();
-            media = context.tMedias
-                        .Where(m => m.Type == type)
-                        .Select(m => m.ID).ToList();
-
-
-            try
-            {
-                record = new MP3Record();
-                record.Album = arTmp[arTmp.Length - 1];
-                record.Interpret = arTmp[arTmp.Length - 2];
-                record.Media = media[0];
-                record.Genre = arTmp[arTmp.Length - 5];
-                record.Catalog = arTmp[arTmp.Length - 4];
-
-                return record;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Media Type not found!", ex.Message);
                 return null;
             }
         }

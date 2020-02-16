@@ -190,22 +190,17 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-
-        public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
+        public static List<vSong> GetQueryResult(string queryText)
         {
             List<vSong> songs = null;
 
             try
             {
-                string sql = Methods.GetQueryString(queryText);
+                string sql = Common.GetQueryString(queryText);
 
                 var context = new MyJukeboxEntities();
-                await Task.Run(() =>
-                        {
-                            songs = context.vSongs
-                                      .SqlQuery(sql).ToList();
-
-                        });
+                songs = context.vSongs
+                          .SqlQuery(sql).ToList();
 
                 return songs;
             }
@@ -214,6 +209,18 @@ namespace MyJukebox_EF.BLL
                 Debug.Print($"GetQueryResultAsync: {ex.Message}");
                 return null;
             }
+        }
+
+        public static List<string> GetQueryList()
+        {
+            List<string> queries = null;
+
+            var context = new MyJukeboxEntities();
+
+            queries = context.tQueries
+                            .Select(q => q.Query).ToList();
+
+            return queries;
         }
 
         public static async Task<List<vSong>> GetTablogicalResultsAsync()
@@ -287,6 +294,15 @@ namespace MyJukebox_EF.BLL
                 result.Rating = rating;
                 context.SaveChanges();
             };
+        }
+
+        public static void SetQueries(string name)
+        {
+            var context = new MyJukeboxEntities();
+
+            context.tQueries.Add(new tQuery { Query = name });
+
+            context.SaveChanges();
         }
 
         public static void SetColumnWidth(string name, int width)
@@ -397,6 +413,23 @@ namespace MyJukebox_EF.BLL
             return recordsImporteds;
         }
 
+        public static bool TruncateTableQueries()
+        {
+            try
+            {
+                var context = new MyJukeboxEntities();
+                var result = context.Database.ExecuteSqlCommand("truncate table [tQueries]");
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Print($"TruncateTableImportTest_Error: {ex.Message}");
+                return false;
+            }
+
+        }
+
         public static bool TruncateTableImportTest()
         {
             try
@@ -413,6 +446,7 @@ namespace MyJukebox_EF.BLL
             }
 
         }
+
         private static bool MD5Exist(string MD5)
         {
             var context = new MyJukeboxEntities();
@@ -669,11 +703,16 @@ namespace MyJukebox_EF.BLL
         #endregion
 
         #region Settings
-
-        public static async Task<List<string>> GetAllSettings()
+        public static List<tSetting> GetAllSettings()
         {
-            // ToDo: implement GetAllSettings
-            return null;
+            List<tSetting> allSettings = null;
+
+            var context = new MyJukeboxEntities();
+
+            allSettings = context.tSettings
+                            .Select(s => s).ToList();
+
+            return allSettings;
         }
 
         internal static object GetSetting(string name, string init = "0")
@@ -780,7 +819,7 @@ namespace MyJukebox_EF.BLL
 
                     foreach (var s in result)
                     {
-                        string hash = Methods.MD5($"{s.Pfad}{s.FileName}");
+                        string hash = Common.MD5($"{s.Pfad}{s.FileName}");
                         Debug.Print($"ID_Song={s.ID}, md5={hash}");
 
 
@@ -795,5 +834,42 @@ namespace MyJukebox_EF.BLL
         }
 
         #endregion
+
+        public static MP3Record GetRecordInfo(string startDirectory)
+        {
+            MP3Record record = null;
+
+            // no special import
+            string[] arTmp = startDirectory.Split('\\');
+
+            if (arTmp.Length < 5)
+                return record;
+
+            List<int> media;
+            string type = arTmp[arTmp.Length - 3];
+            var context = new MyJukeboxEntities();
+            media = context.tMedias
+                        .Where(m => m.Type == type)
+                        .Select(m => m.ID).ToList();
+
+
+            try
+            {
+                record = new MP3Record();
+                record.Album = arTmp[arTmp.Length - 1];
+                record.Interpret = arTmp[arTmp.Length - 2];
+                record.Media = media[0];
+                record.Genre = arTmp[arTmp.Length - 5];
+                record.Catalog = arTmp[arTmp.Length - 4];
+
+                return record;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Media Type not found!", ex.Message);
+                return null;
+            }
+        }
+
     }
 }

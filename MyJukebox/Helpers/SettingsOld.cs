@@ -3,7 +3,7 @@ using NRSoft.FunctionPool;
 using System;
 using System.Collections.Generic;
 
-namespace MyJukebox_EF
+namespace MyJukebox_EF.NotUsed
 {
     [Serializable]
     public class Settings
@@ -101,7 +101,6 @@ namespace MyJukebox_EF
                 DataGetSet.SetSetting("LastKatalog", "");
                 DataGetSet.SetSetting("LastAlbum", "");
                 DataGetSet.SetSetting("LastInterpret", "");
-                //DataGetSet.SetSetting("LastID", "0");
                 DataGetSet.SetSetting("LastQuery", "");
                 DataGetSet.SetSetting("QueryCount", "0");
             }

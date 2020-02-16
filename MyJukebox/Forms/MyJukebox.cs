@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
 
+
+// ToDo: implement contextmenu playlist add new
 namespace MyJukebox_EF
 {
     public partial class MyJukebox : Form
@@ -51,19 +53,19 @@ namespace MyJukebox_EF
 
         private async void MyJukebox_Load(object sender, EventArgs e)
         {
+            SettingsDb.Load();
+
             var currentDatagrigRow = 1;
             var lastQuery = DataGetSet.GetSetting("LastQuery").ToString();
 
-            // ToDo: delete when unnessessery
-            Settings.Load();
-
             #region restore last window properties
 
-            Top = Convert.ToInt32(DataGetSet.GetSetting("FormTop", "100"));
-            Left = Convert.ToInt32(DataGetSet.GetSetting("FormLeft", "100"));
-            Width = Convert.ToInt32(DataGetSet.GetSetting("FormWidth", "836"));
-            Height = Convert.ToInt32(DataGetSet.GetSetting("FormHeight", "580"));
-            WindowState = DataGetSet.GetSetting("FormState", "Normal").ToString() == "Normal" ? FormWindowState.Normal : FormWindowState.Maximized;
+            Top = SettingsDb.FormTop;
+            Left = SettingsDb.FormLeft;
+            Width = SettingsDb.FormWidth;
+            Height = SettingsDb.FormHeight;
+
+            WindowState = (FormWindowState)SettingsDb.Formstate(SettingsDb.FormState);
 
             #endregion restore last window properties
 
@@ -78,7 +80,7 @@ namespace MyJukebox_EF
 
             #region restore query
 
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
 
             FillQueryCombo();
 
@@ -155,6 +157,7 @@ namespace MyJukebox_EF
 
         private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // save window metrics
             DataGetSet.SetSetting("FormTop", Top.ToString());
             DataGetSet.SetSetting("FormLeft", Left.ToString());
             DataGetSet.SetSetting("FormWidth", Width.ToString());
@@ -162,31 +165,33 @@ namespace MyJukebox_EF
             DataGetSet.SetSetting("FormState", WindowState.ToString());
             DataGetSet.SetSetting("FormSplitterLeft", splitContainer1.SplitterDistance.ToString());
 
+            // save dataGridView.Columns widht
             foreach (DataGridViewColumn column in dataGridView.Columns)
+                DataGetSet.SetColumnWidth(column.Name, column.Width);
+
+            // save query list entries
+            var result = DataGetSet.TruncateTableQueries();
+
+            if (result == true)
             {
-                try
+                foreach (var q in comboBoxQueries.Items)
                 {
-                    Settings.DatagridColums.Add(column.Name, column.Width);
-                }
-                catch
-                {
-                    Settings.DatagridColums[column.Name] = column.Width;
+                    if (q.ToString() != "")
+                        DataGetSet.SetQueries(q.ToString());
                 }
             }
-
-            Settings.QueryList.Clear();
-            foreach (var q in comboBoxQueries.Items)
+            else
             {
-                if (q.ToString() != "")
-                    Settings.QueryList.Add(q.ToString());
+                Debug.Print("truncate table tQueries failed!");
             }
 
+            // save treeview logic states
             DataGetSet.SetSetting("LastGenre", TreeViewLogicStates.Genre);
             DataGetSet.SetSetting("LastCatalog", TreeViewLogicStates.Catalog);
             DataGetSet.SetSetting("LastAlbum", TreeViewLogicStates.Album);
             DataGetSet.SetSetting("LastInterpret", TreeViewLogicStates.Interpret);
 
-            //Settings.Save();
+            SettingsDb.Save();
         }
 
         private void TreeviewsFirstFill()
@@ -227,10 +232,8 @@ namespace MyJukebox_EF
 
         private void MyJukebox_Initialize()
         {
-            // ToDo: delete Settings.Initialize() when unnessessery
-            Settings.Initialize();
+            SettingsDb.Initalaze();
             DataGetSet.SetSetting("LastRunDate", DateTime.UtcNow.ToString());
-            DataGetSet.SetSetting("Version", Properties.Settings.Default.Version);
         }
 
         #endregion Form Main Methodes
@@ -259,13 +262,29 @@ namespace MyJukebox_EF
 
             result = DataGetSet.GetInterpretenAsyncTest(TreeViewLogicStates.Genre, "Gabriele", "");
 
-            foreach(var interpret in result)
+            foreach (var interpret in result)
                 Debug.Print(interpret);
 
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
         {
+            string _caption = "New Playlist";
+            string _prompt = "Enter Playlist Name:";
+
+            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt);
+
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                Debug.Print(input.textBoxInput.Text);
+            };
+
+            // Check to see if the dialog is still hanging around
+            // and, if so, get rid of it.
+            if (input != null)
+            {
+                input.Dispose();
+            }
 
         }
 
@@ -327,7 +346,7 @@ namespace MyJukebox_EF
         private void tvlogic_Click(object sender, EventArgs e)
         {
             Debug.Print("tvlogic_Click");
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
 
             string mainNode = "";
 
@@ -905,7 +924,7 @@ namespace MyJukebox_EF
         {
             Debug.Print("tvplaylist_Click:");
 
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
             int lastSelectedPlaylist = DataGetSet.GetLastselectedPlaylist();
 
             try
@@ -987,7 +1006,7 @@ namespace MyJukebox_EF
                 //foreach (var entry in playlistEntries)
                 //{
                 ToolStripMenuItem subitem = new ToolStripMenuItem();
-                subitem.Text = Methods.CamelSpaceOut(item.Name);
+                subitem.Text = Common.CamelSpaceOut(item.Name);
                 subitem.Name = item.Name;
                 subitem.Tag = item.ID;
                 subitem.Click += PlaylistsContextMenuStrip_Click;
@@ -1121,7 +1140,7 @@ namespace MyJukebox_EF
 
             #region FillDatagridByQuery
 
-            if (Methods.IsQuery(filter) == true)
+            if (Common.IsQuery(filter) == true)
             {
                 FillDatagridByQuery();
                 return;
@@ -1229,9 +1248,6 @@ namespace MyJukebox_EF
             dataGridView.DataSource = results;
             dataGridView.ResumeLayout();
 
-            //dataGridView.Rows[(int)info.Row].Selected = true;
-            //dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
-
             Debug.Print("FillDatagridByTabPlaylist finish");
         }
 
@@ -1241,7 +1257,7 @@ namespace MyJukebox_EF
             if (DataGetSet.GetSetting("LastSelectedTab").ToString() == TabcontrolTab.Logical.ToString())
                 currentDatagrigRow = 1;
 
-            var results = DataGetSet.GetQueryResultAsync(textBoxSearch.Text);
+            var results = DataGetSet.GetQueryResult(textBoxSearch.Text);
             dataGridView.DataSource = results;
 
             if (dataGridView.RowCount > 0)
@@ -1264,7 +1280,7 @@ namespace MyJukebox_EF
             if (itemExist == false)
             {
                 comboBoxQueries.Items.Add(query);
-                Settings.QueryList.Add(query);
+                //Settings.QueryList.Add(query);
             }
         }
 
@@ -1536,7 +1552,7 @@ namespace MyJukebox_EF
         {
             Console.WriteLine("tabControl_SelectedIndexChanged");
 
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
 
             int currentTabIndex = tabControl.SelectedIndex;
             switch (currentTabIndex)
@@ -1577,10 +1593,20 @@ namespace MyJukebox_EF
 
         #region other controls
 
+        private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonQueryExecute.PerformClick();
+            }
+        }
+
         private void buttonQueryExecute_Click(object sender, EventArgs e)
         {
-            if (textBoxSearch.Text != DataGetSet.GetSetting("PlaceHolderText", "< Input SQL like Album='V8-A-1' >").ToString()) ;
-            FillDatagridView(textBoxSearch.Text);
+            var placeholderText = DataGetSet.GetSetting("PlaceHolderText").ToString();
+
+            if (textBoxSearch.Text != placeholderText)
+                FillDatagridView(textBoxSearch.Text);
         }
 
         private void buttonQueryhSave_Click(object sender, EventArgs e)
@@ -1590,7 +1616,7 @@ namespace MyJukebox_EF
 
         private void buttonQueryClear_Click(object sender, EventArgs e)
         {
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
             if (comboBoxQueries.Text != "")
             {
                 comboBoxQueries.Text = "";
@@ -1648,10 +1674,12 @@ namespace MyJukebox_EF
         {
             comboBoxQueries.Items.Clear();
 
-            if (Settings.QueryList.Count > 0)
+            List<string> queries = DataGetSet.GetQueryList();
+
+            if (queries.Count > 0)
             {
                 comboBoxQueries.Items.Add("");
-                foreach (var q in Settings.QueryList)
+                foreach (var q in queries)
                 {
                     comboBoxQueries.Items.Add(q);
                 }
@@ -1737,7 +1765,7 @@ namespace MyJukebox_EF
 
         private void comboBoxQueries_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Methods.TextBoxSearchClear(textBoxSearch);
+            Common.TextBoxSearchClear(textBoxSearch);
             toolStripPlaybackButtonStop.PerformClick();
 
             if (comboBoxQueries.Text != "")
@@ -1922,7 +1950,35 @@ namespace MyJukebox_EF
         private void tvlogicContextMenuStripExpand_Click(object sender, EventArgs e)
         {
         }
+        
+        private void contextPlaylistMenuItemAdd_Click(object sender, EventArgs e)
+        {
+            string _caption = "New Playlist";
+            string _prompt = "Enter Playlist Name:";
 
+            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt);
 
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                Debug.Print(input.textBoxInput.Text);
+            };
+
+            // Check to see if the dialog is still hanging around
+            // and, if so, get rid of it.
+            if (input != null)
+            {
+                input.Dispose();
+            }
+        }
+
+        private void toolStripMenuItemRemove_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItemRename_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

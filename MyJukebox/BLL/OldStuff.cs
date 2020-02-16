@@ -1,4 +1,5 @@
 ﻿using MyJukebox_EF.BLL;
+using MyJukebox_EF.DAL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -135,5 +136,33 @@ namespace Oldstuff
             //    return playLists;
             //}
         }
+
+        public static async Task<List<vSong>> GetQueryResultAsync(string queryText)
+        {
+            return null;
+
+            //List<vSong> songs = null;
+
+            //try
+            //{
+            //    string sql = Methods.GetQueryString(queryText);
+
+            //    var context = new MyJukeboxEntities();
+            //    await Task.Run(() =>
+            //    {
+            //        songs = context.vSongs
+            //                  .SqlQuery(sql).ToList();
+
+            //    });
+
+            //    return songs;
+            //}
+            //catch (Exception ex)
+            //{
+            //    Debug.Print($"GetQueryResultAsync: {ex.Message}");
+            //    return null;
+            //}
+        }
+
     }
 }

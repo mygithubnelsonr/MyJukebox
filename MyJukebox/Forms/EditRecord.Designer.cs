@@ -578,6 +578,7 @@ namespace MyJukebox_EF
             this.Name = "EditRecord";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Record";
+            this.Load += new System.EventHandler(this.EditRecord_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

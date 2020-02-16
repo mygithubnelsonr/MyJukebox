@@ -121,6 +121,7 @@
     </AssociationSet>
     <EntitySet Name="tColumns" EntityType="MyJukeboxContext.tColumn" />
     <EntitySet Name="tSettings" EntityType="MyJukeboxContext.tSetting" />
+    <EntitySet Name="tQueries" EntityType="MyJukeboxContext.tQuery" />
   </EntityContainer>
   <EntityType Name="tTestImport">
     <Key>
@@ -314,5 +315,13 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tQuery">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Query" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Query" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -42,5 +42,6 @@ namespace MyJukebox_EF.DAL
         public virtual DbSet<tCatalog> tCatalogs { get; set; }
         public virtual DbSet<tColumn> tColumns { get; set; }
         public virtual DbSet<tSetting> tSettings { get; set; }
+        public virtual DbSet<tQuery> tQueries { get; set; }
     }
 }

@@ -43,7 +43,7 @@ namespace MyJukebox_EF
 
         private void Filescanner_Load(object sender, EventArgs e)
         {
-            Settings.FilescannerLoad();
+            //Settings.FilescannerLoad();
 
             //Top = Settings.FilescannerTop;
             //Left = Settings.FilescannerLeft;
@@ -252,7 +252,7 @@ namespace MyJukebox_EF
                 listViewFileList.AutoResizeColumn(n, ColumnHeaderAutoResizeStyle.ColumnContent);
             }
 
-            int DirCount = Methods.DirectoryCount(startDirectory);
+            int DirCount = Common.DirectoryCount(startDirectory);
 
             listViewFileList.EndUpdate();
             toolStripStatusLabelFiles.Text = listViewFileList.Items.Count.ToString();
@@ -266,7 +266,7 @@ namespace MyJukebox_EF
             }
 
             MP3Record record = new MP3Record();
-            record = Methods.GetRecordInfo(startDirectory);
+            record = DataGetSet.GetRecordInfo(startDirectory);
 
             if (record != null)
             {
@@ -330,7 +330,7 @@ namespace MyJukebox_EF
                 fileExtension = fi.Extension.ToLower();
                 if (checkBoxSpecialImport.Checked)
                 {
-                    MP3Record record = Methods.GetRecordInfo(filePfad);
+                    MP3Record record = DataGetSet.GetRecordInfo(filePfad);
 
                     string[] arTmp = fileName.ToLower().Split(new string[] { " - " }, StringSplitOptions.RemoveEmptyEntries);
                     if (arTmp.Length == 0)
@@ -352,7 +352,7 @@ namespace MyJukebox_EF
                 }
                 else
                 {
-                    MP3Record record = Methods.GetRecordInfo(filePfad);
+                    MP3Record record = DataGetSet.GetRecordInfo(filePfad);
 
                     string[] arTmp = filePfad.Split(new string[] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -392,7 +392,7 @@ namespace MyJukebox_EF
                     mp3.Genre = arPath[arPath.Length - 5];
                 }
 
-                mp3.MD5 = Methods.MD5(mp3.Path + mp3.FileName);
+                mp3.MD5 = Common.MD5(mp3.Path + mp3.FileName);
                 mp3List.Add(mp3);
             }
 

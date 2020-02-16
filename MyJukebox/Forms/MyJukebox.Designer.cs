@@ -92,6 +92,7 @@ namespace MyJukebox_EF
             this.tvlogicContextMenuStripExpand = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPlayLists = new System.Windows.Forms.TabPage();
             this.tvplaylist = new System.Windows.Forms.TreeView();
+            this.contextMenuStripPlaylist = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripPlaybackTrackBarPosition = new System.Windows.Forms.TrackBar();
             this.toolStripPlaybackTrackBarVolume = new System.Windows.Forms.TrackBar();
             this.toolStripPlayback = new System.Windows.Forms.ToolStrip();
@@ -151,6 +152,9 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
+            this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -163,6 +167,7 @@ namespace MyJukebox_EF
             this.tabLogical.SuspendLayout();
             this.tvlogicContextMenuStrip.SuspendLayout();
             this.tabPlayLists.SuspendLayout();
+            this.contextMenuStripPlaylist.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).BeginInit();
             this.toolStripPlayback.SuspendLayout();
@@ -656,6 +661,7 @@ namespace MyJukebox_EF
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvplaylist.BackColor = System.Drawing.Color.LightSlateGray;
+            this.tvplaylist.ContextMenuStrip = this.contextMenuStripPlaylist;
             this.tvplaylist.ForeColor = System.Drawing.Color.Gold;
             this.tvplaylist.Location = new System.Drawing.Point(3, 3);
             this.tvplaylist.Name = "tvplaylist";
@@ -672,6 +678,15 @@ namespace MyJukebox_EF
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
             this.tvplaylist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvplaylist_MouseDown);
+            // 
+            // contextMenuStripPlaylist
+            // 
+            this.contextMenuStripPlaylist.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemAdd,
+            this.toolStripMenuItemRemove,
+            this.toolStripMenuItemRename});
+            this.contextMenuStripPlaylist.Name = "contextMenuStripPlaylist";
+            this.contextMenuStripPlaylist.Size = new System.Drawing.Size(181, 92);
             // 
             // toolStripPlaybackTrackBarPosition
             // 
@@ -854,7 +869,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(644, 448);
+            this.dataGridView.Size = new System.Drawing.Size(628, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -1094,7 +1109,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(596, 28);
+            this.panelSearch.Size = new System.Drawing.Size(580, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1102,7 +1117,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(330, 9);
+            this.label2.Location = new System.Drawing.Point(314, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1117,6 +1132,7 @@ namespace MyJukebox_EF
             this.textBoxSearch.TabIndex = 7;
             this.textBoxSearch.Text = "<Input SQL like \\\'Album\\\' = \\\'V8-A-1\\\'>";
             this.textBoxSearch.Enter += new System.EventHandler(this.textBoxSearch_Enter);
+            this.textBoxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSearch_KeyDown);
             this.textBoxSearch.Leave += new System.EventHandler(this.textBoxSearch_Leave);
             // 
             // buttonQueryhSave
@@ -1124,7 +1140,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(568, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(552, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1136,7 +1152,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(381, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(365, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1235,6 +1251,27 @@ namespace MyJukebox_EF
             // 
             this.timerShowMyBitmap.Interval = 10000;
             // 
+            // toolStripMenuItemAdd
+            // 
+            this.toolStripMenuItemAdd.Name = "toolStripMenuItemAdd";
+            this.toolStripMenuItemAdd.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemAdd.Text = "Add new Playlist";
+            this.toolStripMenuItemAdd.Click += new System.EventHandler(this.contextPlaylistMenuItemAdd_Click);
+            // 
+            // toolStripMenuItemRemove
+            // 
+            this.toolStripMenuItemRemove.Name = "toolStripMenuItemRemove";
+            this.toolStripMenuItemRemove.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemRemove.Text = "Remove Playlist";
+            this.toolStripMenuItemRemove.Click += new System.EventHandler(this.toolStripMenuItemRemove_Click);
+            // 
+            // toolStripMenuItemRename
+            // 
+            this.toolStripMenuItemRename.Name = "toolStripMenuItemRename";
+            this.toolStripMenuItemRename.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItemRename.Text = "Rename Playlist";
+            this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
+            // 
             // MyJukebox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1269,6 +1306,7 @@ namespace MyJukebox_EF
             this.tabLogical.ResumeLayout(false);
             this.tvlogicContextMenuStrip.ResumeLayout(false);
             this.tabPlayLists.ResumeLayout(false);
+            this.contextMenuStripPlaylist.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).EndInit();
             this.toolStripPlayback.ResumeLayout(false);
@@ -1398,6 +1436,10 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DatagridContextMenuStripCopyLineToClip;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripPlaylist;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdd;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
     }
 }
 
