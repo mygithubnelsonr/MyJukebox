@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using WMPLib;
 
 
-// ToDo: implement contextmenu playlist add new
 namespace MyJukebox_EF
 {
     public partial class MyJukebox : Form
@@ -120,7 +119,7 @@ namespace MyJukebox_EF
                 statusStripKatalog.Text = TreeViewLogicStates.Catalog;
                 statusStripAlbum.Text = TreeViewLogicStates.Album;
                 statusStripInterpret.Text = TreeViewLogicStates.Interpret;
-                currentDatagrigRow = Convert.ToInt32(DataGetSet.GetSetting("DatagridLastSelectedRow"));
+                currentDatagrigRow = SettingsDb.DatagridLastSelectedRow;
             }
 
             if (lastSelectedTab == (int)TabcontrolTab.Playlist)
@@ -258,33 +257,14 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest1_Click(object sender, EventArgs e)
         {
-            List<string> result = null;
+            var row = SettingsDb.DatagridLastSelectedRow;
 
-            result = DataGetSet.GetInterpretenAsyncTest(TreeViewLogicStates.Genre, "Gabriele", "");
-
-            foreach (var interpret in result)
-                Debug.Print(interpret);
+            dataGridView.Rows[row].Selected = true;
 
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
         {
-            string _caption = "New Playlist";
-            string _prompt = "Enter Playlist Name:";
-
-            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt);
-
-            if (input.ShowDialog() == DialogResult.OK)
-            {
-                Debug.Print(input.textBoxInput.Text);
-            };
-
-            // Check to see if the dialog is still hanging around
-            // and, if so, get rid of it.
-            if (input != null)
-            {
-                input.Dispose();
-            }
 
         }
 
@@ -479,9 +459,13 @@ namespace MyJukebox_EF
 
             lastSelectedTreeNode = currentTreeNode;
 
+            SettingsDb.DatagridLastSelectedRow = 0;
+
             FillDatagridView();
-            GridViewSetColumsWidth();
-            random.InitRandomNumbers(dataGridView.RowCount - 1, 0);
+
+
+            //GridViewSetColumsWidth();
+            //random.InitRandomNumbers(dataGridView.RowCount - 1, 0);
         }
 
         #endregion Treeview tvlogic Event Handlers
@@ -982,9 +966,6 @@ namespace MyJukebox_EF
 
         private async Task tvplaylistFillPlaylist()
         {
-            //string mainNode = "playlists";
-            //List<Playlist> playlistEntries = null;
-
             List<Playlist> playlistEntries = DataGetSet.GetPlaylists();
 
             TreeNode treeNode = tvplaylist.Nodes["root"].Nodes["playlists"];
@@ -1001,10 +982,6 @@ namespace MyJukebox_EF
                 tn.ImageKey = "playlist";
                 tn.SelectedImageKey = "playlist";
                 tn.Tag = ID;
-                //}
-
-                //foreach (var entry in playlistEntries)
-                //{
                 ToolStripMenuItem subitem = new ToolStripMenuItem();
                 subitem.Text = Common.CamelSpaceOut(item.Name);
                 subitem.Name = item.Name;
@@ -1136,8 +1113,6 @@ namespace MyJukebox_EF
 
         public void FillDatagridView(string filter = "")
         {
-            int lastRow = 0;
-
             #region FillDatagridByQuery
 
             if (Common.IsQuery(filter) == true)
@@ -1151,19 +1126,21 @@ namespace MyJukebox_EF
             #region FillDatagrid by Logical Tab
 
             if (tabControl.SelectedTab == tabLogical)
+            {
                 FillDatagridByTabLogical();
+                dataGridView.Rows[SettingsDb.DatagridLastSelectedRow].Selected = true;
+            }
 
             #endregion FillDatagrid by Logical Tab
 
             #region Fill Datagrid by Playlist
 
-            var x = tabControl.SelectedTab.Text;
-            var y = tabPlayLists.Text;
-
             if (tabControl.SelectedTab == tabPlayLists)
             {
                 Debug.Print("calling FillDatagridByTabPlaylist");
                 FillDatagridByTabPlaylist();
+
+                Debug.Print("back from FillDatagridByTabPlaylist");
 
                 //int playlistID = (int)tvplaylist.SelectedNode.Tag;
 
@@ -1173,26 +1150,28 @@ namespace MyJukebox_EF
             }
             #endregion Fill Datagrid by Playlist
 
-            Debug.Print("back from FillDatagridByTabPlaylist");
-
             #region format datagridview
 
             try
             {
-                if (dataGridView.RowCount > 0)
+                if (dataGridView.RowCount > 1)
                 {
                     GridViewSetColumsWidth();
-                    dataGridView.Rows[lastRow].Selected = true;
+
+                    dataGridView.Columns["ID"].Visible = false;
+                    // after hiding the first column the CurrentRow becomes NULL!!
+                    // so set the CurrentCell to any valid value
+                    dataGridView.CurrentCell = dataGridView["Genre", SettingsDb.DatagridLastSelectedRow];
+                    dataGridView.Rows[SettingsDb.DatagridLastSelectedRow].Selected = true;
                 }
 
                 if (dataGridView.CurrentRow != null)
                 {
                     dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
-                    statusStripRow.Text = Convert.ToString(dataGridView.CurrentRow.Index + 1);
+                    statusStripRow.Text = (dataGridView.SelectedRows[0].Index + 1).ToString();
                     statusStripRowcount.Text = dataGridView.RowCount.ToString();
                 }
 
-                dataGridView.Columns["ID"].Visible = false;
                 dataGridView.ResumeLayout();
             }
             catch (Exception ex)
@@ -1216,8 +1195,7 @@ namespace MyJukebox_EF
             dataGridView.DataSource = results;
             dataGridView.ResumeLayout();
 
-            int lastselectedRow = Convert.ToInt32(DataGetSet.GetSetting("DatagridLastSelectedRow"));
-            //dataGridView.Rows[lastselectedRow].Selected = true;
+            Debug.Print("FillDatagridByTabLogical finish");
         }
 
         private void FillDatagridByTabPlaylist()
@@ -1230,7 +1208,7 @@ namespace MyJukebox_EF
             dataGridView.DataSource = results;
             dataGridView.ResumeLayout();
 
-            if (dataGridView.Rows.Count > 0)
+            if (dataGridView.Rows.Count > 1)
             {
                 dataGridView.Rows[(int)info.Row].Selected = true;
                 dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
@@ -1405,21 +1383,18 @@ namespace MyJukebox_EF
             pictureBoxFoto.Image = Properties.Resources.MyBitmap;
         }
 
-
-        // ToDo: fehler beheben bei click wenn play noch nicht gedrückt wurde
         private void toolStripPlaybackButtonNext_Click(object sender, EventArgs e)
         {
             Debug.Print("buttonNext_Click");
 
             int currentRow = dataGridView.CurrentRow.Index;
-            bool isRandom = (bool)DataGetSet.GetSetting("IsRandom");
 
-            if ((currentRow < dataGridView.RowCount - 1) && !isRandom)
+            if ((currentRow < dataGridView.RowCount - 1) && !SettingsDb.IsRandom)
             {
                 var columsCount = dataGridView.ColumnCount - 1;
                 dataGridView.Rows[++currentRow].Cells[2].Selected = true;
             }
-            else if (isRandom == true)
+            else if (SettingsDb.IsRandom == true)
             {
                 var nextRow = random.GetNextNumber;
                 dataGridView.Rows[nextRow].Cells[2].Selected = true;
@@ -1433,14 +1408,12 @@ namespace MyJukebox_EF
             _isloop = false;
             Debug.Print("buttonRandom_Click");
 
-            bool isRandom = (bool)DataGetSet.GetSetting("IsRandom");
-
+            bool isRandom = SettingsDb.IsRandom;
 
             toolStripPlaybackButtonLoop.Checked = false;
             toolStripPlaybackButtonLoop.BackColor = Color.LightSlateGray;
 
             isRandom = !isRandom;
-
             if (isRandom)
                 toolStripPlaybackButtonRandom.BackColor = Color.LightSteelBlue;
             else
@@ -1448,7 +1421,7 @@ namespace MyJukebox_EF
 
             toolStripPlayback.Refresh();
 
-            DataGetSet.SetSetting("IsRandom", "True");
+            SettingsDb.IsRandom = isRandom;
         }
 
         private void toolStripPlaybackButtonLoop_Click(object sender, EventArgs e)
@@ -1492,7 +1465,6 @@ namespace MyJukebox_EF
 
         private void toolStripFileButtonDelete_Click(object sender, EventArgs e)
         {
-            Debug.Print("");
         }
 
         private void toolStripFileButtonOpen_Click(object sender, EventArgs e)
@@ -1950,34 +1922,109 @@ namespace MyJukebox_EF
         private void tvlogicContextMenuStripExpand_Click(object sender, EventArgs e)
         {
         }
-        
+
         private void contextPlaylistMenuItemAdd_Click(object sender, EventArgs e)
         {
             string _caption = "New Playlist";
             string _prompt = "Enter Playlist Name:";
+            string playlistName = "";
 
             InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt);
 
             if (input.ShowDialog() == DialogResult.OK)
             {
-                Debug.Print(input.textBoxInput.Text);
+                playlistName = input.textBoxInput.Text;
             };
 
             // Check to see if the dialog is still hanging around
             // and, if so, get rid of it.
             if (input != null)
-            {
                 input.Dispose();
+
+            if (string.IsNullOrEmpty(playlistName))
+            {
+                MessageBox.Show("Empty Playlist Name!");
+                return;
             }
+
+            int newID = DataGetSet.AddNewPlaylist(playlistName);
+
+            TreeNode treeNode = tvplaylist.Nodes["root"].Nodes["playlists"];
+
+            TreeNode tn = treeNode.Nodes.Add("playlist_" + playlistName.ToLower(), playlistName);
+            tn.Name = playlistName.ToLower();
+            tn.ImageKey = "playlist";
+            tn.SelectedImageKey = "playlist";
+            tn.Tag = newID;
+            ToolStripMenuItem subitem = new ToolStripMenuItem();
+            subitem.Text = Common.CamelSpaceOut(playlistName);
+            subitem.Name = playlistName;
+            subitem.Tag = newID;
+            subitem.Click += PlaylistsContextMenuStrip_Click;
+            datagridContextMenuStripSendToPlaylist.DropDownItems.Add(subitem);
+
         }
 
+
+        // ToDo: implement rename and delete playlist
         private void toolStripMenuItemRemove_Click(object sender, EventArgs e)
         {
+            string _caption = "Delete Playlist";
+            string _prompt = "Playlist Name:";
+            string _default = tvplaylist.SelectedNode.Text;
+            string playlistName = "";
+
+            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt, DefautText: _default);
+
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                playlistName = input.textBoxInput.Text;
+            };
+
+            // Check to see if the dialog is still hanging around
+            // and, if so, get rid of it.
+            if (input != null)
+                input.Dispose();
+
+            if (string.IsNullOrEmpty(playlistName))
+            {
+                MessageBox.Show("Empty Playlist Name!");
+                return;
+            }
+            else
+                MessageBox.Show($"New Playlist Name is {playlistName}");
+
+
 
         }
 
         private void toolStripMenuItemRename_Click(object sender, EventArgs e)
         {
+            string _caption = "Delete Playlist";
+            string _prompt = "Enter new Playlist Name:";
+            string _default = tvplaylist.SelectedNode.Text;
+            string playlistName = "";
+
+            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt, DefautText: _default);
+
+            if (input.ShowDialog() == DialogResult.OK)
+            {
+                playlistName = input.textBoxInput.Text;
+            };
+
+            // Check to see if the dialog is still hanging around
+            // and, if so, get rid of it.
+            if (input != null)
+                input.Dispose();
+
+            if (string.IsNullOrEmpty(playlistName))
+            {
+                MessageBox.Show("Empty Playlist Name!");
+                return;
+            }
+            else
+                MessageBox.Show($"New Playlist Name is {playlistName}");
+
 
         }
     }

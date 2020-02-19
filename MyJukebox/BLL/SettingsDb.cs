@@ -103,19 +103,13 @@ namespace MyJukebox_EF.BLL
                 DataGetSet.SetSetting("LastAlbum", "");
                 DataGetSet.SetSetting("LastInterpret", "");
                 DataGetSet.SetSetting("LastQuery", "");
+                DataGetSet.SetSetting("DatagridLastSelectedRow", "1");
             }
         }
 
         public static void Load()
         {
             #region Form Settings
-
-            //List<tSetting> settings = DataGetSet.GetAllSettings();
-
-            //foreach(var s in settings)
-            //{
-            //    Debug.Print($"{s.ID}, {s.Name}, {s.Value}");
-            //}
 
             // minwidth=836; minheight=580
             FormState = DataGetSet.GetSetting("FormState", "Normal").ToString();
@@ -124,6 +118,7 @@ namespace MyJukebox_EF.BLL
             FormWidth = Convert.ToInt16(DataGetSet.GetSetting("FormWidth", "836"));
             FormHeight = Convert.ToInt16(DataGetSet.GetSetting("FormHeight", "580"));
             FormSplitterLeft = Convert.ToInt16(DataGetSet.GetSetting("FormSplitterLeft", "200"));
+            DatagridLastSelectedRow = Convert.ToInt16(DataGetSet.GetSetting("DatagridLastSelectedRow", "1"));
 
             #endregion Form Settings
         }

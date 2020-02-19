@@ -12,37 +12,7 @@ namespace MyJukebox_EF.BLL
         #region MyjukeBox
 
 
-        // ToDo: check this !
-        public static void AddSongToPlaylist(int id, string playlistName)
-        {
-            var context = new MyJukeboxEntities();
-            var playlist = context.tPlaylists
-                                .Where(p => p.Name == playlistName)
-                                .Select(p => p.ID).ToList();
-
-            if (playlist == null)
-                throw new Exception("Wrong playlist!");
-
-            var entry = new tPLentry()
-            {
-                PLID = playlist[0],
-                SongID = id,
-                Pos = 1
-            };
-
-            context.tPLentries.Add(entry);
-            context.SaveChanges();
-        }
-
-        public static void DeleteSong(int id)
-        {
-            var context = new MyJukeboxEntities();
-            var songs = context.tSongs.First(s => s.ID == id);
-            context.tSongs.Remove(songs);
-            context.SaveChanges();
-
-        }
-
+        #region Treeview Logic
         public static async Task<List<string>> GetGenresAsync()
         {
             List<string> genres = null;
@@ -132,6 +102,39 @@ namespace MyJukebox_EF.BLL
             }
         }
 
+        #endregion
+
+        #region Treeview Playlists
+        internal static int AddNewPlaylist(string playlistname)
+        {
+            var context = new MyJukeboxEntities();
+            tPlaylist playlist = new tPlaylist { Name = playlistname, Last = false };
+            context.tPlaylists.Add(playlist);
+            context.SaveChanges();
+            return playlist.ID;
+        }
+
+        public static void AddSongToPlaylist(int id, string playlistName)
+        {
+            var context = new MyJukeboxEntities();
+            var playlist = context.tPlaylists
+                                .Where(p => p.Name == playlistName)
+                                .Select(p => p.ID).ToList();
+
+            if (playlist == null)
+                throw new Exception("Wrong playlist!");
+
+            var entry = new tPLentry()
+            {
+                PLID = playlist[0],
+                SongID = id,
+                Pos = 1
+            };
+
+            context.tPLentries.Add(entry);
+            context.SaveChanges();
+        }
+
         public static List<vPlaylistSong> GetPlaylistEntries(int playlistID)
         {
             List<vPlaylistSong> songs = null;
@@ -188,6 +191,90 @@ namespace MyJukebox_EF.BLL
 
                 return playLists;
             }
+        }
+
+        internal static void SetPlaylistLastSelected(int id)
+        {
+            var context = new MyJukeboxEntities();
+
+            int last = GetLastselectedPlaylist();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == last);
+            if (result != null) result.Last = false;
+
+            result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
+            if (result != null) result.Last = true;
+
+            context.SaveChanges();
+        }
+
+        internal static int GetLastselectedPlaylist()
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.Last == true);
+
+            if (result != null)
+                return result.ID;
+            else
+                return 1;
+        }
+
+        internal static PlaylistInfo GetPlaylistInfos(int id)
+        {
+            PlaylistInfo info = null;
+
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
+
+            if (result != null)
+            {
+                return info = new PlaylistInfo
+                {
+                    ID = result.ID,
+                    Name = result.Name,
+                    Row = result.Row != null ? (int)result.Row : 2,
+                    Last = result.Last != null ? (bool)result.Last : false
+                };
+            }
+            else
+                return null;
+        }
+
+        internal static void SetPlaylistInfos(PlaylistInfo playlist)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == playlist.ID);
+
+            if (result != null)
+            {
+                if (playlist.Name != null) result.Name = playlist.Name;
+                if (playlist.Row != null) result.Row = playlist.Row;
+                if (playlist.Last != null) result.Last = playlist.Last;
+
+                context.SaveChanges();
+            }
+        }
+
+        internal static int GetLastselectedPlaylistRow(int currentPlaylist)
+        {
+            var context = new MyJukeboxEntities();
+            var result = context.tPlaylists.SingleOrDefault(n => n.ID == currentPlaylist);
+
+            if (result != null && result.Row != null)
+                return (int)result.Row;
+            else
+                return 2;
+        }
+
+        #endregion
+
+        #region DatagridView
+        public static void DeleteSong(int id)
+        {
+            var context = new MyJukeboxEntities();
+            var songs = context.tSongs.First(s => s.ID == id);
+            context.tSongs.Remove(songs);
+            context.SaveChanges();
+
         }
 
         public static List<vSong> GetQueryResult(string queryText)
@@ -283,6 +370,7 @@ namespace MyJukebox_EF.BLL
 
             return result;
         }
+        #endregion
 
         public static void SetRating(int id, int rating)
         {
@@ -316,78 +404,6 @@ namespace MyJukebox_EF.BLL
                 context.tColumns.Add(new tColumn { Name = name, Width = width });
 
             context.SaveChanges();
-        }
-
-        internal static void SetPlaylistLastSelected(int id)
-        {
-            var context = new MyJukeboxEntities();
-
-            int last = GetLastselectedPlaylist();
-            var result = context.tPlaylists.SingleOrDefault(n => n.ID == last);
-            if (result != null) result.Last = false;
-
-            result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
-            if (result != null) result.Last = true;
-
-            context.SaveChanges();
-        }
-
-        internal static int GetLastselectedPlaylist()
-        {
-            var context = new MyJukeboxEntities();
-            var result = context.tPlaylists.SingleOrDefault(n => n.Last == true);
-
-            if (result != null)
-                return result.ID;
-            else
-                return 1;
-        }
-
-        internal static PlaylistInfo GetPlaylistInfos(int id)
-        {
-            PlaylistInfo info = null;
-
-            var context = new MyJukeboxEntities();
-            var result = context.tPlaylists.SingleOrDefault(n => n.ID == id);
-
-            if (result != null)
-            {
-                return info = new PlaylistInfo
-                {
-                    ID = result.ID,
-                    Name = result.Name,
-                    Row = result.Row != null ? (int)result.Row : 2,
-                    Last = result.Last != null ? (bool)result.Last : false
-                };
-            }
-            else
-                return null;
-        }
-
-        internal static void SetPlaylistInfos(PlaylistInfo playlist)
-        {
-            var context = new MyJukeboxEntities();
-            var result = context.tPlaylists.SingleOrDefault(n => n.ID == playlist.ID);
-
-            if (result != null)
-            {
-                if (playlist.Name != null) result.Name = playlist.Name;
-                if (playlist.Row != null) result.Row = playlist.Row;
-                if (playlist.Last != null) result.Last = playlist.Last;
-
-                context.SaveChanges();
-            }
-        }
-
-        internal static int GetLastselectedPlaylistRow(int currentPlaylist)
-        {
-            var context = new MyJukeboxEntities();
-            var result = context.tPlaylists.SingleOrDefault(n => n.ID == currentPlaylist);
-
-            if (result != null && result.Row != null)
-                return (int)result.Row;
-            else
-                return 2;
         }
 
         #endregion
@@ -833,8 +849,6 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        #endregion
-
         public static MP3Record GetRecordInfo(string startDirectory)
         {
             MP3Record record = null;
@@ -870,6 +884,9 @@ namespace MyJukebox_EF.BLL
                 return null;
             }
         }
+
+        #endregion
+
 
     }
 }
