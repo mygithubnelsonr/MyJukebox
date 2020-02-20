@@ -1965,37 +1965,16 @@ namespace MyJukebox_EF
 
         }
 
-
-        // ToDo: implement rename and delete playlist
         private void toolStripMenuItemRemove_Click(object sender, EventArgs e)
         {
-            string _caption = "Delete Playlist";
-            string _prompt = "Playlist Name:";
-            string _default = tvplaylist.SelectedNode.Text;
-            string playlistName = "";
+            int id = (int)tvplaylist.SelectedNode.Tag;
 
-            InputDialog input = new InputDialog(Caption: _caption, Prompt: _prompt, DefautText: _default);
-
-            if (input.ShowDialog() == DialogResult.OK)
+            if (DataGetSet.RemovePlaylist(id) == false)
             {
-                playlistName = input.textBoxInput.Text;
-            };
-
-            // Check to see if the dialog is still hanging around
-            // and, if so, get rid of it.
-            if (input != null)
-                input.Dispose();
-
-            if (string.IsNullOrEmpty(playlistName))
-            {
-                MessageBox.Show("Empty Playlist Name!");
-                return;
+                MessageBox.Show("Rename failed!");
             }
             else
-                MessageBox.Show($"New Playlist Name is {playlistName}");
-
-
-
+                tvplaylist.SelectedNode.Remove();
         }
 
         private void toolStripMenuItemRename_Click(object sender, EventArgs e)
@@ -2022,10 +2001,15 @@ namespace MyJukebox_EF
                 MessageBox.Show("Empty Playlist Name!");
                 return;
             }
+
+            int id = (int)tvplaylist.SelectedNode.Tag;
+
+            if (DataGetSet.RenamePlaylist(id, playlistName) == false)
+            {
+                MessageBox.Show("Rename failed!");
+            }
             else
-                MessageBox.Show($"New Playlist Name is {playlistName}");
-
-
+                tvplaylist.SelectedNode.Text = playlistName;
         }
     }
 }

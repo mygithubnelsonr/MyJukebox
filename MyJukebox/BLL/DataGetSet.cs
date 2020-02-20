@@ -265,6 +265,46 @@ namespace MyJukebox_EF.BLL
                 return 2;
         }
 
+        internal static bool RenamePlaylist(int id, string newPlaylistName)
+        {
+            try
+            {
+                var context = new MyJukeboxEntities();
+                var playlist = context.tPlaylists.SingleOrDefault(i => i.ID == id);
+
+                playlist.Name = newPlaylistName;
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        internal static bool RemovePlaylist(int id)
+        {
+            try
+            {
+                var context = new MyJukeboxEntities();
+
+                var playlistEntries = context.tPLentries
+                                .Where(i => i.PLID == id)
+                                .Select(i => i);
+
+                context.tPLentries.RemoveRange(playlistEntries);
+
+                var playlist = context.tPlaylists.SingleOrDefault(i => i.ID == id);
+                context.tPlaylists.Remove(playlist);
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region DatagridView
@@ -886,7 +926,5 @@ namespace MyJukebox_EF.BLL
         }
 
         #endregion
-
-
     }
 }
