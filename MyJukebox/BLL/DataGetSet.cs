@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MyJukebox_EF.BLL
 {
-    public static class DataGetSet
+    public class DataGetSet
     {
-        #region MyjukeBox
 
+        #region MyjukeBox
 
         #region Treeview Logic
         public static async Task<List<string>> GetGenresAsync()
@@ -153,26 +153,7 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static async Task<List<vPlaylistSong>> GetPlaylistEntriesAsync(int playlistID)
-        {
-            List<vPlaylistSong> songs = null;
-            try
-            {
-                var context = new MyJukeboxEntities();
-                await Task.Run(() =>
-                {
-                    songs = context.vPlaylistSongs
-                        .Where(i => i.PLID == playlistID).ToList();
-                });
-
-                return songs;
-            }
-            catch (Exception ex)
-            {
-                Debug.Print($"GetPlaylistEntries_Error: {ex.Message}");
-                return null;
-            }
-        }
+        // public static async Task<List<vPlaylistSong>> GetPlaylistEntriesAsync(int playlistID)
 
         public static List<Playlist> GetPlaylists()
         {
@@ -345,7 +326,8 @@ namespace MyJukebox_EF.BLL
             var context = new MyJukeboxEntities();
 
             queries = context.tQueries
-                            .Select(q => q.Query).ToList();
+                            .Select(q => q.Query)
+                            .OrderBy(q => q).ToList();
 
             return queries;
         }
@@ -424,14 +406,14 @@ namespace MyJukebox_EF.BLL
             };
         }
 
-        public static void SetQueries(string name)
-        {
-            var context = new MyJukeboxEntities();
+        //public static void SetQueries(string name)
+        //{
+        //    var context = new MyJukeboxEntities();
 
-            context.tQueries.Add(new tQuery { Query = name });
+        //    context.tQueries.Add(new tQuery { Query = name });
 
-            context.SaveChanges();
-        }
+        //    context.SaveChanges();
+        //}
 
         public static void SetColumnWidth(string name, int width)
         {
@@ -758,45 +740,6 @@ namespace MyJukebox_EF.BLL
         }
         #endregion
 
-        #region Settings
-        public static List<tSetting> GetAllSettings()
-        {
-            List<tSetting> allSettings = null;
-
-            var context = new MyJukeboxEntities();
-
-            allSettings = context.tSettings
-                            .Select(s => s).ToList();
-
-            return allSettings;
-        }
-
-        internal static object GetSetting(string name, string init = "0")
-        {
-            var context = new MyJukeboxEntities();
-            var result = context.tSettings.SingleOrDefault(s => s.Name == name);
-
-            if (result != null)
-                return result.Value;
-            else
-                DataGetSet.SetSetting(name, init);
-            return init;
-        }
-
-        internal static void SetSetting(string name, string value)
-        {
-            var context = new MyJukeboxEntities();
-            var setting = context.tSettings.SingleOrDefault(s => s.Name == name);
-
-            if (setting == null)
-                context.tSettings.Add(new tSetting { Name = name, Value = value });
-            else
-                setting.Value = value;
-
-            context.SaveChanges();
-        }
-        #endregion
-
         #region Generell
         public static int GetCatalogFromString(string catalog)
         {
@@ -906,7 +849,6 @@ namespace MyJukebox_EF.BLL
                         .Where(m => m.Type == type)
                         .Select(m => m.ID).ToList();
 
-
             try
             {
                 record = new MP3Record();
@@ -926,5 +868,6 @@ namespace MyJukebox_EF.BLL
         }
 
         #endregion
+
     }
 }

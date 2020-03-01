@@ -164,5 +164,21 @@ namespace Oldstuff
             //}
         }
 
+        private async Task TreeviewsFirstFillAsync()
+        {
+            //// fill treeview with last results
+            //await tvlogicFillGenreAsync();
+
+            //await tvlogicFillCatalogAsync();
+
+            //await tvlogicFillAlbumAsync();
+
+            //await tvlogicFillInterpretAsync();
+
+            //await tvplaylistFillPlaylist();
+
+            //_tvFilled = true;
+        }
+
     }
 }

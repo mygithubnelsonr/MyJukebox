@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\DataGetSet.cs" />
+    <Compile Include="BLL\GetPlaylistSongs.cs" />
     <Compile Include="BLL\Logging.cs" />
     <Compile Include="BLL\PlaylistInfo.cs" />
     <Compile Include="BLL\TreeViewStates.cs" />
@@ -153,9 +154,9 @@
     <Compile Include="Forms\InputDialog.Designer.cs">
       <DependentUpon>InputDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Colors.cs" />
+    <Compile Include="Commons\Colors.cs" />
     <Compile Include="BLL\SettingsDb.cs" />
-    <Compile Include="Helpers\UsedColors.cs" />
+    <Compile Include="Commons\UsedColors.cs" />
     <Compile Include="DAL\MyJukeboxModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -195,9 +196,9 @@
     <Compile Include="Forms\MyJukebox.Designer.cs">
       <DependentUpon>MyJukebox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common.cs" />
+    <Compile Include="Commons\Common.cs" />
     <Compile Include="Resources\GetFiles.cs" />
-    <Compile Include="Helpers\ImageCollector.cs" />
+    <Compile Include="Commons\ImageCollector.cs" />
     <Compile Include="BLL\Mp3Record.cs" />
     <Compile Include="BLL\Playlist.cs" />
     <Compile Include="Program.cs" />

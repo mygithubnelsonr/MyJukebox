@@ -14,7 +14,7 @@ namespace MyJukebox_EF
         {
             _pathList = pathlist;
             _artist = artist.ToLower();
-            _imagePath = DataGetSet.GetSetting("ImagePath", "_Images").ToString();
+            _imagePath = SettingsDb.GetSetting("ImagePath", "_Images").ToString();
         }
 
         public List<string> GetImagesFullName()
