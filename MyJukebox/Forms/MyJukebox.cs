@@ -355,7 +355,7 @@ namespace MyJukebox_EF
 
             if (mainNode == "katalog" || mainNode == "genre")
             {
-                SettingsDb.SetSetting("LastKatalog", "");
+                SettingsDb.SetSetting("LastCatalog", "");
                 TreeViewLogicStates.Catalog = "";
 
                 tvlogicFillAlbumAsync();
@@ -757,7 +757,7 @@ namespace MyJukebox_EF
             tnkatalog.Nodes.Add("katalog_alle", "Alle");
             tnkatalog.FirstNode.ImageKey = mainNode;
             tnkatalog.FirstNode.SelectedImageKey = mainNode;
-            statusStripKatalog.Text = SettingsDb.GetSetting("LastKatalog").ToString();
+            statusStripKatalog.Text = SettingsDb.GetSetting("LastCatalog").ToString();
 
             catalogues = await DataGetSet.GetCatalogsAsync();
 

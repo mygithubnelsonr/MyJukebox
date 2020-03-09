@@ -30,16 +30,16 @@ namespace MyJukebox_EF
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyJukebox));
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Knoten1");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Knoten0", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Knoten1");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Knoten0", new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node1");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.menuMainFile = new System.Windows.Forms.ToolStripMenuItem();
             this.importNewSongsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -234,7 +234,7 @@ namespace MyJukebox_EF
             // menuMainEditRecord
             // 
             this.menuMainEditRecord.Name = "menuMainEditRecord";
-            this.menuMainEditRecord.Size = new System.Drawing.Size(180, 22);
+            this.menuMainEditRecord.Size = new System.Drawing.Size(111, 22);
             this.menuMainEditRecord.Text = "Record";
             this.menuMainEditRecord.Click += new System.EventHandler(this.menuMainEditRecord_Click);
             // 
@@ -258,21 +258,21 @@ namespace MyJukebox_EF
             // menuMainPlaybackPlay
             // 
             this.menuMainPlaybackPlay.Name = "menuMainPlaybackPlay";
-            this.menuMainPlaybackPlay.Size = new System.Drawing.Size(180, 22);
+            this.menuMainPlaybackPlay.Size = new System.Drawing.Size(110, 22);
             this.menuMainPlaybackPlay.Text = "Play";
             this.menuMainPlaybackPlay.Click += new System.EventHandler(this.menuMainPlaybackPlay_Click);
             // 
             // menuMainPlaybackPause
             // 
             this.menuMainPlaybackPause.Name = "menuMainPlaybackPause";
-            this.menuMainPlaybackPause.Size = new System.Drawing.Size(180, 22);
+            this.menuMainPlaybackPause.Size = new System.Drawing.Size(110, 22);
             this.menuMainPlaybackPause.Text = "Pause";
             this.menuMainPlaybackPause.Click += new System.EventHandler(this.menuMainPlaybackPause_Click);
             // 
             // menuMainPlaybackStop
             // 
             this.menuMainPlaybackStop.Name = "menuMainPlaybackStop";
-            this.menuMainPlaybackStop.Size = new System.Drawing.Size(180, 22);
+            this.menuMainPlaybackStop.Size = new System.Drawing.Size(110, 22);
             this.menuMainPlaybackStop.Text = "Stop";
             this.menuMainPlaybackStop.Click += new System.EventHandler(this.menuMainPlaybackStop_Click);
             // 
@@ -282,7 +282,7 @@ namespace MyJukebox_EF
             this.trackToolStripMenuItem,
             this.allToolStripMenuItem});
             this.repeatToolStripMenuItem.Name = "repeatToolStripMenuItem";
-            this.repeatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.repeatToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.repeatToolStripMenuItem.Text = "Repeat";
             // 
             // trackToolStripMenuItem
@@ -311,14 +311,14 @@ namespace MyJukebox_EF
             // menuMainToolsTest1
             // 
             this.menuMainToolsTest1.Name = "menuMainToolsTest1";
-            this.menuMainToolsTest1.Size = new System.Drawing.Size(180, 22);
+            this.menuMainToolsTest1.Size = new System.Drawing.Size(129, 22);
             this.menuMainToolsTest1.Text = "Test only 1";
             this.menuMainToolsTest1.Click += new System.EventHandler(this.menuMainToolsTest1_Click);
             // 
             // menuMainToolsTest2
             // 
             this.menuMainToolsTest2.Name = "menuMainToolsTest2";
-            this.menuMainToolsTest2.Size = new System.Drawing.Size(180, 22);
+            this.menuMainToolsTest2.Size = new System.Drawing.Size(129, 22);
             this.menuMainToolsTest2.Text = "Test only 2";
             this.menuMainToolsTest2.Click += new System.EventHandler(this.menuMainToolsTest2_Click);
             // 
@@ -599,14 +599,14 @@ namespace MyJukebox_EF
             this.tvlogic.LineColor = System.Drawing.Color.Gold;
             this.tvlogic.Location = new System.Drawing.Point(3, 3);
             this.tvlogic.Name = "tvlogic";
-            treeNode5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            treeNode5.ForeColor = System.Drawing.Color.Gold;
-            treeNode5.Name = "Knoten1";
-            treeNode5.Text = "Knoten1";
-            treeNode6.Name = "Knoten0";
-            treeNode6.Text = "Knoten0";
+            treeNode1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            treeNode1.ForeColor = System.Drawing.Color.Gold;
+            treeNode1.Name = "Knoten1";
+            treeNode1.Text = "Knoten1";
+            treeNode2.Name = "Knoten0";
+            treeNode2.Text = "Knoten0";
             this.tvlogic.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode2});
             this.tvlogic.ShowNodeToolTips = true;
             this.tvlogic.Size = new System.Drawing.Size(222, 210);
             this.tvlogic.TabIndex = 0;
@@ -655,15 +655,15 @@ namespace MyJukebox_EF
             this.tvplaylist.ForeColor = System.Drawing.Color.Gold;
             this.tvplaylist.Location = new System.Drawing.Point(3, 3);
             this.tvplaylist.Name = "tvplaylist";
-            treeNode1.BackColor = System.Drawing.Color.Blue;
-            treeNode1.ForeColor = System.Drawing.Color.Gold;
-            treeNode1.Name = "Node1";
-            treeNode1.Text = "Node1";
-            treeNode2.ForeColor = System.Drawing.Color.Gold;
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Node0";
+            treeNode3.BackColor = System.Drawing.Color.Blue;
+            treeNode3.ForeColor = System.Drawing.Color.Gold;
+            treeNode3.Name = "Node1";
+            treeNode3.Text = "Node1";
+            treeNode4.ForeColor = System.Drawing.Color.Gold;
+            treeNode4.Name = "Node0";
+            treeNode4.Text = "Node0";
             this.tvplaylist.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
             this.tvplaylist.Size = new System.Drawing.Size(225, 215);
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
@@ -842,46 +842,46 @@ namespace MyJukebox_EF
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Gainsboro;
-            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.ColumnHeadersHeight = 28;
             this.dataGridView.ContextMenuStrip = this.contextMenuStripDatagrid;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView.Location = new System.Drawing.Point(2, 57);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.CadetBlue;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.CadetBlue;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(680, 448);
+            this.dataGridView.Size = new System.Drawing.Size(692, 448);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -1121,7 +1121,7 @@ namespace MyJukebox_EF
             this.panelSearch.Controls.Add(this.label1);
             this.panelSearch.Location = new System.Drawing.Point(2, 26);
             this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(608, 28);
+            this.panelSearch.Size = new System.Drawing.Size(604, 28);
             this.panelSearch.TabIndex = 1;
             // 
             // label2
@@ -1129,7 +1129,7 @@ namespace MyJukebox_EF
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(342, 9);
+            this.label2.Location = new System.Drawing.Point(338, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1152,7 +1152,7 @@ namespace MyJukebox_EF
             this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(580, 5);
+            this.buttonQueryhSave.Location = new System.Drawing.Point(576, 5);
             this.buttonQueryhSave.Name = "buttonQueryhSave";
             this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
             this.buttonQueryhSave.TabIndex = 6;
@@ -1164,7 +1164,7 @@ namespace MyJukebox_EF
             this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(393, 5);
+            this.comboBoxQueries.Location = new System.Drawing.Point(389, 5);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
