@@ -181,16 +181,6 @@ namespace MyJukebox_EF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Loop {
-            get {
-                object obj = ResourceManager.GetObject("Loop", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap MyBitmap {
@@ -221,52 +211,32 @@ namespace MyJukebox_EF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon player_next {
+        internal static System.Drawing.Bitmap Playback_Loop {
             get {
-                object obj = ResourceManager.GetObject("player_next", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Playback_Loop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon player_pause {
+        internal static System.Drawing.Bitmap Playback_Pause {
             get {
-                object obj = ResourceManager.GetObject("player_pause", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Playback_Pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon player_play {
+        internal static System.Drawing.Bitmap Playback_Shuffel {
             get {
-                object obj = ResourceManager.GetObject("player_play", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon player_prev {
-            get {
-                object obj = ResourceManager.GetObject("player_prev", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon player_stop {
-            get {
-                object obj = ResourceManager.GetObject("player_stop", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                object obj = ResourceManager.GetObject("Playback_Shuffel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -276,16 +246,6 @@ namespace MyJukebox_EF.Properties {
         internal static System.Drawing.Icon Playlist {
             get {
                 object obj = ResourceManager.GetObject("Playlist", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Random {
-            get {
-                object obj = ResourceManager.GetObject("Random", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

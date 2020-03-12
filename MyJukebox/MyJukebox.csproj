@@ -197,7 +197,6 @@
       <DependentUpon>MyJukebox.cs</DependentUpon>
     </Compile>
     <Compile Include="Commons\Common.cs" />
-    <Compile Include="Resources\GetFiles.cs" />
     <Compile Include="Commons\ImageCollector.cs" />
     <Compile Include="BLL\Mp3Record.cs" />
     <Compile Include="BLL\Playlist.cs" />
@@ -221,14 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EntityDeploy Include="DAL\MyJukeboxModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyJukeboxModel.Designer.cs</LastGenOutput>
@@ -245,6 +239,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -256,9 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MyJukebox.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Random.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Interpret.ico" />
@@ -297,9 +293,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Loop.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="BLL\OldStuff.cs" />
     <Content Include="DAL\MyJukeboxModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -313,17 +306,15 @@
     </Content>
     <Content Include="Jukebox.ico" />
     <Content Include="Resources\Delete.ico" />
+    <Content Include="Resources\Playback_Loop.png" />
+    <Content Include="Resources\Playback_Pause.png" />
+    <None Include="Resources\Playback_Shuffel.png" />
     <Content Include="Resources\QuerySave.ico" />
     <Content Include="Resources\save32.ico" />
     <None Include="app.config" />
     <None Include="Resources\MyBitmap.gif" />
     <EmbeddedResource Include="Resources\Drop.ico" />
     <Content Include="Resources\Binocular.ico" />
-    <Content Include="Resources\player_next.ico" />
-    <Content Include="Resources\player_pause.ico" />
-    <Content Include="Resources\player_play.ico" />
-    <Content Include="Resources\player_prev.ico" />
-    <Content Include="Resources\player_stop.ico" />
     <EmbeddedResource Include="Resources\Playlist.ico" />
     <None Include="Resources\ShadowMen.gif" />
   </ItemGroup>
@@ -363,7 +354,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\11_Public\FunctionPool\FunctionPool.csproj">
+    <ProjectReference Include="..\..\..\..\11_Public\FunctionPool\FunctionPool.csproj">
       <Project>{5e8d2814-7dda-47ad-9739-dc3192f4a5f6}</Project>
       <Name>FunctionPool</Name>
     </ProjectReference>

@@ -95,18 +95,6 @@ namespace MyJukebox_EF
             this.toolStripMenuItemAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRename = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripPlaybackTrackBarPosition = new System.Windows.Forms.TrackBar();
-            this.toolStripPlaybackTrackBarVolume = new System.Windows.Forms.TrackBar();
-            this.toolStripPlayback = new System.Windows.Forms.ToolStrip();
-            this.toolStripPlaybackButtonPlay = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPlaybackButtonPause = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPlaybackButtonStop = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPlaybackButtonNext = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripPlaybackButtonRandom = new System.Windows.Forms.ToolStripButton();
-            this.toolStripPlaybackButtonLoop = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripPlaybackButtonSpeaker = new System.Windows.Forms.ToolStripButton();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.contextMenuStripDatagrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemSendTo = new System.Windows.Forms.ToolStripMenuItem();
@@ -136,17 +124,24 @@ namespace MyJukebox_EF
             this.setLinkToToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.moveEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelSearch = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonPlaybackSpeaker = new System.Windows.Forms.Button();
+            this.panelPlayback = new System.Windows.Forms.Panel();
+            this.buttonPlaybackLoop = new System.Windows.Forms.Button();
+            this.buttonPlaybackShuffle = new System.Windows.Forms.Button();
+            this.buttonPlaybackNext = new System.Windows.Forms.Button();
+            this.buttonPlaybackStop = new System.Windows.Forms.Button();
+            this.buttonPlaybackPlay = new System.Windows.Forms.Button();
+            this.buttonPlaybackPause = new System.Windows.Forms.Button();
             this.buttonQueryhSave = new System.Windows.Forms.Button();
+            this.toolStripPlaybackTrackBarPosition = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolStripPlaybackTrackBarVolume = new System.Windows.Forms.TrackBar();
             this.comboBoxQueries = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonQueryClear = new System.Windows.Forms.Button();
             this.buttonQueryExecute = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.toolStripFile = new System.Windows.Forms.ToolStrip();
-            this.toolStripFileButtonOpen = new System.Windows.Forms.ToolStripButton();
-            this.toolStripFileButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.timerMusic = new System.Windows.Forms.Timer(this.components);
             this.toolTipVolume = new System.Windows.Forms.ToolTip(this.components);
             this.toolTipPosition = new System.Windows.Forms.ToolTip(this.components);
@@ -167,13 +162,12 @@ namespace MyJukebox_EF
             this.contextMenuStripTvlogic.SuspendLayout();
             this.tabPlayLists.SuspendLayout();
             this.contextMenuStripPlaylist.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).BeginInit();
-            this.toolStripPlayback.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.contextMenuStripDatagrid.SuspendLayout();
-            this.panelSearch.SuspendLayout();
-            this.toolStripFile.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panelPlayback.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).BeginInit();
             this.SuspendLayout();
             // 
             // menuMain
@@ -190,7 +184,7 @@ namespace MyJukebox_EF
             this.menuMainAbout});
             this.menuMain.Location = new System.Drawing.Point(0, 0);
             this.menuMain.Name = "menuMain";
-            this.menuMain.Size = new System.Drawing.Size(942, 24);
+            this.menuMain.Size = new System.Drawing.Size(916, 24);
             this.menuMain.TabIndex = 0;
             this.menuMain.Text = "menuMain";
             // 
@@ -351,7 +345,7 @@ namespace MyJukebox_EF
             this.statusStrip.Location = new System.Drawing.Point(0, 533);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 14, 0);
-            this.statusStrip.Size = new System.Drawing.Size(942, 28);
+            this.statusStrip.Size = new System.Drawing.Size(916, 28);
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -426,7 +420,7 @@ namespace MyJukebox_EF
             // 
             this.statusStripTitel.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripTitel.Name = "statusStripTitel";
-            this.statusStripTitel.Size = new System.Drawing.Size(219, 23);
+            this.statusStripTitel.Size = new System.Drawing.Size(193, 23);
             this.statusStripTitel.Spring = true;
             this.statusStripTitel.Text = "Titel";
             this.statusStripTitel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -520,14 +514,11 @@ namespace MyJukebox_EF
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.toolStripPlaybackTrackBarPosition);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStripPlaybackTrackBarVolume);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStripPlayback);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView);
-            this.splitContainer1.Panel2.Controls.Add(this.panelSearch);
-            this.splitContainer1.Panel2.Controls.Add(this.toolStripFile);
-            this.splitContainer1.Size = new System.Drawing.Size(942, 509);
-            this.splitContainer1.SplitterDistance = 237;
+            this.splitContainer1.Panel2.Controls.Add(this.panel1);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.splitContainer1.Size = new System.Drawing.Size(916, 509);
+            this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.SplitterIncrement = 6;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 2;
@@ -539,7 +530,7 @@ namespace MyJukebox_EF
             this.pictureBoxFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(25)))), ((int)(((byte)(52)))));
             this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 380);
             this.pictureBoxFoto.Name = "pictureBoxFoto";
-            this.pictureBoxFoto.Size = new System.Drawing.Size(242, 125);
+            this.pictureBoxFoto.Size = new System.Drawing.Size(235, 125);
             this.pictureBoxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxFoto.TabIndex = 1;
             this.pictureBoxFoto.TabStop = false;
@@ -552,7 +543,7 @@ namespace MyJukebox_EF
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 256);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(235, 169);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(228, 169);
             this.axWindowsMediaPlayer1.TabIndex = 3;
             this.axWindowsMediaPlayer1.OpenStateChange += new AxWMPLib._WMPOCXEvents_OpenStateChangeEventHandler(this.axWindowsMediaPlayer1_OpenStateChange);
             this.axWindowsMediaPlayer1.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.axWindowsMediaPlayer1_PlayStateChange);
@@ -572,7 +563,7 @@ namespace MyJukebox_EF
             this.tabControl.Location = new System.Drawing.Point(3, 6);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(236, 244);
+            this.tabControl.Size = new System.Drawing.Size(229, 244);
             this.tabControl.TabIndex = 0;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
@@ -583,7 +574,7 @@ namespace MyJukebox_EF
             this.tabLogical.Location = new System.Drawing.Point(4, 24);
             this.tabLogical.Name = "tabLogical";
             this.tabLogical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLogical.Size = new System.Drawing.Size(228, 216);
+            this.tabLogical.Size = new System.Drawing.Size(221, 216);
             this.tabLogical.TabIndex = 0;
             this.tabLogical.Text = "Logical";
             this.tabLogical.UseVisualStyleBackColor = true;
@@ -608,7 +599,7 @@ namespace MyJukebox_EF
             this.tvlogic.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2});
             this.tvlogic.ShowNodeToolTips = true;
-            this.tvlogic.Size = new System.Drawing.Size(222, 210);
+            this.tvlogic.Size = new System.Drawing.Size(215, 210);
             this.tvlogic.TabIndex = 0;
             this.tvlogic.Click += new System.EventHandler(this.tvlogic_Click);
             this.tvlogic.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvlogic_MouseDown);
@@ -641,7 +632,7 @@ namespace MyJukebox_EF
             this.tabPlayLists.Location = new System.Drawing.Point(4, 24);
             this.tabPlayLists.Name = "tabPlayLists";
             this.tabPlayLists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlayLists.Size = new System.Drawing.Size(228, 216);
+            this.tabPlayLists.Size = new System.Drawing.Size(221, 216);
             this.tabPlayLists.TabIndex = 1;
             this.tabPlayLists.Text = "Playlists";
             // 
@@ -664,7 +655,7 @@ namespace MyJukebox_EF
             treeNode4.Text = "Node0";
             this.tvplaylist.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode4});
-            this.tvplaylist.Size = new System.Drawing.Size(225, 215);
+            this.tvplaylist.Size = new System.Drawing.Size(218, 215);
             this.tvplaylist.TabIndex = 0;
             this.tvplaylist.Click += new System.EventHandler(this.tvplaylist_Click);
             this.tvplaylist.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tvplaylist_MouseDown);
@@ -699,154 +690,11 @@ namespace MyJukebox_EF
             this.toolStripMenuItemRename.Text = "Rename Playlist";
             this.toolStripMenuItemRename.Click += new System.EventHandler(this.toolStripMenuItemRename_Click);
             // 
-            // toolStripPlaybackTrackBarPosition
-            // 
-            this.toolStripPlaybackTrackBarPosition.AutoSize = false;
-            this.toolStripPlaybackTrackBarPosition.BackColor = System.Drawing.Color.LightSlateGray;
-            this.toolStripPlaybackTrackBarPosition.Location = new System.Drawing.Point(347, 4);
-            this.toolStripPlaybackTrackBarPosition.Maximum = 100;
-            this.toolStripPlaybackTrackBarPosition.Name = "toolStripPlaybackTrackBarPosition";
-            this.toolStripPlaybackTrackBarPosition.Size = new System.Drawing.Size(112, 18);
-            this.toolStripPlaybackTrackBarPosition.TabIndex = 5;
-            this.toolStripPlaybackTrackBarPosition.TickFrequency = 10;
-            this.toolTipPosition.SetToolTip(this.toolStripPlaybackTrackBarPosition, "Position");
-            this.toolStripPlaybackTrackBarPosition.Scroll += new System.EventHandler(this.trackBarPosition_Scroll);
-            // 
-            // toolStripPlaybackTrackBarVolume
-            // 
-            this.toolStripPlaybackTrackBarVolume.AutoSize = false;
-            this.toolStripPlaybackTrackBarVolume.BackColor = System.Drawing.Color.LightSlateGray;
-            this.toolStripPlaybackTrackBarVolume.Location = new System.Drawing.Point(219, 4);
-            this.toolStripPlaybackTrackBarVolume.Maximum = 100;
-            this.toolStripPlaybackTrackBarVolume.Name = "toolStripPlaybackTrackBarVolume";
-            this.toolStripPlaybackTrackBarVolume.Size = new System.Drawing.Size(112, 18);
-            this.toolStripPlaybackTrackBarVolume.TabIndex = 4;
-            this.toolStripPlaybackTrackBarVolume.TickFrequency = 10;
-            this.toolTipVolume.SetToolTip(this.toolStripPlaybackTrackBarVolume, "Volume");
-            this.toolStripPlaybackTrackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
-            this.toolStripPlaybackTrackBarVolume.MouseUp += new System.Windows.Forms.MouseEventHandler(this.toolStripPlaybackTrackBarVolume_MouseUp);
-            // 
-            // toolStripPlayback
-            // 
-            this.toolStripPlayback.BackColor = System.Drawing.Color.LightSlateGray;
-            this.toolStripPlayback.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripPlayback.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripPlayback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripPlaybackButtonPlay,
-            this.toolStripPlaybackButtonPause,
-            this.toolStripPlaybackButtonStop,
-            this.toolStripPlaybackButtonNext,
-            this.toolStripSeparator1,
-            this.toolStripPlaybackButtonRandom,
-            this.toolStripPlaybackButtonLoop,
-            this.toolStripSeparator2,
-            this.toolStripPlaybackButtonSpeaker});
-            this.toolStripPlayback.Location = new System.Drawing.Point(2, 0);
-            this.toolStripPlayback.Name = "toolStripPlayback";
-            this.toolStripPlayback.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStripPlayback.Size = new System.Drawing.Size(449, 27);
-            this.toolStripPlayback.TabIndex = 3;
-            this.toolStripPlayback.Text = "toolStripPlayback";
-            // 
-            // toolStripPlaybackButtonPlay
-            // 
-            this.toolStripPlaybackButtonPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonPlay.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonPlay.Image")));
-            this.toolStripPlaybackButtonPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonPlay.Name = "toolStripPlaybackButtonPlay";
-            this.toolStripPlaybackButtonPlay.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonPlay.Text = "Play";
-            this.toolStripPlaybackButtonPlay.Click += new System.EventHandler(this.toolStripPlaybackButtonPlay_Click);
-            // 
-            // toolStripPlaybackButtonPause
-            // 
-            this.toolStripPlaybackButtonPause.CheckOnClick = true;
-            this.toolStripPlaybackButtonPause.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonPause.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonPause.Image")));
-            this.toolStripPlaybackButtonPause.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonPause.Name = "toolStripPlaybackButtonPause";
-            this.toolStripPlaybackButtonPause.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonPause.Text = "Pause";
-            this.toolStripPlaybackButtonPause.Click += new System.EventHandler(this.toolStripPlaybackButtonPause_Click);
-            // 
-            // toolStripPlaybackButtonStop
-            // 
-            this.toolStripPlaybackButtonStop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonStop.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonStop.Image")));
-            this.toolStripPlaybackButtonStop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonStop.Name = "toolStripPlaybackButtonStop";
-            this.toolStripPlaybackButtonStop.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonStop.Text = "Stop";
-            this.toolStripPlaybackButtonStop.Click += new System.EventHandler(this.toolStripPlaybackButtonStop_Click);
-            // 
-            // toolStripPlaybackButtonNext
-            // 
-            this.toolStripPlaybackButtonNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonNext.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonNext.Image")));
-            this.toolStripPlaybackButtonNext.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonNext.Name = "toolStripPlaybackButtonNext";
-            this.toolStripPlaybackButtonNext.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonNext.Tag = "";
-            this.toolStripPlaybackButtonNext.Text = "Next";
-            this.toolStripPlaybackButtonNext.Click += new System.EventHandler(this.toolStripPlaybackButtonNext_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripPlaybackButtonRandom
-            // 
-            this.toolStripPlaybackButtonRandom.CheckOnClick = true;
-            this.toolStripPlaybackButtonRandom.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonRandom.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonRandom.Image")));
-            this.toolStripPlaybackButtonRandom.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonRandom.Name = "toolStripPlaybackButtonRandom";
-            this.toolStripPlaybackButtonRandom.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonRandom.Tag = false;
-            this.toolStripPlaybackButtonRandom.Text = "toolStripButton6";
-            this.toolStripPlaybackButtonRandom.ToolTipText = "Random";
-            this.toolStripPlaybackButtonRandom.Click += new System.EventHandler(this.toolStripButtonRandom_Click);
-            // 
-            // toolStripPlaybackButtonLoop
-            // 
-            this.toolStripPlaybackButtonLoop.BackColor = System.Drawing.Color.LightSlateGray;
-            this.toolStripPlaybackButtonLoop.CheckOnClick = true;
-            this.toolStripPlaybackButtonLoop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonLoop.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonLoop.Image")));
-            this.toolStripPlaybackButtonLoop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonLoop.Name = "toolStripPlaybackButtonLoop";
-            this.toolStripPlaybackButtonLoop.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonLoop.Text = "toolStripButton7";
-            this.toolStripPlaybackButtonLoop.ToolTipText = "Loop";
-            this.toolStripPlaybackButtonLoop.Click += new System.EventHandler(this.toolStripPlaybackButtonLoop_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
-            // 
-            // toolStripPlaybackButtonSpeaker
-            // 
-            this.toolStripPlaybackButtonSpeaker.CheckOnClick = true;
-            this.toolStripPlaybackButtonSpeaker.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripPlaybackButtonSpeaker.Image = ((System.Drawing.Image)(resources.GetObject("toolStripPlaybackButtonSpeaker.Image")));
-            this.toolStripPlaybackButtonSpeaker.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripPlaybackButtonSpeaker.Margin = new System.Windows.Forms.Padding(6, 1, 250, 2);
-            this.toolStripPlaybackButtonSpeaker.Name = "toolStripPlaybackButtonSpeaker";
-            this.toolStripPlaybackButtonSpeaker.Size = new System.Drawing.Size(24, 24);
-            this.toolStripPlaybackButtonSpeaker.Text = "YYYYYYYYYYYY";
-            this.toolStripPlaybackButtonSpeaker.ToolTipText = "Mute";
-            this.toolStripPlaybackButtonSpeaker.Click += new System.EventHandler(this.toolStripPlaybackButtonSpeaker_Click);
-            // 
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Gainsboro;
             this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView.BackgroundColor = System.Drawing.Color.LightSlateGray;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.CadetBlue;
@@ -866,8 +714,9 @@ namespace MyJukebox_EF
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView.Location = new System.Drawing.Point(2, 57);
+            this.dataGridView.Location = new System.Drawing.Point(0, 71);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -881,7 +730,7 @@ namespace MyJukebox_EF
             this.dataGridView.RowHeadersWidth = 20;
             this.dataGridView.RowTemplate.Height = 20;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(692, 448);
+            this.dataGridView.Size = new System.Drawing.Size(670, 438);
             this.dataGridView.TabIndex = 2;
             this.dataGridView.EditModeChanged += new System.EventHandler(this.dataGridView_EditModeChanged);
             this.dataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellEndEdit);
@@ -1107,38 +956,224 @@ namespace MyJukebox_EF
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
-            // panelSearch
+            // panel1
             // 
-            this.panelSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelSearch.BackColor = System.Drawing.Color.LightSlateGray;
-            this.panelSearch.Controls.Add(this.label2);
-            this.panelSearch.Controls.Add(this.textBoxSearch);
-            this.panelSearch.Controls.Add(this.buttonQueryhSave);
-            this.panelSearch.Controls.Add(this.comboBoxQueries);
-            this.panelSearch.Controls.Add(this.buttonQueryClear);
-            this.panelSearch.Controls.Add(this.buttonQueryExecute);
-            this.panelSearch.Controls.Add(this.label1);
-            this.panelSearch.Location = new System.Drawing.Point(2, 26);
-            this.panelSearch.Name = "panelSearch";
-            this.panelSearch.Size = new System.Drawing.Size(604, 28);
-            this.panelSearch.TabIndex = 1;
+            this.panel1.Controls.Add(this.buttonPlaybackSpeaker);
+            this.panel1.Controls.Add(this.panelPlayback);
+            this.panel1.Controls.Add(this.buttonQueryhSave);
+            this.panel1.Controls.Add(this.toolStripPlaybackTrackBarPosition);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.toolStripPlaybackTrackBarVolume);
+            this.panel1.Controls.Add(this.comboBoxQueries);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.textBoxSearch);
+            this.panel1.Controls.Add(this.buttonQueryClear);
+            this.panel1.Controls.Add(this.buttonQueryExecute);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(670, 71);
+            this.panel1.TabIndex = 7;
+            // 
+            // buttonPlaybackSpeaker
+            // 
+            this.buttonPlaybackSpeaker.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackSpeaker.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackSpeaker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPlaybackSpeaker.BackgroundImage")));
+            this.buttonPlaybackSpeaker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackSpeaker.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackSpeaker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackSpeaker.Location = new System.Drawing.Point(255, 8);
+            this.buttonPlaybackSpeaker.Name = "buttonPlaybackSpeaker";
+            this.buttonPlaybackSpeaker.Size = new System.Drawing.Size(24, 24);
+            this.buttonPlaybackSpeaker.TabIndex = 24;
+            this.buttonPlaybackSpeaker.Tag = "false";
+            this.buttonPlaybackSpeaker.UseVisualStyleBackColor = false;
+            this.buttonPlaybackSpeaker.Click += new System.EventHandler(this.buttonSpeaker_Click);
+            // 
+            // panelPlayback
+            // 
+            this.panelPlayback.Controls.Add(this.buttonPlaybackLoop);
+            this.panelPlayback.Controls.Add(this.buttonPlaybackShuffle);
+            this.panelPlayback.Controls.Add(this.buttonPlaybackNext);
+            this.panelPlayback.Controls.Add(this.buttonPlaybackStop);
+            this.panelPlayback.Controls.Add(this.buttonPlaybackPlay);
+            this.panelPlayback.Controls.Add(this.buttonPlaybackPause);
+            this.panelPlayback.Location = new System.Drawing.Point(6, 5);
+            this.panelPlayback.Name = "panelPlayback";
+            this.panelPlayback.Size = new System.Drawing.Size(220, 31);
+            this.panelPlayback.TabIndex = 23;
+            // 
+            // buttonPlaybackLoop
+            // 
+            this.buttonPlaybackLoop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackLoop.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackLoop.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Loop;
+            this.buttonPlaybackLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackLoop.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackLoop.Location = new System.Drawing.Point(191, 2);
+            this.buttonPlaybackLoop.Name = "buttonPlaybackLoop";
+            this.buttonPlaybackLoop.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackLoop.TabIndex = 25;
+            this.buttonPlaybackLoop.Tag = "False";
+            this.buttonPlaybackLoop.UseVisualStyleBackColor = false;
+            this.buttonPlaybackLoop.Click += new System.EventHandler(this.buttonPlaybackLoop_Click);
+            // 
+            // buttonPlaybackShuffle
+            // 
+            this.buttonPlaybackShuffle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackShuffle.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackShuffle.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Shuffel;
+            this.buttonPlaybackShuffle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackShuffle.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackShuffle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackShuffle.Location = new System.Drawing.Point(157, 1);
+            this.buttonPlaybackShuffle.Name = "buttonPlaybackShuffle";
+            this.buttonPlaybackShuffle.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackShuffle.TabIndex = 24;
+            this.buttonPlaybackShuffle.Tag = "False";
+            this.buttonPlaybackShuffle.UseVisualStyleBackColor = false;
+            this.buttonPlaybackShuffle.Click += new System.EventHandler(this.buttonPlaybackShuffle_Click);
+            // 
+            // buttonPlaybackNext
+            // 
+            this.buttonPlaybackNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackNext.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackNext.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPlaybackNext.BackgroundImage")));
+            this.buttonPlaybackNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackNext.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackNext.Location = new System.Drawing.Point(105, 1);
+            this.buttonPlaybackNext.Name = "buttonPlaybackNext";
+            this.buttonPlaybackNext.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackNext.TabIndex = 23;
+            this.buttonPlaybackNext.TabStop = false;
+            this.buttonPlaybackNext.Tag = "false";
+            this.buttonPlaybackNext.UseVisualStyleBackColor = false;
+            this.buttonPlaybackNext.Click += new System.EventHandler(this.buttonPlaybackNext_Click);
+            // 
+            // buttonPlaybackStop
+            // 
+            this.buttonPlaybackStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackStop.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackStop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPlaybackStop.BackgroundImage")));
+            this.buttonPlaybackStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackStop.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackStop.Location = new System.Drawing.Point(71, 1);
+            this.buttonPlaybackStop.Name = "buttonPlaybackStop";
+            this.buttonPlaybackStop.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackStop.TabIndex = 22;
+            this.buttonPlaybackStop.Tag = "false";
+            this.buttonPlaybackStop.UseVisualStyleBackColor = false;
+            this.buttonPlaybackStop.Click += new System.EventHandler(this.buttonPlaybackStop_Click);
+            // 
+            // buttonPlaybackPlay
+            // 
+            this.buttonPlaybackPlay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackPlay.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackPlay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPlaybackPlay.BackgroundImage")));
+            this.buttonPlaybackPlay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackPlay.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackPlay.Location = new System.Drawing.Point(3, 1);
+            this.buttonPlaybackPlay.Name = "buttonPlaybackPlay";
+            this.buttonPlaybackPlay.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackPlay.TabIndex = 21;
+            this.buttonPlaybackPlay.TabStop = false;
+            this.buttonPlaybackPlay.UseVisualStyleBackColor = false;
+            this.buttonPlaybackPlay.Click += new System.EventHandler(this.buttonPlaybackPlay_Click);
+            // 
+            // buttonPlaybackPause
+            // 
+            this.buttonPlaybackPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonPlaybackPause.BackColor = System.Drawing.Color.LightSlateGray;
+            this.buttonPlaybackPause.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Pause;
+            this.buttonPlaybackPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlaybackPause.FlatAppearance.BorderSize = 0;
+            this.buttonPlaybackPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlaybackPause.Location = new System.Drawing.Point(37, 1);
+            this.buttonPlaybackPause.Name = "buttonPlaybackPause";
+            this.buttonPlaybackPause.Size = new System.Drawing.Size(28, 28);
+            this.buttonPlaybackPause.TabIndex = 20;
+            this.buttonPlaybackPause.Tag = "Pause";
+            this.buttonPlaybackPause.UseVisualStyleBackColor = false;
+            this.buttonPlaybackPause.Click += new System.EventHandler(this.buttonPlaybackPause_Click);
+            // 
+            // buttonQueryhSave
+            // 
+            this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
+            this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
+            this.buttonQueryhSave.Location = new System.Drawing.Point(342, 39);
+            this.buttonQueryhSave.Name = "buttonQueryhSave";
+            this.buttonQueryhSave.Size = new System.Drawing.Size(24, 24);
+            this.buttonQueryhSave.TabIndex = 6;
+            this.buttonQueryhSave.UseVisualStyleBackColor = false;
+            this.buttonQueryhSave.Click += new System.EventHandler(this.buttonQuerySave_Click);
+            // 
+            // toolStripPlaybackTrackBarPosition
+            // 
+            this.toolStripPlaybackTrackBarPosition.AutoSize = false;
+            this.toolStripPlaybackTrackBarPosition.BackColor = System.Drawing.Color.LightSlateGray;
+            this.toolStripPlaybackTrackBarPosition.Location = new System.Drawing.Point(416, 12);
+            this.toolStripPlaybackTrackBarPosition.Maximum = 100;
+            this.toolStripPlaybackTrackBarPosition.Name = "toolStripPlaybackTrackBarPosition";
+            this.toolStripPlaybackTrackBarPosition.Size = new System.Drawing.Size(112, 18);
+            this.toolStripPlaybackTrackBarPosition.TabIndex = 5;
+            this.toolStripPlaybackTrackBarPosition.TickFrequency = 10;
+            this.toolTipPosition.SetToolTip(this.toolStripPlaybackTrackBarPosition, "Position");
+            this.toolStripPlaybackTrackBarPosition.Scroll += new System.EventHandler(this.trackBarPosition_Scroll);
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(338, 9);
+            this.label2.Location = new System.Drawing.Point(402, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Queries:";
             // 
+            // toolStripPlaybackTrackBarVolume
+            // 
+            this.toolStripPlaybackTrackBarVolume.AutoSize = false;
+            this.toolStripPlaybackTrackBarVolume.BackColor = System.Drawing.Color.LightSlateGray;
+            this.toolStripPlaybackTrackBarVolume.Location = new System.Drawing.Point(285, 12);
+            this.toolStripPlaybackTrackBarVolume.Maximum = 100;
+            this.toolStripPlaybackTrackBarVolume.Name = "toolStripPlaybackTrackBarVolume";
+            this.toolStripPlaybackTrackBarVolume.Size = new System.Drawing.Size(112, 18);
+            this.toolStripPlaybackTrackBarVolume.TabIndex = 4;
+            this.toolStripPlaybackTrackBarVolume.TickFrequency = 10;
+            this.toolTipVolume.SetToolTip(this.toolStripPlaybackTrackBarVolume, "Volume");
+            this.toolStripPlaybackTrackBarVolume.Scroll += new System.EventHandler(this.trackBarVolume_Scroll);
+            this.toolStripPlaybackTrackBarVolume.MouseUp += new System.Windows.Forms.MouseEventHandler(this.toolStripPlaybackTrackBarVolume_MouseUp);
+            // 
+            // comboBoxQueries
+            // 
+            this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxQueries.FormattingEnabled = true;
+            this.comboBoxQueries.Location = new System.Drawing.Point(453, 42);
+            this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxQueries.Name = "comboBoxQueries";
+            this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
+            this.comboBoxQueries.TabIndex = 5;
+            this.comboBoxQueries.SelectedIndexChanged += new System.EventHandler(this.comboBoxQueries_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Gold;
+            this.label1.Location = new System.Drawing.Point(3, 45);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Search: ";
+            // 
             // textBoxSearch
             // 
             this.textBoxSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.textBoxSearch.Location = new System.Drawing.Point(56, 6);
+            this.textBoxSearch.Location = new System.Drawing.Point(48, 42);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(220, 20);
             this.textBoxSearch.TabIndex = 7;
@@ -1147,37 +1182,13 @@ namespace MyJukebox_EF
             this.textBoxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxSearch_KeyDown);
             this.textBoxSearch.Leave += new System.EventHandler(this.textBoxSearch_Leave);
             // 
-            // buttonQueryhSave
-            // 
-            this.buttonQueryhSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonQueryhSave.BackColor = System.Drawing.Color.LightGray;
-            this.buttonQueryhSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryhSave.Image")));
-            this.buttonQueryhSave.Location = new System.Drawing.Point(576, 5);
-            this.buttonQueryhSave.Name = "buttonQueryhSave";
-            this.buttonQueryhSave.Size = new System.Drawing.Size(18, 20);
-            this.buttonQueryhSave.TabIndex = 6;
-            this.buttonQueryhSave.UseVisualStyleBackColor = false;
-            this.buttonQueryhSave.Click += new System.EventHandler(this.buttonQuerySave_Click);
-            // 
-            // comboBoxQueries
-            // 
-            this.comboBoxQueries.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(389, 5);
-            this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBoxQueries.Name = "comboBoxQueries";
-            this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
-            this.comboBoxQueries.TabIndex = 5;
-            this.comboBoxQueries.SelectedIndexChanged += new System.EventHandler(this.comboBoxQueries_SelectedIndexChanged);
-            // 
             // buttonQueryClear
             // 
             this.buttonQueryClear.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryClear.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryClear.Image")));
-            this.buttonQueryClear.Location = new System.Drawing.Point(282, 6);
+            this.buttonQueryClear.Location = new System.Drawing.Point(282, 39);
             this.buttonQueryClear.Name = "buttonQueryClear";
-            this.buttonQueryClear.Size = new System.Drawing.Size(18, 20);
+            this.buttonQueryClear.Size = new System.Drawing.Size(24, 24);
             this.buttonQueryClear.TabIndex = 3;
             this.buttonQueryClear.UseVisualStyleBackColor = false;
             this.buttonQueryClear.Click += new System.EventHandler(this.buttonQueryClear_Click);
@@ -1186,57 +1197,12 @@ namespace MyJukebox_EF
             // 
             this.buttonQueryExecute.BackColor = System.Drawing.Color.LightGray;
             this.buttonQueryExecute.Image = ((System.Drawing.Image)(resources.GetObject("buttonQueryExecute.Image")));
-            this.buttonQueryExecute.Location = new System.Drawing.Point(306, 5);
+            this.buttonQueryExecute.Location = new System.Drawing.Point(312, 39);
             this.buttonQueryExecute.Name = "buttonQueryExecute";
-            this.buttonQueryExecute.Size = new System.Drawing.Size(18, 20);
+            this.buttonQueryExecute.Size = new System.Drawing.Size(24, 24);
             this.buttonQueryExecute.TabIndex = 2;
             this.buttonQueryExecute.UseVisualStyleBackColor = false;
             this.buttonQueryExecute.Click += new System.EventHandler(this.buttonQueryExecute_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Gold;
-            this.label1.Location = new System.Drawing.Point(3, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Search: ";
-            // 
-            // toolStripFile
-            // 
-            this.toolStripFile.BackColor = System.Drawing.Color.LightSlateGray;
-            this.toolStripFile.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStripFile.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripFileButtonOpen,
-            this.toolStripFileButtonDelete});
-            this.toolStripFile.Location = new System.Drawing.Point(521, 0);
-            this.toolStripFile.Name = "toolStripFile";
-            this.toolStripFile.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.toolStripFile.Size = new System.Drawing.Size(61, 27);
-            this.toolStripFile.TabIndex = 6;
-            this.toolStripFile.Text = "toolStripFile";
-            // 
-            // toolStripFileButtonOpen
-            // 
-            this.toolStripFileButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripFileButtonOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolStripFileButtonOpen.Image")));
-            this.toolStripFileButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripFileButtonOpen.Name = "toolStripFileButtonOpen";
-            this.toolStripFileButtonOpen.Size = new System.Drawing.Size(24, 24);
-            this.toolStripFileButtonOpen.Text = "toolStripFileButtonOpen";
-            this.toolStripFileButtonOpen.Click += new System.EventHandler(this.toolStripFileButtonDelete_Click);
-            // 
-            // toolStripFileButtonDelete
-            // 
-            this.toolStripFileButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripFileButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripFileButtonDelete.Image")));
-            this.toolStripFileButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripFileButtonDelete.Name = "toolStripFileButtonDelete";
-            this.toolStripFileButtonDelete.Size = new System.Drawing.Size(24, 24);
-            this.toolStripFileButtonDelete.Text = "toolStripFileButtonDelete";
-            this.toolStripFileButtonDelete.Click += new System.EventHandler(this.toolStripFileButtonDelete_Click);
             // 
             // timerImageFlip
             // 
@@ -1267,7 +1233,7 @@ namespace MyJukebox_EF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 561);
+            this.ClientSize = new System.Drawing.Size(916, 561);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuMain);
@@ -1288,7 +1254,6 @@ namespace MyJukebox_EF
             this.statusStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).EndInit();
@@ -1298,16 +1263,13 @@ namespace MyJukebox_EF
             this.contextMenuStripTvlogic.ResumeLayout(false);
             this.tabPlayLists.ResumeLayout(false);
             this.contextMenuStripPlaylist.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).EndInit();
-            this.toolStripPlayback.ResumeLayout(false);
-            this.toolStripPlayback.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.contextMenuStripDatagrid.ResumeLayout(false);
-            this.panelSearch.ResumeLayout(false);
-            this.panelSearch.PerformLayout();
-            this.toolStripFile.ResumeLayout(false);
-            this.toolStripFile.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panelPlayback.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarPosition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripPlaybackTrackBarVolume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1318,48 +1280,31 @@ namespace MyJukebox_EF
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.ToolStripMenuItem menuMainFile;
         private System.Windows.Forms.ToolStripMenuItem menuMainFileExit;
-        private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabLogical;
-        private System.Windows.Forms.TabPage tabPlayLists;
-        private System.Windows.Forms.TreeView tvlogic;
-        private System.Windows.Forms.Panel panelSearch;
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.ToolStripMenuItem menuMainTools;
         private System.Windows.Forms.ToolStripMenuItem menuMainToolsTest1;
         private System.Windows.Forms.ToolStripMenuItem menuMainEdit;
         private System.Windows.Forms.ToolStripMenuItem menuMainView;
         private System.Windows.Forms.ToolStripMenuItem menuMainPlayback;
         private System.Windows.Forms.ToolStripMenuItem menuMainAbout;
-        private System.Windows.Forms.PictureBox pictureBoxFoto;
         private System.Windows.Forms.ToolStripMenuItem menuMainToolsTest2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelNode;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpring1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpring2;
         private System.Windows.Forms.ToolStripMenuItem menuMainPlaybackPlay;
         private System.Windows.Forms.ToolStripMenuItem menuMainPlaybackPause;
         private System.Windows.Forms.ToolStripMenuItem menuMainPlaybackStop;
         private System.Windows.Forms.ToolStripMenuItem repeatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allToolStripMenuItem;
-        private System.Windows.Forms.Timer timerMusic;
-        private System.Windows.Forms.TreeView tvplaylist;
-        private System.Windows.Forms.ToolStrip toolStripPlayback;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonPlay;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonPause;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonStop;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonNext;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonRandom;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonLoop;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.TrackBar toolStripPlaybackTrackBarPosition;
-        private System.Windows.Forms.TrackBar toolStripPlaybackTrackBarVolume;
-        private System.Windows.Forms.ToolStripButton toolStripPlaybackButtonSpeaker;
+        private System.Windows.Forms.ToolStripMenuItem menuMainEditRecord;
+
+
+
+
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelVersion;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelNode;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpring1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSpring2;
         private System.Windows.Forms.ToolStripStatusLabel statusStripRow;
         private System.Windows.Forms.ToolStripStatusLabel statusStripKatalog;
         private System.Windows.Forms.ToolStripStatusLabel statusStripGenre;
@@ -1374,10 +1319,21 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripStatusLabel statusStripVersion;
         private System.Windows.Forms.ToolStripStatusLabel statusStripCopyright;
         private System.Windows.Forms.ToolStripStatusLabel statusStripPosition;
+
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabLogical;
+        private System.Windows.Forms.TabPage tabPlayLists;
+        private System.Windows.Forms.TreeView tvlogic;
+        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.PictureBox pictureBoxFoto;
+        private System.Windows.Forms.Timer timerMusic;
+        private System.Windows.Forms.TreeView tvplaylist;
+        private System.Windows.Forms.TrackBar toolStripPlaybackTrackBarPosition;
+        private System.Windows.Forms.TrackBar toolStripPlaybackTrackBarVolume;
         private System.Windows.Forms.ToolTip toolTipVolume;
         private System.Windows.Forms.ToolTip toolTipPosition;
         private System.Windows.Forms.Timer timerImageFlip;
-        private System.Windows.Forms.ToolStripMenuItem menuMainEditRecord;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripTvlogic;
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripCollaps;
         private System.Windows.Forms.ToolStripMenuItem tvlogicContextMenuStripExpand;
@@ -1414,9 +1370,6 @@ namespace MyJukebox_EF
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private System.Windows.Forms.ImageList imageListTreeView;
         private System.Windows.Forms.Timer timerDuration;
-        private System.Windows.Forms.ToolStrip toolStripFile;
-        private System.Windows.Forms.ToolStripButton toolStripFileButtonOpen;
-        private System.Windows.Forms.ToolStripButton toolStripFileButtonDelete;
         private System.Windows.Forms.ToolStripMenuItem contextMenuStripDatagridSendToPlaylist;
         private System.Windows.Forms.ToolStripMenuItem datagridContextMenuStripSendToKatalog;
         private System.Windows.Forms.TextBox textBoxSearch;
@@ -1430,6 +1383,15 @@ namespace MyJukebox_EF
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAdd;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemove;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRename;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelPlayback;
+        private System.Windows.Forms.Button buttonPlaybackNext;
+        private System.Windows.Forms.Button buttonPlaybackStop;
+        private System.Windows.Forms.Button buttonPlaybackPlay;
+        private System.Windows.Forms.Button buttonPlaybackPause;
+        private System.Windows.Forms.Button buttonPlaybackSpeaker;
+        private System.Windows.Forms.Button buttonPlaybackShuffle;
+        private System.Windows.Forms.Button buttonPlaybackLoop;
     }
 }
 
