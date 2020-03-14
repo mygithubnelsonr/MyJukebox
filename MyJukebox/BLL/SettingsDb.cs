@@ -128,11 +128,15 @@ namespace MyJukebox_EF.BLL
         public static void Save()
         {
             var context = new MyJukeboxEntities();
+
             foreach (Setting s in _settings)
             {
                 var update = context.tSettings.SingleOrDefault(n => n.Name == s.Name);
                 update.Value = s.Value;
             }
+
+            var shuffel = context.tSettings.SingleOrDefault(n => n.Name == "IsRandom");
+            shuffel.Value = IsRandom.ToString();
             context.SaveChanges();
 
             var result = DataGetSet.TruncateTableQueries();

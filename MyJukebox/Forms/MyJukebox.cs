@@ -245,16 +245,18 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest1_Click(object sender, EventArgs e)
         {
-            SettingsDb.SetSetting("Volume", 22);
+            Debug.Print(buttonPlaybackShuffle.Tag.ToString());
+            Debug.Print(buttonPlaybackLoop.Tag.ToString());
+
+            buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
+            buttonPlaybackLoop.BackColor = Color.LightSlateGray;
+
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
         {
-            var obj = SettingsDb.GetSetting("Volume");
-            Debug.Print(Convert.ToString(obj));
-
-            SettingsDb.Save();
-
+            buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
+            buttonPlaybackLoop.BackColor = Color.LightSteelBlue;
         }
 
         private void menuMainEditRecord_Click(object sender, EventArgs e)
@@ -1288,196 +1290,6 @@ namespace MyJukebox_EF
             }
         }
 
-        //private void toolStripPlaybackButtonPlay_Click(object sender, EventArgs e)
-        //{
-        //    Debug.Print("buttonPlay_Click");
-        //    _buttonStop = false;
-
-        //    if (toolStripPlaybackButtonPause.Text == "Resume")
-        //    {
-        //        toolStripPlaybackButtonPause.Text = "Pause";
-        //        axWindowsMediaPlayer1.Ctlcontrols.play();
-        //        timerDuration.Enabled = true;
-
-        //        return;
-        //    }
-
-        //    if (dataGridView.CurrentRow == null)
-        //        dataGridView.CurrentCell = dataGridView[genre, 1];
-
-        //    var currentRow = dataGridView.CurrentRow.Index;
-        //    DataGridViewRow dgrow = dataGridView.CurrentRow;
-        //    var path = dgrow.Cells["Pfad"].Value.ToString();
-        //    var fileName = dgrow.Cells["FileName"].Value.ToString();
-        //    var artist = dgrow.Cells["Interpret"].Value.ToString();
-        //    var filespec = Path.Combine(path, fileName);
-
-
-        //    currentRow = dataGridView.SelectedRows[0].Index;
-
-        //    if (!File.Exists(filespec))
-        //    {
-        //        dataGridView.Rows[dataGridView.CurrentRow.Index].DefaultCellStyle.BackColor = Colors.NotFound;
-        //        if (currentRow >= dataGridView.RowCount - 1)
-        //            BeginInvoke(new Action(() => { toolStripPlaybackButtonStop.PerformClick(); }));
-        //        else
-        //            BeginInvoke(new Action(() => { toolStripPlaybackButtonNext.PerformClick(); }));
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        if (tabControl.SelectedTab == tabLogical)
-        //            SettingsDb.SetSetting("DatagridLastSelectedRow", currentRow.ToString());
-
-        //        if (tabControl.SelectedTab == tabPlayLists)
-        //        {
-        //            PlaylistInfo info = new PlaylistInfo();
-        //            info.ID = DataGetSet.GetLastselectedPlaylist(); ;
-        //            info.Row = currentRow;
-        //            DataGetSet.SetPlaylistInfos(info);
-        //        }
-
-        //        axWindowsMediaPlayer1.URL = filespec;
-        //        axWindowsMediaPlayer1.Ctlcontrols.play();
-
-        //        statusStripRow.Text = (currentRow + 1).ToString();
-        //        statusStrip.Refresh();
-
-        //        FlipImage(dgrow);
-        //    }
-        //}
-
-        //private void toolStripPlaybackButtonPause_Click(object sender, EventArgs e)
-        //{
-        //    if (toolStripPlaybackButtonPause.Text == "Pause")
-        //    {
-        //        toolStripPlaybackButtonPause.Text = "Resume";
-        //        axWindowsMediaPlayer1.Ctlcontrols.pause();
-        //        timerDuration.Enabled = false;
-        //    }
-        //    else
-        //    {
-        //        toolStripPlaybackButtonPause.Text = "Pause";
-        //        axWindowsMediaPlayer1.Ctlcontrols.play();
-        //        timerDuration.Enabled = true;
-        //    }
-        //}
-
-        //private void toolStripPlaybackButtonStop_Click(object sender, EventArgs e)
-        //{
-        //    _buttonStop = true;
-        //    Debug.Print("buttonPlay_Click");
-        //    axWindowsMediaPlayer1.Ctlcontrols.stop();
-        //    timerImageFlip.Enabled = false;
-        //    Task.Delay(TimeSpan.FromSeconds(2.0));
-        //    pictureBoxFoto.Image = Properties.Resources.MyBitmap;
-        //}
-
-        //private void toolStripPlaybackButtonNext_Click(object sender, EventArgs e)
-        //{
-        //    Debug.Print("buttonNext_Click");
-
-        //    int currentRow = dataGridView.CurrentRow.Index;
-
-        //    if ((currentRow < dataGridView.RowCount - 1) && !SettingsDb.IsRandom)
-        //    {
-        //        var columsCount = dataGridView.ColumnCount - 1;
-        //        dataGridView.Rows[++currentRow].Cells[2].Selected = true;
-        //    }
-        //    else if (SettingsDb.IsRandom == true)
-        //    {
-        //        var nextRow = random.GetNextNumber;
-        //        dataGridView.Rows[nextRow].Cells[2].Selected = true;
-        //    }
-
-        //    BeginInvoke(new Action(() => { buttonPlaybackPlay.PerformClick(); }));
-        //}
-
-        //private void toolStripButtonRandom_Click(object sender, EventArgs e)
-        //{
-        //    _isloop = false;
-        //    Debug.Print("buttonRandom_Click");
-
-        //    bool isRandom = SettingsDb.IsRandom;
-
-        //    toolStripPlaybackButtonLoop.Checked = false;
-        //    toolStripPlaybackButtonLoop.BackColor = Color.LightSlateGray;
-
-        //    isRandom = !isRandom;
-        //    if (isRandom)
-        //        toolStripPlaybackButtonRandom.BackColor = Color.LightSteelBlue;
-        //    else
-        //        toolStripPlaybackButtonRandom.BackColor = Color.LightSlateGray;
-
-        //    toolStripPlayback.Refresh();
-
-        //    SettingsDb.IsRandom = isRandom;
-        //}
-
-        //private void toolStripPlaybackButtonLoop_Click(object sender, EventArgs e)
-        //{
-        //    Debug.Print("buttonLoop_Click");
-
-        //    SettingsDb.SetSetting("IsRandom", "False");
-
-        //    buttonPlaybackShuffle.Tag = false;
-        //    buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
-
-        //    _isloop = !_isloop;
-        //    if (_isloop)
-        //    {
-        //        buttonPlaybackLoop.Tag = true;
-        //        buttonPlaybackLoop.BackColor = Color.LightSteelBlue;
-        //    }
-        //    else
-        //    {
-        //        buttonPlaybackLoop.Tag = false;
-        //        buttonPlaybackLoop.BackColor = Color.LightSlateGray;
-        //    }
-        //    toolStripPlayback.Refresh();
-        //}
-
-        //private void toolStripPlaybackButtonSpeaker_Click(object sender, EventArgs e)
-        //{
-        //    Debug.Print("buttonSpeaker_Click");
-
-        //    if (toolStripPlaybackButtonSpeaker.Checked)
-        //    {
-        //        toolStripPlaybackButtonSpeaker.Image = Properties.Resources.SpeakerOff.ToBitmap();
-        //        axWindowsMediaPlayer1.settings.mute = true;
-        //    }
-        //    else
-        //    {
-        //        toolStripPlaybackButtonSpeaker.Image = Properties.Resources.SpeakerOn.ToBitmap();
-        //        axWindowsMediaPlayer1.settings.mute = false;
-        //    }
-        //}
-
-        private void toolStripPlaybackButtonOpen_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripFileButtonDelete_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void toolStripFileButtonOpen_Click(object sender, EventArgs e)
-        {
-            DataGridViewRow dgrow = this.dataGridView.CurrentRow;
-            string strPfad = dgrow.Cells["Pfad"].Value.ToString();
-            ProcessStartInfo psi = new ProcessStartInfo("explorer", strPfad);
-            psi.WindowStyle = ProcessWindowStyle.Normal;
-            try
-            {
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Fehler beim Öffnen des Folders:" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         #endregion toolStripPlaybackButtons Events
 
         #region trackBar Events
@@ -1776,7 +1588,7 @@ namespace MyJukebox_EF
 
                     if ((currentRow < dataGridView.RowCount - 1) && _buttonStop == false)
                     {
-                        if ((bool)buttonPlaybackLoop.Tag == true)
+                        if (Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
                             buttonPlaybackPlay.PerformClick();
                         else
                             buttonPlaybackNext.PerformClick();
@@ -2025,7 +1837,7 @@ namespace MyJukebox_EF
         {
             Debug.Print("buttonSpeaker_Click");
 
-            if ((bool)buttonPlaybackSpeaker.Tag == false)
+            if (Convert.ToBoolean(buttonPlaybackSpeaker.Tag) == false)
             {
                 buttonPlaybackSpeaker.BackgroundImage = Properties.Resources.SpeakerOff.ToBitmap();
                 buttonPlaybackSpeaker.Tag = true;
@@ -2044,12 +1856,18 @@ namespace MyJukebox_EF
             Debug.Print("buttonPlay_Click");
             _buttonStop = false;
 
-            if ((string)buttonPlaybackPause.Tag == "Resume")
+            if (Convert.ToBoolean(buttonPlaybackPause.Tag) == true)
             {
-                buttonPlaybackPause.Tag = "Pause";
+                buttonPlaybackPause.Tag = false;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 timerDuration.Enabled = true;
+                return;
+            }
 
+            if(Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
+            {
+                //axWindowsMediaPlayer1.URL = filespec;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
                 return;
             }
 
@@ -2101,15 +1919,15 @@ namespace MyJukebox_EF
 
         private void buttonPlaybackPause_Click(object sender, EventArgs e)
         {
-            if ((string)buttonPlaybackPause.Tag == "Pause")
+            if (Convert.ToBoolean(buttonPlaybackPause.Tag) == true)
             {
-                buttonPlaybackPause.Tag = "Resume";
+                buttonPlaybackPause.Tag = false;
                 axWindowsMediaPlayer1.Ctlcontrols.pause();
                 timerDuration.Enabled = false;
             }
             else
             {
-                buttonPlaybackPause.Tag = "Pause";
+                buttonPlaybackPause.Tag = true;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 timerDuration.Enabled = true;
             }
@@ -2148,20 +1966,20 @@ namespace MyJukebox_EF
         private void buttonPlaybackShuffle_Click(object sender, EventArgs e)
         {
             _isloop = false;
-            Debug.Print("buttonRandom_Click");
+            Debug.Print($"buttonRandom_Click, isShuffel={buttonPlaybackShuffle.Tag}");
 
-            bool isRandom = SettingsDb.IsRandom;
-
-            buttonPlaybackShuffle.Tag = isRandom;
+            bool isRandom = Convert.ToBoolean(buttonPlaybackShuffle.Tag);
 
             isRandom = !isRandom;
             if (isRandom)
+            {
                 buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
+                buttonPlaybackLoop.BackColor = Color.LightSlateGray;
+            }
             else
                 buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
 
-            //toolStripPlayback.Refresh();
-
+            buttonPlaybackShuffle.Tag = isRandom;
             SettingsDb.IsRandom = isRandom;
         }
 
@@ -2169,23 +1987,21 @@ namespace MyJukebox_EF
         {
             Debug.Print("buttonLoop_Click");
 
-            SettingsDb.SetSetting("IsRandom", "False");
-
             buttonPlaybackShuffle.Tag = false;
             buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
+            SettingsDb.SetSetting("IsRandom", "False");
 
             _isloop = !_isloop;
             if (_isloop)
             {
-                buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
+                buttonPlaybackLoop.BackColor = Color.LightSteelBlue;
                 buttonPlaybackLoop.Tag = true;
             }
             else
             {
-                buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
+                buttonPlaybackLoop.BackColor = Color.LightSlateGray;
                 buttonPlaybackLoop.Tag = false;
             }
         }
-
     }
 }

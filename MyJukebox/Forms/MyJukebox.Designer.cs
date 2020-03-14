@@ -1016,7 +1016,7 @@ namespace MyJukebox_EF
             this.buttonPlaybackLoop.Name = "buttonPlaybackLoop";
             this.buttonPlaybackLoop.Size = new System.Drawing.Size(28, 28);
             this.buttonPlaybackLoop.TabIndex = 25;
-            this.buttonPlaybackLoop.Tag = "False";
+            this.buttonPlaybackLoop.Tag = "false";
             this.buttonPlaybackLoop.UseVisualStyleBackColor = false;
             this.buttonPlaybackLoop.Click += new System.EventHandler(this.buttonPlaybackLoop_Click);
             // 
@@ -1032,7 +1032,7 @@ namespace MyJukebox_EF
             this.buttonPlaybackShuffle.Name = "buttonPlaybackShuffle";
             this.buttonPlaybackShuffle.Size = new System.Drawing.Size(28, 28);
             this.buttonPlaybackShuffle.TabIndex = 24;
-            this.buttonPlaybackShuffle.Tag = "False";
+            this.buttonPlaybackShuffle.Tag = "false";
             this.buttonPlaybackShuffle.UseVisualStyleBackColor = false;
             this.buttonPlaybackShuffle.Click += new System.EventHandler(this.buttonPlaybackShuffle_Click);
             // 
@@ -1082,6 +1082,7 @@ namespace MyJukebox_EF
             this.buttonPlaybackPlay.Size = new System.Drawing.Size(28, 28);
             this.buttonPlaybackPlay.TabIndex = 21;
             this.buttonPlaybackPlay.TabStop = false;
+            this.buttonPlaybackPlay.Tag = "false";
             this.buttonPlaybackPlay.UseVisualStyleBackColor = false;
             this.buttonPlaybackPlay.Click += new System.EventHandler(this.buttonPlaybackPlay_Click);
             // 
@@ -1097,7 +1098,7 @@ namespace MyJukebox_EF
             this.buttonPlaybackPause.Name = "buttonPlaybackPause";
             this.buttonPlaybackPause.Size = new System.Drawing.Size(28, 28);
             this.buttonPlaybackPause.TabIndex = 20;
-            this.buttonPlaybackPause.Tag = "Pause";
+            this.buttonPlaybackPause.Tag = "false";
             this.buttonPlaybackPause.UseVisualStyleBackColor = false;
             this.buttonPlaybackPause.Click += new System.EventHandler(this.buttonPlaybackPause_Click);
             // 

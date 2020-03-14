@@ -354,7 +354,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\11_Public\FunctionPool\FunctionPool.csproj">
+    <ProjectReference Include="..\..\..\11_Public\FunctionPool\FunctionPool.csproj">
       <Project>{5e8d2814-7dda-47ad-9739-dc3192f4a5f6}</Project>
       <Name>FunctionPool</Name>
     </ProjectReference>
