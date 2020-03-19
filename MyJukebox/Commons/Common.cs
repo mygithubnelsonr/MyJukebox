@@ -12,7 +12,7 @@ namespace MyJukebox_EF
     {
         public static void TextBoxSearchClear(TextBox textBox)
         {
-            textBox.Text = SettingsDb.GetSetting("PlaceHolderText").ToString();
+            textBox.Text = SettingsDb.PlaceHolderText;
             textBox.ForeColor = Color.Gray;
         }
 
@@ -20,7 +20,7 @@ namespace MyJukebox_EF
         {
             bool IsQuery = false;
 
-            if (filter == "" || filter == SettingsDb.GetSetting("PlaceHolderText").ToString())
+            if (filter == "" || filter == SettingsDb.PlaceHolderText)
                 IsQuery = false;
             else
                 IsQuery = true;

@@ -245,11 +245,13 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest1_Click(object sender, EventArgs e)
         {
-            Debug.Print(buttonPlaybackShuffle.Tag.ToString());
-            Debug.Print(buttonPlaybackLoop.Tag.ToString());
+            #region BackColor
+            //Debug.Print(buttonPlaybackShuffle.Tag.ToString());
+            //Debug.Print(buttonPlaybackLoop.Tag.ToString());
 
-            buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
-            buttonPlaybackLoop.BackColor = Color.LightSlateGray;
+            //buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
+            //buttonPlaybackLoop.BackColor = Color.LightSlateGray;
+            #endregion
 
         }
 
@@ -1196,10 +1198,11 @@ namespace MyJukebox_EF
             dataGridView.DataSource = results;
             dataGridView.ResumeLayout();
 
-            if (dataGridView.Rows.Count > 1)
+            if (dataGridView.Rows.Count > 1 && info.Row < dataGridView.Rows.Count)
             {
-                // dataGridView.Rows[(int)info.Row].Selected = true;
-                //dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
+                var infos = DataGetSet.GetPlaylistInfos(playlistID);
+                dataGridView.Rows[(int)info.Row].Selected = true;
+                dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
             }
 
             Debug.Print("FillDatagridByTabPlaylist finish");
@@ -1221,7 +1224,7 @@ namespace MyJukebox_EF
         private void FillDatagridByQuery()
         {
             int currentDatagrigRow = 0;
-            if (SettingsDb.GetSetting("LastSelectedTab").ToString() == TabcontrolTab.Logical.ToString())
+            if (SettingsDb.GetSetting("LastTab").ToString() == TabcontrolTab.Logical.ToString())
                 currentDatagrigRow = 1;
 
             var results = DataGetSet.GetQueryResult(textBoxSearch.Text);
@@ -1368,7 +1371,7 @@ namespace MyJukebox_EF
 
             FillDatagridView();
             GridViewSetColumsWidth();
-            SettingsDb.SetSetting("LastSelectedTab", currentTabIndex);
+            SettingsDb.SetSetting("LastTab", currentTabIndex);
         }
 
         #endregion tabControl Events
@@ -1385,7 +1388,7 @@ namespace MyJukebox_EF
 
         private void buttonQueryExecute_Click(object sender, EventArgs e)
         {
-            var placeholderText = SettingsDb.GetSetting("PlaceHolderText").ToString();
+            var placeholderText = SettingsDb.PlaceHolderText;
 
             if (textBoxSearch.Text != placeholderText)
                 FillDatagridView(textBoxSearch.Text);
@@ -1864,7 +1867,7 @@ namespace MyJukebox_EF
                 return;
             }
 
-            if(Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
+            if (Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
             {
                 //axWindowsMediaPlayer1.URL = filespec;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
@@ -1901,7 +1904,7 @@ namespace MyJukebox_EF
                 if (tabControl.SelectedTab == tabPlayLists)
                 {
                     PlaylistInfo info = new PlaylistInfo();
-                    info.ID = DataGetSet.GetLastselectedPlaylist(); ;
+                    info.ID = DataGetSet.GetLastselectedPlaylist();
                     info.Row = currentRow;
                     DataGetSet.SetPlaylistInfos(info);
                 }
@@ -1914,7 +1917,6 @@ namespace MyJukebox_EF
 
                 FlipImage(dgrow);
             }
-
         }
 
         private void buttonPlaybackPause_Click(object sender, EventArgs e)
@@ -2002,6 +2004,12 @@ namespace MyJukebox_EF
                 buttonPlaybackLoop.BackColor = Color.LightSlateGray;
                 buttonPlaybackLoop.Tag = false;
             }
+        }
+
+        private void buttonQueryDelete_Click(object sender, EventArgs e)
+        {
+            comboBoxQueries.Items.Remove(comboBoxQueries.SelectedItem);
+
         }
     }
 }

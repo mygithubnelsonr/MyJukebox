@@ -125,6 +125,7 @@ namespace MyJukebox_EF
             this.moveEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonQueryDelete = new System.Windows.Forms.Button();
             this.buttonPlaybackSpeaker = new System.Windows.Forms.Button();
             this.panelPlayback = new System.Windows.Forms.Panel();
             this.buttonPlaybackLoop = new System.Windows.Forms.Button();
@@ -958,6 +959,7 @@ namespace MyJukebox_EF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonQueryDelete);
             this.panel1.Controls.Add(this.buttonPlaybackSpeaker);
             this.panel1.Controls.Add(this.panelPlayback);
             this.panel1.Controls.Add(this.buttonQueryhSave);
@@ -974,6 +976,19 @@ namespace MyJukebox_EF
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(670, 71);
             this.panel1.TabIndex = 7;
+            // 
+            // buttonQueryDelete
+            // 
+            this.buttonQueryDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonQueryDelete.BackColor = System.Drawing.Color.LightGray;
+            this.buttonQueryDelete.BackgroundImage = global::MyJukebox_EF.Properties.Resources.WasteBox;
+            this.buttonQueryDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonQueryDelete.Location = new System.Drawing.Point(642, 39);
+            this.buttonQueryDelete.Name = "buttonQueryDelete";
+            this.buttonQueryDelete.Size = new System.Drawing.Size(24, 24);
+            this.buttonQueryDelete.TabIndex = 25;
+            this.buttonQueryDelete.UseVisualStyleBackColor = false;
+            this.buttonQueryDelete.Click += new System.EventHandler(this.buttonQueryDelete_Click);
             // 
             // buttonPlaybackSpeaker
             // 
@@ -1130,7 +1145,7 @@ namespace MyJukebox_EF
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Gold;
-            this.label2.Location = new System.Drawing.Point(402, 45);
+            this.label2.Location = new System.Drawing.Point(398, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 8;
@@ -1154,7 +1169,7 @@ namespace MyJukebox_EF
             // 
             this.comboBoxQueries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxQueries.FormattingEnabled = true;
-            this.comboBoxQueries.Location = new System.Drawing.Point(453, 42);
+            this.comboBoxQueries.Location = new System.Drawing.Point(449, 42);
             this.comboBoxQueries.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxQueries.Name = "comboBoxQueries";
             this.comboBoxQueries.Size = new System.Drawing.Size(182, 21);
@@ -1393,6 +1408,7 @@ namespace MyJukebox_EF
         private System.Windows.Forms.Button buttonPlaybackSpeaker;
         private System.Windows.Forms.Button buttonPlaybackShuffle;
         private System.Windows.Forms.Button buttonPlaybackLoop;
+        private System.Windows.Forms.Button buttonQueryDelete;
     }
 }
 

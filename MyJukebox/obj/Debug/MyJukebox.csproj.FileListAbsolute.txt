@@ -79,3 +79,30 @@ A:\Source\Repos\01_Audio\MyJukebox\MyJukebox - 20200312\MyJukebox\obj\Debug\MyJu
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox - 20200312\MyJukebox\obj\Debug\MyJukebox.csproj.CopyComplete
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox - 20200312\MyJukebox\obj\Debug\MyJukebox.exe
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox - 20200312\MyJukebox\obj\Debug\MyJukebox.pdb
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\MyJukebox.config
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\MyJukebox.exe.config
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\MyJukebox.exe
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\MyJukebox.pdb
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\EntityFramework.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\EntityFramework.SqlServer.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\FunctionPool.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\System.Data.SQLite.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\FunctionPool.pdb
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\EntityFramework.xml
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\EntityFramework.SqlServer.xml
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\Interop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\bin\Debug\AxInterop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csprojAssemblyReference.cache
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\Interop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\AxInterop.WMPLib.dll
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csproj.ResolveComReference.cache
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.AboutBox.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.EditRecord.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.Filescanner.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.InputDialog.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.MyJukebox.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.Properties.Resources.resources
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csproj.GenerateResource.cache
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csproj.CopyComplete
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.exe
+A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.pdb

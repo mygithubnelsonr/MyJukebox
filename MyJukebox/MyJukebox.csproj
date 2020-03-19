@@ -308,6 +308,7 @@
     <Content Include="Resources\Delete.ico" />
     <Content Include="Resources\Playback_Loop.png" />
     <Content Include="Resources\Playback_Pause.png" />
+    <Content Include="Resources\WasteBox.png" />
     <None Include="Resources\Playback_Shuffel.png" />
     <Content Include="Resources\QuerySave.ico" />
     <Content Include="Resources\save32.ico" />
