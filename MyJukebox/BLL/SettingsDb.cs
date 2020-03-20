@@ -11,7 +11,7 @@ namespace MyJukebox_EF.BLL
     public class SettingsDb
     {
         private static Dictionary<string, object> Settings = new Dictionary<string, object>();
-        public readonly static string PlaceHolderText = $"< Input SQL like Album='V8-A-1' >";
+        public readonly static string PlaceHolderText = $"  < Input SQL like Album='V8-A-1' >";
 
         #region public properties
 
@@ -93,7 +93,7 @@ namespace MyJukebox_EF.BLL
                 Settings["FirstRunDate"] = DateTime.UtcNow.ToString();
                 Settings["LastTab"] = "0";
                 Settings["ImagePath"] = "_Images";
-                Settings["RootImagePath"] = @"\\win2k16dc01\FS012";
+                Settings["RootImagePath"] = @"C:\\";
                 Settings["LastGenre"] = "";
                 Settings["LastCatalog"] = "";
                 Settings["LastAlbum"] = "";

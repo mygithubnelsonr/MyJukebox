@@ -47,8 +47,8 @@ namespace MyJukebox_EF
                     arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
                 }
 
-                var search = arTokens[0];
                 var argument = arTokens[1];
+                var search = arTokens[0];
 
                 if (argument.Substring(0, 1) == "'")
                     argument = argument.Substring(1);
@@ -58,6 +58,9 @@ namespace MyJukebox_EF
 
                 if (findExplizit == true)
                     sql = $"select * from vSongs where {search} = '{argument}'";
+                else
+                    if (search == "*")
+                    sql = $"select * from vsongs where charindex('{argument}', lower( concat([pfad],[filename]))) > 0";
                 else
                     sql = $"select * from vSongs where {search} like '%{argument}%'";
 

@@ -306,6 +306,7 @@
     </Content>
     <Content Include="Jukebox.ico" />
     <Content Include="Resources\Delete.ico" />
+    <Content Include="Resources\edit-clear.png" />
     <Content Include="Resources\Playback_Loop.png" />
     <Content Include="Resources\Playback_Pause.png" />
     <Content Include="Resources\WasteBox.png" />

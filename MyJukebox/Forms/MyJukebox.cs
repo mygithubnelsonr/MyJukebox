@@ -16,6 +16,7 @@ namespace MyJukebox_EF
     {
         #region fields
 
+        private bool _isLoaded = false;
         private bool _isloop = false;
         private bool _isSetting = false;
         private bool _tvFilled = false;
@@ -57,9 +58,7 @@ namespace MyJukebox_EF
         private async void MyJukebox_Load(object sender, EventArgs e)
         {
             SettingsDb.Load();
-            // Volume
             var currentDatagrigRow = 1;
-            //var lastQuery = SettingsDb.GetSetting("LastQuery").ToString();
 
             #region restore last window properties
 
@@ -67,8 +66,9 @@ namespace MyJukebox_EF
             Left = SettingsDb.FormLeft;
             Width = SettingsDb.FormWidth;
             Height = SettingsDb.FormHeight;
-
             WindowState = (FormWindowState)SettingsDb.Formstate(SettingsDb.FormState);
+
+            var x = SettingsDb.FormSplitterLeft;
 
             #endregion restore last window properties
 
@@ -145,7 +145,6 @@ namespace MyJukebox_EF
             }
 
             pictureBoxFoto.Image = Properties.Resources.MyBitmap;
-            splitContainer1.SplitterDistance = Convert.ToInt32(SettingsDb.GetSetting("FormSplitterLeft"));
         }
 
         private void MyJukebox_Resize(object sender, EventArgs e)
@@ -155,7 +154,7 @@ namespace MyJukebox_EF
 
         private void MyJukebox_ResizeEnd(object sender, EventArgs e)
         {
-            splitContainer1.SplitterDistance = Convert.ToInt32(SettingsDb.GetSetting("FormSplitterLeft", "200"));
+            splitContainer1.SplitterDistance = SettingsDb.FormSplitterLeft;
         }
 
         private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
@@ -166,27 +165,12 @@ namespace MyJukebox_EF
             SettingsDb.SetSetting("FormWidth", Width.ToString());
             SettingsDb.SetSetting("FormHeight", Height.ToString());
             SettingsDb.SetSetting("FormState", WindowState.ToString());
-            SettingsDb.SetSetting("FormSplitterLeft", splitContainer1.SplitterDistance.ToString());
+            //SettingsDb.SetSetting("FormSplitterLeft", splitContainer1.SplitterDistance.ToString());
+            SettingsDb.FormSplitterLeft = splitContainer1.SplitterDistance;
 
             // save dataGridView.Columns widht
             foreach (DataGridViewColumn column in dataGridView.Columns)
                 DataGetSet.SetColumnWidth(column.Name, column.Width);
-
-            //// save query list entries
-            //var result = DataGetSet.TruncateTableQueries();
-
-            //if (result == true)
-            //{
-            //    foreach (var q in comboBoxQueries.Items)
-            //    {
-            //        if (q.ToString() != "")
-            //            DataGetSet.SetQueries(q.ToString());
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.Print("truncate table tQueries failed!");
-            //}
 
             // save treeview logic states
             SettingsDb.SetSetting("LastGenre", TreeViewLogicStates.Genre);
@@ -253,6 +237,7 @@ namespace MyJukebox_EF
             //buttonPlaybackLoop.BackColor = Color.LightSlateGray;
             #endregion
 
+            //SettingsDb.Save();
         }
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
@@ -1381,22 +1366,24 @@ namespace MyJukebox_EF
         private void textBoxSearch_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 buttonQueryExecute.PerformClick();
+            else if (e.KeyCode == Keys.Escape)
+            {
+                buttonQueryClear.PerformClick();
+                dataGridView.Focus();
             }
         }
 
         private void buttonQueryExecute_Click(object sender, EventArgs e)
         {
-            var placeholderText = SettingsDb.PlaceHolderText;
-
-            if (textBoxSearch.Text != placeholderText)
+            if (textBoxSearch.Text != SettingsDb.PlaceHolderText)
                 FillDatagridView(textBoxSearch.Text);
         }
 
         private void buttonQuerySave_Click(object sender, EventArgs e)
         {
-            AddQueryToComboBox(textBoxSearch.Text);
+            if (textBoxSearch.Text != SettingsDb.PlaceHolderText)
+                AddQueryToComboBox(textBoxSearch.Text);
         }
 
         private void buttonQueryClear_Click(object sender, EventArgs e)
@@ -1528,16 +1515,17 @@ namespace MyJukebox_EF
         {
             var path = datagridrow.Cells["Pfad"].Value.ToString();
             var artist = datagridrow.Cells["Interpret"].Value.ToString();
+            var userprofile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Music");
 
             List<string> pathList = new List<string>();
 
             pathList.Add(Path.Combine(
-                SettingsDb.GetSetting("RootImagePath", @"\\win2k16dc01\FS012").ToString(),
+                SettingsDb.GetSetting("RootImagePath", $"{userprofile}").ToString(),
                 datagridrow.Cells["Genre"].Value.ToString(),
-                SettingsDb.GetSetting("ImagePath", "_Images").ToString()
-                ));
+                SettingsDb.GetSetting("ImagePath", "_Images").ToString())
+                );
 
-            pathList.Add(path);
+            //pathList.Add(path);
             pathList.Add(Path.Combine(path, SettingsDb.GetSetting("ImagePath", "_Images").ToString()));
 
             var collector = new ImageCollector(pathList, artist);
@@ -1710,7 +1698,7 @@ namespace MyJukebox_EF
 
         private void textBoxSearch_Enter(object sender, EventArgs e)
         {
-            if (textBoxSearch.Text == SettingsDb.GetSetting("PlaceHolderText").ToString())
+            if (textBoxSearch.Text == SettingsDb.PlaceHolderText)
             {
                 textBoxSearch.Text = "";
                 textBoxSearch.ForeColor = Color.Black;
@@ -1721,7 +1709,7 @@ namespace MyJukebox_EF
         {
             if (textBoxSearch.Text == "")
             {
-                textBoxSearch.Text = SettingsDb.GetSetting("PlaceHolderText").ToString();
+                textBoxSearch.Text = SettingsDb.PlaceHolderText;
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
@@ -2009,7 +1997,19 @@ namespace MyJukebox_EF
         private void buttonQueryDelete_Click(object sender, EventArgs e)
         {
             comboBoxQueries.Items.Remove(comboBoxQueries.SelectedItem);
+            SettingsDb.QueryList.Remove((string)comboBoxQueries.SelectedItem);
+        }
 
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (_isLoaded == true)
+                SettingsDb.FormSplitterLeft = splitContainer1.SplitterDistance;
+        }
+
+        private void MyJukebox_Shown(object sender, EventArgs e)
+        {
+            splitContainer1.SplitterDistance = SettingsDb.FormSplitterLeft;
+            _isLoaded = true;
         }
     }
 }

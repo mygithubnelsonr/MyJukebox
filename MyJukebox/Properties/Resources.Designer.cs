@@ -101,12 +101,12 @@ namespace MyJukebox_EF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Icon delete {
+        internal static System.Drawing.Bitmap delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -117,6 +117,16 @@ namespace MyJukebox_EF.Properties {
             get {
                 object obj = ResourceManager.GetObject("Drop", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap edit_clear {
+            get {
+                object obj = ResourceManager.GetObject("edit-clear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
