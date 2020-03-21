@@ -406,15 +406,6 @@ namespace MyJukebox_EF.BLL
             };
         }
 
-        //public static void SetQueries(string name)
-        //{
-        //    var context = new MyJukeboxEntities();
-
-        //    context.tQueries.Add(new tQuery { Query = name });
-
-        //    context.SaveChanges();
-        //}
-
         public static void SetColumnWidth(string name, int width)
         {
             var context = new MyJukeboxEntities();

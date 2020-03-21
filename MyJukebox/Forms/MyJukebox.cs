@@ -1912,14 +1912,14 @@ namespace MyJukebox_EF
             if (Convert.ToBoolean(buttonPlaybackPause.Tag) == true)
             {
                 buttonPlaybackPause.Tag = false;
-                axWindowsMediaPlayer1.Ctlcontrols.pause();
-                timerDuration.Enabled = false;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+                timerDuration.Enabled = true;
             }
             else
             {
                 buttonPlaybackPause.Tag = true;
-                axWindowsMediaPlayer1.Ctlcontrols.play();
-                timerDuration.Enabled = true;
+                axWindowsMediaPlayer1.Ctlcontrols.pause();
+                timerDuration.Enabled = false;
             }
         }
 

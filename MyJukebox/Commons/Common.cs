@@ -47,8 +47,8 @@ namespace MyJukebox_EF
                     arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
                 }
 
-                var argument = arTokens[1];
                 var search = arTokens[0];
+                var argument = arTokens[1];
 
                 if (argument.Substring(0, 1) == "'")
                     argument = argument.Substring(1);
