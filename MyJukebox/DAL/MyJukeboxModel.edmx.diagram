@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f831fd0a90e4554a8e86d74be47cdd4" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="5f831fd0a90e4554a8e86d74be47cdd4" Name="Diagram1" ZoomLevel="97">
         <EntityTypeShape EntityType="MyJukeboxContext.tBeat" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tGenre" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyJukeboxContext.tInfo" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
@@ -27,8 +27,8 @@
         <EntityTypeShape EntityType="MyJukeboxContext.tCatalog" Width="1.5" PointX="0.75" PointY="2.125" />
         <AssociationConnector Association="MyJukeboxContext.FK_tSongsNew_tCatalogs" />
         <EntityTypeShape EntityType="MyJukeboxContext.tColumn" Width="1.5" PointX="10.75" PointY="4.75" />
-        <EntityTypeShape EntityType="MyJukeboxContext.tSetting" Width="1.5" PointX="10.75" PointY="7.75" />
         <EntityTypeShape EntityType="MyJukeboxContext.tQuery" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="MyJukeboxContext.tSetting" Width="1.5" PointX="5.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

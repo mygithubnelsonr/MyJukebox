@@ -2011,5 +2011,18 @@ namespace MyJukebox_EF
             splitContainer1.SplitterDistance = SettingsDb.FormSplitterLeft;
             _isLoaded = true;
         }
+
+        private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Parameters parameters = new Parameters();
+            parameters.ShowDialog();
+
+            if (parameters.DialogResult == DialogResult.Cancel)
+                Debug.Print("DialogResult.Cancel");
+            else
+                Debug.Print("DialogResult.OK");
+
+            parameters.Dispose();
+        }
     }
 }

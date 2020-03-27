@@ -94,6 +94,10 @@
     <Compile Include="BLL\Logging.cs" />
     <Compile Include="BLL\PlaylistInfo.cs" />
     <Compile Include="BLL\TreeViewStates.cs" />
+    <Compile Include="Commons\AutoSizeTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commons\Setting.cs" />
     <Compile Include="DAL\tAlbum.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
@@ -200,6 +204,12 @@
     <Compile Include="Commons\ImageCollector.cs" />
     <Compile Include="BLL\Mp3Record.cs" />
     <Compile Include="BLL\Playlist.cs" />
+    <Compile Include="Forms\Parameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Parameters.Designer.cs">
+      <DependentUpon>Parameters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BLL\TabcontrolTab.cs" />
@@ -217,6 +227,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MyJukebox.resx">
       <DependentUpon>MyJukebox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Parameters.resx">
+      <DependentUpon>Parameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

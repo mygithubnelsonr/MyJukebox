@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'A:\Source\Repos\90_Work\MyJukebox\MyJukebox\DAL\MyJukeboxModel.edmx'. 
+﻿// T4 code generation is enabled for model 'A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\DAL\MyJukeboxModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

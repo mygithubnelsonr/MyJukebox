@@ -192,19 +192,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tSettings">
-      <EntityTypeMapping TypeName="MyJukeboxContext.tSetting">
-        <MappingFragment StoreEntitySet="tSettings">
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tQueries">
       <EntityTypeMapping TypeName="MyJukeboxContext.tQuery">
         <MappingFragment StoreEntitySet="tQueries">
           <ScalarProperty Name="Query" ColumnName="Query" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tSettings">
+      <EntityTypeMapping TypeName="MyJukeboxContext.tSetting">
+        <MappingFragment StoreEntitySet="tSettings">
+          <ScalarProperty Name="Editable" ColumnName="Editable" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

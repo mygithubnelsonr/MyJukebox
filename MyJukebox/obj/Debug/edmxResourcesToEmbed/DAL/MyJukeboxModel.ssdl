@@ -111,6 +111,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Value" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Editable" Type="bit" />
   </EntityType>
   <EntityType Name="tSongs">
     <Key>

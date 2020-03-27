@@ -227,11 +227,4 @@ namespace MyJukebox_EF.BLL
             return init;
         }
     }
-
-    internal class Setting
-    {
-        public string Name { get; set; }
-        public string Value { get; set; }
-    }
-
 }

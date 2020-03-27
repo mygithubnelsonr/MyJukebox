@@ -1,4 +1,5 @@
-﻿using MyJukebox_EF.DAL;
+﻿using MyJukebox_EF.Commons;
+using MyJukebox_EF.DAL;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -728,6 +729,45 @@ namespace MyJukebox_EF.BLL
             list.Add(songs[0].FileName);
 
             return list;
+        }
+        #endregion
+
+        #region Parameters
+        public static List<Setting> GetParameters()
+        {
+            List<Setting> settings = new List<Setting>();
+
+            try
+            {
+                using (var context = new MyJukeboxEntities())
+                {
+                    var result = context.tSettings.Select(s => s).ToList();
+                    foreach (var s in result)
+                    {
+                        settings.Add(new Setting { ID = s.ID, Name = s.Name, Value = s.Value, Editable = s.Editable }); ;
+                    }
+                }
+
+                return settings;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static void SaveParameters(List<Setting> settings)
+        {
+            var context = new MyJukeboxEntities();
+
+            foreach (Setting setting in settings)
+            {
+                var result = context.tSettings.SingleOrDefault(p => p.Name == setting.Name);
+                result.Value = setting.Value;
+            }
+
+            context.SaveChanges();
+
         }
         #endregion
 
