@@ -155,17 +155,15 @@ namespace MyJukebox_EF
         private void MyJukebox_ResizeEnd(object sender, EventArgs e)
         {
             splitContainer1.SplitterDistance = SettingsDb.FormSplitterLeft;
-        }
-
-        private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // save window metrics
             SettingsDb.SetSetting("FormTop", Top.ToString());
             SettingsDb.SetSetting("FormLeft", Left.ToString());
             SettingsDb.SetSetting("FormWidth", Width.ToString());
             SettingsDb.SetSetting("FormHeight", Height.ToString());
+        }
+
+        private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
+        {
             SettingsDb.SetSetting("FormState", WindowState.ToString());
-            //SettingsDb.SetSetting("FormSplitterLeft", splitContainer1.SplitterDistance.ToString());
             SettingsDb.FormSplitterLeft = splitContainer1.SplitterDistance;
 
             // save dataGridView.Columns widht
@@ -177,7 +175,6 @@ namespace MyJukebox_EF
             SettingsDb.SetSetting("LastCatalog", TreeViewLogicStates.Catalog);
             SettingsDb.SetSetting("LastAlbum", TreeViewLogicStates.Album);
             SettingsDb.SetSetting("LastInterpret", TreeViewLogicStates.Interpret);
-
             SettingsDb.Save();
         }
 

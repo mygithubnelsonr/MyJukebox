@@ -57,6 +57,10 @@ namespace MyJukebox_EF
                     textBox.Name = $"{setting.Name}";
                     textBox.AutoSize = true;
                     textBox.Text = $"{(setting.Value.Length == 0 ? " " : setting.Value)}";
+                    if (setting.Editable == false)
+                    {
+                        textBox.Enabled = false;
+                    }
                     tableLayoutPanel.Controls.Add(textBox);
                 }
             }
