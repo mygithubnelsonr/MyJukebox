@@ -48,6 +48,7 @@ namespace MyJukebox_EF
                 {
                     label = new Label();
                     label.Name = $"label{setting.ID}";
+                    label.ForeColor = System.Drawing.Color.White;
                     label.AutoSize = true;
                     label.Anchor = AnchorStyles.Left;
                     label.Text = $"{setting.Name}";

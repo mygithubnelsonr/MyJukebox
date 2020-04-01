@@ -249,7 +249,5 @@ namespace MyJukebox_EF
                 IsSongInfoChanged = true;
 
         }
-
-
     }
 }

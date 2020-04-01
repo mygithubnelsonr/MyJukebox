@@ -48,6 +48,7 @@ namespace MyJukebox_EF
             this.menuMainEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainEditRecord = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainView = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideShowPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainPlayback = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainPlaybackPlay = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainPlaybackPause = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +57,7 @@ namespace MyJukebox_EF
             this.trackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainToolsTest1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainToolsTest2 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMainAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -125,15 +127,15 @@ namespace MyJukebox_EF
             this.moveEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBoxSpeaker = new System.Windows.Forms.CheckBox();
             this.buttonQueryDelete = new System.Windows.Forms.Button();
-            this.buttonPlaybackSpeaker = new System.Windows.Forms.Button();
             this.panelPlayback = new System.Windows.Forms.Panel();
-            this.buttonPlaybackLoop = new System.Windows.Forms.Button();
-            this.buttonPlaybackShuffle = new System.Windows.Forms.Button();
+            this.checkBoxPause = new System.Windows.Forms.CheckBox();
+            this.checkBoxShuffel = new System.Windows.Forms.CheckBox();
+            this.checkBoxLoop = new System.Windows.Forms.CheckBox();
             this.buttonPlaybackNext = new System.Windows.Forms.Button();
             this.buttonPlaybackStop = new System.Windows.Forms.Button();
             this.buttonPlaybackPlay = new System.Windows.Forms.Button();
-            this.buttonPlaybackPause = new System.Windows.Forms.Button();
             this.buttonQueryhSave = new System.Windows.Forms.Button();
             this.toolStripPlaybackTrackBarPosition = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
@@ -150,7 +152,6 @@ namespace MyJukebox_EF
             this.imageListTreeView = new System.Windows.Forms.ImageList(this.components);
             this.timerDuration = new System.Windows.Forms.Timer(this.components);
             this.timerShowMyBitmap = new System.Windows.Forms.Timer(this.components);
-            this.parametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -236,9 +237,18 @@ namespace MyJukebox_EF
             // 
             // menuMainView
             // 
+            this.menuMainView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hideShowPanelToolStripMenuItem});
             this.menuMainView.Name = "menuMainView";
             this.menuMainView.Size = new System.Drawing.Size(44, 20);
             this.menuMainView.Text = "View";
+            // 
+            // hideShowPanelToolStripMenuItem
+            // 
+            this.hideShowPanelToolStripMenuItem.Name = "hideShowPanelToolStripMenuItem";
+            this.hideShowPanelToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.hideShowPanelToolStripMenuItem.Text = "Hide / Show Panel";
+            this.hideShowPanelToolStripMenuItem.Click += new System.EventHandler(this.hideShowPanelToolStripMenuItem_Click);
             // 
             // menuMainPlayback
             // 
@@ -305,17 +315,24 @@ namespace MyJukebox_EF
             this.menuMainTools.Size = new System.Drawing.Size(46, 20);
             this.menuMainTools.Text = "Tools";
             // 
+            // parametersToolStripMenuItem
+            // 
+            this.parametersToolStripMenuItem.Name = "parametersToolStripMenuItem";
+            this.parametersToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.parametersToolStripMenuItem.Text = "Parameters";
+            this.parametersToolStripMenuItem.Click += new System.EventHandler(this.parametersToolStripMenuItem_Click);
+            // 
             // menuMainToolsTest1
             // 
             this.menuMainToolsTest1.Name = "menuMainToolsTest1";
-            this.menuMainToolsTest1.Size = new System.Drawing.Size(180, 22);
+            this.menuMainToolsTest1.Size = new System.Drawing.Size(133, 22);
             this.menuMainToolsTest1.Text = "Test only 1";
             this.menuMainToolsTest1.Click += new System.EventHandler(this.menuMainToolsTest1_Click);
             // 
             // menuMainToolsTest2
             // 
             this.menuMainToolsTest2.Name = "menuMainToolsTest2";
-            this.menuMainToolsTest2.Size = new System.Drawing.Size(180, 22);
+            this.menuMainToolsTest2.Size = new System.Drawing.Size(133, 22);
             this.menuMainToolsTest2.Text = "Test only 2";
             this.menuMainToolsTest2.Click += new System.EventHandler(this.menuMainToolsTest2_Click);
             // 
@@ -520,6 +537,7 @@ namespace MyJukebox_EF
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView);
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 8, 0);
+            this.splitContainer1.Panel2MinSize = 220;
             this.splitContainer1.Size = new System.Drawing.Size(916, 509);
             this.splitContainer1.SplitterDistance = 230;
             this.splitContainer1.SplitterIncrement = 6;
@@ -962,8 +980,8 @@ namespace MyJukebox_EF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBoxSpeaker);
             this.panel1.Controls.Add(this.buttonQueryDelete);
-            this.panel1.Controls.Add(this.buttonPlaybackSpeaker);
             this.panel1.Controls.Add(this.panelPlayback);
             this.panel1.Controls.Add(this.buttonQueryhSave);
             this.panel1.Controls.Add(this.toolStripPlaybackTrackBarPosition);
@@ -980,6 +998,20 @@ namespace MyJukebox_EF
             this.panel1.Size = new System.Drawing.Size(670, 71);
             this.panel1.TabIndex = 7;
             // 
+            // checkBoxSpeaker
+            // 
+            this.checkBoxSpeaker.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxSpeaker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("checkBoxSpeaker.BackgroundImage")));
+            this.checkBoxSpeaker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.checkBoxSpeaker.FlatAppearance.BorderSize = 0;
+            this.checkBoxSpeaker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxSpeaker.Location = new System.Drawing.Point(263, 7);
+            this.checkBoxSpeaker.Name = "checkBoxSpeaker";
+            this.checkBoxSpeaker.Size = new System.Drawing.Size(24, 24);
+            this.checkBoxSpeaker.TabIndex = 26;
+            this.checkBoxSpeaker.UseVisualStyleBackColor = true;
+            this.checkBoxSpeaker.CheckedChanged += new System.EventHandler(this.checkBoxSpeaker_CheckedChanged);
+            // 
             // buttonQueryDelete
             // 
             this.buttonQueryDelete.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -993,66 +1025,61 @@ namespace MyJukebox_EF
             this.buttonQueryDelete.UseVisualStyleBackColor = false;
             this.buttonQueryDelete.Click += new System.EventHandler(this.buttonQueryDelete_Click);
             // 
-            // buttonPlaybackSpeaker
-            // 
-            this.buttonPlaybackSpeaker.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonPlaybackSpeaker.BackColor = System.Drawing.Color.LightSlateGray;
-            this.buttonPlaybackSpeaker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonPlaybackSpeaker.BackgroundImage")));
-            this.buttonPlaybackSpeaker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlaybackSpeaker.FlatAppearance.BorderSize = 0;
-            this.buttonPlaybackSpeaker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlaybackSpeaker.Location = new System.Drawing.Point(255, 8);
-            this.buttonPlaybackSpeaker.Name = "buttonPlaybackSpeaker";
-            this.buttonPlaybackSpeaker.Size = new System.Drawing.Size(24, 24);
-            this.buttonPlaybackSpeaker.TabIndex = 24;
-            this.buttonPlaybackSpeaker.Tag = "false";
-            this.buttonPlaybackSpeaker.UseVisualStyleBackColor = false;
-            this.buttonPlaybackSpeaker.Click += new System.EventHandler(this.buttonSpeaker_Click);
-            // 
             // panelPlayback
             // 
-            this.panelPlayback.Controls.Add(this.buttonPlaybackLoop);
-            this.panelPlayback.Controls.Add(this.buttonPlaybackShuffle);
+            this.panelPlayback.Controls.Add(this.checkBoxPause);
+            this.panelPlayback.Controls.Add(this.checkBoxShuffel);
+            this.panelPlayback.Controls.Add(this.checkBoxLoop);
             this.panelPlayback.Controls.Add(this.buttonPlaybackNext);
             this.panelPlayback.Controls.Add(this.buttonPlaybackStop);
             this.panelPlayback.Controls.Add(this.buttonPlaybackPlay);
-            this.panelPlayback.Controls.Add(this.buttonPlaybackPause);
             this.panelPlayback.Location = new System.Drawing.Point(6, 5);
             this.panelPlayback.Name = "panelPlayback";
-            this.panelPlayback.Size = new System.Drawing.Size(220, 31);
+            this.panelPlayback.Size = new System.Drawing.Size(230, 31);
             this.panelPlayback.TabIndex = 23;
             // 
-            // buttonPlaybackLoop
+            // checkBoxPause
             // 
-            this.buttonPlaybackLoop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonPlaybackLoop.BackColor = System.Drawing.Color.LightSlateGray;
-            this.buttonPlaybackLoop.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Loop;
-            this.buttonPlaybackLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlaybackLoop.FlatAppearance.BorderSize = 0;
-            this.buttonPlaybackLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlaybackLoop.Location = new System.Drawing.Point(191, 2);
-            this.buttonPlaybackLoop.Name = "buttonPlaybackLoop";
-            this.buttonPlaybackLoop.Size = new System.Drawing.Size(28, 28);
-            this.buttonPlaybackLoop.TabIndex = 25;
-            this.buttonPlaybackLoop.Tag = "false";
-            this.buttonPlaybackLoop.UseVisualStyleBackColor = false;
-            this.buttonPlaybackLoop.Click += new System.EventHandler(this.buttonPlaybackLoop_Click);
+            this.checkBoxPause.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxPause.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Pause;
+            this.checkBoxPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.checkBoxPause.FlatAppearance.BorderSize = 0;
+            this.checkBoxPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxPause.Location = new System.Drawing.Point(37, 1);
+            this.checkBoxPause.Name = "checkBoxPause";
+            this.checkBoxPause.Size = new System.Drawing.Size(28, 28);
+            this.checkBoxPause.TabIndex = 28;
+            this.checkBoxPause.UseVisualStyleBackColor = true;
+            this.checkBoxPause.CheckedChanged += new System.EventHandler(this.checkBoxPause_CheckedChanged);
             // 
-            // buttonPlaybackShuffle
+            // checkBoxShuffel
             // 
-            this.buttonPlaybackShuffle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonPlaybackShuffle.BackColor = System.Drawing.Color.LightSlateGray;
-            this.buttonPlaybackShuffle.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Shuffel;
-            this.buttonPlaybackShuffle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlaybackShuffle.FlatAppearance.BorderSize = 0;
-            this.buttonPlaybackShuffle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlaybackShuffle.Location = new System.Drawing.Point(157, 1);
-            this.buttonPlaybackShuffle.Name = "buttonPlaybackShuffle";
-            this.buttonPlaybackShuffle.Size = new System.Drawing.Size(28, 28);
-            this.buttonPlaybackShuffle.TabIndex = 24;
-            this.buttonPlaybackShuffle.Tag = "false";
-            this.buttonPlaybackShuffle.UseVisualStyleBackColor = false;
-            this.buttonPlaybackShuffle.Click += new System.EventHandler(this.buttonPlaybackShuffle_Click);
+            this.checkBoxShuffel.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxShuffel.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Shuffel;
+            this.checkBoxShuffel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.checkBoxShuffel.FlatAppearance.BorderSize = 0;
+            this.checkBoxShuffel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxShuffel.Location = new System.Drawing.Point(160, 1);
+            this.checkBoxShuffel.Name = "checkBoxShuffel";
+            this.checkBoxShuffel.Size = new System.Drawing.Size(28, 28);
+            this.checkBoxShuffel.TabIndex = 27;
+            this.checkBoxShuffel.UseVisualStyleBackColor = true;
+            this.checkBoxShuffel.CheckedChanged += new System.EventHandler(this.checkBoxShuffel_CheckedChanged);
+            // 
+            // checkBoxLoop
+            // 
+            this.checkBoxLoop.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBoxLoop.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Loop;
+            this.checkBoxLoop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.checkBoxLoop.FlatAppearance.BorderSize = 0;
+            this.checkBoxLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBoxLoop.Location = new System.Drawing.Point(191, 1);
+            this.checkBoxLoop.Margin = new System.Windows.Forms.Padding(0);
+            this.checkBoxLoop.Name = "checkBoxLoop";
+            this.checkBoxLoop.Size = new System.Drawing.Size(28, 28);
+            this.checkBoxLoop.TabIndex = 26;
+            this.checkBoxLoop.UseVisualStyleBackColor = true;
+            this.checkBoxLoop.CheckedChanged += new System.EventHandler(this.checkBoxLoop_CheckedChanged);
             // 
             // buttonPlaybackNext
             // 
@@ -1103,22 +1130,6 @@ namespace MyJukebox_EF
             this.buttonPlaybackPlay.Tag = "false";
             this.buttonPlaybackPlay.UseVisualStyleBackColor = false;
             this.buttonPlaybackPlay.Click += new System.EventHandler(this.buttonPlaybackPlay_Click);
-            // 
-            // buttonPlaybackPause
-            // 
-            this.buttonPlaybackPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonPlaybackPause.BackColor = System.Drawing.Color.LightSlateGray;
-            this.buttonPlaybackPause.BackgroundImage = global::MyJukebox_EF.Properties.Resources.Playback_Pause;
-            this.buttonPlaybackPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlaybackPause.FlatAppearance.BorderSize = 0;
-            this.buttonPlaybackPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlaybackPause.Location = new System.Drawing.Point(37, 1);
-            this.buttonPlaybackPause.Name = "buttonPlaybackPause";
-            this.buttonPlaybackPause.Size = new System.Drawing.Size(28, 28);
-            this.buttonPlaybackPause.TabIndex = 20;
-            this.buttonPlaybackPause.Tag = "false";
-            this.buttonPlaybackPause.UseVisualStyleBackColor = false;
-            this.buttonPlaybackPause.Click += new System.EventHandler(this.buttonPlaybackPause_Click);
             // 
             // buttonQueryhSave
             // 
@@ -1248,13 +1259,6 @@ namespace MyJukebox_EF
             // timerShowMyBitmap
             // 
             this.timerShowMyBitmap.Interval = 10000;
-            // 
-            // parametersToolStripMenuItem
-            // 
-            this.parametersToolStripMenuItem.Name = "parametersToolStripMenuItem";
-            this.parametersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.parametersToolStripMenuItem.Text = "Parameters";
-            this.parametersToolStripMenuItem.Click += new System.EventHandler(this.parametersToolStripMenuItem_Click);
             // 
             // MyJukebox
             // 
@@ -1416,12 +1420,13 @@ namespace MyJukebox_EF
         private System.Windows.Forms.Button buttonPlaybackNext;
         private System.Windows.Forms.Button buttonPlaybackStop;
         private System.Windows.Forms.Button buttonPlaybackPlay;
-        private System.Windows.Forms.Button buttonPlaybackPause;
-        private System.Windows.Forms.Button buttonPlaybackSpeaker;
-        private System.Windows.Forms.Button buttonPlaybackShuffle;
-        private System.Windows.Forms.Button buttonPlaybackLoop;
         private System.Windows.Forms.Button buttonQueryDelete;
         private System.Windows.Forms.ToolStripMenuItem parametersToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxLoop;
+        private System.Windows.Forms.CheckBox checkBoxShuffel;
+        private System.Windows.Forms.CheckBox checkBoxPause;
+        private System.Windows.Forms.ToolStripMenuItem hideShowPanelToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxSpeaker;
     }
 }
 

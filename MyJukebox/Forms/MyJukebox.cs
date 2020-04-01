@@ -39,6 +39,7 @@ namespace MyJukebox_EF
         private string interpreter = "album";
         private string playlists = "playlists";
 
+        private int _distance = 0;
         #endregion fields
 
         #region CTor
@@ -107,10 +108,8 @@ namespace MyJukebox_EF
             statusStripVersion.Text = Properties.Settings.Default.Version;
 
             if (SettingsDb.IsRandom == true)
-            {
-                buttonPlaybackShuffle.Tag = true;
-                buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
-            }
+                checkBoxShuffel.Checked = true;
+
             toolStripPlaybackTrackBarVolume.Value = SettingsDb.Volume;
             trackBarVolume_Scroll(this, EventArgs.Empty);
 
@@ -147,6 +146,12 @@ namespace MyJukebox_EF
             pictureBoxFoto.Image = Properties.Resources.MyBitmap;
         }
 
+        private void MyJukebox_Shown(object sender, EventArgs e)
+        {
+            splitContainer1.SplitterDistance = _distance = SettingsDb.FormSplitterLeft;
+            _isLoaded = true;
+        }
+
         private void MyJukebox_Resize(object sender, EventArgs e)
         {
             this.Update();
@@ -164,7 +169,7 @@ namespace MyJukebox_EF
         private void MyJukebox_FormClosing(object sender, FormClosingEventArgs e)
         {
             SettingsDb.SetSetting("FormState", WindowState.ToString());
-            SettingsDb.FormSplitterLeft = splitContainer1.SplitterDistance;
+            SettingsDb.FormSplitterLeft = _distance;  // splitContainer1.SplitterDistance;
 
             // save dataGridView.Columns widht
             foreach (DataGridViewColumn column in dataGridView.Columns)
@@ -239,8 +244,7 @@ namespace MyJukebox_EF
 
         private void menuMainToolsTest2_Click(object sender, EventArgs e)
         {
-            buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
-            buttonPlaybackLoop.BackColor = Color.LightSteelBlue;
+
         }
 
         private void menuMainEditRecord_Click(object sender, EventArgs e)
@@ -1296,13 +1300,15 @@ namespace MyJukebox_EF
             {
                 axWindowsMediaPlayer1.settings.mute = true;
                 toolTipVolume.SetToolTip(toolStripPlaybackTrackBarVolume, "Mute");
-                buttonPlaybackSpeaker.BackgroundImage = Properties.Resources.SpeakerOff.ToBitmap();
+                checkBoxSpeaker.BackgroundImage = Properties.Resources.SpeakerOff.ToBitmap();
+                checkBoxSpeaker.Checked = true;
             }
             else
             {
                 axWindowsMediaPlayer1.settings.mute = false;
                 toolTipVolume.SetToolTip(toolStripPlaybackTrackBarVolume, $"Volume {toolStripPlaybackTrackBarVolume.Value}%");
-                buttonPlaybackSpeaker.BackgroundImage = Properties.Resources.SpeakerOn.ToBitmap();
+                checkBoxSpeaker.BackgroundImage = Properties.Resources.SpeakerOn.ToBitmap();
+                checkBoxSpeaker.Checked = false;
             }
         }
 
@@ -1576,10 +1582,10 @@ namespace MyJukebox_EF
 
                     if ((currentRow < dataGridView.RowCount - 1) && _buttonStop == false)
                     {
-                        if (Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
-                            buttonPlaybackPlay.PerformClick();
+                        if (checkBoxLoop.Checked == true)
+                            BeginInvoke(new Action(() => { buttonPlaybackPlay.PerformClick(); }));
                         else
-                            buttonPlaybackNext.PerformClick();
+                            BeginInvoke(new Action(() => { buttonPlaybackNext.PerformClick(); }));
                     }
 
                     if (_buttonStop)
@@ -1602,7 +1608,7 @@ namespace MyJukebox_EF
                     dataGridView.Rows[row].DefaultCellStyle.BackColor = Colors.Playing;
 
                     var text = $"{this.Name}       " + Environment.NewLine +
-                        $"playing {dataGridView.CurrentRow.Cells["Interpret"].Value}" +
+                        $"now playing {dataGridView.CurrentRow.Cells["Interpret"].Value}" +
                         $" - {dataGridView.CurrentRow.Cells["Titel"].Value}";
 
                     this.Text = text;
@@ -1821,20 +1827,16 @@ namespace MyJukebox_EF
             aboutBox.ShowDialog();
         }
 
-        private void buttonSpeaker_Click(object sender, EventArgs e)
+        private void checkBoxSpeaker_CheckedChanged(object sender, EventArgs e)
         {
-            Debug.Print("buttonSpeaker_Click");
-
-            if (Convert.ToBoolean(buttonPlaybackSpeaker.Tag) == false)
+            if (checkBoxSpeaker.Checked == true)
             {
-                buttonPlaybackSpeaker.BackgroundImage = Properties.Resources.SpeakerOff.ToBitmap();
-                buttonPlaybackSpeaker.Tag = true;
+                checkBoxSpeaker.BackgroundImage = Properties.Resources.SpeakerOff.ToBitmap();
                 axWindowsMediaPlayer1.settings.mute = true;
             }
             else
             {
-                buttonPlaybackSpeaker.BackgroundImage = Properties.Resources.SpeakerOn.ToBitmap();
-                buttonPlaybackSpeaker.Tag = false;
+                checkBoxSpeaker.BackgroundImage = Properties.Resources.SpeakerOn.ToBitmap();
                 axWindowsMediaPlayer1.settings.mute = false;
             }
         }
@@ -1844,18 +1846,11 @@ namespace MyJukebox_EF
             Debug.Print("buttonPlay_Click");
             _buttonStop = false;
 
-            if (Convert.ToBoolean(buttonPlaybackPause.Tag) == true)
+            if (checkBoxPause.Checked == true)
             {
-                buttonPlaybackPause.Tag = false;
+                checkBoxPause.Checked = false;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 timerDuration.Enabled = true;
-                return;
-            }
-
-            if (Convert.ToBoolean(buttonPlaybackLoop.Tag) == true)
-            {
-                //axWindowsMediaPlayer1.URL = filespec;
-                axWindowsMediaPlayer1.Ctlcontrols.play();
                 return;
             }
 
@@ -1868,7 +1863,6 @@ namespace MyJukebox_EF
             var fileName = dgrow.Cells["FileName"].Value.ToString();
             var artist = dgrow.Cells["Interpret"].Value.ToString();
             var filespec = Path.Combine(path, fileName);
-
 
             currentRow = dataGridView.SelectedRows[0].Index;
 
@@ -1904,17 +1898,15 @@ namespace MyJukebox_EF
             }
         }
 
-        private void buttonPlaybackPause_Click(object sender, EventArgs e)
+        private void checkBoxPause_CheckedChanged(object sender, EventArgs e)
         {
-            if (Convert.ToBoolean(buttonPlaybackPause.Tag) == true)
+            if (checkBoxPause.Checked == false)
             {
-                buttonPlaybackPause.Tag = false;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 timerDuration.Enabled = true;
             }
             else
             {
-                buttonPlaybackPause.Tag = true;
                 axWindowsMediaPlayer1.Ctlcontrols.pause();
                 timerDuration.Enabled = false;
             }
@@ -1936,12 +1928,12 @@ namespace MyJukebox_EF
 
             int currentRow = dataGridView.CurrentRow.Index;
 
-            if ((currentRow < dataGridView.RowCount - 1) && !SettingsDb.IsRandom)
+            if ((currentRow < dataGridView.RowCount - 1) && checkBoxShuffel.Checked == false)
             {
                 var columsCount = dataGridView.ColumnCount - 1;
                 dataGridView.Rows[++currentRow].Cells[2].Selected = true;
             }
-            else if (SettingsDb.IsRandom == true)
+            else if (checkBoxShuffel.Checked == true)
             {
                 var nextRow = random.GetNextNumber;
                 dataGridView.Rows[nextRow].Cells[2].Selected = true;
@@ -1950,44 +1942,27 @@ namespace MyJukebox_EF
             BeginInvoke(new Action(() => { buttonPlaybackPlay.PerformClick(); }));
         }
 
-        private void buttonPlaybackShuffle_Click(object sender, EventArgs e)
+        private void checkBoxShuffel_CheckedChanged(object sender, EventArgs e)
         {
-            _isloop = false;
-            Debug.Print($"buttonRandom_Click, isShuffel={buttonPlaybackShuffle.Tag}");
-
-            bool isRandom = Convert.ToBoolean(buttonPlaybackShuffle.Tag);
-
-            isRandom = !isRandom;
-            if (isRandom)
-            {
-                buttonPlaybackShuffle.BackColor = Color.LightSteelBlue;
-                buttonPlaybackLoop.BackColor = Color.LightSlateGray;
-            }
-            else
-                buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
-
-            buttonPlaybackShuffle.Tag = isRandom;
-            SettingsDb.IsRandom = isRandom;
+            Debug.Print($"checkBoxShuffel_CheckedChanged");
+            checkBoxLoop.Checked = false;
+            SettingsDb.IsRandom = checkBoxShuffel.Checked;
         }
 
-        private void buttonPlaybackLoop_Click(object sender, EventArgs e)
+        private void checkBoxLoop_CheckedChanged(object sender, EventArgs e)
         {
-            Debug.Print("buttonLoop_Click");
+            Debug.Print("checkBoxLoop_CheckedChanged");
 
-            buttonPlaybackShuffle.Tag = false;
-            buttonPlaybackShuffle.BackColor = Color.LightSlateGray;
+            checkBoxShuffel.Checked = false;
             SettingsDb.SetSetting("IsRandom", "False");
 
-            _isloop = !_isloop;
-            if (_isloop)
+            if (checkBoxLoop.Checked == true)
             {
-                buttonPlaybackLoop.BackColor = Color.LightSteelBlue;
-                buttonPlaybackLoop.Tag = true;
+                Debug.Print("Loop is On");
             }
             else
             {
-                buttonPlaybackLoop.BackColor = Color.LightSlateGray;
-                buttonPlaybackLoop.Tag = false;
+                Debug.Print("Loop is Off");
             }
         }
 
@@ -2003,11 +1978,6 @@ namespace MyJukebox_EF
                 SettingsDb.FormSplitterLeft = splitContainer1.SplitterDistance;
         }
 
-        private void MyJukebox_Shown(object sender, EventArgs e)
-        {
-            splitContainer1.SplitterDistance = SettingsDb.FormSplitterLeft;
-            _isLoaded = true;
-        }
 
         private void parametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2021,5 +1991,23 @@ namespace MyJukebox_EF
 
             parameters.Dispose();
         }
+
+        private void hideShowPanelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (hideShowPanelToolStripMenuItem.Checked == false)
+            {
+                _distance = splitContainer1.SplitterDistance;
+                hideShowPanelToolStripMenuItem.Checked = true;
+                splitContainer1.Panel1MinSize = 0;
+                splitContainer1.SplitterDistance = 0;
+            }
+            else
+            {
+                hideShowPanelToolStripMenuItem.Checked = false;
+                splitContainer1.Panel1MinSize = 230;
+                splitContainer1.SplitterDistance = _distance;
+            }
+        }
+
     }
 }
