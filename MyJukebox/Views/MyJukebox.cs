@@ -720,7 +720,6 @@ namespace MyJukebox_EF
             genres = await DataGetSet.GetGenresAsync();
 
             TreeNode tngenre = tvlogic.Nodes["root"].Nodes[mainNode];
-            //if (!tngenre.IsExpanded) tngenre.Expand();
 
             tvlogic.BeginUpdate();
             foreach (string node in genres)

@@ -137,7 +137,7 @@ namespace MyJukebox_EF
                     strFolder = di.Parent.FullName;
 
                 textBoxStartpath.Text = strFolder;
-                ActionStartfolder();
+                CheckStartfolder();
 
                 buttonStartScann.PerformClick();
             }
@@ -155,7 +155,19 @@ namespace MyJukebox_EF
             }
         }
 
-        private void ActionStartfolder()
+        private void listViewFileList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control)
+            {
+                foreach (ListViewItem item in listViewFileList.Items)
+                {
+                    item.Selected = true;
+                }
+            }
+        }
+
+        #region Methodes
+        private void CheckStartfolder()
         {
             try
             {
@@ -174,8 +186,6 @@ namespace MyJukebox_EF
             }
             catch { }
         }
-
-        #region Methodes
 
         private void FillCombos()
         {
@@ -224,6 +234,11 @@ namespace MyJukebox_EF
 
             if (startDirectory == "")
                 return;
+
+            comboBoxGenre.Text = ObjectFound(startDirectory, "Genre");
+            comboBoxKatalog.Text = ObjectFound(startDirectory, "Catalog");
+            comboBoxAlbum.Text = ObjectFound(startDirectory, "Album");
+            comboBoxMedium.Text = ObjectFound(startDirectory, "Media");
 
             statusStripImport.Refresh();
 
@@ -293,9 +308,12 @@ namespace MyJukebox_EF
 
             if (checkBoxSpecialImport.Checked)
             {
-                if (comboBoxGenre.Text == "" | comboBoxKatalog.Text == "" | comboBoxMedium.Text == "" | comboBoxAlbum.Text == "")
+                if (comboBoxGenre.Text == "" | comboBoxGenre.Text == "Untitled"
+                    | comboBoxKatalog.Text == "" | comboBoxKatalog.Text == "Untitled"
+                    | comboBoxMedium.Text == "" | comboBoxMedium.Text == "NA"
+                    | comboBoxAlbum.Text == "" | comboBoxAlbum.Text == "Untitled")
                 {
-                    MessageBox.Show("If checkbox spezial import is checked then all combos must be filled out");
+                    MessageBox.Show("If option 'Spezial Import' is checked then all 'Spezial Import' Fields must be filled out");
                     return;
                 }
             }
@@ -414,6 +432,22 @@ namespace MyJukebox_EF
             Debug.Print($"Import success = {importSuccess}, failed={importFailed}, lastId={lastID}");
         }
 
+        private string ObjectFound(string path, string field)
+        {
+            List<string> list = null;
+
+            list = DataGetSet.GetImportField(field);
+            if (list != null)
+            {
+                foreach (var g in list)
+                {
+                    if (path.IndexOf(g) > -1)
+                        return g;
+                }
+            }
+            return "N/A";
+        }
+
         public string ToProperCase(string sText)
         {
             //Get the culture property of the thread.
@@ -425,15 +459,5 @@ namespace MyJukebox_EF
 
         #endregion Methodes
 
-        private void listViewFileList_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.A && e.Control)
-            {
-                foreach (ListViewItem item in listViewFileList.Items)
-                {
-                    item.Selected = true;
-                }
-            }
-        }
     }
 }

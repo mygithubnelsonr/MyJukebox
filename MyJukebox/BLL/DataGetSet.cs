@@ -26,6 +26,18 @@ namespace MyJukebox_EF.BLL
             return genres;
         }
 
+        public static async Task<List<string>> GetGenresFullAsync()
+        {
+            List<string> genres = null;
+            var context = new MyJukeboxEntities();
+            await Task.Run(() =>
+            {
+                genres = context.tGenres
+                    .Select(g => g.Name).ToList();
+            });
+            return genres;
+        }
+
         public static async Task<List<string>> GetCatalogsAsync()
         {
             List<string> catalogues = null;
@@ -680,16 +692,28 @@ namespace MyJukebox_EF.BLL
             return list;
         }
 
-        public static async Task<List<string>> GetGenresFullAsync()
+        public static List<string> GetGenres()
         {
             List<string> genres = null;
             var context = new MyJukeboxEntities();
-            await Task.Run(() =>
-            {
-                genres = context.tGenres
-                    .Select(g => g.Name).ToList();
-            });
+            genres = context.tGenres.Select(g => g.Name).ToList();
             return genres;
+        }
+
+        // used by filescanner
+        public static List<string> GetImportField(string table)
+        {
+            List<string> list = null;
+            var context = new MyJukeboxEntities();
+
+            if (table == "Genre")
+                list = context.tGenres.Select(g => g.Name).ToList();
+            else if (table == "Catalog")
+                list = context.tCatalogs.Select(g => g.Name).ToList();
+            else if (table == "Album")
+                list = context.tCatalogs.Select(g => g.Name).ToList();
+
+            return list;
         }
 
         public static List<string> GetInfoRecord(int id)

@@ -135,6 +135,7 @@
             this.buttonTest.TabIndex = 24;
             this.buttonTest.Text = "Test";
             this.buttonTest.UseVisualStyleBackColor = true;
+            this.buttonTest.Visible = false;
             this.buttonTest.Click += new System.EventHandler(this.buttonTest_Click);
             // 
             // buttonStartScann
@@ -573,7 +574,7 @@
             this.statusStripLabel3.BackColor = System.Drawing.SystemColors.ControlLight;
             this.statusStripLabel3.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.statusStripLabel3.Name = "statusStripLabel3";
-            this.statusStripLabel3.Size = new System.Drawing.Size(236, 19);
+            this.statusStripLabel3.Size = new System.Drawing.Size(43, 19);
             this.statusStripLabel3.Spring = true;
             // 
             // labelShowHideDbPanel

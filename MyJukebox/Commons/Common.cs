@@ -28,7 +28,7 @@ namespace MyJukebox_EF
             return IsQuery;
         }
 
-        public static string GetQueryString(string queryText)
+        public static string GetQueryStringOld(string queryText)
         {
             List<string> tokens = new List<string>();
             string[] arTokens = null;
@@ -70,6 +70,11 @@ namespace MyJukebox_EF
             {
                 return null;
             }
+        }
+
+        public static string GetQueryString(string queryText)
+        {
+            return $"select * from vsongs where charindex('{queryText}', lower( concat([pfad],[filename]))) > 0";
         }
 
         public static string MD5(string password)
