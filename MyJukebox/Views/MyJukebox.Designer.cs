@@ -207,7 +207,6 @@ namespace MyJukebox_EF
             this.importNewSongsToolStripMenuItem.Name = "importNewSongsToolStripMenuItem";
             this.importNewSongsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.importNewSongsToolStripMenuItem.Text = "Import new Songs";
-            this.importNewSongsToolStripMenuItem.Click += new System.EventHandler(this.toolStripMenuItemimportNewSongs_Click);
             // 
             // toolStripSeparator3
             // 
@@ -548,7 +547,7 @@ namespace MyJukebox_EF
             // 
             // pictureBoxFoto
             // 
-            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.pictureBoxFoto.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxFoto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(25)))), ((int)(((byte)(52)))));
             this.pictureBoxFoto.Location = new System.Drawing.Point(-1, 380);
@@ -560,8 +559,8 @@ namespace MyJukebox_EF
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabLogical);
             this.tabControl.Controls.Add(this.tabPlayLists);
@@ -644,8 +643,8 @@ namespace MyJukebox_EF
             // 
             // tvplaylist
             // 
-            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tvplaylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tvplaylist.BackColor = System.Drawing.Color.LightSlateGray;
             this.tvplaylist.ContextMenuStrip = this.contextMenuStripPlaylist;
@@ -1247,7 +1246,7 @@ namespace MyJukebox_EF
             // 
             // axWindowsMediaPlayer1
             // 
-            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer1.Enabled = true;
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(1, 256);

@@ -201,12 +201,6 @@
     <Compile Include="Views\EditRecord.Designer.cs">
       <DependentUpon>EditRecord.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Filescanner.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\Filescanner.Designer.cs">
-      <DependentUpon>Filescanner.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\MyJukebox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -231,9 +225,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\EditRecord.resx">
       <DependentUpon>EditRecord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Filescanner.resx">
-      <DependentUpon>Filescanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\InputDialog.resx">
       <DependentUpon>InputDialog.cs</DependentUpon>

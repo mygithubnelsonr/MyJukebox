@@ -217,12 +217,6 @@ namespace MyJukebox_EF
 
         #region Menu Event Handlers
 
-        private void toolStripMenuItemimportNewSongs_Click(object sender, EventArgs e)
-        {
-            Filescanner filescanner = new Filescanner();
-            filescanner.Show();
-        }
-
         private void menuMainFileExit_Click(object sender, EventArgs e)
         {
             this.menuMainFileExit.Tag = "1";

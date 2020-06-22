@@ -98,7 +98,6 @@ A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\AxInterop.WMPLib.dll
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox.csproj.ResolveComReference.cache
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.AboutBox.resources
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.EditRecord.resources
-A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.Filescanner.resources
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.InputDialog.resources
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.MyJukebox.resources
 A:\Source\Repos\01_Audio\MyJukebox\MyJukebox\obj\Debug\MyJukebox_EF.Properties.Resources.resources
