@@ -1510,7 +1510,7 @@ namespace MyJukebox_EF
         private void FlipImage(DataGridViewRow datagridrow)
         {
             var path = datagridrow.Cells["Pfad"].Value.ToString();
-            var artist = datagridrow.Cells["Interpret"].Value.ToString();
+            var artist = datagridrow.Cells["Artist"].Value.ToString();
             var userprofile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Music");
 
             List<string> pathList = new List<string>();
@@ -1601,7 +1601,7 @@ namespace MyJukebox_EF
                     dataGridView.Rows[row].DefaultCellStyle.BackColor = Colors.Playing;
 
                     var text = $"{this.Name}       " + Environment.NewLine +
-                        $"now playing {dataGridView.CurrentRow.Cells["Interpret"].Value}" +
+                        $"now playing {dataGridView.CurrentRow.Cells["Artist"].Value}" +
                         $" - {dataGridView.CurrentRow.Cells["Titel"].Value}";
 
                     this.Text = text;
@@ -1854,7 +1854,7 @@ namespace MyJukebox_EF
             DataGridViewRow dgrow = dataGridView.CurrentRow;
             var path = dgrow.Cells["Pfad"].Value.ToString();
             var fileName = dgrow.Cells["FileName"].Value.ToString();
-            var artist = dgrow.Cells["Interpret"].Value.ToString();
+            var artist = dgrow.Cells["Artist"].Value.ToString();
             var filespec = Path.Combine(path, fileName);
 
             currentRow = dataGridView.SelectedRows[0].Index;

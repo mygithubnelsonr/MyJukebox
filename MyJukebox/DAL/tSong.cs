@@ -16,20 +16,16 @@ namespace MyJukebox_EF.DAL
     {
         public int ID { get; set; }
         public string Album { get; set; }
-        public string Interpret { get; set; }
+        public string Artist { get; set; }
         public string Titel { get; set; }
         public string Pfad { get; set; }
         public string FileName { get; set; }
         public Nullable<int> ID_Genre { get; set; }
         public Nullable<int> ID_Catalog { get; set; }
         public Nullable<int> ID_Media { get; set; }
-        public Nullable<int> ID_Info { get; set; }
-        public Nullable<int> ID_File { get; set; }
     
-        public virtual tFileInfo tFileInfo { get; set; }
-        public virtual tGenre tGenre { get; set; }
-        public virtual tInfo tInfo { get; set; }
-        public virtual tMedia tMedia { get; set; }
         public virtual tCatalog tCatalog { get; set; }
+        public virtual tGenre tGenre { get; set; }
+        public virtual tMedia tMedia { get; set; }
     }
 }

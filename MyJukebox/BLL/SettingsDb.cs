@@ -11,7 +11,8 @@ namespace MyJukebox_EF.BLL
     public class SettingsDb
     {
         private static Dictionary<string, object> Settings = new Dictionary<string, object>();
-        public readonly static string PlaceHolderText = $"  < Input SQL like Album='V8-A-1' >";
+        //public readonly static string PlaceHolderText = $"  < Input SQL like Album='V8-A-1' >";
+        public readonly static string PlaceHolderText = $"  enter search text  ";
 
         #region public properties
 

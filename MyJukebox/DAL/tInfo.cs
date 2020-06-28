@@ -14,12 +14,6 @@ namespace MyJukebox_EF.DAL
     
     public partial class tInfo
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tInfo()
-        {
-            this.tSongs = new HashSet<tSong>();
-        }
-    
         public int ID { get; set; }
         public int ID_Song { get; set; }
         public Nullable<int> Played { get; set; }
@@ -28,9 +22,5 @@ namespace MyJukebox_EF.DAL
         public Nullable<bool> Error { get; set; }
         public Nullable<bool> Sampler { get; set; }
         public string Comment { get; set; }
-        public Nullable<int> Media { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tSong> tSongs { get; set; }
     }
 }

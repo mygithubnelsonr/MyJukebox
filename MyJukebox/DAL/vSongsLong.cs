@@ -19,11 +19,9 @@ namespace MyJukebox_EF.DAL
         public string Catalog { get; set; }
         public string Album { get; set; }
         public string Titel { get; set; }
-        public string Interpret { get; set; }
+        public string Artist { get; set; }
         public string Pfad { get; set; }
         public string FileName { get; set; }
-        public string MD5 { get; set; }
         public string Media { get; set; }
-        public Nullable<int> FileSize { get; set; }
     }
 }

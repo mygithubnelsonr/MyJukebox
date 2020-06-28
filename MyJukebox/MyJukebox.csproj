@@ -111,12 +111,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Commons\Setting.cs" />
-    <Compile Include="DAL\tAlbum.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\tBeat.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\tCatalog.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
@@ -151,9 +145,6 @@
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\tSong.cs">
-      <DependentUpon>MyJukeboxModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\tTestImport.cs">
       <DependentUpon>MyJukeboxModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\vPlaylistSong.cs">
