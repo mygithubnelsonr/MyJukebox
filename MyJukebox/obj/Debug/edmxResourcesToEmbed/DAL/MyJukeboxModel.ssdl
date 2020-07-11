@@ -144,7 +144,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongs' does not have a primary key 
     <Property Name="Titel" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Pfad" Type="nvarchar" MaxLength="254" />
     <Property Name="FileName" Type="nvarchar" MaxLength="156" />
-    <Property Name="Type" Type="nvarchar" MaxLength="12" />
+    <Property Name="Media" Type="nvarchar" MaxLength="12" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -247,7 +247,7 @@ warning 6002: The table/view 'MyJukebox.dbo.vSongsLong' does not have a primary 
     [vSongs].[Titel] AS [Titel], 
     [vSongs].[Pfad] AS [Pfad], 
     [vSongs].[FileName] AS [FileName], 
-    [vSongs].[Type] AS [Type]
+    [vSongs].[Media] AS [Media]
     FROM [dbo].[vSongs] AS [vSongs]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="vSongsLong" EntityType="Self.vSongsLong" store:Type="Views" store:Schema="dbo">

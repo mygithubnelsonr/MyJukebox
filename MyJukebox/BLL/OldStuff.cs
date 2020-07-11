@@ -173,7 +173,7 @@ namespace Oldstuff
 
             //await tvlogicFillAlbumAsync();
 
-            //await tvlogicFillInterpretAsync();
+            //await tvlogicFillArtistAsync();
 
             //await tvplaylistFillPlaylist();
 

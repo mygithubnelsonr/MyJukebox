@@ -110,21 +110,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="vSongs">
-      <EntityTypeMapping TypeName="MyJukeboxContext.vSong">
-        <MappingFragment StoreEntitySet="vSongs">
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
-          <ScalarProperty Name="Titel" ColumnName="Titel" />
-          <ScalarProperty Name="Artist" ColumnName="Artist" />
-          <ScalarProperty Name="Album" ColumnName="Album" />
-          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
-          <ScalarProperty Name="Genre" ColumnName="Genre" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="vSongsLongs">
       <EntityTypeMapping TypeName="MyJukeboxContext.vSongsLong">
         <MappingFragment StoreEntitySet="vSongsLong">
@@ -165,6 +150,21 @@
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="Played" ColumnName="Played" />
           <ScalarProperty Name="ID_Song" ColumnName="ID_Song" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vSongs">
+      <EntityTypeMapping TypeName="MyJukeboxContext.vSong">
+        <MappingFragment StoreEntitySet="vSongs">
+          <ScalarProperty Name="Media" ColumnName="Media" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Pfad" ColumnName="Pfad" />
+          <ScalarProperty Name="Titel" ColumnName="Titel" />
+          <ScalarProperty Name="Artist" ColumnName="Artist" />
+          <ScalarProperty Name="Album" ColumnName="Album" />
+          <ScalarProperty Name="Catalog" ColumnName="Catalog" />
+          <ScalarProperty Name="Genre" ColumnName="Genre" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

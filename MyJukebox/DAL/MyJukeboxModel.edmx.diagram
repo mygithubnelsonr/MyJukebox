@@ -20,10 +20,10 @@
         <AssociationConnector Association="MyJukeboxContext.FK_tSongsNew_tCatalogs" />
         <AssociationConnector Association="MyJukeboxContext.FK_tSongsNew_tGenres" />
         <AssociationConnector Association="MyJukeboxContext.FK_tSongsNew_tMedia" />
-        <EntityTypeShape EntityType="MyJukeboxContext.vSong" Width="1.5" PointX="7.5" PointY="3" />
         <EntityTypeShape EntityType="MyJukeboxContext.vSongsLong" Width="1.5" PointX="9.5" PointY="3" />
         <EntityTypeShape EntityType="MyJukeboxContext.vPlaylistSong" Width="1.5" PointX="11.5" PointY="3" />
         <EntityTypeShape EntityType="MyJukeboxContext.tInfo" Width="1.5" PointX="5.625" PointY="6.75" />
+        <EntityTypeShape EntityType="MyJukeboxContext.vSong" Width="1.5" PointX="7.5" PointY="3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

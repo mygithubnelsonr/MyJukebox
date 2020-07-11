@@ -73,6 +73,16 @@ namespace MyJukebox_EF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
+        internal static System.Drawing.Icon Artist {
+            get {
+                object obj = ResourceManager.GetObject("Artist", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
         internal static System.Drawing.Icon Artists {
             get {
                 object obj = ResourceManager.GetObject("Artists", resourceCulture);
@@ -146,16 +156,6 @@ namespace MyJukebox_EF.Properties {
         internal static System.Drawing.Icon Human {
             get {
                 object obj = ResourceManager.GetObject("Human", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Interpret {
-            get {
-                object obj = ResourceManager.GetObject("Interpret", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

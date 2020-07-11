@@ -73,20 +73,20 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static List<string> GetInterpretenAsyncTest(string genre, string catalog, string album)
+        public static List<string> GetArtistAsyncTest(string genre, string catalog, string album)
         {
-            List<string> interpretes = null;
+            List<string> artists = null;
 
             using (var context = new MyJukeboxEntities())
             {
                 try
                 {
-                    interpretes = context.vSongs
+                    artists = context.vSongs
                                     .Where(i => i.Genre == genre && i.Catalog == catalog && i.Album.Contains(album))
                                     .Select(i => i.Artist)
                                     .Distinct().OrderBy(i => i).ToList();
 
-                    return interpretes;
+                    return artists;
 
                 }
                 catch (Exception)
@@ -96,21 +96,21 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        public static async Task<List<string>> GetInterpretenAsync()
+        public static async Task<List<string>> GetArtistsAsync()
         {
-            List<string> interpreter = null;
+            List<string> artist = null;
 
             using (var context = new MyJukeboxEntities())
             {
                 await Task.Run(() =>
                 {
-                    interpreter = context.vSongs
+                    artist = context.vSongs
                                     .Where(i => i.Genre == TreeViewLogicStates.Genre && i.Catalog == TreeViewLogicStates.Catalog && i.Album.Contains(TreeViewLogicStates.Album))
                                     .Select(i => i.Artist)
                                     .Distinct().OrderBy(i => i).ToList();
                 });
 
-                return interpreter;
+                return artist;
             }
         }
 
@@ -358,7 +358,7 @@ namespace MyJukebox_EF.BLL
                             (s.Genre.Contains(TreeViewLogicStates.Genre)) &&
                             (s.Catalog.Contains(TreeViewLogicStates.Catalog)) &&
                             (s.Album.Contains(TreeViewLogicStates.Album)) &&
-                            (s.Artist.Contains(TreeViewLogicStates.Interpret))
+                            (s.Artist.Contains(TreeViewLogicStates.Artist))
                             ).ToList();
                 });
 
@@ -384,7 +384,7 @@ namespace MyJukebox_EF.BLL
                         (s.Genre.Contains(TreeViewLogicStates.Genre)) &&
                         (s.Catalog.Contains(TreeViewLogicStates.Catalog)) &&
                         (s.Album.Contains(TreeViewLogicStates.Album)) &&
-                        (s.Artist.Contains(TreeViewLogicStates.Interpret))
+                        (s.Artist.Contains(TreeViewLogicStates.Artist))
                         ).ToList();
 
                 return songs;
@@ -506,123 +506,6 @@ namespace MyJukebox_EF.BLL
             }
         }
 
-        //private static int SaveNewRecord(MP3Record record, bool testImport)
-        //{
-        //    int recordsImported = 0;
-
-        //    if (testImport == true)
-        //        recordsImported += SetNewTestRecord(record);
-        //    else
-        //    {
-        //        var exist = MD5Exist(record.MD5);
-
-        //        if (MD5Exist(record.MD5) == false)
-        //        {
-        //            recordsImported += SetNewRecord(record);
-        //        }
-        //    }
-        //    return recordsImported;
-        //}
-
-        //private static int SetNewRecord(MP3Record record)   // productiv
-        //{
-        //    try
-        //    {
-        //        var context = new MyJukeboxEntities();
-
-        //        var song = new tSong();
-        //        song.Album = record.Album;
-        //        song.Interpret = record.Interpret;
-        //        song.Titel = record.Titel;
-        //        song.Pfad = record.Path;
-        //        song.FileName = record.FileName;
-
-        //        context.tSongs.Add(song);
-        //        context.SaveChanges();
-
-        //        int songID = (int)GetLastSongID("tSongs");
-
-        //        // tMd5
-        //        var md5 = new tMD5();
-        //        md5.ID_Song = songID;
-        //        md5.MD5 = record.MD5;
-
-        //        context.tMD5.Add(md5);
-        //        context.SaveChanges();
-
-        //        // tInfo
-        //        var info = new tInfo();
-        //        info.ID_Song = songID;
-        //        info.Media = record.Media;
-        //        info.Sampler = record.IsSample;
-        //        context.tInfos.Add(info);
-        //        context.SaveChanges();
-
-        //        // tFileInfo
-        //        var file = new tFileInfo();
-        //        file.ID_Song = songID;
-        //        file.FileDate = record.FileDate;
-        //        file.FileSize = record.FileSize;
-        //        file.ImportDate = DateTime.Now;
-        //        context.tFileInfoes.Add(file);
-        //        context.SaveChanges();
-
-        //        int catalogID = GetCatalogFromString(record.Catalog);
-        //        int genreID = GetGenreFromString(record.Genre);
-
-        //        // tSong
-        //        song.ID_Catalog = catalogID;
-        //        song.ID_Genre = genreID;
-        //        context.SaveChanges();
-
-        //        return 1;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.Print("SetNewRecord_Error: {ex.Message}");
-        //        return 0;
-        //    }
-        //}
-
-        //private static int SetNewTestRecord(MP3Record record)
-        //{
-        //    try
-        //    {
-        //        var context = new MyJukeboxEntities();
-
-        //        var media = new tMedia();
-        //        var medium = context.tMedias
-        //            .Where(m => m.ID == record.Media)
-        //            .Select(m => m.Type).FirstOrDefault();
-
-        //        var import = new tTestImport();
-        //        import.Album = record.Album;
-        //        import.FileDate = record.FileDate;
-        //        import.FileName = record.FileName;
-        //        import.FileSize = record.FileSize;
-        //        import.Genre = record.Genre;
-        //        import.Interpret = record.Interpret;
-        //        import.Katalog = record.Catalog;
-        //        import.MD5 = record.MD5;
-        //        //import.Medium = medium;
-        //        import.Pfad = record.Path;
-        //        import.IsSampler = record.IsSample;
-        //        import.Titel = record.Titel;
-        //        import.ImportDate = DateTime.Now;
-
-        //        context.tTestImports.Add(import);
-        //        context.SaveChanges();
-
-        //        Logging.Log("1 record added");
-        //        return 1;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.Print($"SetNewTestRecord_Error: {ex.Message}");
-        //        Logging.Log(ex.Message);
-        //        return 0;
-        //    }
-        //}
         #endregion
 
         #region EditForm
@@ -661,7 +544,7 @@ namespace MyJukebox_EF.BLL
                     songs.ID_Catalog = GetCatalogFromString(record.Catalog);
 
                 if (songs.Album != record.Album) songs.Album = record.Album;
-                if (songs.Artist != record.Interpret) songs.Artist = record.Interpret;
+                if (songs.Artist != record.Artist) songs.Artist = record.Artist;
                 if (songs.Titel != record.Titel) songs.Titel = record.Titel;
                 if (songs.Pfad != record.Path) songs.Pfad = record.Path;
                 if (songs.FileName != record.FileName) songs.FileName = record.FileName;
@@ -907,7 +790,7 @@ namespace MyJukebox_EF.BLL
             {
                 record = new MP3Record();
                 record.Album = arTmp[arTmp.Length - 1];
-                record.Interpret = arTmp[arTmp.Length - 2];
+                record.Artist = arTmp[arTmp.Length - 2];
                 record.Media = media[0];
                 record.Genre = arTmp[arTmp.Length - 5];
                 record.Catalog = arTmp[arTmp.Length - 4];

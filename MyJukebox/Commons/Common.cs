@@ -1,12 +1,9 @@
 ﻿using MyJukebox_EF.BLL;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace MyJukebox_EF
+namespace MyJukebox_EF.Commons
 {
     public static class Common
     {
@@ -26,50 +23,6 @@ namespace MyJukebox_EF
                 IsQuery = true;
 
             return IsQuery;
-        }
-
-        public static string GetQueryStringOld(string queryText)
-        {
-            List<string> tokens = new List<string>();
-            string[] arTokens = null;
-            string sql = "";
-            bool findExplizit = false;
-
-            try
-            {
-                arTokens = queryText.Split('=');
-
-                if (queryText.IndexOf(@"==") == -1)
-                    findExplizit = false;
-                else
-                {
-                    findExplizit = true;
-                    arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
-                }
-
-                var search = arTokens[0];
-                var argument = arTokens[1];
-
-                if (argument.Substring(0, 1) == "'")
-                    argument = argument.Substring(1);
-
-                if (argument.Substring(argument.Length - 1, 1) == "'")
-                    argument = argument.Substring(0, argument.Length - 1);
-
-                if (findExplizit == true)
-                    sql = $"select * from vSongs where {search} = '{argument}'";
-                else
-                    if (search == "*")
-                    sql = $"select * from vsongs where charindex('{argument}', lower( concat([pfad],[filename]))) > 0";
-                else
-                    sql = $"select * from vSongs where {search} like '%{argument}%'";
-
-                return sql;
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         public static string GetQueryString(string queryText)
@@ -121,13 +74,102 @@ namespace MyJukebox_EF
             return dirCount;
         }
 
-        public static string CamelSpaceOut(string str)
-        {
-            for (int i = 1; i < str.Length; i++)
-                if (Char.IsUpper(str[i]))
-                    str = str.Insert(i++, " ");
-            return str;
-        }
+        //public static string GetQueryStringOld(string queryText)
+        //{
+        //    List<string> tokens = new List<string>();
+        //    string[] arTokens = null;
+        //    string sql = "";
+        //    bool findExplizit = false;
+
+        //    try
+        //    {
+        //        arTokens = queryText.Split('=');
+
+        //        if (queryText.IndexOf(@"==") == -1)
+        //            findExplizit = false;
+        //        else
+        //        {
+        //            findExplizit = true;
+        //            arTokens = arTokens.Where(w => w != arTokens[1]).ToArray();
+        //        }
+
+        //        var search = arTokens[0];
+        //        var argument = arTokens[1];
+
+        //        if (argument.Substring(0, 1) == "'")
+        //            argument = argument.Substring(1);
+
+        //        if (argument.Substring(argument.Length - 1, 1) == "'")
+        //            argument = argument.Substring(0, argument.Length - 1);
+
+        //        if (findExplizit == true)
+        //            sql = $"select * from vSongs where {search} = '{argument}'";
+        //        else
+        //            if (search == "*")
+        //            sql = $"select * from vsongs where charindex('{argument}', lower( concat([pfad],[filename]))) > 0";
+        //        else
+        //            sql = $"select * from vSongs where {search} like '%{argument}%'";
+
+        //        return sql;
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        //public static string QueryBuilder()
+        //{
+        //    string and, query, temp, strGenre, catalog, album, artist;
+
+        //    Hashtable ht = new Hashtable();
+
+        //    strGenre = "";
+        //    if (TreeViewLogicStates.Genre != "")
+        //    {
+        //        ht.Add("genre", TreeViewLogicStates.Genre);
+        //        strGenre = $" genre LIKE '{TreeViewLogicStates.Genre}'";
+        //    }
+
+        //    catalog = "";
+        //    if (TreeViewLogicStates.Catalog != "")
+        //    {
+        //        ht.Add("catalog", TreeViewLogicStates.Catalog);
+        //        catalog = $" catalog LIKE '{TreeViewLogicStates.Catalog}'";
+        //    }
+
+        //    if (TreeViewLogicStates.Album != "")
+        //    {
+        //        ht.Add("album", TreeViewLogicStates.Album);
+        //        album = $" album LIKE '{TreeViewLogicStates.Album}'";
+        //    }
+
+        //    if (TreeViewLogicStates.Artist != "")
+        //    {
+        //        ht.Add("artist", TreeViewLogicStates.Artist);
+        //        artist = $" artist LIKE '{TreeViewLogicStates.Artist}'";
+        //    }
+
+        //    temp = "";
+        //    query = "";
+        //    and = "";
+        //    query = "";
+
+        //    if (ht.Count > 1) and = " AND ";
+        //    int htcount = 1;
+        //    // Query zusammenbasteln
+        //    foreach (DictionaryEntry de in ht)
+        //    {
+        //        string v = de.Value.ToString();
+        //        Console.WriteLine("Key = {0}, Value = {1}", de.Key, v.Replace("'", "''"));
+        //        temp = "";
+        //        temp += de.Key + " LIKE '" + v.Replace("'", "''") + "'";
+        //        query += " (" + temp + ") ";
+        //        if (htcount < ht.Count) query += and;
+        //        htcount++;
+        //    }
+        //    return query;
+        //}
 
     }
 }

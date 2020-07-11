@@ -35,10 +35,10 @@ namespace MyJukebox_EF.BLL
         public static string FormState { get { return Convert.ToString(Settings["FormState"]); } set { Settings["FormState"] = value; } }
         public static int FormSplitterLeft { get { return Convert.ToInt32(Settings["FormSplitterLeft"]); } set { Settings["FormSplitterLeft"] = value.ToString(); } }
         // Treeview 4
-        public static string LastAlbum { get { return Convert.ToString(Settings["LastAlbum"]); } set { Settings["LastAlbum"] = value; } }
         public static string LastGenre { get { return Convert.ToString(Settings["LastGenre"]); } set { Settings["LastGenre"] = value; } }
-        public static string LastInterpret { get { return Convert.ToString(Settings["LastInterpret"]); } set { Settings["LastInterpret"] = value; } }
         public static string LastCatalog { get { return Convert.ToString(Settings["LastCatalog"]); } set { Settings["LastCatalog"] = value; } }
+        public static string LastArtist { get { return Convert.ToString(Settings["LastArtist"]); } set { Settings["LastArtist"] = value; } }
+        public static string LastAlbum { get { return Convert.ToString(Settings["LastAlbum"]); } set { Settings["LastAlbum"] = value; } }
         // PlayList 1
         public static int PlaylistCurrentID { get; set; }
         public static string PlaylistCurrentName { get; set; }
@@ -98,7 +98,7 @@ namespace MyJukebox_EF.BLL
                 Settings["LastGenre"] = "";
                 Settings["LastCatalog"] = "";
                 Settings["LastAlbum"] = "";
-                Settings["LastInterpret"] = "";
+                Settings["LastArtist"] = "";
                 Settings["LastQuery"] = "";
                 Settings["DatagridLastSelectedRow"] = "1";
             }
@@ -180,7 +180,7 @@ namespace MyJukebox_EF.BLL
             LastAlbum = Convert.ToString(GetSetting("LastAlbum", "Alle"));
             LastCatalog = Convert.ToString(GetSetting("LastCatalog", "Alle"));
             LastGenre = Convert.ToString(GetSetting("LastGenre", "Alle"));
-            LastInterpret = Convert.ToString(GetSetting("LastInterpret", "Alle"));
+            LastArtist = Convert.ToString(GetSetting("LastArtist", "Alle"));
             FormTop = Convert.ToInt16(GetSetting("FormTop", "100"));
             FormLeft = Convert.ToInt16(GetSetting("FormLeft", "100"));
             FormWidth = Convert.ToInt16(GetSetting("FormWidth", "836"));

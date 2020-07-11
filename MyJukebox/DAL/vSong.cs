@@ -22,6 +22,6 @@ namespace MyJukebox_EF.DAL
         public string Titel { get; set; }
         public string Pfad { get; set; }
         public string FileName { get; set; }
-        public string Type { get; set; }
+        public string Media { get; set; }
     }
 }

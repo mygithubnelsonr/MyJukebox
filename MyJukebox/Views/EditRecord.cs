@@ -91,7 +91,7 @@ namespace MyJukebox_EF
                 mp3Record.Genre = comboBoxGenre.Text;
                 mp3Record.Catalog = comboBoxCatalog.Text;
                 mp3Record.Album = textBoxAlbum.Text;
-                mp3Record.Interpret = textBoxInterpret.Text;
+                mp3Record.Artist = textBoxInterpret.Text;
                 mp3Record.Titel = textBoxTitel.Text;
                 mp3Record.Path = textBoxPath.Text;
                 mp3Record.FileName = textBoxFilename.Text;

@@ -1,7 +1,7 @@
 ﻿using MyJukebox_EF.BLL;
+using MyJukebox_EF.Commons;
 using NRSoft.FunctionPool;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -36,7 +36,7 @@ namespace MyJukebox_EF
         private string genre = "genre";
         private string catalog = "catalog";
         private string album = "album";
-        private string interpreter = "album";
+        private string artist = "artist";
         private string playlists = "playlists";
 
         private int _distance = 0;
@@ -78,7 +78,7 @@ namespace MyJukebox_EF
             TreeViewLogicStates.Album = SettingsDb.GetSetting("LastAlbum", "").ToString();
             TreeViewLogicStates.Catalog = SettingsDb.GetSetting("LastCatalog", "").ToString();
             TreeViewLogicStates.Genre = SettingsDb.GetSetting("LastGenre", "").ToString();
-            TreeViewLogicStates.Interpret = SettingsDb.GetSetting("LastInterpret", "").ToString();
+            TreeViewLogicStates.Artist = SettingsDb.GetSetting("LastArtist", "").ToString();
 
             #endregion restote TreeviewStates
 
@@ -119,9 +119,9 @@ namespace MyJukebox_EF
             if (lastSelectedTab == (int)TabcontrolTab.Logical)
             {
                 statusStripGenre.Text = TreeViewLogicStates.Genre;
-                statusStripKatalog.Text = TreeViewLogicStates.Catalog;
+                statusStripCatalog.Text = TreeViewLogicStates.Catalog;
                 statusStripAlbum.Text = TreeViewLogicStates.Album;
-                statusStripInterpret.Text = TreeViewLogicStates.Interpret;
+                statusStripArtist.Text = TreeViewLogicStates.Artist;
                 currentDatagrigRow = SettingsDb.DatagridLastSelectedRow;
             }
 
@@ -129,9 +129,9 @@ namespace MyJukebox_EF
             {
                 tvplaylist.ExpandAll();
                 statusStripGenre.Text = "";
-                statusStripKatalog.Text = "";
+                statusStripCatalog.Text = "";
                 statusStripAlbum.Text = "";
-                statusStripInterpret.Text = "";
+                statusStripArtist.Text = "";
 
                 int currentPlaylist = DataGetSet.GetLastselectedPlaylist();
                 currentDatagrigRow = DataGetSet.GetLastselectedPlaylistRow(currentPlaylist);
@@ -179,7 +179,7 @@ namespace MyJukebox_EF
             SettingsDb.SetSetting("LastGenre", TreeViewLogicStates.Genre);
             SettingsDb.SetSetting("LastCatalog", TreeViewLogicStates.Catalog);
             SettingsDb.SetSetting("LastAlbum", TreeViewLogicStates.Album);
-            SettingsDb.SetSetting("LastInterpret", TreeViewLogicStates.Interpret);
+            SettingsDb.SetSetting("LastArtist", TreeViewLogicStates.Artist);
             SettingsDb.Save();
         }
 
@@ -192,7 +192,7 @@ namespace MyJukebox_EF
 
             tvlogicFillAlbumAsync();
 
-            tvlogicFillInterpretAsync();
+            tvlogicFillArtistAsync();
 
             tvplaylistFillPlaylist();
 
@@ -274,23 +274,6 @@ namespace MyJukebox_EF
 
         #region Treeview tvlogic Event Handlers
 
-        //private void tvlogic_AfterExpand(object sender, TreeViewEventArgs e)
-        //{
-        //    if (_tvFilled == false) return;
-
-        //    if (e.Node.Name == "genre")
-        //        tvlogicFillGenreAsync();
-
-        //    if (e.Node.Name == "katalog")
-        //        tvlogicFillCatalogAsync();
-
-        //    if (e.Node.Name == "album")
-        //        tvlogicFillAlbumAsync();
-
-        //    if (e.Node.Name == "interpret")
-        //        tvlogicFillInterpretAsync();
-        //}
-
         private void tvlogic_MouseDown(object sender, MouseEventArgs e)
         {
             currentTreeNode = tvlogic.GetNodeAt(e.X, e.Y);
@@ -335,17 +318,17 @@ namespace MyJukebox_EF
 
             // do nothing if selected node is allready selected
             if (mainNode == "genre" && currentTreeNode.Text == TreeViewLogicStates.Genre) return;
-            if (mainNode == "katalog" && currentTreeNode.Text == TreeViewLogicStates.Catalog) return;
+            if (mainNode == "catalog" && currentTreeNode.Text == TreeViewLogicStates.Catalog) return;
             if (mainNode == "album" && currentTreeNode.Text == TreeViewLogicStates.Album) return;
-            if (mainNode == "interpret" && currentTreeNode.Text == TreeViewLogicStates.Interpret) return;
+            if (mainNode == "artist" && currentTreeNode.Text == TreeViewLogicStates.Artist) return;
 
-            if (mainNode == "katalog" || mainNode == "genre")
+            if (mainNode == "catalog" || mainNode == "genre")
             {
                 SettingsDb.SetSetting("LastCatalog", "");
                 TreeViewLogicStates.Catalog = "";
 
                 tvlogicFillAlbumAsync();
-                tvlogicFillInterpretAsync();
+                tvlogicFillArtistAsync();
             }
 
             if (mainNode == "genre")
@@ -357,28 +340,28 @@ namespace MyJukebox_EF
                 tvlogicFillCatalogAsync();
             }
 
-            if (mainNode == "katalog")
+            if (mainNode == "catalog")
             {
                 var catalog = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
 
                 SettingsDb.SetSetting("LastCatalog", catalog);
                 SettingsDb.SetSetting("LastAlbum", "");
-                SettingsDb.SetSetting("LastInterpret", "");
+                SettingsDb.SetSetting("LastArtist", "");
 
                 TreeViewLogicStates.Catalog = catalog;
                 TreeViewLogicStates.Album = "";
-                TreeViewLogicStates.Interpret = "";
+                TreeViewLogicStates.Artist = "";
 
                 TreeviewFindNodeByText(currentTreeNode.Parent, catalog, true, true);
                 TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["album"], "Alle", true, true);
-                TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["interpret"], "Alle", true, true);
+                TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["artist"], "Alle", true, true);
 
-                statusStripKatalog.Text = currentTreeNode.Text;
+                statusStripCatalog.Text = currentTreeNode.Text;
                 statusStripAlbum.Text = "Alle";
-                statusStripInterpret.Text = "Alle";
+                statusStripArtist.Text = "Alle";
 
                 tvlogicFillAlbumAsync();
-                tvlogicFillInterpretAsync();
+                tvlogicFillArtistAsync();
             }
 
             if (mainNode == "album")
@@ -386,46 +369,46 @@ namespace MyJukebox_EF
                 var album = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
 
                 SettingsDb.SetSetting("LastAlbum", album);
-                SettingsDb.SetSetting("LastInterpret", "");
+                SettingsDb.SetSetting("LastArtist", "");
                 TreeViewLogicStates.Album = album;
-                TreeViewLogicStates.Interpret = "";
+                TreeViewLogicStates.Artist = "";
                 statusStripAlbum.Text = album;
 
                 TreeviewFindNodeByText(currentTreeNode.Parent, album, true, true);
                 tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["album"].Nodes[album];
 
-                tvlogicFillInterpretAsync();
+                tvlogicFillArtistAsync();
 
-                if (tvlogic.Nodes["root"].Nodes["Interpret"].Nodes.Count > 1)   // node interpreter wurde bereits aufgeklappt
+                if (tvlogic.Nodes["root"].Nodes["artist"].Nodes.Count > 1)   // node artist wurde bereits aufgeklappt
                 {
-                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["Interpret"], "Alle", true, true);
-                    TreeViewLogicStates.Interpret = "";
+                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["artist"], "Alle", true, true);
+                    TreeViewLogicStates.Artist = "";
                 }
             }
 
-            if (mainNode == "interpret")
+            if (mainNode == "artist")
             {
-                var interpret = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
+                var artist = currentTreeNode.Text == "Alle" ? "" : currentTreeNode.Text;
 
-                SettingsDb.SetSetting("LastInterpret", interpret);
+                SettingsDb.SetSetting("LastArtist", artist);
                 SettingsDb.SetSetting("LastAlbum", "");
                 SettingsDb.SetSetting("LastCatalog", "");
 
                 TreeViewLogicStates.Catalog = "";
                 TreeViewLogicStates.Album = "";
-                TreeViewLogicStates.Interpret = interpret;
+                TreeViewLogicStates.Artist = artist;
 
-                statusStripKatalog.Text = "Alle";
+                statusStripCatalog.Text = "Alle";
                 statusStripAlbum.Text = "Alle";
-                statusStripInterpret.Text = interpret;
+                statusStripArtist.Text = artist;
 
-                TreeviewFindNodeByText(currentTreeNode.Parent, interpret, true, true);
+                TreeviewFindNodeByText(currentTreeNode.Parent, artist, true, true);
 
-                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["interpret"].Nodes[interpret];
+                tvlogic.SelectedNode = tvlogic.Nodes["root"].Nodes["artist"].Nodes[artist];
 
-                if (tvlogic.Nodes["root"].Nodes["Interpret"].Nodes.Count > 1)   // node album wurde bereits aufgeklappt
+                if (tvlogic.Nodes["root"].Nodes["artist"].Nodes.Count > 1)   // node album wurde bereits aufgeklappt
                 {
-                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["katalog"], "Alle", true, true);
+                    TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["catalog"], "Alle", true, true);
                     TreeviewFindNodeByText(tvlogic.Nodes["root"].Nodes["album"], "Alle", true, true);
                 }
             }
@@ -445,7 +428,7 @@ namespace MyJukebox_EF
         /// </summary>
         private void tvlogicInitialize()
         {
-            string[] subnodes = { "Genre", "Katalog", "Album", "Interpret" };
+            string[] subnodes = { "Genre", "Catalog", "Album", "Artist" };
 
             tvlogic.Nodes.Clear();
             tvlogic.ImageList = imageListTreeView;
@@ -733,16 +716,16 @@ namespace MyJukebox_EF
 
         private async Task tvlogicFillCatalogAsync()
         {
-            string mainNode = "katalog";
+            string mainNode = "catalog";
             List<string> catalogues = null;
 
-            TreeNode tnkatalog;
-            tnkatalog = tvlogic.Nodes["root"].Nodes[mainNode];
-            tnkatalog.Nodes.Clear();
-            tnkatalog.Nodes.Add("katalog_alle", "Alle");
-            tnkatalog.FirstNode.ImageKey = mainNode;
-            tnkatalog.FirstNode.SelectedImageKey = mainNode;
-            statusStripKatalog.Text = SettingsDb.GetSetting("LastCatalog").ToString();
+            TreeNode tncatalog;
+            tncatalog = tvlogic.Nodes["root"].Nodes[mainNode];
+            tncatalog.Nodes.Clear();
+            tncatalog.Nodes.Add("catalog_alle", "Alle");
+            tncatalog.FirstNode.ImageKey = mainNode;
+            tncatalog.FirstNode.SelectedImageKey = mainNode;
+            statusStripCatalog.Text = SettingsDb.GetSetting("LastCatalog").ToString();
 
             catalogues = await DataGetSet.GetCatalogsAsync();
 
@@ -750,14 +733,14 @@ namespace MyJukebox_EF
             foreach (string node in catalogues)
             {
                 string strNodeName = node.ToLower();
-                TreeNode tn = tnkatalog.Nodes.Add(tnkatalog.Parent.Name + "_" + strNodeName, node);
+                TreeNode tn = tncatalog.Nodes.Add(tncatalog.Parent.Name + "_" + strNodeName, node);
                 tn.Name = tn.Parent.Name + "_" + strNodeName;
-                tn.ImageKey = tnkatalog.ImageKey;
-                tn.SelectedImageKey = tnkatalog.SelectedImageKey;
+                tn.ImageKey = tncatalog.ImageKey;
+                tn.SelectedImageKey = tncatalog.SelectedImageKey;
                 tn.Tag = tn.Text.ToUpper();
             }
 
-            TreeviewFindNodeByText(tnkatalog, TreeViewLogicStates.Catalog, true, false);
+            TreeviewFindNodeByText(tncatalog, TreeViewLogicStates.Catalog, true, false);
             tvlogic.EndUpdate();
         }
 
@@ -766,7 +749,6 @@ namespace MyJukebox_EF
             string mainNode = "album";
             List<string> albums = null;
 
-
             if (TreeViewLogicStates.Genre == "" || TreeViewLogicStates.Catalog == "")
             {
                 tvlogic.Nodes["root"].Nodes["album"].Nodes.Clear();
@@ -774,9 +756,9 @@ namespace MyJukebox_EF
                 tvlogic.Nodes["root"].Nodes["album"].FirstNode.ImageKey = "album";
                 tvlogic.Nodes["root"].Nodes["album"].FirstNode.SelectedImageKey = "album";
                 SettingsDb.SetSetting("LastAlbum", "");
-                SettingsDb.SetSetting("LastInterpret", "");
+                SettingsDb.SetSetting("LastArtist", "");
                 TreeViewLogicStates.Album = "";
-                TreeViewLogicStates.Interpret = "";
+                TreeViewLogicStates.Artist = "";
                 statusStripAlbum.Text = "Alle";
                 return;
             }
@@ -793,7 +775,7 @@ namespace MyJukebox_EF
             tnalbum.FirstNode.Tag = "ALLE";
 
             statusStripAlbum.Text = "Alle";
-            statusStripInterpret.Text = "Alle";
+            statusStripArtist.Text = "Alle";
 
             tvlogic.BeginUpdate();
             foreach (string strAlbum in albums)
@@ -810,10 +792,10 @@ namespace MyJukebox_EF
             tvlogic.EndUpdate();
         }
 
-        private async Task tvlogicFillInterpretAsync()
+        private async Task tvlogicFillArtistAsync()
         {
-            string mainNode = "interpret";
-            List<string> interpreters = null;
+            string mainNode = "artist";
+            List<string> artists = null;
 
             if (TreeViewLogicStates.Genre == "" || TreeViewLogicStates.Catalog == "")
             {
@@ -822,38 +804,38 @@ namespace MyJukebox_EF
                 tvlogic.Nodes["root"].Nodes[mainNode].FirstNode.ImageKey = mainNode;
                 tvlogic.Nodes["root"].Nodes[mainNode].FirstNode.SelectedImageKey = mainNode;
                 SettingsDb.SetSetting("LastAlbum", "");
-                SettingsDb.SetSetting("LastInterpret", "");
+                SettingsDb.SetSetting("LastArtist", "");
                 TreeViewLogicStates.Album = "";
-                TreeViewLogicStates.Interpret = "";
-                statusStripInterpret.Text = "Alle";
-                interpreters = await DataGetSet.GetInterpretenAsync();
+                TreeViewLogicStates.Artist = "";
+                statusStripArtist.Text = "Alle";
+                artists = await DataGetSet.GetArtistsAsync();
                 return;
             }
 
-            interpreters = await DataGetSet.GetInterpretenAsync();
+            artists = await DataGetSet.GetArtistsAsync();
 
-            TreeNode tninterpret = new TreeNode();
-            tninterpret = tvlogic.Nodes["root"].Nodes[mainNode];
-            tninterpret.Nodes.Clear();
-            tninterpret.Nodes.Add("Alle");
-            tninterpret.FirstNode.ImageKey = mainNode;
-            tninterpret.FirstNode.SelectedImageKey = mainNode;
-            tninterpret.FirstNode.Tag = "ALLE";
+            TreeNode tnartist = new TreeNode();
+            tnartist = tvlogic.Nodes["root"].Nodes[mainNode];
+            tnartist.Nodes.Clear();
+            tnartist.Nodes.Add("Alle");
+            tnartist.FirstNode.ImageKey = mainNode;
+            tnartist.FirstNode.SelectedImageKey = mainNode;
+            tnartist.FirstNode.Tag = "ALLE";
 
-            if (tninterpret.Nodes.Count == 1)
+            if (tnartist.Nodes.Count == 1)
             {
                 tvlogic.BeginUpdate();
-                foreach (string strNode in interpreters)
+                foreach (string strNode in artists)
                 {
                     string strNodeName = strNode.ToLower();
-                    TreeNode tn = tninterpret.Nodes.Add(tninterpret.Parent.Name + "_" + strNodeName, strNode);
+                    TreeNode tn = tnartist.Nodes.Add(tnartist.Parent.Name + "_" + strNodeName, strNode);
                     tn.Name = tn.Parent.Name + "_" + strNodeName;
-                    tn.ImageKey = tninterpret.ImageKey;
-                    tn.SelectedImageKey = tninterpret.SelectedImageKey;
+                    tn.ImageKey = tnartist.ImageKey;
+                    tn.SelectedImageKey = tnartist.SelectedImageKey;
                     tn.Tag = tn.Text.ToUpper();
                 }
 
-                TreeviewFindNodeByText(tninterpret, TreeViewLogicStates.Interpret, true, false);
+                TreeviewFindNodeByText(tnartist, TreeViewLogicStates.Artist, true, false);
                 tvlogic.EndUpdate();
             }
         }
@@ -950,7 +932,7 @@ namespace MyJukebox_EF
                 tn.SelectedImageKey = "playlist";
                 tn.Tag = ID;
                 ToolStripMenuItem subitem = new ToolStripMenuItem();
-                subitem.Text = Common.CamelSpaceOut(item.Name);
+                subitem.Text = GeneralH.CamelSpaceOut(item.Name);
                 subitem.Name = item.Name;
                 subitem.Tag = item.ID;
                 subitem.Click += contextMenuStripDatagridSendToPlaylist_Click;
@@ -1332,12 +1314,11 @@ namespace MyJukebox_EF
                         //tvlogic.Nodes["root"].Nodes["album"].ExpandAll();
                         tvlogic.Nodes["root"].Nodes["album"].Tag = lastAlbum;
                     }
-                    string lastInterpret = SettingsDb.GetSetting("LastInterpret").ToString();
+                    string lastArtist = SettingsDb.GetSetting("LastArtist").ToString();
 
-                    if (lastInterpret != "Alle")
+                    if (lastArtist != "Alle")
                     {
-                        //tvlogic.Nodes["root"].Nodes["interpret"].ExpandAll();
-                        tvlogic.Nodes["root"].Nodes["interpret"].Tag = lastInterpret;
+                        tvlogic.Nodes["root"].Nodes["artist"].Tag = lastArtist;
                     }
 
                     break;
@@ -1454,59 +1435,6 @@ namespace MyJukebox_EF
             }
         }
 
-        public string QueryBuilder()
-        {
-            string and, query, temp, strGenre, katalog, album, interpret;
-
-            Hashtable ht = new Hashtable();
-
-            strGenre = "";
-            if (TreeViewLogicStates.Genre != "")
-            {
-                ht.Add("genre", TreeViewLogicStates.Genre);
-                strGenre = $" genre LIKE '{TreeViewLogicStates.Genre}'";
-            }
-
-            katalog = "";
-            if (TreeViewLogicStates.Catalog != "")
-            {
-                ht.Add("katalog", TreeViewLogicStates.Catalog);
-                katalog = $" katalog LIKE '{TreeViewLogicStates.Catalog}'";
-            }
-
-            if (TreeViewLogicStates.Album != "")
-            {
-                ht.Add("album", TreeViewLogicStates.Album);
-                album = $" album LIKE '{TreeViewLogicStates.Album}'";
-            }
-
-            if (TreeViewLogicStates.Interpret != "")
-            {
-                ht.Add("interpret", TreeViewLogicStates.Interpret);
-                interpret = $" interpret LIKE '{TreeViewLogicStates.Interpret}'";
-            }
-
-            temp = "";
-            query = "";
-            and = "";
-            query = "";
-
-            if (ht.Count > 1) and = " AND ";
-            int htcount = 1;
-            // Query zusammenbasteln
-            foreach (DictionaryEntry de in ht)
-            {
-                string v = de.Value.ToString();
-                Console.WriteLine("Key = {0}, Value = {1}", de.Key, v.Replace("'", "''"));
-                temp = "";
-                temp += de.Key + " LIKE '" + v.Replace("'", "''") + "'";
-                query += " (" + temp + ") ";
-                if (htcount < ht.Count) query += and;
-                htcount++;
-            }
-            return query;
-        }
-
         private void FlipImage(DataGridViewRow datagridrow)
         {
             var path = datagridrow.Cells["Pfad"].Value.ToString();
@@ -1521,7 +1449,6 @@ namespace MyJukebox_EF
                 SettingsDb.GetSetting("ImagePath", "_Images").ToString())
                 );
 
-            //pathList.Add(path);
             pathList.Add(Path.Combine(path, SettingsDb.GetSetting("ImagePath", "_Images").ToString()));
 
             var collector = new ImageCollector(pathList, artist);
@@ -1752,7 +1679,7 @@ namespace MyJukebox_EF
             tn.SelectedImageKey = "playlist";
             tn.Tag = newID;
             ToolStripMenuItem subitem = new ToolStripMenuItem();
-            subitem.Text = Common.CamelSpaceOut(playlistName);
+            subitem.Text = GeneralH.CamelSpaceOut(playlistName);
             subitem.Name = playlistName;
             subitem.Tag = newID;
             subitem.Click += contextMenuStripDatagridSendToPlaylist_Click;

@@ -85,10 +85,10 @@
       <End Role="tMedia" EntitySet="tMedias" />
       <End Role="tSong" EntitySet="tSongs" />
     </AssociationSet>
-    <EntitySet Name="vSongs" EntityType="MyJukeboxContext.vSong" />
     <EntitySet Name="vSongsLongs" EntityType="MyJukeboxContext.vSongsLong" />
     <EntitySet Name="vPlaylistSongs" EntityType="MyJukeboxContext.vPlaylistSong" />
     <EntitySet Name="tInfos" EntityType="MyJukeboxContext.tInfo" />
+    <EntitySet Name="vSongs" EntityType="MyJukeboxContext.vSong" />
   </EntityContainer>
   <EntityType Name="tFileInfo">
     <Key>
@@ -187,21 +187,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="vSong">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="Titel" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Artist" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
-    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
-    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
-    <Property Name="Type" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="vSongsLong">
     <Key>
       <PropertyRef Name="ID" />
@@ -245,5 +230,20 @@
     <Property Name="Error" Type="Boolean" />
     <Property Name="Sampler" Type="Boolean" />
     <Property Name="Comment" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vSong">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Titel" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Genre" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Catalog" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="Album" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Artist" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="Titel" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pfad" Type="String" MaxLength="254" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+    <Property Name="Media" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

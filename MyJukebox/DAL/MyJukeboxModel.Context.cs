@@ -36,9 +36,9 @@ namespace MyJukebox_EF.DAL
         public virtual DbSet<tQuery> tQueries { get; set; }
         public virtual DbSet<tSetting> tSettings { get; set; }
         public virtual DbSet<tSong> tSongs { get; set; }
-        public virtual DbSet<vSong> vSongs { get; set; }
         public virtual DbSet<vSongsLong> vSongsLongs { get; set; }
         public virtual DbSet<vPlaylistSong> vPlaylistSongs { get; set; }
         public virtual DbSet<tInfo> tInfos { get; set; }
+        public virtual DbSet<vSong> vSongs { get; set; }
     }
 }
