@@ -9,9 +9,6 @@
 
 namespace MyJukebox_EF.DAL
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class vPlaylistSong
     {
         public int ID { get; set; }

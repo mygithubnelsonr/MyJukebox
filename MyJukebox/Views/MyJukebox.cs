@@ -893,14 +893,19 @@ namespace MyJukebox_EF
 
             if (dataGridView.Rows.Count > 0)
             {
+                int selectedRow = 0;
+
                 dataGridView.Columns["ID"].Visible = false;
 
-                dataGridView.Rows[(int)info.Row].Selected = true;
+                if (info.Row < dataGridView.Rows.Count)
+                    selectedRow = (int)info.Row;
+
+                dataGridView.Rows[selectedRow].Selected = true;
                 dataGridView.FirstDisplayedScrollingRowIndex = dataGridView.SelectedRows[0].Index;
 
-                statusStripRow.Text = (info.Row + 1).ToString();
+                statusStripRow.Text = (selectedRow + 1).ToString();
                 statusStripRowcount.Text = dataGridView.RowCount.ToString();
-                statusStripTitel.Text = dataGridView.Rows[(int)info.Row].Cells[1].Value + " - " + dataGridView.Rows[(int)info.Row].Cells[2].Value;
+                statusStripTitel.Text = dataGridView.Rows[selectedRow].Cells[4].Value + " - " + dataGridView.Rows[selectedRow].Cells[5].Value;
             }
             else
             {
@@ -1062,6 +1067,8 @@ namespace MyJukebox_EF
 
         public void FillDatagridView(string filter = "")
         {
+            int lastRow = 0;
+
             #region FillDatagridByQuery
 
             if (Common.IsQuery(filter) == true)
@@ -1077,7 +1084,8 @@ namespace MyJukebox_EF
             if (tabControl.SelectedTab == tabLogical)
             {
                 FillDatagridByTabLogical();
-                // dataGridView.Rows[SettingsDb.DatagridLastSelectedRow].Selected = true;
+                lastRow = SettingsDb.DatagridLastSelectedRow;
+                //dataGridView.Rows[SettingsDb.DatagridLastSelectedRow].Selected = true;
             }
 
             #endregion FillDatagrid by Logical Tab
@@ -1088,14 +1096,12 @@ namespace MyJukebox_EF
             {
                 Debug.Print("calling FillDatagridByTabPlaylist");
                 FillDatagridByTabPlaylist();
-
                 Debug.Print("back from FillDatagridByTabPlaylist");
 
-                //int playlistID = (int)tvplaylist.SelectedNode.Tag;
-
-                //PlaylistInfo info = new PlaylistInfo();
-                //info = DataGetSet.GetLastselectedPlaylistInfos(playlistID);
-                //lastRow = (int)info.Row;
+                int playlistID = Convert.ToInt32(tvplaylist.SelectedNode.Tag);
+                PlaylistInfo info = new PlaylistInfo();
+                info = DataGetSet.GetPlaylistInfos(playlistID);
+                lastRow = (int)info.Row;
             }
             #endregion Fill Datagrid by Playlist
 
@@ -1110,8 +1116,8 @@ namespace MyJukebox_EF
                     dataGridView.Columns["ID"].Visible = false;
                     // after hiding the first column the CurrentRow becomes NULL!!
                     // so set the CurrentCell to any valid value
-                    dataGridView.CurrentCell = dataGridView["Genre", SettingsDb.DatagridLastSelectedRow];
-                    dataGridView.Rows[SettingsDb.DatagridLastSelectedRow].Selected = true;
+                    dataGridView.CurrentCell = dataGridView["Genre", lastRow];
+                    dataGridView.Rows[lastRow].Selected = true;
                 }
 
                 if (dataGridView.CurrentRow != null)
@@ -1128,7 +1134,6 @@ namespace MyJukebox_EF
                 Debug.Print($"FillDatagridView_Error: {ex.Message}");
             }
 
-            //SettingsDb.SetSetting("LastQuery", "");
             statusStripTitel.Text = "";
             random.InitRandomNumbers(dataGridView.RowCount - 1);
 
@@ -1143,10 +1148,6 @@ namespace MyJukebox_EF
             dataGridView.SuspendLayout();
             dataGridView.DataSource = results;
             dataGridView.ResumeLayout();
-
-            ////tvlogic.Nodes["root"].Nodes["Genre"].Collapse();
-
-            Debug.Print("FillDatagridByTabLogical finish");
         }
 
         private void FillDatagridByTabPlaylist()
